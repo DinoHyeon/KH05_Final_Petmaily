@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	<!-- 인터셉터 그룹 생성 -->
+	<mvc:interceptors>
+		<!-- 단일 인터셉터 -->
+		<mvc:interceptor>
+			<!-- 인터셉터 할 특정 요청 -->
+			<!-- /list로 요청이 왔을 경우 -->
+			<mvc:mapping path="/list" />
+			<!-- /detail로 요청이 왔을 경우 -->
+			<!-- *detail은 뒤에 parameter가 붙기 때문에 *를 사용한다 
+						<mvc:mapping path="/detail*" />
+			-->
+
+			<!-- 인터셉터 한 내용에 대한 클래스 매핑 -->
+			<!-- 해당 클래스는 HandlerInterceptorAdapter를 상속받는다 -->
+			<bean class="com.petmily.interceptor.LoginChk" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+</beans>
