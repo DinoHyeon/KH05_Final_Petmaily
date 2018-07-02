@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petmily.dao.quizDAO.QuizInter">
+	<select id="getAnimalList" resultType="String">
+		SELECT * FROM Animal_idx
+	</select>
+
+	<insert id="registQuiz" parameterType="QuizDTO">
+		INSERT INTO
+		Quiz(quiz_idx,quiz_category,animal_idx,quiz_ask,quiz_content,quiz_answer)
+		VALUES(quiz_seq.NEXTVAL, #{quiz_category}, #{animal_idx}, #{quiz_ask},
+		#{quiz_content}, #{quiz_answer})
+	</insert>
+
+	<select id="getQuizList" resultType="QuizDTO">
+		SELECT * FROM Quiz ORDER BY quiz_idx ASC
+	</select>
+
+	<select id="quizDetail" parameterType="Integer"
+		resultType="QuizDTO">
+		SELECT * FROM Quiz WHERE quiz_idx = #{param1}
+	</select>
+
+	<select id="quizUpdateView" parameterType="Integer"
+		resultType="QuizDTO">
+		SELECT * FROM Quiz WHERE quiz_idx = #{param1}
+	</select>
+	
+	<update id="quizUpdate" parameterType="QuizDTO">
+		UPDATE Quiz 
+			SET animal_idx=#{animal_idx},quiz_category=#{quiz_category},quiz_ask=#{quiz_ask},quiz_answer=#{quiz_answer},quiz_content=#{quiz_content}
+			 	WHERE quiz_idx = #{quiz_idx}
+	</update>
+	
+	<delete id="quizDelete" parameterType="Integer">
+		DELETE FROM Quiz WHERE quiz_idx = #{param1}
+	</delete>
+</mapper>

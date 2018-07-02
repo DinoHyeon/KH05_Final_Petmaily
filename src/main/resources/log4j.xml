@@ -22,7 +22,7 @@
 	</logger>
 	
 	<!-- Application Loggers -->
-	<logger name="com.petmily.controller">
+	<logger name="com.petmily">
 		<level value="info" />
 	</logger>
 	

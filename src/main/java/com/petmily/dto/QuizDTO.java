@@ -2,7 +2,7 @@ package com.petmily.dto;
 
 public class QuizDTO {
 	private int quiz_idx;
-	String quiz_category;
+	private String quiz_category;
 	private String animal_idx;
 	private String quiz_ask;
 	private String quiz_content;
