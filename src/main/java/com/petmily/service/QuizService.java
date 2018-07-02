@@ -3,6 +3,7 @@ package com.petmily.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,9 +43,38 @@ public class QuizService {
 		return inter.registQuiz(dto);
 	}
 
-	public ArrayList<QuizDTO> getQuizList() {
+	public HashMap<String, Object> getQuizList(HashMap<String, String> params) {
 		inter = sqlSession.getMapper(QuizInter.class);
-		return inter.getQuizList();
+		
+		logger.info("짜쯩나 : {}",params.get("searchAnimal"));
+		
+		//전체 게시글 수 구하기
+		int allCnt = inter.getAllCnt(params);
+		//생성 가능한 페이지 수 구하기
+		int pageCnt = allCnt % 10 > 0 ? Math.round(allCnt / 10) + 1 : allCnt / 10;
+		//리턴을 위한 맵 생성
+		HashMap<String, Object> QuizList = new HashMap<String, Object>();
+		
+		int page = Integer.parseInt(params.get("showPageNum"));
+		
+		//클라이언트가 원한 페이지가 최종 페이지보다 높은 경우..
+		if (page > pageCnt) {
+			page = pageCnt;
+		}
+		
+		int end = 10 * page;
+		int start = end - 10 + 1;
+		
+		params.put("start", String.valueOf(start));
+		params.put("end", String.valueOf(end));
+		
+		QuizList.put("list", inter.getQuizList(params));
+		// 생성 페이지의 수
+		QuizList.put("range", pageCnt);
+		//현재 페이지 번호
+		QuizList.put("currPage", page);
+		
+		return QuizList;
 	}
 
 	public ModelAndView quizDetail(String idx) {
@@ -105,12 +135,4 @@ public class QuizService {
 		return mav;
 	}
 
-	public ArrayList<String> quizSearch(HashMap<String, String> params) {
-		String animal = params.get("searchAnimal");
-		String category = params.get("searchCategory");
-		String word = params.get("searchWord");
-		
-		logger.info(animal+"/"+category+"/"+word);
-		return null;
-	}
 }

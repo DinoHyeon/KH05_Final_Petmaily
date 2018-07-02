@@ -30,19 +30,10 @@ public class QuizController {
 	}
 	
 	@RequestMapping(value = "getAnimalList")
-	//AJAX를 사용할 경우 @ResponseBody가 없으면 값을 view로 반환하지 못한다.
-	//Why? @ResponseBody는 반환 값을 response형태로 보낼 수 있게하는 어노테이션 *mvc때 ajax사용 방법이랑 비교하면 금방 알 수 있음
 	public @ResponseBody ArrayList<String> getAnimalList () {
 		logger.info("동물 리스트 출력");
 		return service.AnimalList();
-	}
-	
-	@RequestMapping(value = "quizSearch")
-	public @ResponseBody ArrayList<String> quizSearch (@RequestParam HashMap<String, String> params) {
-		logger.info("동물 리스트 검색 요청 및 출력");
-		return service.quizSearch(params);
-	}
-	
+	}	
 	
 	@RequestMapping(value = "registQuiz")
 	public @ResponseBody int registQuiz (@RequestParam HashMap<String,String> params) {
@@ -51,9 +42,9 @@ public class QuizController {
 	}
 	
 	@RequestMapping(value = "getQuizList")
-	public @ResponseBody ArrayList<QuizDTO> registQuiz () {
+	public @ResponseBody HashMap<String, Object> getQuizList (@RequestParam HashMap<String, String> params) {
 		logger.info("문제 리스트 호출");
-		return service.getQuizList();
+		return service.getQuizList(params);
 	}
 	
 	@RequestMapping(value = "quizDetailPage")

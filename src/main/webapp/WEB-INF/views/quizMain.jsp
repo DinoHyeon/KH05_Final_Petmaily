@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="resources/js/zer0boxPaging.js" type="text/javascript"></script>
 <title>Insert title here</title>
 <style>
 textarea {
@@ -54,7 +55,7 @@ textarea {
 			<option value="기타">기타</option>
 		</select>
 		<input id="searchWord" type="text">
-		<input type="button" onclick="search()" value="검색"> 
+		<input type="button" onclick="quizListCall(showPageNum)" value="검색"> 
 		<table>
 			<thead>
 				<tr>
@@ -68,13 +69,21 @@ textarea {
 			<tbody id="quizList">
 			</tbody>
 		</table>
+		<div id="paging"/>
 	</div>
 </body>
 <script>
+	//현재 보여줄 페이지
+	var showPageNum = 1
 	$(document).ready(function() {
 		$.ajax({
 			type : "get",
 			url : "./getAnimalList",
+			data : {
+				"searchAnimal" : $("#searchAniamlList").val(),
+				"searchCategory" : $("#searchCategory").val(),
+				"searchWord" : $("#searchWord").val(),
+			},
 			success : function(data) {
 				var content = "";
 				var contentAll = "<option value='전체'>전체</option>";
@@ -95,7 +104,7 @@ textarea {
 				console.log(e);
 			}
 		});
-		quizListCall();
+		quizListCall(showPageNum);
 	});
 
 	function registQuiz() {
@@ -120,7 +129,7 @@ textarea {
 					//checked 속성 제거
 					$("input[name='answer']:checked").removeAttr('checked');
 
-					quizListCall();
+					quizListCall(showPageNum);
 				} else {
 					alert("문제 등록에 실패했습니다");
 				}
@@ -131,27 +140,19 @@ textarea {
 		});
 	}
 
-	function quizListCall() {
-		var content = "";
+	function quizListCall(page) {
 		$.ajax({
 			type : "get",
 			url : "./getQuizList",
+			data : {
+				"searchAnimal" : $("#searchAniamlList").val(),
+				"searchCategory" : $("#searchCategory").val(),
+				"searchWord" : $("#searchWord").val(),
+				"showPageNum" : page
+			},
 			success : function(data) {
-				console.log(data);
-
-				data.forEach(function(item) {
-					content += "<tr>";
-					content += "<td>" + item.quiz_idx + "</td>";
-					content += "<td>" + item.animal_idx + "</td>";
-					content += "<td>" + item.quiz_category + "</td>";
-					content += "<td><a href='./quizDetailPage?idx="
-							+ item.quiz_idx + "'>" + item.quiz_ask
-							+ "</a></td>";
-					content += "<td>" + item.quiz_answer + "</td>";
-					content += "</tr>";
-				})
-				$("#quizList").empty();
-				$("#quizList").append(content);
+				listPrint(data);
+				console.log(data.list);
 			},
 			error : function(e) {
 				console.log(e);
@@ -159,35 +160,30 @@ textarea {
 		});
 	}
 	
-	function search() {
-		$.ajax({
-			type : "get",
-			url : "./quizSearch",
-			data : {
-				"searchAnimal" : $("#searchAniamlList").val(),
-				"searchCategory" : $("#searchCategory").val(),
-				"searchWord" : $("#searchWord").val(),
-			},
-			success : function(data) {
-				/* console.log(data);
-				data.forEach(function(item) {
-					content += "<tr>";
-					content += "<td>" + item.quiz_idx + "</td>";
-					content += "<td>" + item.animal_idx + "</td>";
-					content += "<td>" + item.quiz_category + "</td>";
-					content += "<td><a href='./quizDetailPage?idx="
-							+ item.quiz_idx + "'>" + item.quiz_ask
-							+ "</a></td>";
-					content += "<td>" + item.quiz_answer + "</td>";
-					content += "</tr>";
-				})
-				$("#quizList").empty();
-				$("#quizList").append(content); */
-			},
-			error : function(e) {
-				console.log(e);
-			}
-		});
+	function listPrint(data) {
+		var content = "";
+		data.list.forEach(function(item) {
+			content += "<tr>";
+			content += "<td>" + item.quiz_idx + "</td>";
+			content += "<td>" + item.animal_idx + "</td>";
+			content += "<td>" + item.quiz_category + "</td>";
+			content += "<td><a href='./quizDetailPage?idx="
+					+ item.quiz_idx + "'>" + item.quiz_ask
+					+ "</a></td>";
+			content += "<td>" + item.quiz_answer + "</td>";
+			content += "</tr>";
+		})
+		$("#quizList").empty();
+		$("#quizList").append(content);
+		
+		$("#paging").zer0boxPaging({
+            viewRange : 5,
+            currPage : data.currPage,
+            maxPage : data.range,
+            clickAction : function(e){
+            	quizListCall($(this).attr('page'));
+            }
+        });
 	}
 </script>
 </html>

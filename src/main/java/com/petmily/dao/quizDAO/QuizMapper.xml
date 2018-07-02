@@ -8,14 +8,41 @@
 	</select>
 
 	<insert id="registQuiz" parameterType="QuizDTO">
-		INSERT INTO
-		Quiz(quiz_idx,quiz_category,animal_idx,quiz_ask,quiz_content,quiz_answer)
-		VALUES(quiz_seq.NEXTVAL, #{quiz_category}, #{animal_idx}, #{quiz_ask},
-		#{quiz_content}, #{quiz_answer})
+		INSERT INTO Quiz(quiz_idx,quiz_category,animal_idx,quiz_ask,quiz_content,quiz_answer)
+				VALUES(quiz_seq.NEXTVAL, #{quiz_category}, #{animal_idx}, #{quiz_ask},#{quiz_content}, #{quiz_answer})
 	</insert>
+	
+	<select id="getAllCnt" resultType="Integer" parameterType="hashMap">
+		SELECT COUNT(*) FROM Quiz
+			<where>
+				<if test="!searchAnimal.equals('전체') and searchAnimal!=null and !searchAnimal.equals('')">
+					animal_idx=#{searchAnimal}
+				</if>
+				<if test="!searchCategory.equals('전체')">
+					AND quiz_category=#{searchCategory}
+				</if>
+				<if test="searchWord != null or !searchWord.equals('')">
+					AND quiz_ask LIKE '%'||#{searchWord}||'%'
+				</if>
+			</where>
+	</select>
 
-	<select id="getQuizList" resultType="QuizDTO">
-		SELECT * FROM Quiz ORDER BY quiz_idx ASC
+	<select id="getQuizList" resultType="QuizDTO" parameterType="hashMap">
+		SELECT quiz_idx, quiz_category, quiz_ask, quiz_content, quiz_answer, animal_idx
+			FROM (SELECT quiz_idx, quiz_category, quiz_ask, quiz_content,quiz_answer,animal_idx, ROW_NUMBER() OVER(ORDER BY quiz_idx DESC) AS rNUM FROM Quiz
+					<where>
+						<if test="!searchAnimal.equals('전체') and searchAnimal!=null and !searchAnimal.equals('')">
+							animal_idx=#{searchAnimal}
+						</if>
+						<if test="!searchCategory.equals('전체')">
+							AND quiz_category=#{searchCategory}
+						</if>
+						<if test="searchWord != null or !searchWord.equals('')">
+							AND quiz_ask LIKE '%'||#{searchWord}||'%'
+						</if>
+					</where>
+			)
+				WHERE rNum BETWEEN #{start} AND #{end}
 	</select>
 
 	<select id="quizDetail" parameterType="Integer"
@@ -27,14 +54,16 @@
 		resultType="QuizDTO">
 		SELECT * FROM Quiz WHERE quiz_idx = #{param1}
 	</select>
-	
+
 	<update id="quizUpdate" parameterType="QuizDTO">
-		UPDATE Quiz 
-			SET animal_idx=#{animal_idx},quiz_category=#{quiz_category},quiz_ask=#{quiz_ask},quiz_answer=#{quiz_answer},quiz_content=#{quiz_content}
-			 	WHERE quiz_idx = #{quiz_idx}
+		UPDATE Quiz
+		SET
+		animal_idx=#{animal_idx},quiz_category=#{quiz_category},quiz_ask=#{quiz_ask},quiz_answer=#{quiz_answer},quiz_content=#{quiz_content}
+		WHERE quiz_idx = #{quiz_idx}
 	</update>
-	
+
 	<delete id="quizDelete" parameterType="Integer">
-		DELETE FROM Quiz WHERE quiz_idx = #{param1}
+		DELETE FROM Quiz WHERE
+		quiz_idx = #{param1}
 	</delete>
 </mapper>
