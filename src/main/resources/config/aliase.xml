@@ -12,4 +12,4 @@
 		<typeAlias alias="QuizDTO" type="com.petmily.dto.QuizDTO" />
 		<typeAlias alias="ReplyDTO" type="com.petmily.dto.ReplyDTO" />
 	</typeAliases>
-</configuration>   
+</configuration>
