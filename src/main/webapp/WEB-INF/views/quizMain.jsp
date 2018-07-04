@@ -27,8 +27,10 @@ textarea {
 <body>
 	<div>
 		<select id="aniamlList">
-		</select>
-		<select id="category">
+			<option value="강아지">강아지</option>
+			<option value="건강">고양이</option>
+			<option value="기타">기타</option>
+		</select> <select id="category">
 			<option value="건강">건강</option>
 			<option value="음식">음식</option>
 			<option value="습성">습성</option>
@@ -38,24 +40,25 @@ textarea {
 	</div>
 	<textarea id="quizAsk" rows="" cols=""></textarea>
 	<div id="quizAnswerDiv">
-		<input type="radio" name="answer" value="O">O <input
-			type="radio" name="answer" value="X">X
+		<input type="radio" name="answer" value="O">O 
+		<input type="radio" name="answer" value="X">X
 	</div>
 	<textarea id="quizContent" rows="" cols=""></textarea>
 	<input type="button" onclick="registQuiz()" value="문제 등록">
 	<div id="quizListDiv">
 		<select id="searchAniamlList">
-		</select>
-		<select id="searchCategory">
+			<option value="강아지">강아지</option>
+			<option value="건강">고양이</option>
+			<option value="기타">기타</option>
+		</select> <select id="searchCategory">
 			<option value="전체">전체</option>
 			<option value="건강">건강</option>
 			<option value="음식">음식</option>
 			<option value="습성">습성</option>
 			<option value="생활">생활</option>
 			<option value="기타">기타</option>
-		</select>
-		문제 <input id="searchWord" type="text">
-		<input type="button" onclick="quizListCall(showPageNum)" value="검색"> 
+		</select> 문제 <input id="searchWord" type="text"> <input type="button"
+			onclick="quizListCall(showPageNum)" value="검색">
 		<table>
 			<thead>
 				<tr>
@@ -69,41 +72,13 @@ textarea {
 			<tbody id="quizList">
 			</tbody>
 		</table>
-		<div id="paging"/>
+		<div id="paging" />
 	</div>
 </body>
 <script>
 	//현재 보여줄 페이지
 	var showPageNum = 1
 	$(document).ready(function() {
-		$.ajax({
-			type : "get",
-			url : "./getAnimalList",
-			data : {
-				"searchAnimal" : $("#searchAniamlList").val(),
-				"searchCategory" : $("#searchCategory").val(),
-				"searchWord" : $("#searchWord").val(),
-			},
-			success : function(data) {
-				var content = "";
-				var contentAll = "<option value='전체'>전체</option>";
-				//forEach - http://aljjabaegi.tistory.com/314
-				data.forEach(function(item) {
-					content += "<option value="+item+">";
-					content += item;
-					content += "</option>";
-				})
-				$("#aniamlList").empty();
-				$("#aniamlList").append(content);
-				
-				$("#searchAniamlList").empty();
-				$("#searchAniamlList").append(contentAll);
-				$("#searchAniamlList").append(content);
-			},
-			error : function(e) {
-				console.log(e);
-			}
-		});
 		quizListCall(showPageNum);
 	});
 
