@@ -6,26 +6,39 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style type="text/css">
+#animalChoice{
+	position: absolute;
+	left: 10%;
+	top: 5%;
+	width: 10%;
+	height: 20%;
+}
 .animal{
-	widows: 10%;
+	width: 10%;
 	height: 10%;
 	background-color: gray;
+}
+
+.animalImg{
+	width: 10%;
+	height: 20%;
 }
 </style>
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="mainFrame.jsp"/>
 	<form action="quizPlaySetting" id="quizPlaySetting">
 	<div id="animalChoice">
 		<input type="hidden" name="animal">
 		<div class="animal" id="강아지">
-			강아지
+			<img class="animalImg" alt="강아지" src="resources/img/dog.png">
 		</div>
 		<div class="animal" id="고양이">
-			고양이
+			<img class="animalImg" alt="강아지" src="resources/img/cat.png">
 		</div>
 		<div class="animal" id="기타">
-			기타
+			<img class="animalImg" alt="강아지" src="resources/img/fish.png">
 		</div>
 		<div class="animal" id="전체">
 			전체

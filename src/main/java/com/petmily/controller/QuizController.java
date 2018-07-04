@@ -18,82 +18,88 @@ import com.petmily.service.QuizService;
 
 @Controller
 public class QuizController {
-	
-	@Autowired QuizService service;
-	
+
+	@Autowired
+	QuizService service;
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value = "quizMain", method = RequestMethod.GET)
-	public String board () {
+	public String board() {
 		logger.info("퀴즈 등록(관리) 페이지 접근");
 		return "quizMain";
 	}
-	
+
 	@RequestMapping(value = "getAnimalList")
-	public @ResponseBody ArrayList<String> getAnimalList () {
+	public @ResponseBody ArrayList<String> getAnimalList() {
 		logger.info("동물 리스트 출력");
 		return service.AnimalList();
-	}	
-	
+	}
+
 	@RequestMapping(value = "registQuiz")
-	public @ResponseBody int registQuiz (@RequestParam HashMap<String,String> params) {
+	public @ResponseBody int registQuiz(@RequestParam HashMap<String, String> params) {
 		logger.info("문제 등록");
 		return service.registQuiz(params);
 	}
-	
+
 	@RequestMapping(value = "getQuizList")
-	public @ResponseBody HashMap<String, Object> getQuizList (@RequestParam HashMap<String, String> params) {
+	public @ResponseBody HashMap<String, Object> getQuizList(@RequestParam HashMap<String, String> params) {
 		logger.info("문제 리스트 호출");
 		return service.getQuizList(params);
 	}
-	
+
 	@RequestMapping(value = "quizDetailPage")
-	public ModelAndView quizDetail(@RequestParam ("idx") String idx) {
-		logger.info("문제 상세보기 요청: {}번글",idx);
+	public ModelAndView quizDetail(@RequestParam("idx") String idx) {
+		logger.info("문제 상세보기 요청: {}번글", idx);
 		return service.quizDetail(idx);
 	}
-	
+
 	@RequestMapping(value = "quizUpdatePage")
-	public ModelAndView quizUpdateView(@RequestParam ("idx") String idx) {
-		logger.info("문제 수정 페이지 요청: {}번글",idx);
+	public ModelAndView quizUpdateView(@RequestParam("idx") String idx) {
+		logger.info("문제 수정 페이지 요청: {}번글", idx);
 		return service.quizUpdateView(idx);
 	}
-	
+
 	@RequestMapping(value = "quizUpdate")
 	public ModelAndView quizUpdate(@RequestParam HashMap<String, String> params) {
 		logger.info("문제 수정  요청");
 		return service.quizUpdate(params);
 	}
-	
+
 	@RequestMapping(value = "quizDelete")
-	public ModelAndView quizDelete(@RequestParam ("idx") int idx) {
+	public ModelAndView quizDelete(@RequestParam("idx") int idx) {
 		logger.info("문제 삭제  요청");
 		return service.quizDelete(idx);
 	}
-	
+
 	@RequestMapping(value = "quizSetting")
-	public String quizPlayPage () {
+	public String quizPlayPage() {
 		logger.info("퀴즈 페이지 접근");
 		return "quizSetting";
-	}	
-	
+	}
+
 	@RequestMapping(value = "quizPlaySetting")
-	public ModelAndView quizPlaySetting (@RequestParam HashMap<String, String> params) {
+	public ModelAndView quizPlaySetting(@RequestParam HashMap<String, String> params) {
 		logger.info("퀴즈 셋팅");
 		return service.quizSetting(params);
-	}	
-	
+	}
+
 	@RequestMapping(value = "cleanQuiz")
 	public @ResponseBody void cleanQuiz() {
 		logger.info("퀴즈 초기화");
-		service.cleanQuiz();
-	}	
-	
+		service.cleanQuiz(); 
+	}
+
 	@RequestMapping(value = "nextQuiz")
 	public @ResponseBody QuizDTO nextQuiz () {
 		logger.info("퀴즈 풀이");
 		return service.nextQuiz();
-	}	
-	
+	}
+
+	@RequestMapping(value = "answerChk",produces = "application/text; charset=utf8")
+	public @ResponseBody String answerChk(@RequestParam ("answer") String answer) {
+		logger.info("퀴즈 정답 확인");
+		return service.answerChk(answer);
+	}
 	
 }
