@@ -20,7 +20,7 @@
 			value="classpath:/config/mybatis-config.xml" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations"
-			value="classpath:com/petmily/dao/*.xml" />
+			value="classpath:com/petmily/dao/*/*.xml" />
 		<property name="configLocation"
 			value="classpath:/config/aliase.xml" />
 	</bean>
