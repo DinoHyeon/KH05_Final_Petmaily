@@ -23,4 +23,6 @@ public interface QuizInter {
 
 	int getAllCnt(HashMap<String, String> params);
 
+	ArrayList<QuizDTO> quizSetting(HashMap<String, String> params);
+
 }

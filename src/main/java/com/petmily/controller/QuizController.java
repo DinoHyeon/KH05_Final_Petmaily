@@ -71,7 +71,29 @@ public class QuizController {
 		return service.quizDelete(idx);
 	}
 	
+	@RequestMapping(value = "quizSetting")
+	public String quizPlayPage () {
+		logger.info("퀴즈 페이지 접근");
+		return "quizSetting";
+	}	
 	
+	@RequestMapping(value = "quizPlaySetting")
+	public ModelAndView quizPlaySetting (@RequestParam HashMap<String, String> params) {
+		logger.info("퀴즈 셋팅");
+		return service.quizSetting(params);
+	}	
+	
+	@RequestMapping(value = "cleanQuiz")
+	public @ResponseBody void cleanQuiz() {
+		logger.info("퀴즈 초기화");
+		service.cleanQuiz();
+	}	
+	
+	@RequestMapping(value = "nextQuiz")
+	public @ResponseBody QuizDTO nextQuiz () {
+		logger.info("퀴즈 풀이");
+		return service.nextQuiz();
+	}	
 	
 	
 }

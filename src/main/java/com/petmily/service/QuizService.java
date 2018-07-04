@@ -21,6 +21,9 @@ public class QuizService {
 	SqlSession sqlSession;
 	QuizInter inter;
 
+	ArrayList<QuizDTO> list = new ArrayList<QuizDTO>();
+	int quizNum = 0;
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public ArrayList<String> AnimalList() {
@@ -45,35 +48,33 @@ public class QuizService {
 
 	public HashMap<String, Object> getQuizList(HashMap<String, String> params) {
 		inter = sqlSession.getMapper(QuizInter.class);
-		
-		logger.info("짜쯩나 : {}",params.get("searchAnimal"));
-		
-		//전체 게시글 수 구하기
+
+		// 전체 게시글 수 구하기
 		int allCnt = inter.getAllCnt(params);
-		//생성 가능한 페이지 수 구하기
+		// 생성 가능한 페이지 수 구하기
 		int pageCnt = allCnt % 10 > 0 ? Math.round(allCnt / 10) + 1 : allCnt / 10;
-		//리턴을 위한 맵 생성
+		// 리턴을 위한 맵 생성
 		HashMap<String, Object> QuizList = new HashMap<String, Object>();
-		
+
 		int page = Integer.parseInt(params.get("showPageNum"));
-		
-		//클라이언트가 원한 페이지가 최종 페이지보다 높은 경우..
+
+		// 클라이언트가 원한 페이지가 최종 페이지보다 높은 경우..
 		if (page > pageCnt) {
 			page = pageCnt;
 		}
-		
+
 		int end = 10 * page;
 		int start = end - 10 + 1;
-		
+
 		params.put("start", String.valueOf(start));
 		params.put("end", String.valueOf(end));
-		
+
 		QuizList.put("list", inter.getQuizList(params));
 		// 생성 페이지의 수
 		QuizList.put("range", pageCnt);
-		//현재 페이지 번호
+		// 현재 페이지 번호
 		QuizList.put("currPage", page);
-		
+
 		return QuizList;
 	}
 
@@ -95,7 +96,7 @@ public class QuizService {
 
 	public ModelAndView quizUpdate(HashMap<String, String> params) {
 		ModelAndView mav = new ModelAndView();
-		
+
 		QuizDTO dto = new QuizDTO();
 		dto.setQuiz_idx(Integer.parseInt(params.get("quiz_idx")));
 		dto.setAnimal_idx(params.get("aniamlList"));
@@ -103,36 +104,79 @@ public class QuizService {
 		dto.setQuiz_ask(params.get("ask"));
 		dto.setQuiz_answer(params.get("answer"));
 		dto.setQuiz_content(params.get("content"));
-		
+
 		inter = sqlSession.getMapper(QuizInter.class);
 		int success = inter.quizUpdate(dto);
-		
-		String page = "redirect:/quizUpdatePage?idx="+dto.getQuiz_idx();
+
+		String page = "redirect:/quizUpdatePage?idx=" + dto.getQuiz_idx();
 		String msg = "수정을 실패했습니다.";
-		if(success==1) {
-			page = "redirect:/quizDetailPage?idx="+dto.getQuiz_idx();
+		if (success == 1) {
+			page = "redirect:/quizDetailPage?idx=" + dto.getQuiz_idx();
 			msg = "수정을 성공했습니다.";
 		}
-		
+
 		mav.setViewName(page);
-		
+
 		return mav;
 	}
 
 	public ModelAndView quizDelete(int idx) {
 		ModelAndView mav = new ModelAndView();
-		
+
 		inter = sqlSession.getMapper(QuizInter.class);
 		int success = inter.quizDelete(idx);
-		
-		String page = "redirect:/quizDetailPage?idx="+idx;
-		if(success==1) {
+
+		String page = "redirect:/quizDetailPage?idx=" + idx;
+		if (success == 1) {
 			page = "redirect:/quizMain";
 		}
-		
+
 		mav.setViewName(page);
-		
+
 		return mav;
+	}
+
+	public ModelAndView quizSetting(HashMap<String, String> params) {
+		list.clear();
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(QuizInter.class);
+
+		String animal = params.get("animal");
+		String category = params.get("category");
+		String quizNum = params.get("quizNum");
+
+		System.out.println("동물 종류 : " + animal);
+		System.out.println("카테고리 종류: " + category);
+		System.out.println("문제 개수: " + quizNum);
+
+		list = inter.quizSetting(params);
+
+		mav.setViewName("quiz");
+
+		return mav;
+	}
+
+	public QuizDTO nextQuiz() {
+		System.out.println(list);
+		System.out.println(quizNum);
+
+		QuizDTO quiz = new QuizDTO();
+
+		if (quizNum == list.size()) {
+			quiz = null;
+		} else {
+			quiz.setQuiz_ask(list.get(quizNum).getQuiz_ask());
+			quiz.setQuiz_answer(list.get(quizNum).getQuiz_answer());
+			quiz.setQuiz_content(list.get(quizNum).getQuiz_content());
+
+			quizNum++;
+		}
+		System.out.println(quiz);
+		return quiz;
+	}
+
+	public void cleanQuiz() {
+		quizNum = 0;
 	}
 
 }

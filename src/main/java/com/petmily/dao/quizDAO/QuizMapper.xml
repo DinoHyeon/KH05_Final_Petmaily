@@ -8,41 +8,50 @@
 	</select>
 
 	<insert id="registQuiz" parameterType="QuizDTO">
-		INSERT INTO Quiz(quiz_idx,quiz_category,animal_idx,quiz_ask,quiz_content,quiz_answer)
-				VALUES(quiz_seq.NEXTVAL, #{quiz_category}, #{animal_idx}, #{quiz_ask},#{quiz_content}, #{quiz_answer})
+		INSERT INTO
+		Quiz(quiz_idx,quiz_category,animal_idx,quiz_ask,quiz_content,quiz_answer)
+		VALUES(quiz_seq.NEXTVAL, #{quiz_category}, #{animal_idx},
+		#{quiz_ask},#{quiz_content}, #{quiz_answer})
 	</insert>
-	
-	<select id="getAllCnt" resultType="Integer" parameterType="hashMap">
+
+	<select id="getAllCnt" resultType="Integer"
+		parameterType="hashMap">
 		SELECT COUNT(*) FROM Quiz
-			<where>
-				<if test="!searchAnimal.equals('전체') and searchAnimal!=null and !searchAnimal.equals('')">
-					animal_idx=#{searchAnimal}
-				</if>
-				<if test="!searchCategory.equals('전체')">
-					AND quiz_category=#{searchCategory}
-				</if>
-				<if test="searchWord != null or !searchWord.equals('')">
-					AND quiz_ask LIKE '%'||#{searchWord}||'%'
-				</if>
-			</where>
+		<where>
+			<if
+				test="!searchAnimal.equals('전체') and searchAnimal!=null and !searchAnimal.equals('')">
+				animal_idx=#{searchAnimal}
+			</if>
+			<if test="!searchCategory.equals('전체')">
+				AND quiz_category=#{searchCategory}
+			</if>
+			<if test="searchWord != null or !searchWord.equals('')">
+				AND quiz_ask LIKE '%'||#{searchWord}||'%'
+			</if>
+		</where>
 	</select>
 
-	<select id="getQuizList" resultType="QuizDTO" parameterType="hashMap">
-		SELECT quiz_idx, quiz_category, quiz_ask, quiz_content, quiz_answer, animal_idx
-			FROM (SELECT quiz_idx, quiz_category, quiz_ask, quiz_content,quiz_answer,animal_idx, ROW_NUMBER() OVER(ORDER BY quiz_idx DESC) AS rNUM FROM Quiz
-					<where>
-						<if test="!searchAnimal.equals('전체') and searchAnimal!=null and !searchAnimal.equals('')">
-							animal_idx=#{searchAnimal}
-						</if>
-						<if test="!searchCategory.equals('전체')">
-							AND quiz_category=#{searchCategory}
-						</if>
-						<if test="searchWord != null or !searchWord.equals('')">
-							AND quiz_ask LIKE '%'||#{searchWord}||'%'
-						</if>
-					</where>
-			)
-				WHERE rNum BETWEEN #{start} AND #{end}
+	<select id="getQuizList" resultType="QuizDTO"
+		parameterType="hashMap">
+		SELECT quiz_idx, quiz_category, quiz_ask, quiz_content, quiz_answer,
+		animal_idx
+		FROM (SELECT quiz_idx, quiz_category, quiz_ask,
+		quiz_content,quiz_answer,animal_idx, ROW_NUMBER() OVER(ORDER BY
+		quiz_idx DESC) AS rNUM FROM Quiz
+		<where>
+			<if
+				test="!searchAnimal.equals('전체') and searchAnimal!=null and !searchAnimal.equals('')">
+				animal_idx=#{searchAnimal}
+			</if>
+			<if test="!searchCategory.equals('전체')">
+				AND quiz_category=#{searchCategory}
+			</if>
+			<if test="searchWord != null or !searchWord.equals('')">
+				AND quiz_ask LIKE '%'||#{searchWord}||'%'
+			</if>
+		</where>
+		)
+		WHERE rNum BETWEEN #{start} AND #{end}
 	</select>
 
 	<select id="quizDetail" parameterType="Integer"
@@ -66,4 +75,19 @@
 		DELETE FROM Quiz WHERE
 		quiz_idx = #{param1}
 	</delete>
+
+	<select id="quizSetting" parameterType="hashMap" resultType="QuizDTO">
+		SELECT * FROM (
+		SELECT * FROM Quiz
+		<where>
+			<if test="!category.equals('전체')">
+				quiz_category=#{category}
+			</if>
+			<if test="!animal.equals('전체')">
+				animal_idx = #{animal}
+			</if>
+		</where>
+		ORDER BY DBMS_RANDOM.VALUE
+		)WHERE #{quizNum} >= ROWNUM 
+	</select>
 </mapper>

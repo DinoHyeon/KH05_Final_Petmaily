@@ -54,7 +54,7 @@ textarea {
 			<option value="생활">생활</option>
 			<option value="기타">기타</option>
 		</select>
-		<input id="searchWord" type="text">
+		문제 <input id="searchWord" type="text">
 		<input type="button" onclick="quizListCall(showPageNum)" value="검색"> 
 		<table>
 			<thead>
@@ -152,7 +152,6 @@ textarea {
 			},
 			success : function(data) {
 				listPrint(data);
-				console.log(data.list);
 			},
 			error : function(e) {
 				console.log(e);
