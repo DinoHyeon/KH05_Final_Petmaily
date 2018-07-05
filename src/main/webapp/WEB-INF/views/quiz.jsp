@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="resources/plugIn/jquery-ui.css">
+<link rel="stylesheet" href="resources/plugIn/jquery-ui.theme.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="resources/plugIn/jquery-ui.js"></script>
 <title>Insert title here</title>
 <style>
 #quizStart {
@@ -31,6 +34,12 @@
 </style>
 </head>
 <body>
+	<div id="dialog-confirm" title="퀴즈 시작 !">
+  		<p>
+  			<span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+  			열심히 풀어주세요 !
+  		</p>
+	</div>
 	<div id="quizStart">
 		<input type="button" id="StartBnt" value="퀴즈풀기">
 	</div>
@@ -47,7 +56,21 @@
 	var quiz;
 
 	$(document).ready(function() {
-		//퀴즈 정답, 순서 클리어
+		  $( function() {
+			    $( "#dialog-confirm" ).dialog({
+			      resizable: false,
+			      height: "auto",
+			      width: 400,
+			      modal: true,
+			      buttons: {
+			        Cancel: function() {
+			          $( this ).dialog( "퀴즈 시작" );
+			          nextQuiz();
+			        }
+			      }
+			    });
+			  } );
+		
 		$.ajax({
 			"url" : "./cleanQuiz",
 			"type" : "get",
@@ -59,10 +82,10 @@
 		});
 	});
 
-	$("#StartBnt").click(function() {
+/* 	$("#StartBnt").click(function() {
 		alert("퀴즈 시작!");
 		nextQuiz();
-	})
+	}) */
 
 	//다음 퀴즈
 	function nextQuiz() {

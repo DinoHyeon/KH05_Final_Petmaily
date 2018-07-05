@@ -4,12 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="resources/plugIn/jquery-ui.css">
+<link rel="stylesheet" href="resources/plugIn/jquery-ui.theme.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<style type="text/css"></style>
+<script src="resources/plugIn/jquery-ui.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 	<select id="sido" onchange="getSigungu()">
+		<option></option>
 	</select>
 
 	<select id="sigundo">
@@ -22,7 +25,9 @@
 		<option value="429900">기타</option>
 	</select>
 	
-	<select id="animalType"></select>
+	<select id="animalType">
+		<option></option>
+	</select>
 	
 	<input type="button" onclick="getShelter()" value="검색"> 
 	결과 :<select id="shelter">
@@ -33,6 +38,21 @@
 </body>
 <script>
 	$(document).ready(function() {
+		//버튼화
+		$("input[type='button']").button();
+		$( "#sido" ).selectmenu({
+			change: function( event, ui ) {
+				getSigungu();
+			}
+		});
+		$( "#sigundo" ).selectmenu();
+		$( "#animal" ).selectmenu({
+			change: function( event, ui ) {
+				getAnimalType();
+			}
+		}).selectmenu( "menuWidget" ).addClass( "overflow" );
+		$( "#animalType" ).selectmenu();
+		
 		$.ajax({
 			"url" : "./getSido",
 			"type" : "get",
@@ -42,7 +62,8 @@
 					content += "<option value="+item.sidoCode+">";
 					content += item.sidoName;
 					content += "</option>";
-				})
+				});
+				
 				$("#sido").empty();
 				$("#sido").append(content);
 			},
@@ -53,7 +74,7 @@
 	});
 	
 	function getSigungu() {
-		console.log();
+		console.log($("#sido").val())
 		$.ajax({
 			"url" : "./getSigungu",
 			"type" : "get",
@@ -68,6 +89,9 @@
 				})
 				$("#sigundo").empty();
 				$("#sigundo").append(content);
+				
+				$( "#sigundo" ).selectmenu( "destroy" );
+				$( "#sigundo" ).selectmenu();
 			},
 			"error" : function(x, o, e) {
 				alert(x.status + ":" + o + ":" + e);
@@ -90,6 +114,9 @@
 				})
 				$("#animalType").empty();
 				$("#animalType").append(content);
+				
+				$( "#animalType" ).selectmenu( "destroy" );
+				$( "#animalType" ).selectmenu();
 			},
 			"error" : function(x, o, e) {
 				alert(x.status + ":" + o + ":" + e);

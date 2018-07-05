@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="resources/plugIn/jquery-ui.css">
+<link rel="stylesheet" href="resources/plugIn/jquery-ui.theme.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="resources/plugIn/jquery-ui.js"></script>
 <script src="resources/js/zer0boxPaging.js" type="text/javascript"></script>
 <title>Insert title here</title>
 <style>
@@ -21,6 +24,11 @@ textarea {
 	width: 50%;
 	height: 20%;
 	border: 1px solid black;
+}
+
+button{
+	width: 10%;
+	
 }
 </style>
 </head>
@@ -40,8 +48,12 @@ textarea {
 	</div>
 	<textarea id="quizAsk" rows="" cols=""></textarea>
 	<div id="quizAnswerDiv">
-		<input type="radio" name="answer" value="O">O 
-		<input type="radio" name="answer" value="X">X
+		<label>
+			O<input type="radio" name="answer" value="O">
+		</label>
+		<label>
+			X<input type="radio" name="answer" value="X">
+		</label>
 	</div>
 	<textarea id="quizContent" rows="" cols=""></textarea>
 	<input type="button" onclick="registQuiz()" value="문제 등록">
@@ -79,6 +91,15 @@ textarea {
 	//현재 보여줄 페이지
 	var showPageNum = 1
 	$(document).ready(function() {
+		$( "#aniamlList" ).selectmenu();
+		$( "#category" ).selectmenu();
+		$( "#searchAniamlList" ).selectmenu();
+		$( "#searchCategory" ).selectmenu();
+		$('input[type="radio"]').checkboxradio();
+	    $( "input[type=submit], button, input[type=button]" ).button();
+	    $( "input[type=submit], button, input[type=button]" ).click( function( event ) {
+	      event.preventDefault();
+	    } );
 		quizListCall(showPageNum);
 	});
 
