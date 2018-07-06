@@ -102,4 +102,10 @@ public class QuizController {
 		return service.answerChk(answer);
 	}
 	
+	@RequestMapping(value = "knowledge")
+	public String knowledge() {
+		logger.info("지식 페이지 접근");
+		return "knowledge";
+	}
+	
 }

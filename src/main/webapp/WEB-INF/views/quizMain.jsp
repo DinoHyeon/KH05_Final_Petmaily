@@ -36,7 +36,7 @@ button{
 	<div>
 		<select id="aniamlList">
 			<option value="강아지">강아지</option>
-			<option value="건강">고양이</option>
+			<option value="고양이">고양이</option>
 			<option value="기타">기타</option>
 		</select> <select id="category">
 			<option value="건강">건강</option>
@@ -69,8 +69,9 @@ button{
 			<option value="습성">습성</option>
 			<option value="생활">생활</option>
 			<option value="기타">기타</option>
-		</select> 문제 <input id="searchWord" type="text"> <input type="button"
-			onclick="quizListCall(showPageNum)" value="검색">
+		</select> 
+		문제 <input id="searchWord" type="text">
+		<input type="button" onclick="quizListCall(showPageNum)" value="검색">
 		<table>
 			<thead>
 				<tr>
@@ -162,9 +163,7 @@ button{
 			content += "<td>" + item.quiz_idx + "</td>";
 			content += "<td>" + item.animal_idx + "</td>";
 			content += "<td>" + item.quiz_category + "</td>";
-			content += "<td><a href='./quizDetailPage?idx="
-					+ item.quiz_idx + "'>" + item.quiz_ask
-					+ "</a></td>";
+			content += "<td><a href='./quizDetailPage?idx="+ item.quiz_idx + "'>" + item.quiz_ask + "</a></td>";
 			content += "<td>" + item.quiz_answer + "</td>";
 			content += "</tr>";
 		})
