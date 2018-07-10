@@ -3,5 +3,20 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petmily.dao.memberDAO.MemberInter">
-
+	<select id="loginConfirmPage" resultType="String">
+		SELECT member_id FROM member WHERE member_id=#{param1} AND member_pw=#{param2}
+	</select>
+	
+   <insert id="joinConfirmPage" parameterType="MemberDTO">
+      INSERT INTO member(member_id, member_pw, member_name, member_email, member_phone, member_addr, member_state, member_date)
+      VALUES(#{member_id},#{member_pw},#{member_name},#{member_email},#{member_phone},#{member_addr},'멤버', SYSDATE)
+   </insert>
+   
+   	<select id="idChkPage" resultType="String">
+		SELECT member_id FROM member WHERE member_id=#{param1}
+	</select>
+	
+	<select id="idSearchPage" resultType="String">
+		SELECT member_id FROM member WHERE member_name=#{param1} AND member_email=#{param2} AND member_phone=#{param3}
+	</select>
 </mapper>
