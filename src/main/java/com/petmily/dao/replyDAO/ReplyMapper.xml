@@ -3,5 +3,23 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petmily.dao.replyDAO.ReplyInter">
-
+	<insert id="regist" parameterType="ReplyDTO">
+		INSERT INTO Reply (reply_idx ,board_idx,reply_content,reply_writer,reply_pw) VALUES (reply_seq.NEXTVAL,#{board_idx},#{reply_content},#{reply_writer},#{reply_pw})
+	</insert>
+	
+	<select id="replyListCall" parameterType="Integer" resultType="ReplyDTO">
+		SELECT * FROM Reply WHERE board_idx=#{param1}
+	</select>
+	
+	<delete id="replyDel" parameterType="Integer">
+		DELETE FROM Reply WHERE reply_idx=#{param1}
+	</delete>
+	
+	<select id="getReplyPass" parameterType="Integer" resultType="String">
+		SELECT reply_pw FROM Reply WHERE reply_idx=#{param1}
+	</select>
+	
+	<update id="replyModi" parameterType="hashMap">
+		UPDATE Reply SET reply_content = #{content} WHERE reply_idx = #{replyIdx}
+	</update>
 </mapper>
