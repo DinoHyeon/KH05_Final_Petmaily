@@ -19,13 +19,16 @@ textarea {
 			<tr>
 				<td colspan="2">
 					<select id="aniamlList"  name="aniamlList">
+						<option value="강아지">강아지</option>
+						<option value="건강">고양이</option>
+						<option value="기타">기타</option>
 					</select>
 					<select id="category" name="category">
-							<option value="건강">건강</option>
-							<option value="음식">음식</option>
-							<option value="습성">습성</option>
-							<option value="생활">생활</option>
-							<option value="기타">기타</option>
+						<option value="건강">건강</option>
+						<option value="음식">음식</option>
+						<option value="습성">습성</option>
+						<option value="생활">생활</option>
+						<option value="기타">기타</option>
 					</select>
 				</td>
 			</tr>
@@ -57,28 +60,6 @@ textarea {
 </body>
 <script>
 	$(document).ready(function() {
-		$.ajax({
-			type : "get",
-			url : "./getAnimalList",
-			success : function(data) {
-				var content = "";
-				//forEach - http://aljjabaegi.tistory.com/314
-				data.forEach(function(item) {
-					content += "<option value="+item+">";
-					content += item;
-					content += "</option>";
-				})
-				$("#aniamlList").empty();
-				$("#aniamlList").append(content);
-				
-				$("#aniamlList option[value='${dto.animal_idx}']").attr("selected", "selected");
-				$("#category option[value='${dto.quiz_category}']").attr("selected", "selected")
-			},
-			error : function(e) {
-				console.log(e);
-			}
-		});
-		
 		$("input[value='${dto.quiz_answer}']").attr("checked", true);
 	});
 	

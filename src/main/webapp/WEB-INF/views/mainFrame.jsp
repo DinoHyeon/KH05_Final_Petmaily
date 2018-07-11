@@ -1,21 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<link rel="icon" href="resources/icon.jpg"/>
-	<script src ="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<title>Petmily</title>
-		<style>
+	<style>
 		
-		
+		body{
+			margin: 0%;
+		}
 		
 		#frame2{/* 2번째프레임 */
 			background-color: #28977B;
 			position:fixed;
 			top:55px;	
-			width:98%;
+			width:100%;
 			height:26px;
 			
 			
@@ -25,7 +26,7 @@
 			background-color: #217D65;
 			top:81px;
 			position:fixed;		
-			width:98%;
+			width:100%;
 			height:10px;
 		}
 		#frame1{/* 1번째프레임 */

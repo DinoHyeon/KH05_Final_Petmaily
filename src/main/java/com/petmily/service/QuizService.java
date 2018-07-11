@@ -23,6 +23,8 @@ public class QuizService {
 
 	ArrayList<QuizDTO> list = new ArrayList<QuizDTO>();
 	int quizNum = 0;
+	int right = 0;
+	int wrong = 0;
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -177,6 +179,28 @@ public class QuizService {
 
 	public void cleanQuiz() {
 		quizNum = 0;
+		right = 0;
+		wrong = 0;
+	}
+
+	public String answerChk(String answer) {
+		String quizAnswer = "";
+		String answerResult = "오답";
+		
+		if (quizNum == list.size()) {
+			answerResult = null;
+		}else {
+			System.out.println("퀴즈 정답 : "+quizAnswer+" / 입력 답 : "+answer);
+			quizAnswer = list.get(quizNum).getQuiz_answer();
+			if(quizAnswer.equals(answer)) {
+				right++;
+				answerResult = "정답";
+			}else {
+				wrong++;
+			}
+		}
+		
+		return answerResult;
 	}
 
 }

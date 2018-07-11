@@ -1,9 +1,16 @@
 package com.petmily.controller;
 
 import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -295,4 +302,26 @@ public class ApiController {
 		}
 		return list;
 	}
+	
+	@RequestMapping(value = "shelter")
+	public String shelter() {
+		org.json.simple.parser.JSONParser parser = new JSONParser();
+		
+		try {
+			Object obj = parser.parse(new FileReader("resources/dataFile/shelter.json"));
+			JSONObject jsonObject = (JSONObject) obj;
+			JSONArray shelterList = (JSONArray) jsonObject.get("records");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 }
