@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="resources/plugIn/jquery-ui.css">
+<link rel="stylesheet" href="resources/plugIn/jquery-ui.theme.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="resources/plugIn/jquery-ui.js"></script>
 <title>Insert title here</title>
 <style>
 textarea {
@@ -20,7 +23,7 @@ textarea {
 				<td colspan="2">
 					<select id="aniamlList"  name="aniamlList">
 						<option value="강아지">강아지</option>
-						<option value="건강">고양이</option>
+						<option value="고양이">고양이</option>
 						<option value="기타">기타</option>
 					</select>
 					<select id="category" name="category">
@@ -43,8 +46,12 @@ textarea {
 				<td>정답</td>
 				<td>
 					<div id="quizAnswerDiv">
-						<input type="radio" name="answer" value="O">O 
-						<input type="radio" name="answer" value="X">X
+						<label>
+							O<input type="radio" name="answer" value="O">
+						</label>
+						<label>
+							X<input type="radio" name="answer" value="X">
+						</label>
 					</div>
 				</td>
 			</tr>
@@ -61,10 +68,31 @@ textarea {
 <script>
 	$(document).ready(function() {
 		$("input[value='${dto.quiz_answer}']").attr("checked", true);
+		selectBoxChk($("#aniamlList"),"${dto.animal_idx}");
+		selectBoxChk($("#category"),"${dto.quiz_category}");
+		
+		$( "#category" ).selectmenu();
+		$( "#aniamlList" ).selectmenu();
+		$('input[type="radio"]').checkboxradio({icon: false});
+		$( "input[type=submit], button, input[type=button]" ).button();
 	});
 	
 	function update() {
-		$("#update").submit();
+		if($("#ask").val()==""){
+			alert("퀴즈를 입력해주세요.");
+		}else if($("#content").val()==""){
+			alert("퀴즈 해설을 입력해주세요.");
+		}else{
+			$("#update").submit();	
+		}		
+	}
+	
+	function selectBoxChk(selectBox,data) {
+		selectBox.find("option").each(function(index){
+			if( $(this).val() == data ){
+				selectBox.val(data).prop("selected", true);
+			}
+		});
 	}
 
 </script>

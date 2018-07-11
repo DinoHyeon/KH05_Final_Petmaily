@@ -19,13 +19,13 @@
 		SELECT COUNT(*) FROM Quiz
 		<where>
 			<if
-				test="!searchAnimal.equals('전체') and searchAnimal!=null and !searchAnimal.equals('')">
+				test="!searchAnimal.equals('전체') and searchAnimal!=null and searchAnimal!=''">
 				animal_idx=#{searchAnimal}
 			</if>
 			<if test="!searchCategory.equals('전체')">
 				AND quiz_category=#{searchCategory}
 			</if>
-			<if test="searchWord != null or !searchWord.equals('')">
+			<if test="searchWord != null and searchWord!=''">
 				AND quiz_ask LIKE '%'||#{searchWord}||'%'
 			</if>
 		</where>
@@ -40,13 +40,13 @@
 		quiz_idx DESC) AS rNUM FROM Quiz
 		<where>
 			<if
-				test="!searchAnimal.equals('전체') and searchAnimal!=null and !searchAnimal.equals('')">
+				test="!searchAnimal.equals('전체') and searchAnimal!=null and searchAnimal!=''">
 				animal_idx=#{searchAnimal}
 			</if>
 			<if test="!searchCategory.equals('전체')">
 				AND quiz_category=#{searchCategory}
 			</if>
-			<if test="searchWord != null or !searchWord.equals('')">
+			<if test="searchWord != null and searchWord != ''">
 				AND quiz_ask LIKE '%'||#{searchWord}||'%'
 			</if>
 		</where>
@@ -90,4 +90,5 @@
 		ORDER BY DBMS_RANDOM.VALUE
 		)WHERE #{quizNum} >= ROWNUM 
 	</select>
+	
 </mapper>

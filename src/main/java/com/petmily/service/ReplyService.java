@@ -40,9 +40,30 @@ public class ReplyService {
 		return inter.regist(dto);
 	}
 
-	public ArrayList<ReplyDTO> replyListCall(int idx) {
+	public HashMap<String, Object> replyListCall(HashMap<String, String> params) {
 		inter = sqlSession.getMapper(ReplyInter.class);
-		return inter.replyListCall(idx);
+		
+		int allCnt = inter.getAllCnt(Integer.parseInt(params.get("idx")));
+		int pageCnt = allCnt % 15 > 0 ? Math.round(allCnt/15)+1 : allCnt/15;
+		HashMap<String, Object> replyList = new HashMap<String,Object>();
+		
+		int page = Integer.parseInt(params.get("showPageNum"));
+		
+		if(page>pageCnt) {
+			page=pageCnt;
+		}
+		
+		int end = 15*page;
+		int start = end-15+1;
+		
+		params.put("start", String.valueOf(start));
+		params.put("end", String.valueOf(end));
+		
+		replyList.put("list", inter.getReplyList(params));
+		replyList.put("range", pageCnt);
+		replyList.put("currPage", page);
+		
+		return replyList;
 	}
 
 	public int replyDel(int replyIdx) {

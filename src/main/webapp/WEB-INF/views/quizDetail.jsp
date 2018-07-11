@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="resources/plugIn/jquery-ui.css">
+<link rel="stylesheet" href="resources/plugIn/jquery-ui.theme.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="resources/plugIn/jquery-ui.js"></script>
 <title>Insert title here</title>
 <style>
 textarea {
@@ -29,8 +32,12 @@ textarea {
 			<td>정답</td>
 			<td colspan="3">
 				<div id="quizAnswerDiv">
-					<input type="radio" name="answer" value="O">O <input
-						type="radio" name="answer" value="X">X
+					<label>
+							O<input type="radio" name="answer" value="O">
+					</label>
+					<label>
+							X<input type="radio" name="answer" value="X">
+					</label>
 				</div>
 			</td>
 		</tr>
@@ -51,6 +58,9 @@ textarea {
 		//$("input[name='answer").not('input[value="${dto.quiz_answer}"]').attr("disabled",true);
 		$("input[value='${dto.quiz_answer}']").attr("checked",true);
 		$("input[name='answer']").attr("disabled",true);
+		
+		$('input[type="radio"]').checkboxradio({icon: false});
+		$( "input[type=submit], button, input[type=button]" ).button();
 	});
 	
 	function del() {

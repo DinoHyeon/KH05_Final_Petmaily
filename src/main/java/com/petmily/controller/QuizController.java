@@ -95,17 +95,16 @@ public class QuizController {
 		logger.info("퀴즈 풀이");
 		return service.nextQuiz();
 	}
-
-	@RequestMapping(value = "answerChk",produces = "application/text; charset=utf8")
-	public @ResponseBody String answerChk(@RequestParam ("answer") String answer) {
-		logger.info("퀴즈 정답 확인");
-		return service.answerChk(answer);
-	}
 	
 	@RequestMapping(value = "knowledge")
 	public String knowledge() {
 		logger.info("지식 페이지 접근");
 		return "knowledge";
+	}
+	
+	@RequestMapping(value = "QuizSettingChk")
+	public @ResponseBody Boolean QuizSettingChk(@RequestParam HashMap<String, String> params) {
+		return service.QuizSettingChk(params);
 	}
 	
 }

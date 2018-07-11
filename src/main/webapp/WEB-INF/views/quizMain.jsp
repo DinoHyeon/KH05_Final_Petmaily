@@ -20,7 +20,7 @@ textarea {
 	border: 1px solid black;
 }
 
-#quizContent {
+#registQuizContent {
 	width: 50%;
 	height: 20%;
 	border: 1px solid black;
@@ -33,12 +33,15 @@ button{
 </style>
 </head>
 <body>
-	<div>
+	<div id="registSelectBox">
 		<select id="aniamlList">
+			<option value="동물">동물 선택</option>
 			<option value="강아지">강아지</option>
 			<option value="고양이">고양이</option>
 			<option value="기타">기타</option>
-		</select> <select id="category">
+		</select>
+		<select id="category">
+			<option value="카테고리">카테고리 선택</option>
 			<option value="건강">건강</option>
 			<option value="음식">음식</option>
 			<option value="습성">습성</option>
@@ -47,7 +50,7 @@ button{
 		</select>
 	</div>
 	<textarea id="quizAsk" rows="" cols=""></textarea>
-	<div id="quizAnswerDiv">
+	<div id="registAnswerRadio">
 		<label>
 			O<input type="radio" name="answer" value="O">
 		</label>
@@ -55,14 +58,16 @@ button{
 			X<input type="radio" name="answer" value="X">
 		</label>
 	</div>
-	<textarea id="quizContent" rows="" cols=""></textarea>
+	<textarea id="registQuizContent" rows="" cols=""></textarea>
 	<input type="button" onclick="registQuiz()" value="문제 등록">
 	<div id="quizListDiv">
 		<select id="searchAniamlList">
+			<option value="전체">전체</option>
 			<option value="강아지">강아지</option>
-			<option value="건강">고양이</option>
+			<option value="고양이">고양이</option>
 			<option value="기타">기타</option>
-		</select> <select id="searchCategory">
+		</select> 
+		<select id="searchCategory">
 			<option value="전체">전체</option>
 			<option value="건강">건강</option>
 			<option value="음식">음식</option>
@@ -85,7 +90,8 @@ button{
 			<tbody id="quizList">
 			</tbody>
 		</table>
-		<div id="paging" />
+		<div id="paging">
+		</div>
 	</div>
 </body>
 <script>
@@ -96,45 +102,57 @@ button{
 		$( "#category" ).selectmenu();
 		$( "#searchAniamlList" ).selectmenu();
 		$( "#searchCategory" ).selectmenu();
-		$('input[type="radio"]').checkboxradio();
+		$('input[type="radio"]').checkboxradio({icon: false});
 	    $( "input[type=submit], button, input[type=button]" ).button();
-	    $( "input[type=submit], button, input[type=button]" ).click( function( event ) {
-	      event.preventDefault();
-	    } );
 		quizListCall(showPageNum);
 	});
 
 	function registQuiz() {
-		$.ajax({
-			type : "get",
-			url : "./registQuiz",
-			data : {
-				"animal" : $("#aniamlList").val(),
-				"category" : $("#category").val(),
-				"ask" : $("#quizAsk").val(),
-				//~:checked : 라디오버튼들 중에서 선택된 개체
-				"answer" : $("input[name='answer']:checked").val(),
-				"content" : $("#quizContent").val()
-			},
-			success : function(data) {
-				if (data == 1) {
-					alert("문제 등록에 성공했습니다");
-					$("#aniamlList").val("");
-					$("#category").val("");
-					$("#quizAsk").val("");
-					$("#quizContent").val("");
-					//checked 속성 제거
-					$("input[name='answer']:checked").removeAttr('checked');
-
-					quizListCall(showPageNum);
-				} else {
-					alert("문제 등록에 실패했습니다");
+		console.log($("#quizAsk"));
+		console.log("퀴즈 내용 : "+$("#quizAsk").val())
+		
+		console.log($("input[name=answer]")[0]);
+		console.log("퀴즈 정답 : "+$("input[name='answer']").val())
+		
+		if($("#aniamlList").val()=="동물" || $("#category").val()=="카테고리"){
+			alert("동물 또는 카테고리를 선택해주세요.");
+		}else if($("#quizAsk").val()==""){
+			alert("퀴즈를 입력해주세요.");
+		}else if(!$("input:radio[name='answer']").is(":checked")){
+			alert("퀴즈정답을 입력해주세요.");
+		}else if($("#registQuizContent").val()==""){
+			alert("퀴즈 해설을 입력해주세요.");
+		}else{
+			$.ajax({
+				type : "get",
+				url : "./registQuiz",
+				data : {
+					"animal" : $("#aniamlList").val(),
+					"category" : $("#category").val(),
+					"ask" : $("#quizAsk").val(),
+					//~:checked : 라디오버튼들 중에서 선택된 개체
+					"answer" : $("input[name='answer']:checked").val(),
+					"content" : $("#registQuizContent").val()
+				},
+				success : function(data) {
+					if (data == 1) {
+						alert("문제 등록에 성공했습니다");
+						$("#aniamlList").val("동물");
+						$("#category").val("카테고리");
+						$("#quizAsk").val("");
+						$("#registQuizContent").val("");
+						$("input[name='answer']:checked").closest("label").attr("class","ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label");
+						$("input[name='answer']:checked").removeAttr('checked');
+						quizListCall(showPageNum);
+					} else {
+						alert("문제 등록에 실패했습니다");
+					}
+				},
+				error : function(e) {
+					console.log(e);
 				}
-			},
-			error : function(e) {
-				console.log(e);
-			}
-		});
+			});
+		}
 	}
 
 	function quizListCall(page) {
@@ -158,15 +176,22 @@ button{
 	
 	function listPrint(data) {
 		var content = "";
-		data.list.forEach(function(item) {
+		if(data.list.length!=0){
+			data.list.forEach(function(item) {
+				content += "<tr>";
+				content += "<td>" + item.quiz_idx + "</td>";
+				content += "<td>" + item.animal_idx + "</td>";
+				content += "<td>" + item.quiz_category + "</td>";
+				content += "<td><a href='./quizDetailPage?idx="+ item.quiz_idx + "'>" + item.quiz_ask + "</a></td>";
+				content += "<td>" + item.quiz_answer + "</td>";
+				content += "</tr>";
+			})	
+		}else{
 			content += "<tr>";
-			content += "<td>" + item.quiz_idx + "</td>";
-			content += "<td>" + item.animal_idx + "</td>";
-			content += "<td>" + item.quiz_category + "</td>";
-			content += "<td><a href='./quizDetailPage?idx="+ item.quiz_idx + "'>" + item.quiz_ask + "</a></td>";
-			content += "<td>" + item.quiz_answer + "</td>";
+			content += "<td colspan='5'>검색결과가 없습니다.</td>"
 			content += "</tr>";
-		})
+		}
+		
 		$("#quizList").empty();
 		$("#quizList").append(content);
 		

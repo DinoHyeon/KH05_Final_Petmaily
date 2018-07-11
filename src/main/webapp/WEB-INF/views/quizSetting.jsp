@@ -187,7 +187,40 @@
 	});
 
 	function quizPlay() {
-		$("#quizPlaySetting").submit();
+		if(!$("input:radio[name='animal']").is(":checked")){
+			alert("퀴즈 동물을 선택해주세요.");
+		}else if(!$("input:radio[name='category']").is(":checked")){
+			alert("퀴즈 주제를 선택해주세요.");
+		}else if(!$("input:radio[name='quizNum']").is(":checked")){
+			alert("퀴즈 문제 수를 선택해주세요.");
+		}else if(!QuizSettingChk()){
+			alert($("input:radio[name='animal']:checked").val()+" - "+ $("input:radio[name='category']:checked").val() + "문제의 수는 "+$("input:radio[name='quizNum']:checked").val()+"개 보다 적습니다. \n빠른 시일 내에 문제를 추가하겠습니다. TT");
+		}else{
+			$("#quizPlaySetting").submit();
+		}
+	}
+	
+	function QuizSettingChk() {
+		var success;
+		$.ajax({
+			type : "get",
+			url : "./QuizSettingChk",
+			async:false,
+			data : {
+				"searchAnimal" : $("input:radio[name='animal']:checked").val(),
+				"searchCategory" :$("input:radio[name='category']:checked").val(),
+				"quiz_num" : $("input:radio[name='quizNum']:checked").val()
+			},
+			success : function(data) {
+				success = data;
+				console.log(data);
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+		
+		return success;
 	}
 </script>
 </html>

@@ -40,8 +40,8 @@ public class ReplyController {
 	}
 	
 	@RequestMapping(value = "replyListCall")
-	public @ResponseBody ArrayList<ReplyDTO> ReplyListCall (@RequestParam ("idx") int idx) {
-		return service.replyListCall(idx);
+	public @ResponseBody HashMap<String, Object> ReplyListCall (@RequestParam HashMap<String, String> params) {
+		return service.replyListCall(params);
 	}
 	
 	@RequestMapping(value = "replyRegist")

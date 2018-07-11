@@ -9,12 +9,14 @@ public interface ReplyInter {
 
 	int regist(ReplyDTO dto);
 
-	ArrayList<ReplyDTO> replyListCall(int idx);
-
 	int replyDel(int replyIdx);
 
 	String getReplyPass(int replyIdx);
 
 	int replyModi(HashMap<String, String> params);
+
+	int getAllCnt(int idx);
+
+	ArrayList<ReplyDTO> getReplyList(HashMap<String, String> params);
 
 }

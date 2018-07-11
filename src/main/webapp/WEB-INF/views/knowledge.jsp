@@ -17,6 +17,13 @@
 	height: 20%;
 }
 
+#paging{
+	position: absolute;
+	top : 61%;
+	width: 49.7%;
+	height: 20%;
+}
+
 .ui-accordion .ui-accordion-header {
 	font-weight: 600 !important;
 	font-size: 110%;
@@ -45,9 +52,11 @@
 	</select> 
 	<input id="searchWord" type="text">
 	<input id="search" type="button" onclick="knowledgeListCall(showPageNum)" value="검색">
+
 	<div id="knowledgeList">
-	
 	</div>
+	
+	<div id="paging"></div>
 </body>
 <script>
 var showPageNum = 1
@@ -101,6 +110,15 @@ function listPrint(data) {
 	    $( "#knowledgeList" ).accordion();
 	  });
 
+	$("#paging").zer0boxPaging({
+        viewRange : 5,
+        currPage : data.currPage,
+        maxPage : data.range,
+        clickAction : function(e){
+        	knowledgeListCall($(this).attr('page'));
+        }
+    });
+	
 }
 </script>
 </html>

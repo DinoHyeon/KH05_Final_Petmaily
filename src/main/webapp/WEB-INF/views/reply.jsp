@@ -9,6 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="resources/plugIn/jquery-ui.js"></script>
 <script src="resources/js/autosize.js"></script>
+<script src="resources/js/zer0boxPaging.js" type="text/javascript"></script>
 <title>Insert title here</title>
 <style type="text/css">
 #ip{
@@ -61,13 +62,16 @@
 		</tbody>
 	</table>
 </div>
+
+<div id="paging"></div>
 </body>
 <script>
 var replyIdx;
 var request;
+var showPageNum = 1;
 
 $(document).ready(function() {
-	replyListCall();
+	replyListCall(showPageNum);
 	$( "#noneMemberPassChk" ).dialog({
 		autoOpen: false,
      	resizable: false,
@@ -82,12 +86,13 @@ $(document).ready(function() {
 	});
 });
 
-function replyListCall() {
+function replyListCall(page) {
 	$.ajax({
 		type : "get",
 		url : "./replyListCall",
 		data : {
 			"idx": 1,
+			"showPageNum":page
 		},
 		success : function(data) {
 			listPrint(data);
@@ -130,7 +135,7 @@ function replyPassChk() {
 
 function listPrint(data){
 	var content="";
-	data.forEach(function(item){
+	data.list.forEach(function(item){
 		var pre = item.reply_writer.substr(0,3);
 		var ip = item.reply_writer.substr(4,15);
 		var ipArr = ip.split('.');
@@ -166,6 +171,15 @@ function listPrint(data){
 	
 	$("#replyList").empty();
 	$("#replyList").append(content);
+	
+	$("#paging").zer0boxPaging({
+        viewRange : 5,
+        currPage : data.currPage,
+        maxPage : data.range,
+        clickAction : function(e){
+        	replyListCall($(this).attr('page'));
+        }
+    });
 }
 
 function regist() {
@@ -180,7 +194,7 @@ function regist() {
 		success : function(data) {
 			$("#replyContent").val("");
 			$("#noneMemberPass").val("");
-			replyListCall();
+			replyListCall(showPageNum);
 		},
 		error : function(e) {
 			console.log(e);
@@ -200,7 +214,7 @@ function replyDel(idx) {
 			success : function(data) {
 				if(data==1){
 					alert("댓글이 삭제되었습니다");
-					replyListCall();
+					replyListCall(showPageNum);
 				}
 				
 			},
@@ -228,7 +242,7 @@ function replyModi(data) {
 		success : function(result) {
 			if(result==1){
 				alert("댓글이 수정되었습니다.");
-				replyListCall();
+				replyListCall(showPageNum);
 			}
 			
 		},
