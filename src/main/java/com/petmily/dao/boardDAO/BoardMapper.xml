@@ -3,59 +3,247 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petmily.dao.boardDAO.BoardInter">
-	<!-- 보호 게시판 리스트 -->
-	<select id="protectList" parameterType="HashMap" resultType="BoardDTO">
-		SELECT b.board_idx, b.board_title, p.mainPhoto FROM board
-		b, photo p WHERE b.board_idx = p.board_idx AND b.board_type='보호'
+
+	<!-- 실종_전체 게시글 수 -->
+	<select id="mgetAllCnt" parameterType="HashMap" resultType="Integer">
+		SELECT COUNT(*) FROM missingBoard
+		<where>
+			<if test="!sido.equals('선택') and sido!=null">
+				AND missing_loc LIKE '%'||#{sido}||'%'
+			</if>
+			<if test="sigundo!='' and sigundo!=null">
+				AND missing_loc LIKE '%'||#{sigundo}||'%'
+			</if>
+			<if test="!animal.equals('선택') and animal!=null">
+				AND animal_idx=#{animal}
+			</if>
+			<if test="animalType!='' and animalType!=null">
+				AND animal_type=#{animalType}
+			</if>
+			<if test="keyword!='' and keyword!=null">
+				AND boar_title LIKE '%'||#{keyword}||'%'
+			</if>
+		</where>
 	</select>
 
-	<!-- 실종 게시판 리스트 -->
-	<select id="missingList" parameterType="HashMap" resultType="BoardDTO">
-		SELECT b.board_idx, b.board_title, b.board_regDate,
-		p.mainPhoto FROM board b, photo p WHERE b.board_idx = p.board_idx AND
-		b.board_type='실종'
+	<!-- 보호_전체 게시글 수 -->
+	<select id="pGetAllCnt" parameterType="HashMap" resultType="Integer">
+		SELECT COUNT(*) FROM protectBoard
+		<where>
+			<if test="!sido.equals('선택') and sido!=null">
+				AND protect_loc LIKE '%'||#{sido}||'%'
+			</if>
+			<if test="sigundo!='' and sigundo!=null">
+				AND protect_loc LIKE '%'||#{sigundo}||'%'
+			</if>
+			<if test="!animal.equals('선택') and animal!=null">
+				AND animal_idx=#{animal}
+			</if>
+			<if test="animalType!='' and animalType!=null">
+				AND animal_type=#{animalType}
+			</if>
+			<if test="keyword!='' and keyword!=null">
+				AND boar_title LIKE '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
+	
+	
+	<!-- 파일 리스트 -->
+	<select id="fileList" resultType="BoardDTO">
+		SELECT * FROM photo WHERE
+		board_idx = #{param1}
+	</select>
+
+
+	<!-- 보호 게시판 리스트 -->
+	<select id="protectList" parameterType="HashMap" resultType="BoardDTO">
+		SELECT board_idx, board_title, board_regDate, protect_loc, animal_idx, animal_type, photo_newName, mainPhoto 
+		FROM(SELECT board_idx, board_title, board_regDate, protect_loc, animal_idx, animal_type, photo_newName, mainPhoto, ROW_NUMBER() OVER(ORDER BY
+		board_idx DESC) AS rNUM FROM protectBoard
+		<where>
+			<if test="!sido.equals('선택') and sido!=null">
+				AND protect_loc LIKE '%'||#{sido}||'%'
+			</if>
+			<if test="sigundo!='' and sigundo!=null">
+				AND protect_loc LIKE '%'||#{sigundo}||'%'
+			</if>
+			<if test="!animal.equals('선택') and animal!=null">
+				AND animal_idx=#{animal}
+			</if>
+			<if test="animalType!='' and animalType!=null">
+				AND animal_type=#{animalType}
+			</if>
+			<if test="keyWord!='' and keyWord!=null">
+				AND board_title LIKE '%'||#{keyWord}||'%'
+			</if>
+		</where>
+		)
+		WHERE mainPhoto='대표이미지' AND rNum BETWEEN #{start} AND #{end}
 	</select>
 
 	<!-- 보호 게시판 상세보기 -->
 	<select id="protectDetail" resultType="BoardDTO">
-		SELECT b.board_title, b.board_content, b.board_writer, b.board_regDate,
-		b.board_hit, bp.protect_loc, p.photo_newName
-		FROM board b, board_protect bp, photo p
-		WHERE b.board_idx=#{param1} AND bp.board_idx=#{param1} AND
-		p.board_idx=#{param1}
+		SELECT b.board_idx, b.board_title, b.board_content, b.board_writer, b.board_regDate, b.board_hit, bp.protect_loc, bp.animal_idx, bp.animal_type
+		FROM board b, board_protect bp
+		WHERE b.board_idx=#{param1} AND bp.board_idx=#{param1} 
+	</select>
+	
+	<!-- 보호_게시판 글 등록 -->
+	<insert id="protectWrite" parameterType="BoardDTO"
+		useGeneratedKeys="true" keyProperty="board_idx" keyColumn="board_idx">
+		INSERT INTO
+		board(board_idx, board_type, board_title, board_content, board_writer,
+		board_hit)
+		VALUES(board_seq.NEXTVAL, '보호', #{board_title},
+		#{board_content}, #{board_writer}, 0)
+	</insert>
+
+
+	<!-- 보호_테이블 글 등록 -->
+	<insert id="board_protectWrite" parameterType="BoardDTO">
+		INSERT INTO
+		board_protect(board_idx, protect_loc, animal_type, animal_idx,
+		protect_pw)
+		VALUES(#{board_idx}, #{protect_loc}, #{animal_type},
+		#{animal_idx}, '1234')
+	</insert>
+
+	<!-- 보호_사진 등록 -->
+	<insert id="protectWriteFile" parameterType="BoardDTO">
+		INSERT INTO
+		photo(photo_idx, board_idx, photo_type, photo_oriName, photo_newName,mainPhoto)
+		VALUES(photo_seq.NEXTVAL, #{param3}, '사진', #{param2},
+		#{param1}, #{param4})
+	</insert>
+	
+	
+	<!-- 보호_삭제 파일 확인 -->
+	<select id="pDelFileName" resultType="String">
+		SELECT photo_newName FROM photo WHERE photo_newName = #{param1}
+	</select>
+	
+	<!-- 보호_파일 삭제 -->
+	<delete id="pFileDelete">
+		DELETE FROM photo WHERE photo_newName = #{param1}
+	</delete>
+	
+	<!-- 보호 게시글 삭제 -->
+	<delete id="protectDelete" parameterType="Integer">
+		DELETE FROM board WHERE board_idx=#{param1}
+	</delete>
+	
+	<!-- 보호 게시글 수정 -->
+	<update id="protectUpdate">
+		UPDATE board SET board_title=#{param2}, board_content=#{param3} WHERE board_idx=#{param1} 
+	</update>
+	
+	<!-- 보호_ 테이블 수정 -->
+	<update id="board_protectUpdate">
+		UPDATE board_protect SET protect_loc=#{param2}, animal_idx=#{param3}, animal_type=#{param4} WHERE board_idx=#{param1} 
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 실종 게시판 리스트 -->
+	<select id="missingList" parameterType="HashMap" resultType="BoardDTO">
+		SELECT board_idx, board_title, board_regDate, missing_loc, animal_idx, animal_type, photo_newName, mainPhoto 
+		FROM(SELECT board_idx, board_title, board_regDate, missing_loc, animal_idx, animal_type, photo_newName, mainPhoto, ROW_NUMBER() OVER(ORDER BY
+		board_idx DESC) AS rNUM FROM missingBoard
+		<where>
+			<if test="!sido.equals('선택') and sido!=null">
+				AND missing_loc LIKE '%'||#{sido}||'%'
+			</if>
+			<if test="sigundo!='' and sigundo!=null">
+				AND missing_loc LIKE '%'||#{sigundo}||'%'
+			</if>
+			<if test="!animal.equals('선택') and animal!=null">
+				AND animal_idx=#{animal}
+			</if>
+			<if test="animalType!='' and animalType!=null">
+				AND animal_type=#{animalType}
+			</if>
+			<if test="keyWord!='' and keyWord!=null">
+				AND board_title LIKE '%'||#{keyWord}||'%'
+			</if>
+		</where>
+		)
+		WHERE mainPhoto='대표이미지' AND rNum BETWEEN #{start} AND #{end}
 	</select>
 
 	<!-- 실종 게시판 상세보기 -->
 	<select id="missingDetail" resultType="BoardDTO">
-		SELECT b.board_title, b.board_content, b.board_writer, b.board_regDate,
-		b.board_hit, bs.missing_loc, p.photo_newName
-		FROM board b, board_missing bs, photo p
-		WHERE b.board_idx=#{param1} AND bs.board_idx=#{param1} AND
-		p.board_idx=#{param1}
+		SELECT b.board_idx, b.board_title,b.board_content, b.board_writer, b.board_regDate,b.board_hit, bs.missing_loc, bs.animal_idx, bs.animal_type
+		FROM board b, board_missing bs
+		WHERE b.board_idx=#{param1} AND bs.board_idx=#{param1}
 	</select>
 
-	<!-- 실종 게시판 글작성 -->
+	<!-- 실종_게시판 글 등록 -->
 	<insert 
 		id="missingWrite" 
 		parameterType="BoardDTO"
 		useGeneratedKeys="true" 
 		keyProperty="board_idx" 
-		keyColumn="board_idx">
+		keyColumn="board_idx"
+		>
 		INSERT INTO board(board_idx, board_type, board_title, board_content, board_writer,board_hit)
-		<!-- 회원 -->
-		<if test="!board_writer.equals('')">
-			VALUES(board_seq.NEXTVAL, '실종', #{board_title}, #{content}, loginId, 0)
-		</if>
-		<!-- 비회원 -->
-		<if test="board_writer.equals('')">
-			VALUES(board_seq.NEXTVAL, '실종', #{board_title}, #{content}, '비회원', 0)
-		</if>
-		
-		
-	<!-- 
-		INSERT INTO board_missing(board_idx, missing_loc, animal_idx, animal_type,
-		missing_pw)
-		VALUES(board_idx, '서울 잠실', '고양이', '먼치킨', '1234') WHERE board_idx =
-		board_missing.board_idx -->
+		VALUES(board_seq.NEXTVAL, '실종', #{board_title},#{board_content}, #{board_writer}, 0)
 	</insert>
+
+	<!-- 실종_테이블 글 등록 -->
+	<insert id="board_missingWrite" parameterType="BoardDTO">
+		INSERT INTO board_missing(board_idx, missing_loc, animal_idx, animal_type,missing_pw)
+		VALUES(#{board_idx}, #{missing_loc}, #{animal_idx},#{animal_type}, '1234')
+	</insert>
+
+	<!-- 실종_사진 등록 -->
+	<insert id="missingWriteFile" parameterType="BoardDTO">
+		INSERT INTO photo(photo_idx, board_idx, photo_type, photo_oriName, photo_newName,mainPhoto)
+		VALUES(photo_seq.NEXTVAL, #{param3}, '사진', #{param2},#{param1}, #{param4})
+	</insert>
+
+	<!-- 실종_삭제 파일 확인 -->
+	<select id="mDelFileName" resultType="String">
+		SELECT photo_newName FROM photo WHERE photo_newName = #{param1}
+	</select>
+	
+	<!-- 실종_파일 삭제 -->
+	<delete id="mFileDelete">
+		DELETE FROM photo WHERE photo_newName = #{param1}
+	</delete>
+	
+	<!-- 실종 게시글 삭제 -->
+	<delete id="missingDelete" parameterType="Integer">
+		DELETE FROM board WHERE board_idx=#{param1}
+	</delete>
+	
+	<!-- 실종 게시글 수정 -->
+	<update id="missingUpdate">
+		UPDATE board SET board_title=#{param2}, board_content=#{param3} WHERE board_idx=#{param1} 
+	</update>
+	
+	<!-- 실종_ 테이블 수정 -->
+	<update id="board_missingUpdate">
+		UPDATE board_missing SET missing_loc=#{param2}, animal_idx=#{param3}, animal_type=#{param4} WHERE board_idx=#{param1} 
+	</update>
+	
+
 </mapper>

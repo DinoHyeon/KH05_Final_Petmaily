@@ -1,2 +1,4 @@
 src/test/
 target/
+resources/log4j.xml
+.classpath
