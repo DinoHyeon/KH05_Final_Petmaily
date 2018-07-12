@@ -56,7 +56,7 @@ function getSigungu() {
 		"url" : "./getSigungu",
 		"type" : "get",
 		"data" : {"sidoCode" : $("#sido").val()},
-		"success" : function(data) {
+		"success" : function(data) { 
 			var content = "";
 			content += "<option value=''>전체</option>"
 			data.forEach(function(item) {
