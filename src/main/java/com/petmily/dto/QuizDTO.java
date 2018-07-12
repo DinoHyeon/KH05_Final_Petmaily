@@ -7,6 +7,8 @@ public class QuizDTO {
 	private String quiz_ask;
 	private String quiz_content;
 	private String quiz_answer;
+	private int quiz_rightNum;
+	private int quiz_wrongNum;
 	
 	public int getQuiz_idx() {
 		return quiz_idx;
@@ -43,6 +45,18 @@ public class QuizDTO {
 	}
 	public void setQuiz_answer(String quiz_answer) {
 		this.quiz_answer = quiz_answer;
+	}
+	public int getQuiz_rightNum() {
+		return quiz_rightNum;
+	}
+	public void setQuiz_rightNum(int quiz_rightNum) {
+		this.quiz_rightNum = quiz_rightNum;
+	}
+	public int getQuiz_wrongNum() {
+		return quiz_wrongNum;
+	}
+	public void setQuiz_wrongNum(int quiz_wrongNum) {
+		this.quiz_wrongNum = quiz_wrongNum;
 	}
 	
 	

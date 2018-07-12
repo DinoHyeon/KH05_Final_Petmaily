@@ -36,13 +36,10 @@
 <body>
 	<div id="dialog-confirm" title="퀴즈 시작 !">
   		<p>
-  			<span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-  			열심히 풀어주세요 !
+ 			열심히 풀어주세요 !
   		</p>
 	</div>
-	<div id="quizStart">
-		<input type="button" id="StartBnt" value="퀴즈풀기">
-	</div>
+	
 	<div id="ask"></div>
 	<div id="result">
 		<span id="askResult"></span> <span id="content"></span>
@@ -51,26 +48,34 @@
 	<input type="radio" name="answer" value="X">X
 	<input type="button" onclick="answerChk()" value="정답확인">
 	<input type="button" onclick="nextQuiz()" value="다음문제">
+	
+	<div id="quizEnding" title="퀴즈 결과 발표">
+		<p><span id="quizEndingContent"></span></p>
+	</div>
 </body>
 <script>
 	var quiz;
-
+	var rightNum=0;
+	var wrongNum=0;
+	
 	$(document).ready(function() {
 		  $( function() {
+			  	//dialog plugin적용
 			    $( "#dialog-confirm" ).dialog({
 			      resizable: false,
 			      height: "auto",
 			      width: 400,
 			      modal: true,
 			      buttons: {
-			        Cancel: function() {
-			          $( this ).dialog( "퀴즈 시작" );
-			          nextQuiz();
+			        Start: function() {
+			        	$( this ).dialog( "close" );
+			        	nextQuiz();
 			        }
 			      }
 			    });
 			  } );
 		
+		//퀴즈 목록 초기화
 		$.ajax({
 			"url" : "./cleanQuiz",
 			"type" : "get",
@@ -81,11 +86,6 @@
 			}
 		});
 	});
-
-/* 	$("#StartBnt").click(function() {
-		alert("퀴즈 시작!");
-		nextQuiz();
-	}) */
 
 	//다음 퀴즈
 	function nextQuiz() {
@@ -98,8 +98,7 @@
 				$("#askResult").html("");
 				$("#content").html("");
 				if (!data) {
-					console.log("문제 끝!");
-					alert("문제가 끝났습니다!");
+					alert("정답: "+rightNum+" / "+"오답: "+wrongNum);
 				} else {
 					$("#ask").html(data.quiz_ask);
 				}
@@ -112,25 +111,15 @@
 
 	//정답체크
 	function answerChk() {
-		$.ajax({
-			"url" : "./answerChk",
-			"type" : "get",
-			"data" : {
-				"answer" : $("input[name='answer']:checked").val()
-			},
-			"success" : function(data) {
-				$("#result").css("display", "block");
-				if (!data) {
-					alert("마지막 문제");
-				} else {
-					$("#askResult").html(data);
-					$("#content").html($(quiz)[0].quiz_content);
-				}
-			},
-			"error" : function(x, o, e) {
-				alert(x.status + ":" + o + ":" + e);
-			}
-		});
+		if(quiz.quiz_answer==$("input[name='answer']:checked").val()){
+			console.log("정답");
+			rightNum+=1;
+			console.log(rightNum);
+		}else{
+			console.log("오답");
+			wrongNum+=1;
+			console.log(wrongNum);
+		}	
 	}
 </script>
 </html>

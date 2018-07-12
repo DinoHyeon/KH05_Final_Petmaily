@@ -9,7 +9,7 @@
             "padding" : "5px 10px",
             "margin" : "0 3px",
             "font-weight" : 600,
-            "color":"dodgerblue",
+            "color":"#469840",
             "cursor":"pointer"            
         };
 

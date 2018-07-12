@@ -7,8 +7,15 @@
 		INSERT INTO Reply (reply_idx ,board_idx,reply_content,reply_writer,reply_pw) VALUES (reply_seq.NEXTVAL,#{board_idx},#{reply_content},#{reply_writer},#{reply_pw})
 	</insert>
 	
-	<select id="replyListCall" parameterType="Integer" resultType="ReplyDTO">
-		SELECT * FROM Reply WHERE board_idx=#{param1}
+	<select id="getAllCnt" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(*) FROM Reply WHERE board_idx=#{param1}
+	</select>
+	
+	<select id="getReplyList" parameterType="hashMap" resultType="ReplyDTO">
+		SELECT reply_idx, board_idx, reply_content, reply_writer 
+		FROM (SELECT reply_idx, board_idx, reply_content,reply_writer, ROW_NUMBER() OVER(ORDER BY reply_idx DESC)AS rNUM 
+			FROM reply WHERE board_idx = #{idx})
+		WHERE rNum BETWEEN #{start} AND #{end}
 	</select>
 	
 	<delete id="replyDel" parameterType="Integer">

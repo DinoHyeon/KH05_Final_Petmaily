@@ -25,4 +25,6 @@ public interface QuizInter {
 
 	ArrayList<QuizDTO> quizSetting(HashMap<String, String> params);
 
+	int QuizSettingChk(HashMap<String, String> params);
+
 }

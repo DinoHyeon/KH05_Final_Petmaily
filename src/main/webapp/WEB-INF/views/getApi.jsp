@@ -37,6 +37,7 @@
 	결과 :<select id="shelter">
 	</select>
 	
+	<input type="button" onclick="shelterSearch()" value="보호소 검색"> 
 	
 	
 </body>
@@ -75,6 +76,17 @@
 				alert(x.status + ":" + o + ":" + e);
 			}
 		});
+		
+		$.ajax({
+			"url" : "./shelter",
+			"type" : "get",
+			"success" : function(data) {
+				console.log(data);
+			},
+			"error" : function(x, o, e) {
+				alert(x.status + ":" + o + ":" + e);
+			}
+		});
 	});
 	
 	function getSigungu() {
@@ -93,9 +105,6 @@
 				})
 				$("#sigundo").empty();
 				$("#sigundo").append(content);
-				
-				$( "#sigundo" ).selectmenu( "destroy" );
-				$( "#sigundo" ).selectmenu();
 			},
 			"error" : function(x, o, e) {
 				alert(x.status + ":" + o + ":" + e);
@@ -146,6 +155,19 @@
 				})
 				$("#shelter").empty();
 				$("#shelter").append(content);
+			},
+			"error" : function(x, o, e) {
+				alert(x.status + ":" + o + ":" + e);
+			}
+		});
+	}
+	
+	function shelterSearch() {
+		$.ajax({
+			"url" : "./shelterSearch",
+			"type" : "get",
+			"success" : function(data) {
+				console.log(data);
 			},
 			"error" : function(x, o, e) {
 				alert(x.status + ":" + o + ":" + e);

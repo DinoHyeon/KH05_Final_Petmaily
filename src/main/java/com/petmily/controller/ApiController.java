@@ -1,11 +1,13 @@
 package com.petmily.controller;
 
 import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -24,13 +26,56 @@ import com.petmily.dto.ShelterDTO;
 
 @Controller
 public class ApiController {
+	
+	//보호소 전체 리스트
+	ArrayList<ShelterDTO> shelterList = new ArrayList<ShelterDTO>();
+	
 	@RequestMapping(value = "apiPage")
 	public String apiPage() {
 		return "getApi";
 	}
 	
 
-	@RequestMapping(value = "getSido")
+	@RequestMapping(value = "searchShelter")
+	public String searchShelter(HttpSession session) {
+		if(shelterList.isEmpty()) {
+			try {
+				JSONParser parser = new JSONParser();
+				String dataFilePath = session.getServletContext().getRealPath("/resources/dataFile/shelter.json");
+				Object obj = parser.parse(new FileReader(dataFilePath));
+				JSONObject jsonObj = (JSONObject) obj;
+				
+				JSONArray arr = (JSONArray) jsonObj.get("records");
+				
+				for (int i = 0; i < arr.size(); i++) {
+					JSONObject temp = (JSONObject) arr.get(i);
+					ShelterDTO dto = new ShelterDTO();
+					dto.setCenterName((String) temp.get("동물보호센터명"));
+					dto.setManageName((String) temp.get("관리기관명"));
+					dto.setCenterType((String) temp.get("동물보호센터유형"));
+					dto.setRoadAddr((String) temp.get("소재지도로명주소"));
+					dto.setLocationAddr((String) temp.get("소재지지번주소"));
+					dto.setX((String) temp.get("위도"));
+					dto.setY((String) temp.get("경도"));
+					dto.setWeekdayStartTime((String) temp.get("평일운영시작시각"));
+					dto.setWeekdayEndTime((String) temp.get("평일운영종료시각"));
+					dto.setWeekendStartTime((String) temp.get("주말운영시작시각"));
+					dto.setWeekendEndTime((String) temp.get("주말운영종료시각"));
+					dto.setHoliday((String) temp.get("휴무일"));
+					dto.setPhoneNum((String) temp.get("전화번호"));
+					
+					shelterList.add(dto);
+				}
+			} catch (IOException | ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return "searchShelter";
+	}
+	
+
+/*	@RequestMapping(value = "getSido")
 	public @ResponseBody ArrayList<LocationDTO> goQuizMain() {
 		String addr = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sido?ServiceKey=";
 		String serviceKey = "XCdNWTVmXT3Zk0y%2BK3CpUAV2t4qBVGx34uevgRwA8jGhto%2FVOnbeSyfYnh74wEKL0DGPoql%2FDnZy6cjcbDGnHg%3D%3D";
@@ -94,15 +139,13 @@ public class ApiController {
 		}
 
 		return list;
-	}
+	}*/
 
 	@RequestMapping(value = "getSigungu")
 	public @ResponseBody ArrayList<LocationDTO> getSigungu(@RequestParam("sidoCode") String sidoCode) {
 		String addr = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sigungu?upr_cd="
 				+ sidoCode + "&ServiceKey=";
 		String serviceKey = "XCdNWTVmXT3Zk0y%2BK3CpUAV2t4qBVGx34uevgRwA8jGhto%2FVOnbeSyfYnh74wEKL0DGPoql%2FDnZy6cjcbDGnHg%3D%3D";
-
-		System.out.println(addr+serviceKey);
 		
 		ArrayList<LocationDTO> list = null;
 		LocationDTO dto = new LocationDTO();
@@ -303,25 +346,35 @@ public class ApiController {
 		return list;
 	}
 	
-	@RequestMapping(value = "shelter")
-	public String shelter() {
-		org.json.simple.parser.JSONParser parser = new JSONParser();
+	@RequestMapping(value = "shelterList")
+	public @ResponseBody ArrayList<ShelterDTO> shelterList(@RequestParam ("sido") String sido, @RequestParam ("sigudo") String sigudo) {
+		ArrayList<ShelterDTO> list = new ArrayList<ShelterDTO>();
+		ShelterDTO shelter = null;
 		
-		try {
-			Object obj = parser.parse(new FileReader("resources/dataFile/shelter.json"));
-			JSONObject jsonObject = (JSONObject) obj;
-			JSONArray shelterList = (JSONArray) jsonObject.get("records");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for(ShelterDTO temp : shelterList) {
+			if(!sido.equals("선택")) {
+				if(temp.getLocationAddr().contains("서울특별시")) {
+					shelter = temp;
+					list.add(shelter);
+				}
+			}else {
+				shelter = temp;
+				list.add(shelter);
+			}
 		}
-		
-		return null;
+		return list;
 	}
+	
+	@RequestMapping(value = "shelterDetail")
+	public @ResponseBody ShelterDTO shelterDetail(@RequestParam ("centetName") String name) {
+		ShelterDTO shelter = null;
+		for(ShelterDTO temp : shelterList) {
+			if(temp.getCenterName().equals(name)) {
+				shelter = temp;
+			}
+		}
+		return shelter;
+	}
+		
 	
 }

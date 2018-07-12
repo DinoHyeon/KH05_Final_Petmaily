@@ -23,8 +23,6 @@ public class QuizService {
 
 	ArrayList<QuizDTO> list = new ArrayList<QuizDTO>();
 	int quizNum = 0;
-	int right = 0;
-	int wrong = 0;
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -58,6 +56,8 @@ public class QuizService {
 		// 리턴을 위한 맵 생성
 		HashMap<String, Object> QuizList = new HashMap<String, Object>();
 
+		logger.info("전체 글 수 : "+allCnt);
+		
 		int page = Integer.parseInt(params.get("showPageNum"));
 
 		// 클라이언트가 원한 페이지가 최종 페이지보다 높은 경우..
@@ -151,6 +151,7 @@ public class QuizService {
 		System.out.println("카테고리 종류: " + category);
 		System.out.println("문제 개수: " + quizNum);
 
+		// 퀴즈 목록 반환
 		list = inter.quizSetting(params);
 
 		mav.setViewName("quiz");
@@ -159,8 +160,6 @@ public class QuizService {
 	}
 
 	public QuizDTO nextQuiz() {
-		System.out.println(list);
-		System.out.println(quizNum);
 
 		QuizDTO quiz = new QuizDTO();
 
@@ -170,37 +169,31 @@ public class QuizService {
 			quiz.setQuiz_ask(list.get(quizNum).getQuiz_ask());
 			quiz.setQuiz_answer(list.get(quizNum).getQuiz_answer());
 			quiz.setQuiz_content(list.get(quizNum).getQuiz_content());
-
 			quizNum++;
 		}
-		System.out.println(quiz);
 		return quiz;
 	}
 
 	public void cleanQuiz() {
 		quizNum = 0;
-		right = 0;
-		wrong = 0;
 	}
 
-	public String answerChk(String answer) {
-		String quizAnswer = "";
-		String answerResult = "오답";
+	public Boolean QuizSettingChk(HashMap<String, String> params) {
 		
-		if (quizNum == list.size()) {
-			answerResult = null;
-		}else {
-			System.out.println("퀴즈 정답 : "+quizAnswer+" / 입력 답 : "+answer);
-			quizAnswer = list.get(quizNum).getQuiz_answer();
-			if(quizAnswer.equals(answer)) {
-				right++;
-				answerResult = "정답";
-			}else {
-				wrong++;
-			}
+		logger.info("퀴즈 설정 확인");
+		
+		inter = sqlSession.getMapper(QuizInter.class);
+		int reqQuizNum = Integer.parseInt(params.get("quiz_num"));
+		int resQuizNum = inter.getAllCnt(params);
+		boolean quizSettingResult = true;
+		
+		logger.info(reqQuizNum + "/" + resQuizNum);
+		
+		if(reqQuizNum>resQuizNum) {
+			logger.info("문제 부족");
+			quizSettingResult = false;
 		}
 		
-		return answerResult;
+		return quizSettingResult;
 	}
-
 }
