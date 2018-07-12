@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-<script src="resources/js/zer0boxPaging.js" type="text/javascript"></script>
 <title>실종 게시판</title>
 <style>
 table {
@@ -16,22 +14,27 @@ table {
 }
 
 table, tr, td {
-	width: 300px;
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 5px 10px;
 }
 
-.missingList {
-	width: 700px;
+.list {
+	width: 900px;
 }
 
 #write {
 	margin: 300px 300px;
 }
+
+#paging{
+	
+}
+
 </style>
 </head>
 <body>
+<jsp:include page="mainFrame.jsp"/>
 	<h3>실종 게시판</h3>
 		<!-- 지역 -->
 		<select id="sido" onchange="getSigungu()">
@@ -109,16 +112,18 @@ function listCall(page){ //page -> showPageNum
 function listPrint(data){
 	var content = "";
 	data.list.forEach(function(item){
+		var date = new Date(item.board_regDate); //날짜 millisecond나오는거 변형
+		
 		content += "<table>";
 		content += "<tr>";
 		content += "<td>"+item.board_idx+"</td>";
 		content += "<td><a href='missingDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
 		content += "</tr>";
 		content += "<tr>";
-		content += "<td colspan='2'><img width='300' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";
+		content += "<td colspan='2'><img width='400' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";
 		content += "</tr>";
 		content += "<tr>";
-		content += "<td colspan='2'>"+item.board_regDate+"</td>";
+		content += "<td colspan='2'>"+date.toLocaleDateString("en-KOR")+"</td>";
 		content += "</tr>";
 		content += "</table>";
 	})

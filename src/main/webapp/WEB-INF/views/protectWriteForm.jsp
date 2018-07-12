@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <title>보호 게시글 작성</title>
 <style>
 table, tr, td {
@@ -44,6 +43,7 @@ input[type='text'] {
 </style>
 </head>
 <body>
+<jsp:include page="mainFrame.jsp"/>
 	<center>
 		<h3>보호 글 등록</h3>
 	</center>
@@ -170,11 +170,7 @@ input[type='text'] {
 	
 	//사진 삭제 - ajax
 	function pDel(elem){
-		var path = elem.id;
-		console.log("해당 아이디 값 :" + path);
-		var pathimg = path+"img";
 		var fileName = elem.id.split("/")[2];
-		console.log("fileName", fileName);
 		$.ajax({
 			url : "./pFileDel",
 			type : "get",
@@ -182,10 +178,8 @@ input[type='text'] {
 			success:function(data){
 				console.log(data);
 				if(data.success == 1){
-					//이미지 삭제+버튼삭제
-   					$(elem).prev().remove();//attach 이미지삭제
-					$(elem).remove();//attach 버튼삭제
-					document.getElementById(pathimg).remove();//editable 이미지삭제
+					$(elem).closest("div").remove();
+					document.getElementById(fileName).remove();
 				}
 			},
 			error:function(e){
@@ -194,6 +188,24 @@ input[type='text'] {
 		});
 	}
 	
+	/* 사진 체크 */
+	function pcheckphoto() {
+      var photoChk;
+      $.ajax({
+         url:"./pcheckphoto",
+         type:"get",
+         async: false,
+         success:function(data){
+            photoChk = data;
+         },
+         error:function(e){
+            console.log(e);
+         }
+      });
+      
+      return photoChk;
+      
+   }
 	
 	//파일 업로드 창
 	function fileUp() {
@@ -202,10 +214,16 @@ input[type='text'] {
 
 	//게시글 등록 버튼
 	$("#btn_protectWrite").click(function() {
-		$("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
-		$("#location").val($("#sido option:selected").html());
-		$("#selectAnimal").val($("#animal option:selected").html());
-		$("#protectSend").submit();
+	if(pcheckphoto()){
+	       $("#editable input[type='button']").remove();//삭제 버튼 제거
+	       $("#editable input[type='checkbox']").remove();//체크박스 버튼 제거
+	       $("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
+	       $("#location").val($("#sido option:selected").html());
+	       $("#selectAnimal").val($("#animal option:selected").html());
+	       $("#protectSend").submit();
+	    }else{
+	       alert("파일을 등록해주세요.");
+	    }
 		
 	});
 </script>

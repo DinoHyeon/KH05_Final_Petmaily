@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <title>실종 게시글 작성</title>
 <style>
 table, tr, td {
@@ -43,6 +42,7 @@ input[type='text']{
 </style>
 </head>
 <body>
+<jsp:include page="mainFrame.jsp"/>
 	<center>
 		<h3>실종 글 등록</h3>
 	</center>
@@ -108,7 +108,9 @@ input[type='text']{
 				<td><input type="button" id="fileUpBtn" onclick="fileUp()" value="첨부" /></td>
 			</tr>
 			<tr>
-				<td colspan="3" height="50px"><div id="attach" contenteditable="true"></div></td>
+				<td colspan="3" height="50px">
+				<div id="attach"></div>
+				</td>
 			</tr>
 		</table>
 		<p>
@@ -117,7 +119,7 @@ input[type='text']{
 		<center>
 			<input type="password" placeholder="비밀번호" /> 
 			<input type="button" id="btn_missingWrite" value="등록"> 
-			<input type="button" value="취소">
+			<input type="button" id="back" value="취소">
 		</center>
 	</form>
 </body>
@@ -172,10 +174,8 @@ input[type='text']{
 	
 	//사진 삭제 - ajax
 	function mDel(elem){
-		var path = elem.id;
-		var pathimg = path+"img";
 		var fileName = elem.id.split("/")[2];
-		console.log("fileName", fileName);
+		console.log(fileName);
 		$.ajax({
 			url : "./mFileDel",
 			type : "get",
@@ -183,10 +183,8 @@ input[type='text']{
 			success:function(data){
 				console.log(data);
 				if(data.success == 1){
-					//이미지 삭제+버튼삭제
-   					$(elem).prev().remove();//attach 이미지삭제
-					$(elem).remove();//attach 버튼삭제
-					document.getElementById(pathimg).remove();//editable 이미지삭제
+					$(elem).closest("div").remove();
+					document.getElementById(fileName).remove();
 				}
 			},
 			error:function(e){
@@ -195,18 +193,47 @@ input[type='text']{
 		});
 	}
 	
+	/* 사진체크 */
+	function mcheckphoto() {
+      var photoChk;
+      $.ajax({
+         url:"./mcheckphoto",
+         type:"get",
+         async: false,
+         success:function(data){
+            photoChk = data;
+         },
+         error:function(e){
+            console.log(e);
+         }
+      });
+      
+      return photoChk;
+      
+   }
 	
 	//파일 업로드 창
 	function fileUp() {
 		var myWin = window.open("./muploadForm", "파일 업로드", "width=300, height=150");
 	}
-
+	
+	//취소
+	$("#back").click(function(){
+		location.href="./missingList";
+	});
+	
 	//게시글 등록 버튼
 	$("#btn_missingWrite").click(function() {
-		$("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
-		$("#location").val($("#sido option:selected").html());
-		$("#selectAnimal").val($("#animal option:selected").html());
-		$("#missingSend").submit();
+	if(mcheckphoto()){
+       $("#editable input[type='button']").remove();//삭제 버튼 제거
+       $("#editable input[type='checkbox']").remove();//체크박스 버튼 제거
+       $("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
+       $("#location").val($("#sido option:selected").html());
+       $("#selectAnimal").val($("#animal option:selected").html());
+       $("#missingSend").submit();
+    }else{
+       alert("파일을 등록해주세요.");
+    }
 		
 	});
 </script>

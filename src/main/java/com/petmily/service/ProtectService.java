@@ -204,8 +204,9 @@ public class ProtectService {
 				//fileName DB에 있는지 확인
 				if(inter.pDelFileName(fileName)!=null) {//삭제할 파일명 존재
 					inter.pFileDelete(fileName); //해당이름 가진 파일(newFileName) DB에서 삭제
+					fileList.remove(fileName); //파일 리스트에서도 해당 이름 가진 파일 삭제
 				}	
-				fileList.remove(fileName); //파일 리스트에서도 해당 이름 가진 파일 삭제
+				
 			}
 			success = 1; //파일 삭제 성공
 		}catch (Exception e) {
@@ -292,5 +293,15 @@ ModelAndView mav = new ModelAndView();
 						mav.setViewName(page);
 						return mav;
 	}
+
+	public boolean pcheckphoto() {
+		boolean photo = false;//사진이 없으면 false 반환
+	      System.out.println("파일: "+fileList.size());
+	      if (fileList.size() > 0) {// 저장할 파일이 있을 경우
+	         photo = true;
+	      }
+
+	      return photo;
+	   }
 
 }

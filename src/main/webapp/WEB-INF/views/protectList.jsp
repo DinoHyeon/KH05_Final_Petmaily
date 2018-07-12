@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-<script src="resources/js/zer0boxPaging.js" type="text/javascript"></script>
 <title>보호 게시판</title>
 <style>
 table {
@@ -16,14 +14,13 @@ table {
 }
 
 table, tr, td {
-	width: 300px;
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 5px 10px;
 }
 
-.protectList {
-	width: 700px;
+.list {
+	width: 900px;
 }
 
 #write {
@@ -32,6 +29,7 @@ table, tr, td {
 </style>
 </head>
 <body>
+<jsp:include page="mainFrame.jsp"/>
 	<h3>보호 게시판</h3>
 		<!-- 지역 -->
 		<select id="sido" onchange="getSigungu()">
@@ -115,7 +113,7 @@ function listPrint(data){
 		content += "<td><a href='protectDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
 		content += "</tr>";
 		content += "<tr>";
-		content += "<td colspan='2'><img width='300' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";
+		content += "<td colspan='2'><img width='400' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";
 		content += "</tr>";
 		content += "</table>";
 	})

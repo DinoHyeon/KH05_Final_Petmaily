@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -168,10 +169,6 @@ public class MissingService {
 					inter.missingWriteFile(key, fileList.get(key), dto.getBoard_idx(), main);
 				}
 			}
-			System.out.println("글번호: " + dto.getBoard_idx());
-			System.out.println("실종 지역 : " + dto.getMissing_loc());
-			System.out.println("동물종 : " + dto.getAnimal_idx());
-			System.out.println("품종 : " + dto.getAnimal_type());
 			inter.board_missingWrite(dto);// board_missing 테이블에 글 등록
 		}
 
@@ -192,11 +189,13 @@ public class MissingService {
 		ArrayList<BoardDTO> files = inter.fileList(board_idx);
 		for (BoardDTO dto : files) {
 			fileList.put(dto.getPhoto_newName(), dto.getPhoto_oriName());
+			
 		}
 
 		mav.addObject("files", files);
 		mav.addObject("size", files.size()); // 첨부파일 유무
 		mav.setViewName("missingUpdateForm");
+
 		return mav;
 	}
 
@@ -208,7 +207,6 @@ public class MissingService {
 
 		try {
 			String fullPath = root + "resources/upload/" + fileName;
-			System.out.println("전체 경로 :" + fullPath);
 			File file = new File(fullPath); // 전체 경로 담은 파일생성
 			if (file.exists()) {// 삭제할 파일 존재
 				file.delete();
@@ -222,8 +220,8 @@ public class MissingService {
 				// fileName DB에 있는지 확인
 				if (inter.mDelFileName(fileName) != null) {// 삭제할 파일명 존재
 					inter.mFileDelete(fileName); // 해당이름 가진 파일(newFileName) DB에서 삭제
+					fileList.remove(fileName); // 파일 리스트에서도 해당 이름 가진 파일 삭제
 				}
-				fileList.remove(fileName); // 파일 리스트에서도 해당 이름 가진 파일 삭제
 			}
 			success = 1; // 파일 삭제 성공
 		} catch (Exception e) {
@@ -261,10 +259,12 @@ public class MissingService {
 		String animal_type = map.get("animalType");
 		String board_title = map.get("board_title");
 		String board_content = map.get("board_content");
-		logger.info(board_idx + "/" + missing_loc + "/" + animal_idx + "/" + animal_type + "/" + board_title + "/"
-				+ board_content);
-
+		
+		BoardDTO dto = new BoardDTO();
+		dto.setMainPhoto(map.get("main"));
+	
 		inter = sqlSession.getMapper(BoardInter.class);
+		//수정 실패
 		String page = "redirect:/missingUpdateForm?board_idx=" + board_idx;
 
 		// 쿼리 실행
@@ -281,7 +281,9 @@ public class MissingService {
 		if (size > 0) {// 기존 파일이 남아 있거나, 추가 되었거나...
 			String main = "X";
 			for (String key : fileList.keySet()) {// map 에서 키를 뽑아 온다.
-
+				if (key.equals(dto.getMainPhoto())) {
+					main = "대표이미지";
+				}
 				// 중복 방지를 위해 기존 데이터 삭제
 				logger.info("newFile : {}", key);
 				inter.mFileDelete(key);
@@ -293,5 +295,15 @@ public class MissingService {
 		mav.setViewName(page);
 		return mav;
 	}
+
+	public boolean mcheckphoto() {
+		  boolean photo = false;//사진이 없으면 false 반환
+	      System.out.println("파일: "+fileList.size());
+	      if (fileList.size() > 0) {// 저장할 파일이 있을 경우
+	         photo = true;
+	      }
+
+	      return photo;
+	   }
 
 }

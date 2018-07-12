@@ -83,7 +83,7 @@ public class BoardController {
 		return "puploadForm";
 	}
 	
-	/* 실종_첨부파일 업로드 */
+	/* 보호_첨부파일 업로드 */
 	@RequestMapping(value = "/pupload")
 	// 파일은 request 형태로 받지 않고 MultipartFile로 받아야함
 	public ModelAndView pupload(MultipartFile file, HttpSession session) {
@@ -113,6 +113,14 @@ public class BoardController {
 		logger.info("protectWrite 요청");
 		return protect.protectWrite(map, ipAddr);
 	}
+	
+	/* 보호_파일 체크 여부 */
+	  @RequestMapping(value="pcheckphoto")
+	   public @ResponseBody boolean pcheckphoto() {
+	   logger.info("파일 유무 확인 요청");
+	   
+	   return protect.pcheckphoto();
+	   }
 	
 	/* 보호 게시판 파일 삭제 */
 	@RequestMapping(value = "/pFileDel")
@@ -229,13 +237,20 @@ public class BoardController {
 		return missing.missingWrite(map, ipAddr);
 	}
 	
+	/* 실종_파일 체크 여부 */
+	  @RequestMapping(value="mcheckphoto")
+	   public @ResponseBody boolean mcheckphoto() {
+	   logger.info("파일 유무 확인 요청");
+	   
+	   return missing.mcheckphoto();
+	   }
+	
 	/* 실종 게시판 파일 삭제 */
 	@RequestMapping(value = "/mFileDel")
 	//파일 삭제 위한 파일이름과 경로 가져오기
 	public @ResponseBody HashMap<String, Integer> mFileDel(@RequestParam("fileName") String fileName, HttpSession session){
 		String root = session.getServletContext().getRealPath("/"); //파일 경로
 		logger.info("실종_ mFileDel 요청");
-		logger.info(root);
 		return missing.mFileDel(root, fileName);
 		
 	}

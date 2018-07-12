@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <title>Insert title here</title>
 <style>
 table, tr, td{
@@ -31,6 +30,7 @@ th{
 </style>
 </head>
 <body>
+<jsp:include page="mainFrame.jsp"/>
 	<form id="sendForm" action="protectUpdate" method="post">
 	<table>
 		<tr>
@@ -220,10 +220,7 @@ th{
 	
 	//사진 삭제 - ajax
 	function pDel(elem){
-		var path = elem.id;
-		var pathimg = path+"img";
 		var fileName = elem.id.split("/")[2];
-		console.log("fileName", fileName);
 		$.ajax({
 			url : "./pFileDel",
 			type : "get",
@@ -231,11 +228,10 @@ th{
 			success:function(data){
 				console.log(data);
 				if(data.success == 1){
-					//이미지 삭제+버튼삭제
-   					$(elem).prev().remove();//attach 이미지삭제
-					$(elem).remove();//attach 버튼삭제
-					$("#attach").remove(); //원래있던 이미지 지우기
-					document.getElementById(pathimg).remove();//editable 이미지삭제
+					$(elem).prev().remove();//이미지 삭제
+					$(elem).remove();//버튼 삭제
+					$(elem).closest("div").remove();
+					document.getElementById(fileName).remove();
 				}
 			},
 			error:function(e){

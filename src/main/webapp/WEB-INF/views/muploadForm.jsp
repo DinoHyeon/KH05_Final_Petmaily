@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <title>파일 첨부</title>
 <style></style>
 </head>
@@ -30,9 +30,8 @@
 			content +="<img id='"+imgId+"' width='250' src='${path}'/>";
 			elem.innerHTML += content+"<br/>";
 			content ="";//content 초기화
-			content +="<img width='250' src='${path}'/>";
-			content +="<input id='${path}' type='button' value='삭제' onclick='mDel(this)'><input type='radio' name='main' value='"+imgId+"'><div>";
-
+			content +="<div><img width='250' src='${path}'/>";
+			content +="<input id='${path}' type='button' value='삭제' onclick='mDel(this)'><input type='radio' name='main' value='"+imgId+"'></div>";
 			content +="<br/>";
 			elem2.innerHTML += content;
 			self.close();
