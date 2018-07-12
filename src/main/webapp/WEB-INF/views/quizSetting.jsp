@@ -10,27 +10,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
 
-#animal{
+#animal {
 	position: absolute;
 	left: 50%;
 }
 
-#contentFrame{
+#contentFrame {
 	position: absolute;
-	left: 0%;
-	top: 12%;
-	width: 100%;
+	left: 0.8%;
+	top: 12.9%;
+	width: 98%;
 	height: 88%;
 	background: white;
 }
 
-#quizPlaySetting{
+#quizPlaySetting {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 }
 
-#animalChoice{
+#animalChoice {
 	position: absolute;
 	left: 25%;
 	top: 8%;
@@ -38,38 +38,37 @@
 	height: 34%;
 }
 
-#AnimalSleDog{
+#AnimalSleDog {
 	position: absolute;
 	left: 25%;
 	top: 8%;
-
 }
 
-#AnimalSleCat{
+#AnimalSleCat {
 	position: absolute;
 	left: 34%;
 	top: 67%;
 }
 
-#AnimalSleEtc{
+#AnimalSleEtc {
 	position: absolute;
 	left: 25%;
 	top: 8%;
 }
 
-#AnimalSleAll{
+#AnimalSleAll {
 	position: absolute;
 	left: 25%;
 	top: 8%;
 }
 
-.animal{
+.animal {
 	float: left;
 	width: 25%;
 	height: 100%;
 }
 
-.animalImg{
+.animalImg {
 	position: absolute;
 	width: 17%;
 	height: 70%;
@@ -77,96 +76,81 @@
 	margin-top: 0.5%;
 }
 
-.animalName{
+.animalName {
 	position: absolute;
 	margin-top: 17%;
-	margin-left: 9.5%;	
+	margin-left: 9.5%;
 	font-weight: 600;
 	font-size: 14;
 	text-align: center;
 }
 
-#categoryFieldset{
+#categoryFieldset {
 	border: none;
 }
 </style>
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="mainFrame.jsp" />
+
 	<div id="contentFrame">
 		<form action="quizPlaySetting" id="quizPlaySetting">
-		
-		
-		<div id="animalChoice">
-			<div class="animal" id="dog">
-				<img class="animalImg" id="강아지" alt="강아지" src="resources/img/dog.png">
-				<div id="AnimalSleDog">
-					<label>강아지
-						<input type="radio" value="강아지" name="animal">
-					</label>
+
+
+			<div id="animalChoice">
+				<div class="animal" id="dog">
+					<img class="animalImg" id="강아지" alt="강아지"
+						src="resources/img/dog.png">
+					<div id="AnimalSleDog">
+						<label>강아지 <input type="radio" value="강아지" name="animal">
+						</label>
+					</div>
+				</div>
+				<div class="animal" id="cat">
+					<img class="animalImg" id="고양이" alt="고양이"
+						src="resources/img/cat.png">
+					<div id="AnimalSleCat">
+						<label>고양이 <input type="radio" value="고양이" name="animal">
+						</label>
+					</div>
+				</div>
+				<div class="animal" id="etc">
+					<img class="animalImg" id="기타" alt="기타"
+						src="resources/img/fish.png">
+					<div id="AnimalSleEtc">
+						<label>기타 <input type="radio" value="기타" name="animal">
+						</label>
+					</div>
+				</div>
+				<div class="animal" id="all">
+					<div id="AnimalSleAll">
+						<label>전체 <input type="radio" value="전체" name="animal">
+						</label>
+					</div>
 				</div>
 			</div>
-			<div class="animal" id="cat">
-				<img class="animalImg" id="고양이" alt="고양이" src="resources/img/cat.png">
-				<div id="AnimalSleCat">
-					<label>고양이
-						<input type="radio" value="고양이" name="animal">
+
+
+			<div id="categoryChoice">
+				<fieldset id="categoryFieldset">
+					<label>전체 <input type="radio" value="전체" name="category">
+					</label> <label>음식 <input type="radio" value="음식" name="category">
+					</label> <label>습성 <input type="radio" value="습성" name="category">
+					</label> <label>생활 <input type="radio" value="생활" name="category">
+					</label> <label>건강 <input type="radio" value="건강" name="category">
+					</label> <label>기타 <input type="radio" value="기타" name="category">
 					</label>
-				</div>
+				</fieldset>
 			</div>
-			<div class="animal" id="etc">
-				<img class="animalImg" id="기타" alt="기타" src="resources/img/fish.png">
-				<div id="AnimalSleEtc">
-					<label>기타
-						<input type="radio" value="기타" name="animal">
-					</label>
-				</div>
+			<div id="quizNumChoice">
+				<label>3 <input type="radio" value="3" name="quizNum">
+				</label> <label>5 <input type="radio" value="5" name="quizNum">
+				</label> <label>10 <input type="radio" value="10" name="quizNum">
+				</label>
 			</div>
-			<div class="animal" id="all">
-				<div id="AnimalSleAll">
-					<label>전체
-						<input type="radio" value="전체" name="animal">
-					</label>
-				</div>
-			</div>		
-		</div>
-		
-		
-		<div id="categoryChoice">
-			<fieldset id="categoryFieldset">
-				<label>전체
-					<input type="radio" value="전체" name="category">
-				</label>
-				<label>음식
-					<input type="radio" value="음식" name="category">
-				</label>
-				<label>습성
-					<input type="radio" value="습성" name="category">
-				</label>
-				<label>생활
-					<input type="radio" value="생활" name="category">
-				</label>
-				<label>건강
-					<input type="radio" value="건강" name="category">
-				</label>
-				<label>기타
-					<input type="radio" value="기타" name="category">
-				</label>
-			</fieldset>
-		</div>
-		<div id="quizNumChoice">
-			<label>3
-		 		<input type="radio" value="3" name="quizNum">
-		 	</label>
-		 	<label>5
-		 		<input type="radio" value="5" name="quizNum">
-		 	</label>
-		 	<label>10
-		 		<input type="radio" value="10" name="quizNum">
-		 	</label>
-		</div>		
-		
-		<input type="button" onclick="quizPlay()" value="문제풀기">
+
+			<input type="button" onclick="quizPlay()" value="문제풀기">
 		</form>
 	</div>
 </body>

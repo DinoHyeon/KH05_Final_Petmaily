@@ -85,6 +85,7 @@ function getSigungu() {
 }
 
 function shelterList() {
+<<<<<<< HEAD
    $.ajax({
       "url" : "./shelterList",
       "type" : "get",
@@ -100,6 +101,23 @@ function shelterList() {
          alert(x.status + ":" + o + ":" + e);
       }
    });
+=======
+	$.ajax({
+		"url" : "./shelterList",
+		"type" : "get",
+		"data" : {
+					"sido":$("#sido option:selected").html(),
+					"sigundo":$("#sigundo").val()
+				},
+		"success" : function(data) {
+			listPrint(data);
+			console.log(data);
+		},
+		"error" : function(x, o, e) {
+			alert(x.status + ":" + o + ":" + e);
+		}
+	});
+>>>>>>> c1bb095a619f3c0ce4ac01a873ff9736412e9f9c
 }
 
 function listPrint(data) {

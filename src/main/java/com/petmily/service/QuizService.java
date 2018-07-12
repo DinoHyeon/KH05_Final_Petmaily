@@ -155,23 +155,33 @@ public class QuizService {
 		list = inter.quizSetting(params);
 
 		mav.setViewName("quiz");
+		mav.addObject("animal", animal);
+		mav.addObject("category",category);
+		mav.addObject("quizNum", quizNum);
 
 		return mav;
 	}
 
-	public QuizDTO nextQuiz() {
+	public HashMap<String, Object> nextQuiz() {
 
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		QuizDTO quiz = new QuizDTO();
 
 		if (quizNum == list.size()) {
 			quiz = null;
 		} else {
+			map.put("currQuizNum", quizNum);
 			quiz.setQuiz_ask(list.get(quizNum).getQuiz_ask());
 			quiz.setQuiz_answer(list.get(quizNum).getQuiz_answer());
 			quiz.setQuiz_content(list.get(quizNum).getQuiz_content());
+			
+			map.put("quiz", quiz);
+			
 			quizNum++;
 		}
-		return quiz;
+		
+		return map;
 	}
 
 	public void cleanQuiz() {

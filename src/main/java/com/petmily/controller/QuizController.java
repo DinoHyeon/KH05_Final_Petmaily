@@ -91,7 +91,7 @@ public class QuizController {
 	}
 
 	@RequestMapping(value = "nextQuiz")
-	public @ResponseBody QuizDTO nextQuiz () {
+	public @ResponseBody HashMap<String, Object> nextQuiz () {
 		logger.info("퀴즈 풀이");
 		return service.nextQuiz();
 	}

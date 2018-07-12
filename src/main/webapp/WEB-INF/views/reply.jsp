@@ -4,12 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="resources/plugIn/jquery-ui.css">
-<link rel="stylesheet" href="resources/plugIn/jquery-ui.theme.css">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="resources/plugIn/jquery-ui.js"></script>
-<script src="resources/js/autosize.js"></script>
-<script src="resources/js/zer0boxPaging.js" type="text/javascript"></script>
 <title>Insert title here</title>
 <style type="text/css">
 #ip{
@@ -34,6 +28,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="mainFrame.jsp" />
 <div id="noneMemberPassChk" title="비회원 댓글 삭제">
 	<div>
 		<h1>비밀번호를 입력해주세요.</h1>
