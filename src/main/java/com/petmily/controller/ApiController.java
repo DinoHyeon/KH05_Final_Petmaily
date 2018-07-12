@@ -13,6 +13,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +29,8 @@ import com.petmily.dto.ShelterDTO;
 @Controller
 public class ApiController {
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	//보호소 전체 리스트
 	ArrayList<ShelterDTO> shelterList = new ArrayList<ShelterDTO>();
 	
@@ -35,7 +39,6 @@ public class ApiController {
 		return "getApi";
 	}
 	
-
 	@RequestMapping(value = "searchShelter")
 	public String searchShelter(HttpSession session) {
 		if(shelterList.isEmpty()) {
@@ -65,9 +68,10 @@ public class ApiController {
 					dto.setPhoneNum((String) temp.get("전화번호"));
 					
 					shelterList.add(dto);
+					
+					
 				}
 			} catch (IOException | ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -351,7 +355,7 @@ public class ApiController {
 		ArrayList<ShelterDTO> list = new ArrayList<ShelterDTO>();
 		ShelterDTO shelter = null;
 		
-		for(ShelterDTO temp : shelterList) {
+		/*for(ShelterDTO temp : shelterList) {
 			if(!sido.equals("선택")) {
 				if(temp.getLocationAddr().contains("서울특별시")) {
 					shelter = temp;
@@ -361,8 +365,8 @@ public class ApiController {
 				shelter = temp;
 				list.add(shelter);
 			}
-		}
-		return list;
+		}*/
+		return shelterList;
 	}
 	
 	@RequestMapping(value = "shelterDetail")

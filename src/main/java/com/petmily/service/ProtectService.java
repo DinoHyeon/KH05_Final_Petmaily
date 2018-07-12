@@ -73,13 +73,6 @@ public class ProtectService {
 	public HashMap<String, Object> protectList(HashMap<String, String> map) {
 		inter = sqlSession.getMapper(BoardInter.class);
 
-		logger.info(map.get("sido"));// 아무것도 선택안됐을 때 - 선택
-		logger.info(map.get("sigundo"));
-		logger.info(map.get("animal"));// 아무것도 선택안됐을 때 - 선택
-		logger.info(map.get("animalType"));
-		logger.info(map.get("keyWord"));
-		logger.info(map.get("showPageNum"));
-
 		// 전체 게시글 수 구하기
 		int allCnt = inter.pGetAllCnt(map);
 
