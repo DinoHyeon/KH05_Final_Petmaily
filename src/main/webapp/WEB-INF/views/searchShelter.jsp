@@ -79,7 +79,7 @@ function shelterList() {
 		"type" : "get",
 		"data" : {
 					"sido":$("#sido option:selected").html(),
-					"sigudo":$("#sigundo").val()
+					"sigundo":$("#sigundo").val()
 				},
 		"success" : function(data) {
 			listPrint(data);

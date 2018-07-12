@@ -4,13 +4,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="resources/plugIn/jquery-ui.css">
-<link rel="stylesheet" href="resources/plugIn/jquery-ui.theme.css">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="resources/plugIn/jquery-ui.js"></script>
-<script src="resources/js/zer0boxPaging.js" type="text/javascript"></script>
 <title>Insert title here</title>
 <style>
+#contentFrame {
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 87%;
+	background: white;
+}
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.5%;
+	width: 15%;
+	height: 87%;
+	background: black;
+}
+
 textarea {
 	resize: none;
 }
@@ -33,64 +46,68 @@ button{
 </style>
 </head>
 <body>
-	<div id="registSelectBox">
-		<select id="aniamlList">
-			<option value="동물">동물 선택</option>
-			<option value="강아지">강아지</option>
-			<option value="고양이">고양이</option>
-			<option value="기타">기타</option>
-		</select>
-		<select id="category">
-			<option value="카테고리">카테고리 선택</option>
-			<option value="건강">건강</option>
-			<option value="음식">음식</option>
-			<option value="습성">습성</option>
-			<option value="생활">생활</option>
-			<option value="기타">기타</option>
-		</select>
-	</div>
-	<textarea id="quizAsk" rows="" cols=""></textarea>
-	<div id="registAnswerRadio">
-		<label>
-			O<input type="radio" name="answer" value="O">
-		</label>
-		<label>
-			X<input type="radio" name="answer" value="X">
-		</label>
-	</div>
-	<textarea id="registQuizContent" rows="" cols=""></textarea>
-	<input type="button" onclick="registQuiz()" value="문제 등록">
-	<div id="quizListDiv">
-		<select id="searchAniamlList">
-			<option value="전체">전체</option>
-			<option value="강아지">강아지</option>
-			<option value="고양이">고양이</option>
-			<option value="기타">기타</option>
-		</select> 
-		<select id="searchCategory">
-			<option value="전체">전체</option>
-			<option value="건강">건강</option>
-			<option value="음식">음식</option>
-			<option value="습성">습성</option>
-			<option value="생활">생활</option>
-			<option value="기타">기타</option>
-		</select> 
-		문제 <input id="searchWord" type="text">
-		<input type="button" onclick="quizListCall(showPageNum)" value="검색">
-		<table>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>동물</th>
-					<th>주제</th>
-					<th>문제</th>
-					<th>정답</th>
-				</tr>
-			</thead>
-			<tbody id="quizList">
-			</tbody>
-		</table>
-		<div id="paging">
+	<jsp:include page="mainFrame.jsp" />
+	<div id="sideFrame"></div>
+	<div id="contentFrame">
+		<div id="registSelectBox">
+			<select id="aniamlList">
+				<option value="동물">동물 선택</option>
+				<option value="강아지">강아지</option>
+				<option value="고양이">고양이</option>
+				<option value="기타">기타</option>
+			</select>
+			<select id="category">
+				<option value="카테고리">카테고리 선택</option>
+				<option value="건강">건강</option>
+				<option value="음식">음식</option>
+				<option value="습성">습성</option>
+				<option value="생활">생활</option>
+				<option value="기타">기타</option>
+			</select>
+		</div>
+		<textarea id="quizAsk" rows="" cols=""></textarea>
+		<div id="registAnswerRadio">
+			<label>
+				O<input type="radio" name="answer" value="O">
+			</label>
+			<label>
+				X<input type="radio" name="answer" value="X">
+			</label>
+		</div>
+		<textarea id="registQuizContent" rows="" cols=""></textarea>
+		<input type="button" onclick="registQuiz()" value="문제 등록">
+		<div id="quizListDiv">
+			<select id="searchAniamlList">
+				<option value="전체">전체</option>
+				<option value="강아지">강아지</option>
+				<option value="고양이">고양이</option>
+				<option value="기타">기타</option>
+			</select> 
+			<select id="searchCategory">
+				<option value="전체">전체</option>
+				<option value="건강">건강</option>
+				<option value="음식">음식</option>
+				<option value="습성">습성</option>
+				<option value="생활">생활</option>
+				<option value="기타">기타</option>
+			</select> 
+			문제 <input id="searchWord" type="text">
+			<input type="button" onclick="quizListCall(showPageNum)" value="검색">
+			<table>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>동물</th>
+						<th>주제</th>
+						<th>문제</th>
+						<th>정답</th>
+					</tr>
+				</thead>
+				<tbody id="quizList">
+				</tbody>
+			</table>
+			<div id="paging">
+			</div>
 		</div>
 	</div>
 </body>
