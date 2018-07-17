@@ -1,7 +1,6 @@
 package com.petmily.controller;
 
 import java.io.BufferedInputStream;
-import java.io.Console;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -18,11 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import com.petmily.dto.AnimalDTO;
 import com.petmily.dto.LocationDTO;
+import com.petmily.dto.NoticeDTO;
 import com.petmily.dto.ShelterDTO;
 
 @Controller
@@ -30,6 +31,8 @@ public class ApiController {
 
 	// 보호소 전체 리스트
 	ArrayList<ShelterDTO> shelterList = new ArrayList<ShelterDTO>();
+	ArrayList<NoticeDTO> noticeList = new ArrayList<NoticeDTO>();
+	int shelterListAllCnt = 0;
 
 	@RequestMapping(value = "apiPage")
 	public String apiPage() {
@@ -320,25 +323,57 @@ public class ApiController {
 	}
 
 	@RequestMapping(value = "shelterList")
-	public @ResponseBody ArrayList<ShelterDTO> shelterList(@RequestParam("sido") String sido,
-			@RequestParam("sigundo") String sigundo) {
+	public @ResponseBody HashMap<String, Object> shelterList(@RequestParam("sido") String sido,
+			@RequestParam("sigundo") String sigundo, @RequestParam("page") int page) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<ShelterDTO> list = new ArrayList<ShelterDTO>();
+		ArrayList<ShelterDTO> tempList = new ArrayList<ShelterDTO>();
 		ShelterDTO shelter = null;
-		
+
 		for (ShelterDTO temp : shelterList) {
 			if (!sido.equals("선택")) {
 				if (temp.getLocationAddr() != null) {
-					if (temp.getLocationAddr().contains(sido+" "+sigundo)) {
+					if (temp.getLocationAddr().contains(sido + " " + sigundo)) {
 						shelter = temp;
-						list.add(shelter);
+						tempList.add(shelter);
 					}
 				}
 			} else {
 				shelter = temp;
-				list.add(shelter);
+				tempList.add(shelter);
+			}
+			
+			shelterListAllCnt = tempList.size();
+		}
+		
+		int pageCnt = shelterListAllCnt % 10 > 0 ? Math.round(shelterListAllCnt / 10) + 1 : shelterListAllCnt / 10;
+		if (page > pageCnt) {
+			page = pageCnt;
+		}
+
+		int end = 10 * page;
+		int start = end - 10 + 1;
+		
+		System.out.println(end);
+		System.out.println(start);
+		System.out.println(shelterListAllCnt);
+		
+		if(page == pageCnt) {
+			for(int i=start; i<=shelterListAllCnt-1; i++) {
+				list.add(tempList.get(i));
+			}
+		}else {
+			for(int i=start; i<end-1; i++) {
+				list.add(tempList.get(i));
 			}
 		}
-		return list;
+		
+		
+		map.put("list", list);
+		map.put("currPage", page);
+		map.put("pageCnt", pageCnt);
+		
+		return map;
 	}
 
 	@RequestMapping(value = "shelterDetail")
@@ -352,4 +387,224 @@ public class ApiController {
 		return shelter;
 	}
 
+	// 유기동물 공고 페이지 이동
+	@RequestMapping(value = "animalNotice")
+	public String animalNotice() {
+		return "animalNotice";
+	}
+
+	@RequestMapping(value = "noticeList")
+	public @ResponseBody HashMap<String, Object> noticeList(@RequestParam HashMap<String, String> params) {
+		noticeList.clear();
+		String showPageNum = params.get("showPageNum");
+		String start_date = params.get("start_date");
+		System.out.println(start_date);
+		String end_date = params.get("end_date");
+		System.out.println(end_date);
+		String sido = params.get("sido");
+		System.out.println(sido);
+		String sigundo = params.get("sigundo");
+		System.out.println(sigundo);
+		String shelter = params.get("shelter");
+		System.out.println(shelter);
+		String animal = params.get("animal");
+		System.out.println(animal);
+		String animalType = params.get("animalType");
+		System.out.println(animalType);
+		String statement = params.get("statement");
+		System.out.println(statement);
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		String numOfRows;
+		String totalCount = null;
+
+		String serviceKey = "XCdNWTVmXT3Zk0y%2BK3CpUAV2t4qBVGx34uevgRwA8jGhto%2FVOnbeSyfYnh74wEKL0DGPoql%2FDnZy6cjcbDGnHg%3D%3D";
+		String addr = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?serviceKey="
+				+ serviceKey + "&bgnde=" + start_date + "&endde=" + end_date + "&upkind=" + animal + "&kind="
+				+ animalType + "&upr_cd=" + sido + "&org_cd=" + sigundo + "&care_reg_no=" + shelter + "&state="
+				+ statement + "&pageNo=" + showPageNum + "&startPage=" + 1 + "&numOfRows=" + 8 + "&pageSize=10";
+
+		NoticeDTO dto = new NoticeDTO();
+
+		try {
+			URL url = new URL(addr);
+
+			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+			factory.setNamespaceAware(true);
+			XmlPullParser parser = factory.newPullParser();
+			BufferedInputStream bis = new BufferedInputStream(url.openStream());
+			parser.setInput(bis, "utf-8");
+
+			int eventType = parser.getEventType();
+
+			while (eventType != XmlPullParser.END_DOCUMENT) {
+				switch (eventType) {
+				case XmlPullParser.END_DOCUMENT:
+					break;
+				case XmlPullParser.START_DOCUMENT:
+					noticeList = new ArrayList<NoticeDTO>();
+					break;
+				case XmlPullParser.END_TAG: {
+					String tag = parser.getName();
+					if (tag.equals("item")) {
+						noticeList.add(dto);
+					}
+				}
+				case XmlPullParser.START_TAG: {
+					
+					String tag = parser.getName();
+					switch (tag) {
+					case "item":
+						dto = new NoticeDTO();
+						break;
+					case "age":
+						if (dto != null) {
+							dto.setAge(parser.nextText());
+						}
+						break;
+					case "careAddr":
+						if (dto != null) {
+							dto.setCareAddr(parser.nextText());
+						}
+						break;
+					case "careNm":
+						if (dto != null) {
+							dto.setCareNm(parser.nextText());
+						}
+						break;
+					case "careTel":
+						if (dto != null) {
+							dto.setCareTel(parser.nextText());
+						}
+						break;
+					case "chargeNm":
+						if (dto != null) {
+							dto.setChargeNm(parser.nextText());
+						}
+						break;
+					case "colorCd":
+						if (dto != null) {
+							dto.setColorCd(parser.nextText());
+						}
+						break;
+					case "desertionNo":
+						if (dto != null) {
+							dto.setDesertionNo(parser.nextText());
+						}
+						break;
+					case "filename":
+						if (dto != null) {
+							dto.setFileName(parser.nextText());
+						}
+						break;
+					case "happenDt":
+						if (dto != null) {
+							dto.setHappenDt(parser.nextText());
+						}
+						break;
+					case "happenPlace":
+						if (dto != null) {
+							dto.setHappenPlace(parser.nextText());
+						}
+						break;
+					case "kindCd":
+						if (dto != null) {
+							dto.setKindCd(parser.nextText());
+						}
+						break;
+					case "neuterYn":
+						if (dto != null) {
+							dto.setNeuterYn(parser.nextText());
+						}
+						break;
+					case "noticeEdt":
+						if (dto != null) {
+							dto.setNoticeEdt(parser.nextText());
+						}
+						break;
+					case "noticeNo":
+						if (dto != null) {
+							dto.setNoticeNo(parser.nextText());
+						}
+						break;
+					case "noticeSdt":
+						if (dto != null) {
+							dto.setNoticeSdt(parser.nextText());
+						}
+						break;
+					case "officetel":
+						if (dto != null) {
+							dto.setOfficetel(parser.nextText());
+						}
+						break;
+					case "orgNm":
+						if (dto != null) {
+							dto.setOrgNm(parser.nextText());
+						}
+						break;
+					case "specialMark":
+						if (dto != null) {
+							dto.setSpeciaMark(parser.nextText());
+						}
+						break;
+					case "popfile":
+						if (dto != null) {
+							dto.setPopfile(parser.nextText());
+						}
+						break;
+					case "processState":
+						if (dto != null) {
+							dto.setProcessState(parser.nextText());
+						}
+						break;
+					case "sexCd":
+						if (dto != null) {
+							dto.setSexCd(parser.nextText());
+						}
+						break;
+					case "weight":
+						if (dto != null) {
+							dto.setWeight(parser.nextText());
+						}
+						break;
+					case "totalCount":
+						totalCount = parser.nextText();
+						break;
+					}
+					break;
+				}
+				}
+				eventType = parser.next();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		int pageCnt = Integer.parseInt(totalCount) % 10 > 0 ? Math.round(Integer.parseInt(totalCount) / 10) + 1 : Integer.parseInt(totalCount) / 10;
+
+		map.put("list", noticeList);
+		map.put("currPage", showPageNum);
+		map.put("pageCnt", pageCnt);
+
+		return map;
+	}
+
+	@RequestMapping(value = "noticeDetail")
+	public ModelAndView noticeDetail(@RequestParam ("idx") String idx) {
+		ModelAndView mav = new ModelAndView();
+		NoticeDTO dto = null;
+		for (NoticeDTO temp : noticeList) {
+			if (temp.getNoticeNo().equals(idx)) {
+				dto = temp;
+			}
+		}
+		
+		mav.setViewName("noticeDetail");
+		mav.addObject("dto", dto);
+		
+		return mav;
+	}
+	
 }

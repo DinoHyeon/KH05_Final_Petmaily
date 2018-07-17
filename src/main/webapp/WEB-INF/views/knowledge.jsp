@@ -12,16 +12,18 @@
 <style type="text/css">
 #knowledgeList{
 	position: absolute;
-	top : 6%;
+	top : 26%;
 	width: 49.7%;
 	height: 20%;
+	left : 25%;
 }
 
 #paging{
 	position: absolute;
-	top : 61%;
+	top : 80%;
 	width: 49.7%;
 	height: 20%;
+	left : 43%;
 }
 
 .ui-accordion .ui-accordion-header {
@@ -33,10 +35,20 @@
 	width: 20%;
 	height: 3.7%;
 }
+
+#selectArea{
+	position: absolute;
+	width : 100%;
+	top : 17%;
+	left : 25%;
+}
+
 </style>
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="mainFrame.jsp" />
+	<div id="selectArea">
 	<select id="searchAniamlList">
 		<option value="강아지">강아지</option>
 		<option value="건강">고양이</option>
@@ -52,7 +64,8 @@
 	</select> 
 	<input id="searchWord" type="text">
 	<input id="search" type="button" onclick="knowledgeListCall(showPageNum)" value="검색">
-
+	</div>
+	
 	<div id="knowledgeList">
 	</div>
 	

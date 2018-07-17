@@ -12,25 +12,50 @@
 <style>
 textarea {
 	resize: none;
+	width: 100%;
+}
+#qqq{
+	text-align: center;
+	margin-top: 5px;
+}
+table{
+	border : 1px solid black;
+	border-collapse: collapse;
+	width: 600px;
+	margin: auto;
+}
+th{
+border : 1px solid black;
+	width: 100px;
+}
+
+#td_cont{
+	border : 1px solid black;
+	width : 300px;
+	text-align: center;
+}
+#buttonArea{
+	margin-top: 10px;
+	text-align: center;
 }
 </style>
 </head>
 <body>
-	<h1>퀴즈 상세보기</h1>
+	<h3 id='qqq'>퀴즈 상세보기</h3>
 	<table>
 		<tr>
-			<td>동물</td>
-			<td>${dto.animal_idx}</td>
-			<td>주제</td>
-			<td>${dto.quiz_category}</td>
+			<th>동물</th>
+			<td id="td_cont">${dto.animal_idx}</td>
+			<th>주제</th>
+			<td id="td_cont">${dto.quiz_category}</td>
 		</tr>
 		<tr>
-			<td>문제</td>
-			<td colspan="3"><textarea id="ask" rows="10" cols="5" readonly="readonly">${dto.quiz_ask}</textarea></td>
+			<th>문제</th>
+			<td colspan="3" id="td_cont"><textarea id="ask" rows="4" cols="" readonly="readonly">${dto.quiz_ask}</textarea></td>
 		</tr>
 		<tr>
-			<td>정답</td>
-			<td colspan="3">
+			<th>정답</th>
+			<td colspan="3" id="td_cont">
 				<div id="quizAnswerDiv">
 					<label>
 							O<input type="radio" name="answer" value="O">
@@ -42,16 +67,18 @@ textarea {
 			</td>
 		</tr>
 		<tr>
-			<td>해설</td>
-			<td colspan="3">
-				<textarea id="content" rows="10" cols="5" readonly="readonly">${dto.quiz_content}
+			<th>해설</th>
+			<td colspan="3" id="td_cont">
+				<textarea id="content" rows="7" cols="" readonly="readonly">${dto.quiz_content}
 				</textarea>
 			</td>
 		</tr>
 	</table>
+	<div id="buttonArea">
 	<button id="updateFormBtn" onclick="location.href='./quizUpdatePage?idx=${dto.quiz_idx}'">수정</button>
 	<button id="deleteBtn" onclick="del()">삭제</button>
 	<button onclick="location.href='./quizMain'">리스트</button>
+	</div>
 </body>
 <script>
 	$(document).ready(function() {
