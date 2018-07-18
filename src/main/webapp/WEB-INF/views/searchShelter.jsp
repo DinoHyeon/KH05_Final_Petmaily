@@ -12,7 +12,7 @@ table {
 	padding: 10px 0;
 }
 
-table, tr, th {
+table, tr, th , td{
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 5px 10px;
@@ -85,23 +85,6 @@ function getSigungu() {
 }
 
 function shelterList() {
-<<<<<<< HEAD
-   $.ajax({
-      "url" : "./shelterList",
-      "type" : "get",
-      "data" : {
-               "sido":$("#sido option:selected").html(),
-               "sigudo":$("#sigundo").val()
-            },
-      "success" : function(data) {
-         listPrint(data);
-         console.log(data);
-      },
-      "error" : function(x, o, e) {
-         alert(x.status + ":" + o + ":" + e);
-      }
-   });
-=======
 	$.ajax({
 		"url" : "./shelterList",
 		"type" : "get",
@@ -117,7 +100,6 @@ function shelterList() {
 			alert(x.status + ":" + o + ":" + e);
 		}
 	});
->>>>>>> c1bb095a619f3c0ce4ac01a873ff9736412e9f9c
 }
 
 function listPrint(data) {

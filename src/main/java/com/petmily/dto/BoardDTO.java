@@ -28,11 +28,19 @@ public class BoardDTO {
 	private String photo_type;
 	private String photo_oriName;
 	private String photo_newName;
+	private String preMainPhoto;
 	private String mainPhoto;
 	private int favorite_idx;
 	private String member_id;
 	
 	
+	
+	public String getPreMainPhoto() {
+		return preMainPhoto;
+	}
+	public void setPreMainPhoto(String preMainPhoto) {
+		this.preMainPhoto = preMainPhoto;
+	}
 	public int getBoard_idx() {
 		return board_idx;
 	}

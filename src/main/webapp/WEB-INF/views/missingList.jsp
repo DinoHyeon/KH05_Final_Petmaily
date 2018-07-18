@@ -8,7 +8,7 @@
 <style>
 table {
 	float: left;
-	margin: 10px 10px;
+	margin: 10px 20px;
 	padding: 10px 0;
 }
 
@@ -19,19 +19,59 @@ table, tr, td {
 }
 
 .list {
-	width: 900px;
+	position: absolute;
+	width: 100%;
+	top : 10%;
+	left : 3%;
 }
 
 #write {
-	margin: 300px 300px;
+	position: absolute;
+	top : 88%;
+	left : 88%;
+}
+#contentFrame {
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 150%;
+   background: white;
 }
 
+#sideFrame{
+   position: absolute;
+   left: 0.52%;
+   top: 11.4%;
+   width: 15%;
+   height: 150%;
+   background: black;
+}
+#aaa{
+	position: absolute;
+	left : 2%;
+}
+
+#searchArea{
+	position: absolute;
+	top: 5%;
+	left : 2%;
+}
+
+#paging{
+	position: absolute;
+	top : 96%;
+	left : 40%;
+}
 
 </style>
 </head>
 <body>
 <jsp:include page="mainFrame.jsp"/>
-	<h3>실종 게시판</h3>
+<div id="sideFrame"></div>
+<div id="contentFrame">
+	<h3 id="aaa">실종 게시판</h3>
+		<div id="searchArea">
 		<!-- 지역 -->
 		<select id="sido" onchange="getSigungu()">
 		      <option value="">선택</option>
@@ -69,10 +109,12 @@ table, tr, td {
 		</select> 
 		<input type="text" id="keyWord" placeholder="검색어를 입력해주세요." /> 
 		<input type="button" onclick="listCall(showPageNum)" value="검색" />
+		</div>
 	<div class="list">
 	</div>
 	<input type="button" id="write" onclick="missingWriteForm()" value="글쓰기">
 		<div id="paging"></div>
+</div>
 </body>
 <script>
 var showPageNum=1;//현재 내가 보는 페이지

@@ -8,6 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.petmily.dto.BoardDTO;
 
 public interface BoardInter {
+	
+	
+///////////////////////////////////////////////////윤영//////////////////////////////////////////////////
 
 	ArrayList<BoardDTO> protectList(HashMap<String, String> map); /* 보호 게시판 리스트 */
 
@@ -55,7 +58,40 @@ public interface BoardInter {
 
 	int pGetAllCnt(HashMap<String, String> map); /*보호_출력할 수 있는 전체 게시글 수*/
 
-	
+	String getPass(HashMap<String, String> params); /*실종_비밀번호확인*/
 
+	int favoriteChk(HashMap<String, Object> map); /*즐겨찾기 체크*/
+
+	int favoriteRegist(HashMap<String, String> map); /*즐겨찾기 등록*/
+
+	int favoriteDel(HashMap<String, String> map); /*즐겨찾기 삭제*/
+	
+	
+	
+	
+	
+///////////////////////////////////////////////////소현//////////////////////////////////////////////////
+	int mylistallCount(HashMap<String, String> params);
+	ArrayList<BoardDTO> getmyList(HashMap<String, String> params);
+	int delMylist(int idx);
+	String reason(int idx);
+	int fundlistallCount(HashMap<String, String> params);
+	ArrayList<BoardDTO> getfundList(HashMap<String, String> params);
+	int writefund(BoardDTO board);
+	int writebbs(BoardDTO board);
+	void writeFile(String key, String string, int board_idx, String main);
+	void writefund(int board_idx, String fund_centerName, String fund_area);
+	BoardDTO funddetail(String idx);
+	ArrayList<BoardDTO> fundfileList(String idx);
+	BoardDTO fundupdateForm(int idx);
+	int fundupdate(String subject, String content, String idx);
+	int agreelistallCount(HashMap<String, String> params);
+	ArrayList<BoardDTO> getagreeList(HashMap<String, String> params);
+	int getagreeAdmin(int idx);
+	int getnoreasonidx(int idx);
+	int getnoreason(int idx, String reason);
+	int likeallCount(HashMap<String, String> params);
+	ArrayList<BoardDTO> getlikeList(HashMap<String, String> params);
+	int delLikelist(int idx);
 
 }

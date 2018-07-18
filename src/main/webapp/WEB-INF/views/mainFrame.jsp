@@ -151,11 +151,8 @@
 			<a class="classBtn3" id="sl3" onclick="javascript:void(0)">/</a>
 			<a href="./fundMain" class="classBtn3" id="frame2fund">모금</a>
 			
-<<<<<<< HEAD
+
 			<a href="./searchShelter" class="classBtn4" id="frame2center">보호센터 찾기</a>
-=======
-			<a href="./centerMain" class="classBtn4" id="frame2center">보호센터 찾기</a>
->>>>>>> c1bb095a619f3c0ce4ac01a873ff9736412e9f9c
 			<a class="classBtn4" id="sl4_1" onclick="javascript:void(0)">/</a>
 			<a href="./quizMain" class="classBtn4" id="frame2quiz">퀴즈</a>
 			<a class="classBtn4" id="sl4_2" onclick="javascript:void(0)">/</a>

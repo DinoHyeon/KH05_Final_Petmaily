@@ -110,12 +110,32 @@ public class MemberController {
 	@RequestMapping(value="/pwSearchPage")
 	public @ResponseBody HashMap<String, String> pwSearchPage(@RequestParam HashMap<String, String> params) {
 		logger.info("비밀번호 찾기");
-		
-		/*String allData[] = {params.get("name"), params.get("email"), params.get("phone")};
-		String findId = null;
-		HashMap<String, String> map = new HashMap<String, String>();
-		findId = service.idSearchPage(allData);
-		map.put("findId", findId);*/
 		return null;
+	}
+	
+	
+	/////////////////////////////////////////////////////////////소현////////////////////////////////////////////////////////
+	
+	
+	/*소현 : 관리자페이지 멤버추방*/
+	@RequestMapping(value = "getmemberList")
+	public @ResponseBody HashMap<String, Object> getmemberList(@RequestParam HashMap<String, String> params) {
+		logger.info("멤버 리스트 호출");
+		return service.getmemberList(params);
+	}
+	
+	//소현 : 관리자 페이지 회원 추방(회원 상태 리스트)
+	@RequestMapping(value="changeState")
+	public @ResponseBody int changeState(@RequestParam ("idx") String idx) {
+		logger.info("나의 모금 리스트 삭제 ");
+		return service.changeState(idx);
+	}
+
+	
+    //소현 : 관리자 페이지 회원 상태 리스트 페이지 접근
+	@RequestMapping(value = "memberlist")
+	public String memberlist () {
+		logger.info("나의 회원 리스트 페이지 접근");
+		return "memberlist";
 	}
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -74,13 +76,6 @@ public class MissingService {
 	public HashMap<String, Object> missingList(HashMap<String, String> map) {
 		inter = sqlSession.getMapper(BoardInter.class);
 
-		logger.info(map.get("sido"));// 아무것도 선택안됐을 때 - 선택
-		logger.info(map.get("sigundo"));
-		logger.info(map.get("animal"));// 아무것도 선택안됐을 때 - 선택
-		logger.info(map.get("animalType"));
-		logger.info(map.get("keyWord"));
-		logger.info(map.get("showPageNum"));
-
 		// 전체 게시글 수 구하기
 		int allCnt = inter.mgetAllCnt(map);
 
@@ -115,16 +110,24 @@ public class MissingService {
 	}
 
 	/* 실종 게시판 상세보기 */
-	public ModelAndView missingDetail(int board_idx) {
+	public ModelAndView missingDetail(int board_idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-
+		session.setAttribute("login", "test");
+		String id = (String) session.getAttribute("login");
+		
 		inter = sqlSession.getMapper(BoardInter.class);
 
 		// 상세보기 정보
 		mav.addObject("missingDetail", inter.missingDetail(board_idx));
 		// 첨부파일 정보
 		ArrayList<BoardDTO> files = inter.fileList(board_idx);
+		HashMap<String, Object>map = new HashMap<>();
+		
+		map.put("board_idx", board_idx);
+		map.put("id", id);
+		
 		mav.addObject("files", files);
+		mav.addObject("favorite", inter.favoriteChk(map));
 		mav.addObject("size", files.size());// 첨부파일 유무
 		mav.setViewName("missingDetail");
 		return mav;
@@ -132,7 +135,7 @@ public class MissingService {
 
 	/* 실종 게시판 글작성 */
 	@Transactional
-	public ModelAndView missingWrite(HashMap<String, String> map, String ipAddr) {
+	public ModelAndView missingWrite(HashMap<String, String> map, String ipAddr, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String page = "redirect:/missingWriteForm"; // 글 등록 실패시 이동
 
@@ -142,16 +145,17 @@ public class MissingService {
 		dto.setAnimal_type(map.get("animalType"));
 		dto.setBoard_title(map.get("board_title"));
 		dto.setBoard_content(map.get("board_content"));
-		dto.setBoard_writer("비회원" + ipAddr);
 		dto.setMainPhoto(map.get("main"));
 
-		// 회원|비회원 구분
-		/*
-		 * String loginId =""; //로그인 ID
-		 * 
-		 * if(loginId!="") {//회원인 경우 dto.setBoard_writer(loginId); }else {
-		 * dto.setBoard_writer("비회원"+ip); }
-		 */
+		if(session.getAttribute("loginId")==null) { //loginId에 값이 없으면
+			dto.setBoard_writer("비회원 "+ipAddr); //작성자 : 비회원+ip주소
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //암호화
+			dto.setMissing_pw(encoder.encode(map.get("pass")));
+		}else {
+			dto.setBoard_writer((String) session.getAttribute("loginId"));
+			dto.setMissing_pw("회원");
+			
+		}
 
 		// DB에 글 등록
 		inter = sqlSession.getMapper(BoardInter.class);
@@ -171,8 +175,8 @@ public class MissingService {
 			}
 			inter.board_missingWrite(dto);// board_missing 테이블에 글 등록
 		}
-
 		fileList.clear();// 글 작성 후 파일리스트를 한번 비워야지 다음 글쓰기시 중복X
+		System.out.println("글 등록 완료 후 파일 리스트 : "+fileList.size());
 		mav.setViewName(page);
 		return mav;
 	}
@@ -229,6 +233,7 @@ public class MissingService {
 		} finally {
 			map.put("success", success); // 파일 삭제 성공 여부 map 에 담기
 		}
+		fileList.clear();// 글 작성 후 파일리스트를 한번 비워야지 다음 글쓰기시 중복X
 		return map;
 	}
 
@@ -254,14 +259,15 @@ public class MissingService {
 
 		// 파라메터 값 받기
 		String board_idx = map.get("board_idx");
-		String missing_loc = map.get("sido") + map.get("sigundo");
+		String missing_loc = map.get("sido")+map.get("sigundo");
 		String animal_idx = map.get("animal");
 		String animal_type = map.get("animalType");
 		String board_title = map.get("board_title");
 		String board_content = map.get("board_content");
 		
 		BoardDTO dto = new BoardDTO();
-		dto.setMainPhoto(map.get("main"));
+		dto.setMainPhoto(map.get("mainPhoto"));
+		System.out.println(map.get("mainPhoto"));
 	
 		inter = sqlSession.getMapper(BoardInter.class);
 		//수정 실패
@@ -279,8 +285,8 @@ public class MissingService {
 		int size = fileList.size();
 		logger.info("list size : " + size);
 		if (size > 0) {// 기존 파일이 남아 있거나, 추가 되었거나...
-			String main = "X";
 			for (String key : fileList.keySet()) {// map 에서 키를 뽑아 온다.
+				String main = "X";
 				if (key.equals(dto.getMainPhoto())) {
 					main = "대표이미지";
 				}
@@ -305,5 +311,31 @@ public class MissingService {
 
 	      return photo;
 	   }
+
+	public boolean passChk(HashMap<String,String> params) {
+		inter = sqlSession.getMapper(BoardInter.class);
+		//param값으로 해당 글의 pass 출력
+		String writingPass = inter.getPass(params);
+		//비교해서 결과 값 return
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		System.out.println("DB비밀번호 : "+writingPass);
+		System.out.println("입력비밀번호 : "+params.get("pass"));
+		return encoder.matches(params.get("pass"),writingPass);
+	}
+
+	public int favoriteRegist(HashMap<String, String> map) {
+		inter = sqlSession.getMapper(BoardInter.class);
+		return inter.favoriteRegist(map);
+	}
+
+	public int favoriteDel(HashMap<String, String> map) {
+		inter = sqlSession.getMapper(BoardInter.class);
+		return inter.favoriteDel(map);
+	}
+
+	public void photoClear() {
+		System.out.println("사진 리스트 클리어");
+		fileList.clear();
+	}
 
 }

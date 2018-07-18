@@ -10,11 +10,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -107,16 +109,24 @@ public class ProtectService {
 	}
 
 	/*보호 게시판 상세보기*/
-	public ModelAndView protectDetail(int board_idx) {
+	public ModelAndView protectDetail(int board_idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		session.setAttribute("login", "test");
+		String id = (String) session.getAttribute("login");
 		
 		inter = sqlSession.getMapper(BoardInter.class);
 		
 		//상세보기 정보
 		mav.addObject("protectDetail", inter.protectDetail(board_idx));
 		//첨부파일 정보
-		ArrayList<BoardDTO> files = inter.fileList(board_idx);		
+		ArrayList<BoardDTO> files = inter.fileList(board_idx);	
+		HashMap<String, Object>map = new HashMap<>();
+		
+		map.put("board_idx", board_idx);
+		map.put("id", id);
+		
 		mav.addObject("files", files);
+		mav.addObject("favorite", inter.favoriteChk(map));
 		mav.addObject("size", files.size()); //첨부파일 유무
 		mav.setViewName("protectDetail");
 		return mav;
@@ -124,52 +134,51 @@ public class ProtectService {
 	
 	/*보호 게시판 글작성*/
 	@Transactional
-	public ModelAndView protectWrite(HashMap<String, String> map, String ipAddr) {
+	public ModelAndView protectWrite(HashMap<String, String> map, String ipAddr, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String page = "redirect:/protectWriteForm"; // 글 등록 실패시 이동
 
 		BoardDTO dto = new BoardDTO();
 		dto.setProtect_loc(map.get("sido")+" "+map.get("sigundo"));		
-		dto.setAnimal_idx(map.get("animal")); //동물종
+		dto.setAnimal_idx(map.get("animal")); // 동물종
 		dto.setAnimal_type(map.get("animalType"));
 		dto.setBoard_title(map.get("board_title"));
 		dto.setBoard_content(map.get("board_content"));
-		dto.setBoard_writer("비회원"+ipAddr);
 		dto.setMainPhoto(map.get("main"));
-		
-		//회원|비회원 구분
-		/*String loginId =""; //로그인 ID
-		
-		if(loginId!="") {//회원인 경우
-			dto.setBoard_writer(loginId);
+
+		if(session.getAttribute("loginId")==null) {
+			//작성자에 비회원  + 아이피 주소 값
+			dto.setBoard_writer("비회원 "+ipAddr);
+			//view에서 입력 받은 비밀번호 암호화 처리 후 필드에 값 입력
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			dto.setProtect_pw(encoder.encode(map.get("pass")));
 		}else {
-			dto.setBoard_writer("비회원"+ipAddr);
-		}*/
+			//작성자는 로그인 session값
+			dto.setBoard_writer((String) session.getAttribute("loginId"));
+			//회원인 경우 따로 입력한 pw값이 없기 때문에 '회원'데이터를 입력한다.
+			dto.setProtect_pw("회원");
+		}
 		
 		// DB에 글 등록
 		inter = sqlSession.getMapper(BoardInter.class);
 		
 		if (inter.protectWrite(dto) == 1) {// 글 등록 성공
 			page = "redirect:/protectDetail?board_idx=" + dto.getBoard_idx();
-			if (fileList.size()>0) {// 저장할 파일 있을 경우
-				String main="X";
-				for(String key : fileList.keySet()) {// map에서 첨부파일 key 값 추출
-					if(key.equals(dto.getMainPhoto())) {
-		                  main = "대표이미지";
-		               }else {
-		            	   main = "X";
-		               }
+			if (fileList.size() > 0) {// 저장할 파일 있을 경우
+				String main = "";
+				for (String key : fileList.keySet()) {// map에서 첨부파일 key 값 추출
+					if (key.equals(dto.getMainPhoto())) {
+						main = "대표이미지";
+					} else {
+						main = "X";
+					}
 					inter.protectWriteFile(key, fileList.get(key), dto.getBoard_idx(), main);
 				}
 			}
-			System.out.println("글번호: " +dto.getBoard_idx());
-			System.out.println("실종 지역 : "+dto.getProtect_loc());
-			System.out.println("동물종 : "+dto.getAnimal_idx());
-			System.out.println("품종 : "+dto.getAnimal_type());
-			inter.board_protectWrite(dto);//board_protect 테이블에 글 등록
+			inter.board_protectWrite(dto);// board_protect 테이블에 글 등록
 		}
-		
-		fileList.clear();//글 작성 후 파일리스트를 한번 비워야지 다음 글쓰기시 중복X
+		fileList.clear();// 글 작성 후 파일리스트를 한번 비워야지 다음 글쓰기시 중복X
+		System.out.println("글 등록 완료 후 파일 리스트 : "+fileList.size());
 		mav.setViewName(page);
 		return mav;
 	}
@@ -207,6 +216,7 @@ public class ProtectService {
 		}finally {
 			map.put("success", success); //파일 삭제 성공 여부 map 에 담기
 		}
+		fileList.clear();// 글 작성 후 파일리스트를 한번 비워야지 다음 글쓰기시 중복X
 		return map;
 	}
 
@@ -246,6 +256,7 @@ ModelAndView mav = new ModelAndView();
 	}
 
 	/* 보호 글 수정 */
+	@Transactional
 	public ModelAndView protectUpdate(HashMap<String, String> map) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -258,7 +269,11 @@ ModelAndView mav = new ModelAndView();
 		String board_content = map.get("board_content");
 		logger.info(board_idx+"/"+protect_loc+"/"+animal_idx+"/"+animal_type+"/"+board_title+"/"+board_content);
 		
+		BoardDTO dto = new BoardDTO();
+		dto.setMainPhoto(map.get("mainPhoto"));
+		
 		inter = sqlSession.getMapper(BoardInter.class);
+		
 		String page = "redirect:/protectUpdateForm?board_idx="+board_idx;
 		
 		//쿼리 실행
@@ -269,22 +284,25 @@ ModelAndView mav = new ModelAndView();
 					
 				}
 				
-				//파일에 변화가 있을 경우 파일 관련 쿼리 실행
-						int size = fileList.size();
-						logger.info("list size : "+size);
-						if(size >0) {//기존 파일이 남아 있거나, 추가 되었거나...
-							String main="X";
-							for(String key : fileList.keySet()) {//map 에서 키를 뽑아 온다.
-								//중복 방지를 위해 기존 데이터 삭제
-								logger.info("newFile : {}", key);
-								inter.mFileDelete(key);
-								//이후 추가
-								inter.protectWriteFile(key,fileList.get(key),Integer.parseInt(board_idx), main);					
-							}	
+				// 파일에 변화가 있을 경우 파일 관련 쿼리 실행
+				int size = fileList.size();
+				logger.info("list size : " + size);
+				if (size > 0) {// 기존 파일이 남아 있거나, 추가 되었거나...
+					for (String key : fileList.keySet()) {// map 에서 키를 뽑아 온다.
+						String main = "X";
+						if (key.equals(dto.getMainPhoto())) {
+							main = "대표이미지";
 						}
-						fileList.clear();
-						mav.setViewName(page);
-						return mav;
+						// 중복 방지를 위해 기존 데이터 삭제
+						logger.info("newFile : {}", key);
+						inter.pFileDelete(key);
+						// 이후 추가
+						inter.protectWriteFile(key, fileList.get(key), Integer.parseInt(board_idx), main);
+					}
+				}
+				fileList.clear();
+				mav.setViewName(page);
+				return mav;
 	}
 
 	public boolean pcheckphoto() {
@@ -296,5 +314,10 @@ ModelAndView mav = new ModelAndView();
 
 	      return photo;
 	   }
+
+	public void photoClear() {
+		System.out.println("사진 리스트 클리어");
+		fileList.clear();
+	}
 
 }

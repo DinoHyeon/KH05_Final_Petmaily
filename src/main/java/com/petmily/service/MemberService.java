@@ -146,4 +146,45 @@ public class MemberService {
 
 		return success;
 	}
+	
+	
+	
+	///////////////////////////////////////////////////////////소현//////////////////////////////////////////////////////////
+	
+	
+	public HashMap<String, Object> getmemberList(HashMap<String, String> params) {
+		 inter = sqlSession.getMapper(MemberInter.class);
+			int allCnt = inter.memberallCount(params);
+			// 생성 가능한 페이지 수 구하기
+			int pageCnt = allCnt % 10 > 0 ? Math.round(allCnt / 10) + 1 : allCnt / 10;
+			// 리턴을 위한 맵 생성
+			HashMap<String, Object> memberList = new HashMap<String, Object>();
+			int page = Integer.parseInt(params.get("showPageNum"));
+
+			// 클라이언트가 원한 페이지가 최종 페이지보다 높은 경우..
+			if (page > pageCnt) {
+				page = pageCnt;
+			}
+
+			int end = 10 * page;
+			int start = end - 10 + 1;
+
+			params.put("start", String.valueOf(start));
+			params.put("end", String.valueOf(end));
+
+			memberList.put("list", inter.getmemberList(params));
+			// 생성 페이지의 수
+			memberList.put("range", pageCnt);
+			// 현재 페이지 번호
+			memberList.put("currPage", page);
+
+			return memberList;
+		
+	}
+	//소현 : 관리자 페이지 회원 추방(회원 상태 리스트)
+	public int changeState(String idx) {
+		inter = sqlSession.getMapper(MemberInter.class);
+		int success = inter.getchangeState(idx);
+		return success;
+   }
 }

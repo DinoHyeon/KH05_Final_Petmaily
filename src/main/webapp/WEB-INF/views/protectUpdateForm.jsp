@@ -99,7 +99,9 @@ th{
 				<td colspan="2"><input type="button" id="fileUpBtn" onclick="fileUp()" value="첨부" /></td>
 			</tr>
 			<tr>
-				<td colspan="3" height="50px"><div id="attach" contenteditable="true"></div></td>
+				<td colspan="3" height="50px"><div id="attach"></div>
+				<input type="hidden" name="mainPhoto">
+				</td>
 			</tr>
 	</table>
 	</form>
@@ -110,7 +112,7 @@ th{
 <script>
 	var fullLoc = "${protectDetail.protect_loc}"; //지역 값 전체 받아오기
 	var locArr = fullLoc.split(' '); //locArr[0] :시    locArr[1] : 구
-	
+	var mainPhoto;
 	
 	$(document).ready(function(){	
 	  selectBoxChk($("#sido"),locArr[0]);
@@ -131,22 +133,27 @@ th{
 	
 	var fileMap = {};
 	var fileCnt = "${size}";//첨부파일 유무 확인
-	var path = "${path}";//내파일 위치
-	console.log("첨부파일 갯수 : "+fileCnt);
-	console.log("파일 위치 : "+path);
 	
 	<c:forEach items="${files}" var = "protectList">
-		fileMap["${protectList.photo_newName}"] = "${protectList.photo_oriName}";
-	</c:forEach>
+	if("${protectList.mainPhoto}"=="대표이미지"){
+		mainPhoto = "${protectList.photo_newName}"
+	}
+	fileMap["${protectList.photo_newName}"] = "${protectList.photo_oriName}";
+</c:forEach>
 	
 	//파일이 있으면 fileMap 에 있는 값으로 링크를 생성
 	if(fileCnt >0){
 		//object 에서 키추출 -> 키에 따른 값을 추출
 		//키를 이용해 값을 하나씩 뽑아내기
 		var content = "";
-		Object.keys(fileMap).forEach(function(item){
-			content +=" <img width='15px' src='${path}'/> "
-			+fileMap[item];
+		Object.keys(fileMap).forEach(function(item) {
+			content += "<img width='15px' src='resources/upload/"+item+"'/>";
+			if(mainPhoto==item){
+				content += "<input type='radio' name='main' value='"+item+"' checked>";
+			}else{
+				content += "<input type='radio' name='main' value='"+item+"'>";
+			}
+			
 		});
 		$("#attach").append(content);
 		
@@ -219,33 +226,36 @@ th{
 	}
 	
 	//사진 삭제 - ajax
-	function pDel(elem){
+	function pDel(elem) {
 		var fileName = elem.id.split("/")[2];
 		$.ajax({
 			url : "./pFileDel",
 			type : "get",
-			data : {"fileName":fileName},
-			success:function(data){
+			data : {
+				"fileName" : fileName
+			},
+			success : function(data) {
 				console.log(data);
-				if(data.success == 1){
-					$(elem).prev().remove();//이미지 삭제
+				if (data.success == 1) {
+					
+					$(elem).prev().remove();//content 파일 삭제
 					$(elem).remove();//버튼 삭제
-					$(elem).closest("div").remove();
-					document.getElementById(fileName).remove();
+					document.getElementById(fileName).remove(); //해당파일 삭제
 				}
 			},
-			error:function(e){
+			error : function(e) {
 				console.log(e);
 			}
 		});
 	}
 	
-	// 이미지에 삭제 버튼 붙이기		
-	$("#editable img").each(function(index,value){		
-		var delBtn = "<input id='"+$(this).attr("src")
-			+"' type='button' value='삭제' onclick='pDel(this)'>";
-		$(this).after(delBtn);
-	});
+	// (첨부파일 보기란)이미지에 삭제 버튼 붙이기		
+	$("#attach img").each(
+			function(index, value) {
+				var delBtn = "<input id='" + $(this).attr("src")
+						+ "' type='button' value='삭제' onclick='pDel(this)'>";
+				$(this).after(delBtn);
+			});
 	
 	//취소
 	$("#back").click(function(){
@@ -255,6 +265,8 @@ th{
 	//수정
 	$("#btn_Update").click(function(){
 		$("#editable input[type='button']").remove();//삭제 버튼 제거
+		$("input[name='mainPhoto']").val($("input:radio[name='main']:checked").val());
+		$("#attach input[type='radio']").remove();//체크박스 버튼 제거
 		$("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
 		$("#location").val($("#sido option:selected").html());//지역 내용 담기
 		$("#selectAnimal").val($("#animal option:selected").html());//동물 내용 담기

@@ -73,50 +73,62 @@ input[type='text'] {
 			      <option value="6500000">제주특별자치도</option>
 			   </select>
 				<select id="sigundo" name="sigundo">
+					<option value="">선택</option>
+				</select>
+				
 				<input type="hidden" id="location" name="sido">
-				</select></td>
+				</td>
 			</tr>
 			<tr>
 				<th>동물</th>
 				<td>
-					<!-- 동물종 --> <select id="animal" onchange="getAnimalType()">
+					<select id="animal" onchange="getAnimalType()">
+						<option value="">선택</option>
 						<option value="417000">개</option>
 						<option value="422400">고양이</option>
 						<option value="429900">기타</option>
 						<input type="hidden" id="selectAnimal" name="animal">
-				</select> 
-				
-				<!-- 품종 --> <select id="animalType" name="animalType">
-				</select>
+					</select> 
+					
+					<select id="animalType" name="animalType">
+						<option value="">선택</option>
+					</select>
 				</td>
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="board_title" /></td>
+				<td>
+					<input type="text" name="board_title" name="board_title"/>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<div id="editable" contenteditable="true"></div> <input
-					id="contentForm" type="hidden" name="board_content" />
+					<div id="editable" contenteditable="true"></div>
+					<input id="contentForm" type="hidden" name="board_content" />
 				</td>
 			</tr>
 			<tr>
 				<th id="field">사진 첨부</th>
-				<td><input type="button" id="fileUpBtn" onclick="fileUp()"
-					value="첨부" /></td>
+				<td>
+					<input type="button" id="fileUpBtn" onclick="fileUp()" value="첨부" />
+					</td>
 			</tr>
 			<tr>
-				<td colspan="3" height="50px"><div id="attach"
-						contenteditable="true"></div></td>
+				<td colspan="3" height="50px">
+					<div id="attach"></div>
+				</td>
 			</tr>
 		</table>
 		<p>
 		<p>
 		<p>
 		<center>
-			<input type="password" placeholder="비밀번호" /> <input type="button"
-				id="btn_protectWrite" value="등록"> <input type="button"
-				value="취소">
+			<c:set var="loginId" value="${sessionScope.login}"/>
+    		<c:if test="${empty loginId}">
+				<input name="pass" type="password" placeholder="비밀번호"/> 
+    		</c:if>
+			<input type="button" id="btn_protectWrite" value="등록"> 
+			<input type="button" id="back" value="취소">
 		</center>
 	</form>
 </body>
@@ -190,41 +202,60 @@ input[type='text'] {
 	
 	/* 사진 체크 */
 	function pcheckphoto() {
-      var photoChk;
-      $.ajax({
-         url:"./pcheckphoto",
-         type:"get",
-         async: false,
-         success:function(data){
-            photoChk = data;
-         },
-         error:function(e){
-            console.log(e);
-         }
-      });
-      
-      return photoChk;
-      
-   }
+		var photoChk;
+	      $.ajax({
+	         url:"./pcheckphoto",
+	         type:"get",
+	         async: false,
+	         success:function(data){
+	            photoChk = data;
+	         },
+	         error:function(e){
+	            console.log(e);
+	         }
+	      });
+	      
+	      return photoChk;
+	      
+	   }
 	
 	//파일 업로드 창
 	function fileUp() {
 		var myWin = window.open("./puploadForm", "파일 업로드", "width=300, height=150");
 	}
+	
+	//취소
+	$("#back").click(function(){
+		location.href="./protectList";
+	});
 
 	//게시글 등록 버튼
 	$("#btn_protectWrite").click(function() {
-	if(pcheckphoto()){
-	       $("#editable input[type='button']").remove();//삭제 버튼 제거
-	       $("#editable input[type='checkbox']").remove();//체크박스 버튼 제거
-	       $("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
-	       $("#location").val($("#sido option:selected").html());
-	       $("#selectAnimal").val($("#animal option:selected").html());
-	       $("#protectSend").submit();
-	    }else{
-	       alert("파일을 등록해주세요.");
-	    }
-		
+		if($("#sido option:selected").html()=="선택"){
+			$("#sido").focus();
+			alert("지역을 선택해 주세요.");
+		}else if($("#animal option:selected").html()=="선택"){
+			$("#animal").focus();
+			alert("동물종을 선택해 주세요.");
+		}else if($("#board_title").val()==""){
+			$("#board_title").focus();
+			alert("제목을 입력해 주세요.");
+		}else if(!pcheckphoto()){
+			alert("파일을 등록해주세요.");
+		}else if($("#pass").val()==""){
+			$("#pass").focus();
+			alert("비밀번호를 입력해 주세요.");
+		}else if(!$("input:radio[name='main']").is(":checked")){
+			$("input:radio[name='main']").focus();
+			alert("대표이미지를 선택해 주세요.");
+		}else{
+			$("#editable input[type='button']").remove();//삭제 버튼 제거
+	        $("#editable input[type='checkbox']").remove();//체크박스 버튼 제거
+	        $("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
+	        $("#location").val($("#sido option:selected").html());
+	        $("#selectAnimal").val($("#animal option:selected").html());
+		    $("#protectSend").submit();
+		}
 	});
 </script>
 </html>

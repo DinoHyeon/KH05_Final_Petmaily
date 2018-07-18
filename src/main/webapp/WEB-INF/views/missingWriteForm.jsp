@@ -39,10 +39,30 @@ input[type='text']{
 	width: 80px;
 	height: 80px;
 }
+
+#contentFrame {
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 150%;
+   background: white;
+}
+
+#sideFrame{
+   position: absolute;
+   left: 0.52%;
+   top: 11.4%;
+   width: 15%;
+   height: 150%;
+   background: black;
+}
 </style>
 </head>
 <body>
 <jsp:include page="mainFrame.jsp"/>
+<div id="sideFrame"></div>
+<div id="contentFrame">
 	<center>
 		<h3>실종 글 등록</h3>
 	</center>
@@ -71,15 +91,18 @@ input[type='text']{
 				      <option value="6480000">경상남도</option>
 				      <option value="6500000">제주특별자치도</option>
 				   </select>
-				<select id="sigundo" name="sigundo">
-				<input type="hidden" id="location" name="sido">
-				</select></td>
+					<select id="sigundo" name="sigundo">
+						<option value="">선택</option>
+					</select>
+					<input type="hidden" id="location" name="sido">
+				</td>
 			</tr>
 			<tr>
 				<th>동물</th>
 				<td>
 					<!-- 동물종 -->
 					<select id="animal" onchange="getAnimalType()">
+						<option value="">선택</option>
 						<option value="417000">개</option>
 						<option value="422400">고양이</option>
 						<option value="429900">기타</option>
@@ -88,13 +111,14 @@ input[type='text']{
 					
 					<!-- 품종 -->
 					<select id="animalType" name="animalType">
+						<option value="">선택</option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<th>제목</th>
 				<td>
-					<input type="text" name="board_title"/>
+					<input type="text" name="board_title" />
 				</td>
 			</tr>
 			<tr>
@@ -117,11 +141,15 @@ input[type='text']{
 		<p>
 		<p>
 		<center>
-			<input type="password" placeholder="비밀번호" /> 
+			<c:set var="loginId" value="${sessionScope.login}"/>
+    		<c:if test="${empty loginId}">
+				<input id="pass" name="pass" type="password" placeholder="비밀번호"/> 
+    		</c:if>
 			<input type="button" id="btn_missingWrite" value="등록"> 
 			<input type="button" id="back" value="취소">
 		</center>
 	</form>
+	</div>
 </body>
 <script>
 	
@@ -222,19 +250,34 @@ input[type='text']{
 		location.href="./missingList";
 	});
 	
+	
 	//게시글 등록 버튼
 	$("#btn_missingWrite").click(function() {
-	if(mcheckphoto()){
-       $("#editable input[type='button']").remove();//삭제 버튼 제거
-       $("#editable input[type='checkbox']").remove();//체크박스 버튼 제거
-       $("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
-       $("#location").val($("#sido option:selected").html());
-       $("#selectAnimal").val($("#animal option:selected").html());
-       $("#missingSend").submit();
-    }else{
-       alert("파일을 등록해주세요.");
-    }
-		
+		if($("#sido option:selected").html()=="선택"){
+			$("#sido").focus();
+			alert("지역을 선택해 주세요.");
+		}else if($("#animal option:selected").html()=="선택"){
+			$("#animal").focus();
+			alert("동물종을 선택해 주세요.");
+		}else if($("#board_title").val()==""){
+			$("#board_title").focus();
+			alert("제목을 입력해 주세요.");
+		}else if(!mcheckphoto()){
+			alert("파일을 등록해주세요.");
+		}else if($("#pass").val()==""){
+			$("#pass").focus();
+			alert("비밀번호를 입력해 주세요.");
+		}else if(!$("input:radio[name='main']").is(":checked")){
+			$("input:radio[name='main']").focus();
+			alert("대표이미지를 선택해 주세요.");
+		}else{
+			$("#editable input[type='button']").remove();//삭제 버튼 제거
+	        $("#editable input[type='checkbox']").remove();//체크박스 버튼 제거
+	        $("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
+	        $("#location").val($("#sido option:selected").html());
+	        $("#selectAnimal").val($("#animal option:selected").html());
+		    $("#missingSend").submit();
+		}
 	});
 </script>
 </html>
