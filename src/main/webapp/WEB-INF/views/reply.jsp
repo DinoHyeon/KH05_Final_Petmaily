@@ -25,6 +25,39 @@
 	resize: none;
 }
 
+#registArea{
+	position: absolute;
+	width : 100%;
+	top : 15%;
+	left: 30%;
+}
+
+#replyContent{
+	width : 30%;
+}
+
+.replyArea{
+	position: absolute;
+	top :23%;
+	left: 30%;
+}
+
+th{
+	border-top : 1px solid black;
+	border-bottom: 1px solid black;
+	background-color: #D2E5A8;
+}
+
+td{
+	border-bottom: 1px solid black;
+}
+
+#paging{
+	position: absolute;
+	top :105%;
+	left: 50%;
+}
+
 </style>
 </head>
 <body>
@@ -36,7 +69,7 @@
 	</div>
 </div>
 
-<div class="registArea">
+<div class="registArea" id="registArea">
 	<input type="text" id="replyContent" placeholder="내용">
 	<c:set var="loginId" value="${sessionScope.loginId}"/>
     	<c:if test="${empty loginId}">

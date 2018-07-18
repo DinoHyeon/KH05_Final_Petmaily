@@ -6,12 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
+/* 전체(배경) */
 #contentFrame {
 	position: absolute;
 	left: 15.52%;
 	top: 12.5%;
 	width: 82.95%;
-	height: 87%;
+	height: 100%;
 	background: white;
 }
 
@@ -24,24 +25,97 @@
 	background: black;
 }
 
+
+/* selectBox(동물종/카테고리) */
+#registSelectBox{
+	position: absolute;
+	top : 3.5%;
+	left : 20%;
+}
+
+
+/* 정답 div */
+#registAnswerRadio{
+	position: absolute;
+	top : 34%;
+	left : 20%;
+}
+
+/* 테이블 상단 */
+#quizListTable{
+	border-top : 1px solid black;
+	border-bottom: 1px solid black;
+	margin-top : 8px;
+	width : 100%;
+	padding-top: 3px;
+	background-color: #D2E5A8;
+}
+
+#quizListTable td{
+	text-align: center;
+	width : 300px;
+}
+
 textarea {
 	resize: none;
 }
 
+/* 문제작성 */
 #quizAsk {
 	width: 50%;
 	border: 1px solid black;
+	position: absolute;
+	top : 8%;
+	left : 20%;
 }
 
+/* 문제해설 */
 #registQuizContent {
 	width: 50%;
 	height: 20%;
 	border: 1px solid black;
+	position: absolute;
+	top : 13%;
+	left : 20%;
+}
+
+/* 버튼(문제등록) */
+#registBtn{
+	position: absolute;
+	top : 40%;
+	left : 44%;
+}
+
+#qqq{
+	margin-left : 15px;
+}
+
+/* 리스트 */
+#quizList{
+	position: absolute;
+	top : 100%;
+}
+
+/* 페이징 */
+#paging{
+	position: absolute;
+	top : 110%;
+	left : 40%;
+}
+
+/* selectBox(검색) */
+#quizListDiv{
+	position: absolute;
+	top : 53%;
+	left : 20%;
 }
 
 button{
 	width: 10%;
 	
+}
+td{
+	border-bottom: 1px solid black;
 }
 </style>
 </head>
@@ -49,6 +123,7 @@ button{
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
 	<div id="contentFrame">
+	<h3 id="qqq">Quiz 등록</h3>
 		<div id="registSelectBox">
 			<select id="aniamlList">
 				<option value="동물">동물 선택</option>
@@ -65,7 +140,7 @@ button{
 				<option value="기타">기타</option>
 			</select>
 		</div>
-		<textarea id="quizAsk" rows="" cols=""></textarea>
+		<textarea id="quizAsk" rows="" cols="" placeholder="퀴즈 제목 작성"></textarea>
 		<div id="registAnswerRadio">
 			<label>
 				O<input type="radio" name="answer" value="O">
@@ -74,8 +149,10 @@ button{
 				X<input type="radio" name="answer" value="X">
 			</label>
 		</div>
-		<textarea id="registQuizContent" rows="" cols=""></textarea>
+		<textarea id="registQuizContent" rows="" cols="" placeholder="퀴즈 해설 작성"></textarea>
+		<div id="registBtn">
 		<input type="button" onclick="registQuiz()" value="문제 등록">
+		</div>
 		<div id="quizListDiv">
 			<select id="searchAniamlList">
 				<option value="전체">전체</option>
@@ -91,9 +168,9 @@ button{
 				<option value="생활">생활</option>
 				<option value="기타">기타</option>
 			</select> 
-			문제 <input id="searchWord" type="text">
+			문제 : <input id="searchWord" type="text">
 			<input type="button" onclick="quizListCall(showPageNum)" value="검색">
-			<table>
+			<table id="quizListTable">
 				<thead>
 					<tr>
 						<th>번호</th>
@@ -106,9 +183,8 @@ button{
 				<tbody id="quizList">
 				</tbody>
 			</table>
-			<div id="paging">
-			</div>
 		</div>
+		<div id="paging"></div>
 	</div>
 </body>
 <script>

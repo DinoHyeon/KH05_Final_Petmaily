@@ -84,7 +84,7 @@
 				quiz_category=#{category}
 			</if>
 			<if test="!animal.equals('전체')">
-				animal_idx = #{animal}
+				AND animal_idx = #{animal}
 			</if>
 		</where>
 		ORDER BY DBMS_RANDOM.VALUE

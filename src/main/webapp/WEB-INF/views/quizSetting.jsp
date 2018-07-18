@@ -20,7 +20,7 @@
 	left: 0.8%;
 	top: 12.9%;
 	width: 98%;
-	height: 88%;
+	height: 100%;
 	background: white;
 }
 
@@ -32,7 +32,7 @@
 
 #animalChoice {
 	position: absolute;
-	left: 25%;
+	left: 15%;
 	top: 8%;
 	width: 70%;
 	height: 34%;
@@ -40,8 +40,8 @@
 
 #AnimalSleDog {
 	position: absolute;
-	left: 25%;
-	top: 8%;
+	left: 9%;
+	top: 67%;
 }
 
 #AnimalSleCat {
@@ -52,14 +52,14 @@
 
 #AnimalSleEtc {
 	position: absolute;
-	left: 25%;
-	top: 8%;
+	left: 60%;
+	top: 67%;
 }
 
 #AnimalSleAll {
 	position: absolute;
-	left: 25%;
-	top: 8%;
+	left: 85%;
+	top: 67%;
 }
 
 .animal {
@@ -85,9 +85,36 @@
 	text-align: center;
 }
 
+#categoryChoice{
+	position: absolute;
+	top : 50%;
+	left : 20%;
+	
+}
+
+#quizNumChoice{
+	position: absolute;
+	left : 21%;
+}
+
 #categoryFieldset {
 	border: none;
 }
+
+#play{
+	position: absolute;
+	margin-top: 10%;
+	margin-left: 80%;
+}
+
+#one{
+	margin-top: 250px;
+}
+
+#two{
+	margin-top: 125px;
+}
+
 </style>
 <title>Insert title here</title>
 </head>
@@ -97,7 +124,7 @@
 	<div id="contentFrame">
 		<form action="quizPlaySetting" id="quizPlaySetting">
 
-
+		  <h4>●동물 선택</h4>
 			<div id="animalChoice">
 				<div class="animal" id="dog">
 					<img class="animalImg" id="강아지" alt="강아지"
@@ -124,6 +151,8 @@
 					</div>
 				</div>
 				<div class="animal" id="all">
+					<img class="animalImg" id="기타" alt="기타"
+						src="resources/img/turtle.png">
 					<div id="AnimalSleAll">
 						<label>전체 <input type="radio" value="전체" name="animal">
 						</label>
@@ -131,7 +160,8 @@
 				</div>
 			</div>
 
-
+			<hr id="one">
+			 <h4>●Quiz 카테고리</h4>
 			<div id="categoryChoice">
 				<fieldset id="categoryFieldset">
 					<label>전체 <input type="radio" value="전체" name="category">
@@ -143,6 +173,9 @@
 					</label>
 				</fieldset>
 			</div>
+			
+			<hr id="two">
+			<h4>●Quiz 갯수</h4>
 			<div id="quizNumChoice">
 				<label>3 <input type="radio" value="3" name="quizNum">
 				</label> <label>5 <input type="radio" value="5" name="quizNum">
@@ -150,7 +183,7 @@
 				</label>
 			</div>
 
-			<input type="button" onclick="quizPlay()" value="문제풀기">
+			<input type="button" id="play" onclick="quizPlay()" value="문제풀기">
 		</form>
 	</div>
 </body>
