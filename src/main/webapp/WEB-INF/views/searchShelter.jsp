@@ -7,37 +7,154 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=672cd5bbb388875a20f43c78deb73240"></script>
 <title>Insert title here</title>
+<style>
+#contentFrame {
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 95%;
+	background: white;
+}
+
+#sideFrame{
+position: absolute;
+    left: 0.52%;
+    top: 12.4%;
+    width: 15%;
+    height: 95%;
+    background: black;
+}
+
+fieldset {
+    position: absolute;
+    border: 4px solid #2478FF;
+    border-radius: 5px;
+    width: 77.8%;
+    height: 8%;
+    top: 3%;
+    left: 11.2%;
+    text-align: center;
+}
+
+fieldset legend {
+    background: #fff;
+    color: #38547F;
+    padding: 5px 10px;
+    font-size: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 4px #2478FF;
+    margin-left: 20px;
+}
+
+#searchDiv{
+    position: absolute;
+    top: 49%;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.ui-widget{
+	font-size: 15px!important;
+}
+
+button{
+	font-weight: 600!important;
+}
+
+.overflow{
+	height: 150px;
+}
+
+#shelterList{
+    position: absolute;
+    width: 80%;
+    height: 17%;
+    top: 17%;
+    left: 11.5%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#shelterList td,th,tr{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+#shelter{
+	text-align: center;
+}
+
+#paging{
+    position: absolute;
+    left: 38%;
+    top: 38%;
+}
+
+#shelterDetail{
+    position: absolute;
+    width: 80%;
+    height: 49%;
+    top: 48%;
+    left: 11.5%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#mapField{
+    height: 72%;
+}
+
+#shelterDetail th{
+	width: 20%;
+}
+
+#map{
+    position: absolute;
+    top: 48.5%;
+    left: 24%;
+    width: 55%;
+    height: 34%;
+}
+
+</style>
 </head>
 <body>
 <jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
 	<div id="contentFrame">
-		<select id="sido" onchange="getSigungu()">
-			<option value="">선택</option>
-			<option value="6110000">서울특별시</option>
-			<option value="6260000">부산광역시</option>
-			<option value="6270000">대구광역시</option>
-			<option value="6280000">인천광역시</option>
-			<option value="6290000">광주광역시</option>
-			<option value="5690000">세종특별자치시</option>
-			<option value="6300000">대전광역시</option>
-			<option value="6310000">울산광역시</option>
-			<option value="6410000">경기도</option>
-			<option value="6420000">강원도</option>
-			<option value="6430000">충청북도</option>
-			<option value="6440000">충청남도</option>
-			<option value="6450000">전라북도</option>
-			<option value="6460000">전라남도</option>
-			<option value="6470000">경상북도</option>
-			<option value="6480000">경상남도</option>
-			<option value="6500000">제주특별자치도</option>
-		</select>
-		
-		<select id="sigundo">
-			<option value="">선택</option>
-		</select>
-		<input type="button" onclick="shelterList(showPageNum)" value="검색">
-		<table>
+		<fieldset>
+			<legend>지역 검색</legend>
+				<div id="searchDiv">
+					<select id="sido">
+						<option value="">선택</option>
+						<option value="6110000">서울특별시</option>
+						<option value="6260000">부산광역시</option>
+						<option value="6270000">대구광역시</option>
+						<option value="6280000">인천광역시</option>
+						<option value="6290000">광주광역시</option>
+						<option value="5690000">세종특별자치시</option>
+						<option value="6300000">대전광역시</option>
+						<option value="6310000">울산광역시</option>
+						<option value="6410000">경기도</option>
+						<option value="6420000">강원도</option>
+						<option value="6430000">충청북도</option>
+						<option value="6440000">충청남도</option>
+						<option value="6450000">전라북도</option>
+						<option value="6460000">전라남도</option>
+						<option value="6470000">경상북도</option>
+						<option value="6480000">경상남도</option>
+						<option value="6500000">제주특별자치도</option>
+					</select>
+					
+					<select id="sigundo">
+						<option value="">선택</option>
+					</select>
+					<button id="search">검색</button>
+			</div>
+		</fieldset>
+		<table id="shelterList">
 			<thead>
 				<tr>
 					<th>지역</th>
@@ -50,14 +167,50 @@
 			
 		<div id="paging"></div>
 			
-			
-		<div id="map" style="width:500px;height:400px;"></div>
+		<div id="map"></div>	
+		<table id="shelterDetail">
+			<tr>
+				<td id="mapField" colspan="6"></td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td colspan="2" id="centerName"></td>
+				<th>전화번호</th>
+				<td colspan="2" id="centerTel"></td>				
+			</tr>
+			<tr>
+				<th>위치</th>
+				<td colspan="5" id="centerLocation"></td>
+			</tr>			
+			<tr>
+				<th>평일 운영 시간</th>
+				<td id="weekdayTime"></td>
+				<th>주말 운영 시간</th>
+				<td id="weekendTime"></td>
+				<th>휴일</th>
+				<td id="holiday"></td>
+			</tr>						
+		</table>	
+		
 	</div>
 </body>
 <script>
 var showPageNum = 1;
 
 $(document).ready(function() {
+	$( "#sido" ).selectmenu({
+		width: 250,
+		change: function( event, ui ) {
+			getSigungu();
+		}
+	}).selectmenu( "menuWidget" ).addClass( "overflow" );
+	
+	$( "#sigundo" ).selectmenu({
+		width: 200
+	}).selectmenu( "menuWidget" ).addClass( "overflow" );
+	
+	$( "#search" ).button();
+	
 	shelterList(showPageNum);
 });
 
@@ -130,6 +283,15 @@ function sehelterDetail(name) {
 		"type" : "get",
 		"data" : {"centetName" : $(name).attr("id")},
 		"success" : function(data) {
+			console.log(data);
+			
+			$("#centerName").html(data.centerName);
+			$("#centerTel").html(data.phoneNum);
+			$("#centerLocation").html(data.locationAddr);
+			$("#weekdayTime").html(data.weekdayStartTime+" ~ "+data.weekdayEndTime);
+			$("#weekendTime").html(data.weekendStartTime+" ~ "+data.weekendEndTime);
+			$("#holiday").html(data.holiday);
+			
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
 		        center: new daum.maps.LatLng(data.x, data.y), // 지도의 중심좌표
@@ -162,6 +324,10 @@ function sehelterDetail(name) {
 		}
 	});
 }
+
+$( "#search" ).click( function( event ) {
+	shelterList(showPageNum);
+} );
 
 </script>
 </html>

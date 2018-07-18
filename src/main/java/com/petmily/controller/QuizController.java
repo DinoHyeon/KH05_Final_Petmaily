@@ -30,12 +30,6 @@ public class QuizController {
 		return "quizMain";
 	}
 
-	@RequestMapping(value = "getAnimalList")
-	public @ResponseBody ArrayList<String> getAnimalList() {
-		logger.info("동물 리스트 출력");
-		return service.AnimalList();
-	}
-
 	@RequestMapping(value = "registQuiz")
 	public @ResponseBody int registQuiz(@RequestParam HashMap<String, String> params) {
 		logger.info("문제 등록");

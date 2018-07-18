@@ -325,6 +325,8 @@ public class ApiController {
 	@RequestMapping(value = "shelterList")
 	public @ResponseBody HashMap<String, Object> shelterList(@RequestParam("sido") String sido,
 			@RequestParam("sigundo") String sigundo, @RequestParam("page") int page) {
+		
+		System.out.println(sido+"/"+sigundo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<ShelterDTO> list = new ArrayList<ShelterDTO>();
 		ArrayList<ShelterDTO> tempList = new ArrayList<ShelterDTO>();
@@ -346,29 +348,28 @@ public class ApiController {
 			shelterListAllCnt = tempList.size();
 		}
 		
-		int pageCnt = shelterListAllCnt % 10 > 0 ? Math.round(shelterListAllCnt / 10) + 1 : shelterListAllCnt / 10;
+		int pageCnt = shelterListAllCnt % 5 > 0 ? Math.round(shelterListAllCnt / 5) + 1 : shelterListAllCnt / 5;
 		if (page > pageCnt) {
 			page = pageCnt;
 		}
 
-		int end = 10 * page;
-		int start = end - 10 + 1;
+		int end = 5 * page - 1;
+		int start = end - 5 + 1;
 		
 		System.out.println(end);
 		System.out.println(start);
 		System.out.println(shelterListAllCnt);
 		
-		if(page == pageCnt) {
+		if(end>shelterListAllCnt) {
 			for(int i=start; i<=shelterListAllCnt-1; i++) {
 				list.add(tempList.get(i));
-			}
+			}	
 		}else {
-			for(int i=start; i<end-1; i++) {
+			for(int i=start; i<=end; i++) {
 				list.add(tempList.get(i));
-			}
+			}		
 		}
-		
-		
+
 		map.put("list", list);
 		map.put("currPage", page);
 		map.put("pageCnt", pageCnt);
