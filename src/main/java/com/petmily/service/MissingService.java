@@ -80,7 +80,7 @@ public class MissingService {
 
 		logger.info("전체 게시글 수" + allCnt);
 		// 생성 가능한 페이지 수 구하기
-		int pageCnt = allCnt % 8 > 0 ? Math.round(allCnt / 8) + 1 : allCnt / 8;
+		int pageCnt = allCnt % 9 > 0 ? Math.round(allCnt / 9) + 1 : allCnt / 9;
 		// 리턴을 위한 맵 생성
 		HashMap<String, Object> missingList = new HashMap<String, Object>();
 
@@ -91,8 +91,8 @@ public class MissingService {
 			page = pageCnt;
 		}
 
-		int end = 8 * page;
-		int start = end - 8 + 1;
+		int end = 9* page;
+		int start = end - 9 + 1;
 
 		map.put("start", String.valueOf(start));
 		map.put("end", String.valueOf(end));

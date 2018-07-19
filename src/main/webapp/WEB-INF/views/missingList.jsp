@@ -8,14 +8,14 @@
 <style>
 table {
 	float: left;
-	margin: 10px 20px;
-	padding: 10px 0;
+	margin: 1% 1.5%;
+	padding: 1.5% 1.5%;
 }
 
 table, tr, td {
 	border: 1px solid black;
 	border-collapse: collapse;
-	padding: 5px 10px;
+	padding: 1.5% 0.1%;
 }
 
 .list {
@@ -28,7 +28,9 @@ table, tr, td {
 #write {
 	position: absolute;
 	top : 88%;
-	left : 88%;
+	left : 85%;
+	width : 5%;
+	height: 3%;
 }
 #contentFrame {
    position: absolute;
@@ -54,7 +56,7 @@ table, tr, td {
 
 #searchArea{
 	position: absolute;
-	top: 5%;
+	top: 6%;
 	left : 2%;
 }
 
@@ -70,7 +72,7 @@ table, tr, td {
 <jsp:include page="mainFrame.jsp"/>
 <div id="sideFrame"></div>
 <div id="contentFrame">
-	<h3 id="aaa">실종 게시판</h3>
+	<h2 id="aaa">실종 게시판</h2>
 		<div id="searchArea">
 		<!-- 지역 -->
 		<select id="sido" onchange="getSigungu()">
@@ -158,7 +160,7 @@ function listPrint(data){
 		content += "<td><a href='missingDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
 		content += "</tr>";
 		content += "<tr>";
-		content += "<td colspan='2'><img width='400' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";
+		content += "<td colspan='2'><img width='390' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";
 		content += "</tr>";
 		content += "<tr>";
 		content += "<td colspan='2'>"+date.toLocaleDateString("en-KOR")+"</td>";
