@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -112,11 +111,17 @@ public class MissingService {
 	/* 실종 게시판 상세보기 */
 	public ModelAndView missingDetail(int board_idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		session.setAttribute("login", "test");
-		String id = (String) session.getAttribute("login");
+		
+		String id="";
+		if(session.getAttribute("loginId")==null) {
+			id="비회원";
+		}else {
+			/*session.setAttribute("login", session.getAttribute("loginId"));*/
+			id = (String) session.getAttribute("loginId");
+		}
 		
 		inter = sqlSession.getMapper(BoardInter.class);
-
+		
 		// 상세보기 정보
 		mav.addObject("missingDetail", inter.missingDetail(board_idx));
 		// 첨부파일 정보

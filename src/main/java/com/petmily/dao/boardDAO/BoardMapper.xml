@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petmily.dao.boardDAO.BoardInter">
 
-<!-- ///////////////////////////////////////////////////윤영////////////////////////////////////////////////// -->
+	<!-- ///////////////////////////////////////////////////윤영////////////////////////////////////////////////// -->
 	<!-- 비밀번호 -->
 	<select id="getPass" parameterType="hashMap" resultType="String">
 		<if test="requestPage.equals('실종')">
@@ -95,9 +95,12 @@
 		resultType="BoardDTO">
 		SELECT board_idx, board_title, board_regDate, protect_loc, animal_idx,
 		animal_type, photo_newName, mainPhoto
-		FROM(SELECT board_idx, board_title, board_regDate, protect_loc, animal_idx,
-		animal_type, photo_newName, mainPhoto, ROW_NUMBER() OVER(ORDER BY
-		board_idx DESC) AS rNUM FROM protectBoard
+		FROM(SELECT board_idx,
+		board_title, board_regDate, protect_loc, animal_idx,
+		animal_type,
+		photo_newName, mainPhoto, ROW_NUMBER() OVER(ORDER BY
+		board_idx DESC) AS
+		rNUM FROM protectBoard
 		<where>
 			<if test="!sido.equals('선택') and sido!=null">
 				AND protect_loc LIKE '%'||#{sido}||'%'
@@ -184,7 +187,7 @@
 		board_content=#{param3} WHERE board_idx=#{param1}
 	</update>
 
-	<!-- 보호_ 테이블 수정 -->
+	<!-- 보호_테이블 수정 -->
 	<update id="board_protectUpdate">
 		UPDATE board_protect SET protect_loc=#{param2},
 		animal_idx=#{param3}, animal_type=#{param4} WHERE board_idx=#{param1}
@@ -195,9 +198,12 @@
 		resultType="BoardDTO">
 		SELECT board_idx, board_title, board_regDate, missing_loc, animal_idx,
 		animal_type, photo_newName, mainPhoto
-		FROM(SELECT board_idx, board_title, board_regDate, missing_loc, animal_idx,
-		animal_type, photo_newName, mainPhoto, ROW_NUMBER() OVER(ORDER BY
-		board_idx DESC) AS rNUM FROM missingBoard
+		FROM(SELECT board_idx,
+		board_title, board_regDate, missing_loc, animal_idx,
+		animal_type,
+		photo_newName, mainPhoto, ROW_NUMBER() OVER(ORDER BY
+		board_idx DESC) AS
+		rNUM FROM missingBoard
 		<where>
 			<if test="!sido.equals('선택') and sido!=null">
 				AND missing_loc LIKE '%'||#{sido}||'%'
@@ -233,7 +239,8 @@
 	<!-- 실종_게시판 글 등록 -->
 	<insert id="missingWrite" parameterType="BoardDTO"
 		useGeneratedKeys="true" keyProperty="board_idx" keyColumn="board_idx">
-		INSERT INTO board(board_idx, board_type, board_title, board_content,
+		INSERT INTO
+		board(board_idx, board_type, board_title, board_content,
 		board_writer,board_hit)
 		VALUES(board_seq.NEXTVAL, '실종',
 		#{board_title},#{board_content}, #{board_writer}, 0)
@@ -288,37 +295,43 @@
 
 
 
-<!-- ///////////////////////////////////////////////////소현////////////////////////////////////////////////// -->
-	<!-- 소현 : 나의 모금리스트 페이징 처리 (세션처리 필요)  -->
-	<select id="mylistallCount" resultType="Integer" parameterType="hashMap">
-		SELECT COUNT(*) FROM board where board_type='모금' 
+	<!-- ///////////////////////////////////////////////////소현////////////////////////////////////////////////// -->
+	<!-- 소현 : 나의 모금리스트 페이징 처리 (세션처리 필요) -->
+	<select id="mylistallCount" resultType="Integer"
+		parameterType="hashMap">
+		SELECT COUNT(*) FROM board where board_type='모금'
 	</select>
-	
-	
-	<!--소현 : 나의 모금리스트 페이징 처리 리스트 출력  -->
-	<select id="getmyList" resultType="BoardDTO" parameterType="hashMap">
-		SELECT board_idx, board_title, mainPhoto, photo_newname, fund_state 
-        FROM (SELECT p.board_idx, board_title, mainPhoto, photo_newname, fund_state,
-        ROW_NUMBER() OVER(ORDER BY p.board_idx DESC) AS rnum
-        FROM board b, board_fund f, Photo p
-        where b.board_idx=f.board_idx 
-        and p.board_idx=f.board_idx and p.mainPhoto='대표이미지'
-        and b.board_writer=#{loginWriter}
-         ) WHERE rnum BETWEEN #{start} AND #{end}
+
+
+	<!--소현 : 나의 모금리스트 페이징 처리 리스트 출력 -->
+	<select id="getmyList" resultType="BoardDTO"
+		parameterType="hashMap">
+		SELECT board_idx, board_title, mainPhoto, photo_newname,
+		fund_state
+		FROM (SELECT p.board_idx, board_title, mainPhoto, photo_newname,
+		fund_state,
+		ROW_NUMBER() OVER(ORDER BY p.board_idx DESC) AS rnum
+		FROM board b, board_fund f, Photo p
+		where b.board_idx=f.board_idx
+		and p.board_idx=f.board_idx and p.mainPhoto='대표이미지'
+		and b.board_writer=#{loginWriter}
+		) WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
-	
-	<!--소현 : 나의 모금리스트 삭제  -->	
+
+	<!--소현 : 나의 모금리스트 삭제 -->
 	<delete id="delMylist" parameterType="Integer">
-		DELETE FROM Board WHERE board_idx=#{param1}
+		DELETE FROM Board WHERE
+		board_idx=#{param1}
 	</delete>
 
-	<!--소현 : 나의 모금리스트 사유보기  -->	
+	<!--소현 : 나의 모금리스트 사유보기 -->
 	<select id="reason" resultType="String">
-    Select fund_sorry from board_fund where board_idx=#{param1}
-   </select>
-   
-   <!--소현: 모금 게시판 페이징 처리  -->
-   <select id="fundlistallCount" resultType="Integer" parameterType="hashMap">
+		Select fund_sorry from board_fund where board_idx=#{param1}
+	</select>
+
+	<!--소현: 모금 게시판 페이징 처리 -->
+	<select id="fundlistallCount" resultType="Integer"
+		parameterType="hashMap">
 		SELECT COUNT(*) FROM board_fund
 		<where>
 			<if test="!sido.equals('선택') and sido!=null">
@@ -327,41 +340,44 @@
 			<if test="sigundo!='' and sigundo!=null">
 				AND fund_area LIKE '%'||#{sigundo}||'%'
 			</if>
-			
+
 			<if test="keyword!='' and keyword!=null">
 				AND board_title LIKE '%'||#{keyword}||'%'
 			</if>
 		</where>
-		
-		
-   </select>
-   
-   
-     <!--소현: 모금 게시판 페이징 처리  -->
-     <select id="getfundList" resultType="BoardDTO" parameterType="hashMap">	
-      SELECT board_idx, board_title, board_writer, board_regDate, board_hit,fund_area
-			FROM(
-				SELECT b.board_idx, b.board_title, b.board_writer, b.board_regDate, b.board_hit, f.fund_area,
-				ROW_NUMBER() OVER(ORDER BY b.board_idx DESC) AS rnum
-				FROM board b, board_fund f
-	             where b.board_idx = f.board_idx 
-     		<if test="!sido.equals('선택') and sido!=null">
-				AND fund_area LIKE '%'||#{sido}||'%'
-			</if>
-			<if test="sigundo!='' and sigundo!=null">
-				AND fund_area LIKE '%'||#{sigundo}||'%'
-			</if>
-			<if test="keyword!='' and keyword!=null">
-				AND board_title LIKE '%'||#{keyword}||'%'
-			</if>
-			) 
-			WHERE rnum BETWEEN #{start} AND #{end}	
-			
-			
+
+
 	</select>
-   
-   <!-- 소현 : 글등록 -->
-   	<insert id="writebbs" parameterType="BoardDTO"
+
+
+	<!--소현: 모금 게시판 페이징 처리 -->
+	<select id="getfundList" resultType="BoardDTO"
+		parameterType="hashMap">
+		SELECT board_idx, board_title, board_writer, board_regDate,
+		board_hit,fund_area
+		FROM(
+		SELECT b.board_idx, b.board_title, b.board_writer, b.board_regDate,
+		b.board_hit, f.fund_area,
+		ROW_NUMBER() OVER(ORDER BY b.board_idx DESC) AS rnum
+		FROM board b, board_fund f
+		where b.board_idx = f.board_idx
+		<if test="!sido.equals('선택') and sido!=null">
+			AND fund_area LIKE '%'||#{sido}||'%'
+		</if>
+		<if test="sigundo!='' and sigundo!=null">
+			AND fund_area LIKE '%'||#{sigundo}||'%'
+		</if>
+		<if test="keyword!='' and keyword!=null">
+			AND board_title LIKE '%'||#{keyword}||'%'
+		</if>
+		)
+		WHERE rnum BETWEEN #{start} AND #{end}
+
+
+	</select>
+
+	<!-- 소현 : 글등록 -->
+	<insert id="writebbs" parameterType="BoardDTO"
 		useGeneratedKeys="true" keyProperty="board_idx" keyColumn="board_idx">
 		INSERT INTO
 		board(board_idx, board_type, board_title, board_content, board_writer,
@@ -369,96 +385,115 @@
 		VALUES(board_seq.NEXTVAL, '모금', #{board_title},
 		#{board_content}, #{ board_writer} , #{board_hit})
 	</insert>
-	
-	  <!-- 소현 : 파일등록 -->
-	  <insert id="writeFile">
+
+	<!-- 소현 : 파일등록 -->
+	<insert id="writeFile">
 		INSERT INTO
-		Photo(photo_idx, board_idx, photo_type, photo_oriName,
+		Photo(photo_idx, board_idx, photo_type,
+		photo_oriName,
 		photo_newName, mainPhoto )
-		VALUES(photo_seq.NEXTVAL, #{param3}, '사진',
+		VALUES(photo_seq.NEXTVAL,
+		#{param3}, '사진',
 		#{param2}, #{param1}, #{param4})
 	</insert>
-	
+
 	<!--소현: 모금게시판 글 등록 -->
 	<insert id="writefund" parameterType="BoardDTO">
 		INSERT INTO
 		Board_fund(board_idx,fund_area,fund_sorry,fund_centerName)
 		VALUES(#{param1}, #{param3}, '거절사유', #{param2})
 	</insert>
-	
-		<!--소현: 모금게시판 상세보기 -->
+
+	<!--소현: 모금게시판 상세보기 -->
 	<select id="funddetail" resultType="BoardDTO">
-		SELECT * FROM board WHERE board_idx=#{param1}
+		SELECT * FROM board WHERE
+		board_idx=#{param1}
 	</select>
-	
-	
+
+
 	<!-- 소현 : 파일 목록 가져오기 -->
 	<select id="fundfileList" resultType="BoardDTO">
-		SELECT * FROM Photo WHERE board_idx= #{param1}
+		SELECT * FROM Photo WHERE
+		board_idx= #{param1}
 	</select>
-	
-	<!-- 소현 : 모금게시판 수정 폼  -->
+
+	<!-- 소현 : 모금게시판 수정 폼 -->
 	<select id="fundupdateForm" parameterType="Integer"
 		resultType="BoardDTO">
 		SELECT * FROM board WHERE board_idx=#{board_idx}
 	</select>
-	
-	<!-- 소현: 모금게시판 수정 등록  -->
-	 <update id="fundupdate">
-		UPDATE board SET board_title=#{param1}, board_content=#{param2}
-			WHERE board_idx=${param3}	 
-	 </update>
-	
-	 <!--소현 : 관리자 승인대기 리스트 페이징 처리 agreelistallCount -->
-	<select id="agreelistallCount" resultType="Integer" parameterType="hashMap">
+
+	<!-- 소현: 모금게시판 수정 등록 -->
+	<update id="fundupdate">
+		UPDATE board SET board_title=#{param1},
+		board_content=#{param2}
+		WHERE board_idx=${param3}
+	</update>
+
+	<!--소현 : 관리자 승인대기 리스트 페이징 처리 agreelistallCount -->
+	<select id="agreelistallCount" resultType="Integer"
+		parameterType="hashMap">
 		SELECT COUNT(*) FROM board_fund where fund_state='승인대기'
 	</select>
 
-   <!--소현 : 관리자 승인대기 리스트  -->
-   <select id="getagreeList" resultType="BoardDTO" parameterType="hashMap">
-    SELECT board_idx, board_title, fund_state 
-    FROM (select b.board_idx, b.board_title, f.fund_state,
-    ROW_NUMBER() OVER(ORDER BY b.board_idx DESC) AS rnum
-    from board b, board_fund f
-    where b.board_idx=f.board_idx and f.fund_state='승인대기'
-    )WHERE rnum BETWEEN #{start} AND #{end}
+	<!--소현 : 관리자 승인대기 리스트 -->
+	<select id="getagreeList" resultType="BoardDTO"
+		parameterType="hashMap">
+		SELECT board_idx, board_title, fund_state
+		FROM (select b.board_idx, b.board_title, f.fund_state,
+		ROW_NUMBER() OVER(ORDER BY b.board_idx DESC) AS rnum
+		from board b, board_fund f
+		where b.board_idx=f.board_idx and f.fund_state='승인대기'
+		)WHERE rnum BETWEEN #{start} AND #{end}
 
-   </select>
-
-  <!--소현: 관리자페이지 승인대기 리스트에서 승인대기-> 승인  -->
-  <update id="getagreeAdmin" parameterType="Integer" >
-	UPDATE board_fund SET fund_state='승인' where board_idx=#{param1} 
-  </update>	 
-  
-  <!--	소현: 관리자 페이지 승인 리스트 거부 버튼 클릭시 클릭한 idx값-->	 
-<select id="getnoreasonidx" resultType="Integer">
-	 SELECT board_idx from board_fund where board_idx=#{param1}
- </select>
- 
- <!-- 소현: 관리자 페이지 승인 리스트 거부 버튼 클릭시 거절사유 전송 승인상태 거절으로 변경	 -->	 
- <update id="getnoreason">
-	 update board_fund SET fund_sorry=#{param2}, fund_state='승인 거절' where board_idx=#{param1}
-</update> 
-  
-<!--소현 : 마이페이지 즐겨찾기 페이징 처리 (세션처리 필요) -->
-	<select id="likeallCount" resultType="Integer" parameterType="hashMap">
-		SELECT COUNT(*) FROM favorite
-	</select>	
-	
-	<!--소현 : 즐겨찾기 리스트 출력 페이징 처리  (세션처리 해야함)-->
-		<select id="getlikeList" resultType="BoardDTO" parameterType="hashMap">	
-		SELECT favorite_idx, board_type, board_title, board_writer, board_idx
-			FROM(
-				SELECT favorite_idx, board_type, board_title, board_writer, b.board_idx,
-					ROW_NUMBER() OVER(ORDER BY favorite_idx DESC) AS rnum
-					FROM favorite f, board b 
-					WHERE  b.board_idx=f.board_idx
-			) WHERE rnum BETWEEN #{start} AND #{end}	
 	</select>
-	
-		<!-- 즐겨찾기 리스트 삭제 -->
+
+	<!--소현: 관리자페이지 승인대기 리스트에서 승인대기-> 승인 -->
+	<update id="getagreeAdmin" parameterType="Integer">
+		UPDATE board_fund SET fund_state='승인' where board_idx=#{param1}
+	</update>
+
+	<!-- 소현: 관리자 페이지 승인 리스트 거부 버튼 클릭시 클릭한 idx값 -->
+	<select id="getnoreasonidx" resultType="Integer">
+		SELECT board_idx from board_fund where board_idx=#{param1}
+	</select>
+
+	<!-- 소현: 관리자 페이지 승인 리스트 거부 버튼 클릭시 거절사유 전송 승인상태 거절으로 변경 -->
+	<update id="getnoreason">
+		update board_fund SET fund_sorry=#{param2}, fund_state='승인 거절' where
+		board_idx=#{param1}
+	</update>
+
+	<!--소현 : 마이페이지 즐겨찾기 페이징 처리 (세션처리 필요) -->
+	<select id="likeallCount" resultType="Integer"
+		parameterType="hashMap">
+		SELECT COUNT(*) FROM favorite
+	</select>
+
+	<!--소현 : 즐겨찾기 리스트 출력 페이징 처리 (세션처리 해야함) -->
+	<select id="getlikeList" resultType="BoardDTO"
+		parameterType="hashMap">
+		SELECT favorite_idx, board_type, board_title, board_writer, board_idx
+		FROM(
+		SELECT favorite_idx, board_type, board_title, board_writer, b.board_idx,
+		ROW_NUMBER() OVER(ORDER BY favorite_idx DESC) AS rnum
+		FROM favorite f, board b
+		WHERE b.board_idx=f.board_idx
+		) WHERE rnum BETWEEN #{start} AND #{end}
+	</select>
+
+	<!-- 즐겨찾기 리스트 삭제 -->
 	<delete id="delLikelist" parameterType="Integer">
-	  	DELETE FROM Favorite WHERE favorite_idx=#{param1}
+		DELETE FROM Favorite WHERE favorite_idx=#{param1}
 	</delete>
-	
+
+	<!-- 소현: 글삭제 -->
+	<delete id="funddelete" parameterType="Integer">
+		DELETE FROM board WHERE board_idx=#{board_idx}
+	</delete>
+
+	<update id="uphit">
+		UPDATE board SET board_hit=board_hit+1 WHERE board_idx=#{param1}
+	</update>
+
 </mapper>

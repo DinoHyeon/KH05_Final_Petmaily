@@ -111,8 +111,13 @@ public class ProtectService {
 	/*보호 게시판 상세보기*/
 	public ModelAndView protectDetail(int board_idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		session.setAttribute("login", "test");
-		String id = (String) session.getAttribute("login");
+		String id="";
+		if(session.getAttribute("loginId")==null) {
+			id="비회원";
+		}else {
+			/*session.setAttribute("login", session.getAttribute("loginId"));*/
+			id = (String) session.getAttribute("loginId");
+		}
 		
 		inter = sqlSession.getMapper(BoardInter.class);
 		

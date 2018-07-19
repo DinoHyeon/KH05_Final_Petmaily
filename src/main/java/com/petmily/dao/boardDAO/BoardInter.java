@@ -93,5 +93,6 @@ public interface BoardInter {
 	int likeallCount(HashMap<String, String> params);
 	ArrayList<BoardDTO> getlikeList(HashMap<String, String> params);
 	int delLikelist(int idx);
-
+	int funddelete(int idx);
+	void uphit(String idx);
 }
