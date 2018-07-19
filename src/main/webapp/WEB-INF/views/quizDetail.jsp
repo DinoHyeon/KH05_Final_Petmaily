@@ -10,38 +10,63 @@
 <script src="resources/plugIn/jquery-ui.js"></script>
 <title>Insert title here</title>
 <style>
+/* 전체(배경) */
+#contentFrame {
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 100%;
+	background: white;
+}
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 10.5%;
+	width: 15%;
+	height: 100%;
+	background: black;
+}
 textarea {
 	resize: none;
 	width: 100%;
 }
-#qqq{
-	text-align: center;
-	margin-top: 5px;
-}
 table{
 	border : 1px solid black;
 	border-collapse: collapse;
-	width: 600px;
+	width: 70%;
 	margin: auto;
+	margin-top: 8%;
 }
 th{
 border : 1px solid black;
-	width: 100px;
+width: 18%;
+background-color: #A9CB73;
+}
+
+td{
+	padding : 0.5% 0.5%;
 }
 
 #td_cont{
 	border : 1px solid black;
-	width : 300px;
 	text-align: center;
 }
 #buttonArea{
-	margin-top: 10px;
+	margin-top: 3%;
+	margin-left : 4%;
 	text-align: center;
+}
+.ui-widget{
+    font-size: 16px !important;
 }
 </style>
 </head>
 <body>
-	<h3 id='qqq'>퀴즈 상세보기</h3>
+<jsp:include page="mainFrame.jsp" />
+	<div id="sideFrame"></div>
+	<div id="contentFrame">
 	<table>
 		<tr>
 			<th>동물</th>
@@ -69,7 +94,7 @@ border : 1px solid black;
 		<tr>
 			<th>해설</th>
 			<td colspan="3" id="td_cont">
-				<textarea id="content" rows="7" cols="" readonly="readonly">${dto.quiz_content}
+				<textarea id="content" rows="12" cols="" readonly="readonly">${dto.quiz_content}
 				</textarea>
 			</td>
 		</tr>
@@ -78,6 +103,7 @@ border : 1px solid black;
 	<button id="updateFormBtn" onclick="location.href='./quizUpdatePage?idx=${dto.quiz_idx}'">수정</button>
 	<button id="deleteBtn" onclick="del()">삭제</button>
 	<button onclick="location.href='./quizMain'">리스트</button>
+	</div>
 	</div>
 </body>
 <script>

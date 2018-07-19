@@ -19,9 +19,9 @@
 #sideFrame {
 	position: absolute;
 	left: 0.52%;
-	top: 12.5%;
+	top: 10.5%;
 	width: 15%;
-	height: 87%;
+	height: 140%;
 	background: black;
 }
 
@@ -29,7 +29,7 @@
 /* selectBox(동물종/카테고리) */
 #registSelectBox{
 	position: absolute;
-	top : 3.5%;
+	top : 5.5%;
 	left : 20%;
 }
 
@@ -37,7 +37,7 @@
 /* 정답 div */
 #registAnswerRadio{
 	position: absolute;
-	top : 34%;
+	top : 45%;
 	left : 20%;
 }
 
@@ -45,45 +45,50 @@
 #quizListTable{
 	border-top : 1px solid black;
 	border-bottom: 1px solid black;
-	margin-top : 8px;
+	margin-top : 20px;
 	width : 100%;
 	padding-top: 3px;
-	background-color: #D2E5A8;
+	background-color: #A9CB73;
 }
 
 #quizListTable td{
 	text-align: center;
-	width : 300px;
+	width : 5.4%;
 }
 
 textarea {
 	resize: none;
 }
 
+#noLisd{
+	width : 14%;
+}
+
 /* 문제작성 */
 #quizAsk {
-	width: 50%;
+	width: 65%;
+	height : 6%;
 	border: 1px solid black;
 	position: absolute;
-	top : 8%;
+	top : 11%;
 	left : 20%;
 }
 
 /* 문제해설 */
 #registQuizContent {
-	width: 50%;
-	height: 20%;
+	width: 65%;
+	height: 26%;
 	border: 1px solid black;
 	position: absolute;
-	top : 13%;
+	top : 18%;
 	left : 20%;
 }
 
 /* 버튼(문제등록) */
 #registBtn{
 	position: absolute;
-	top : 40%;
-	left : 44%;
+	top : 52%;
+	left : 48%;
 }
 
 #qqq{
@@ -95,19 +100,19 @@ textarea {
 	position: absolute;
 	top : 100%;
 }
-
 /* 페이징 */
 #paging{
 	position: absolute;
-	top : 110%;
-	left : 40%;
+	top : 133%;
+	left : 47%;
 }
 
 /* selectBox(검색) */
 #quizListDiv{
 	position: absolute;
-	top : 53%;
-	left : 20%;
+	top : 72%;
+	left : 17%;
+	width: 73%;
 }
 
 button{
@@ -116,6 +121,14 @@ button{
 }
 td{
 	border-bottom: 1px solid black;
+	padding : 1% 0;
+}
+.ui-widget{
+    font-size: 16px !important;
+}
+
+#a{
+	margin-top: 36%;
 }
 </style>
 </head>
@@ -153,6 +166,7 @@ td{
 		<div id="registBtn">
 		<input type="button" onclick="registQuiz()" value="문제 등록">
 		</div>
+		<hr id="a">
 		<div id="quizListDiv">
 			<select id="searchAniamlList">
 				<option value="전체">전체</option>
@@ -281,7 +295,7 @@ td{
 			})	
 		}else{
 			content += "<tr>";
-			content += "<td colspan='5'>검색결과가 없습니다.</td>"
+			content += "<td id='noLisd' colspan='5'>검색결과가 없습니다.</td>"
 			content += "</tr>";
 		}
 		

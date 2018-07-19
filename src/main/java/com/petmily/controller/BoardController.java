@@ -228,9 +228,8 @@ public class BoardController {
 	/* 실종 게시판 글작성 */
 	@RequestMapping(value = "/missingWrite")
 	public ModelAndView missingWrite(@RequestParam HashMap<String, String> map, HttpSession session) {
-
 		//회원 : session / 비회원 : ipAddr
-		// 비회원 글작성시 추가할 ip값 추출
+		//비회원 글작성시 추가할 ip값 추출
 		String ipAddr = "";
 		try {
 			InetAddress ip = InetAddress.getLocalHost();
@@ -284,8 +283,6 @@ public class BoardController {
 		logger.info("missingUpdate 요청");
 		return missing.missingUpdate(map);
 	}
-	
-	
 	
 	///////////////////////////////////////////////////소현//////////////////////////////////////////////////
 
@@ -494,17 +491,25 @@ public class BoardController {
 			}
 			
 
-			//소현 즐겨찾기 리스트 페이징 처리
+			//소현 : 즐겨찾기 리스트 페이징 처리
 			@RequestMapping(value = "getlikeList")
 			public @ResponseBody HashMap<String, Object> getlikeList(@RequestParam HashMap<String, String> params) {
 				logger.info("즐겨찾기 리스트 호출");
 				return fund.getlikeList(params);
 			}
 					
-			 //소현 나의 즐겨찾기 리스트 삭제
+			 //소현  : 나의 즐겨찾기 리스트 삭제
 			@RequestMapping(value="delLikelist")
 			public @ResponseBody int delLikelist(@RequestParam ("idx") int idx) {
 				logger.info("나의 즐겨찾기 리스트 삭제 ");
 				return fund.delLikelist(idx);
 			}
+			
+			//소현 : 게시글 삭제
+	         @RequestMapping(value="/funddelete")
+	         public ModelAndView funddelete(Model model, HttpServletRequest request) {
+	            logger.info("삭제  요청");
+	            model.addAttribute("request", request);//는 request 로 넘어온 값들을 model 로 저장을 합니다
+	            return fund.funddelete(model);
+	         }
 }

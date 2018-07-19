@@ -8,64 +8,14 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=672cd5bbb388875a20f43c78deb73240"></script>
 <title>Insert title here</title>
 <style>
-<<<<<<< HEAD
-table {
-	margin: 10px 10px;
-	padding: 10px 0;
-}
 
-table, tr, th , td{
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding: 5px 10px;
-}
-</style>
-</head>
-<body>
-   <select id="sido" onchange="getSigungu()">
-      <option value="">선택</option>
-      <option value="6110000">서울특별시</option>
-      <option value="6260000">부산광역시</option>
-      <option value="6270000">대구광역시</option>
-      <option value="6280000">인천광역시</option>
-      <option value="6290000">광주광역시</option>
-      <option value="5690000">세종특별자치시</option>
-      <option value="6300000">대전광역시</option>
-      <option value="6310000">울산광역시</option>
-      <option value="6410000">경기도</option>
-      <option value="6420000">강원도</option>
-      <option value="6430000">충청북도</option>
-      <option value="6440000">충청남도</option>
-      <option value="6450000">전라북도</option>
-      <option value="6460000">전라남도</option>
-      <option value="6470000">경상북도</option>
-      <option value="6480000">경상남도</option>
-      <option value="6500000">제주특별자치도</option>
-   </select>
-
-   <select id="sigundo">
-      <option value="">선택</option>
-   </select>
-   <input type="button" onclick="shelterList()" value="검색">
-   <table>
-      <thead>
-         <tr>
-            <th>지역</th>
-            <th>센터 이름</th>
-            <th>전화 번호</th>
-         </tr>
-      </thead>
-      <tbody   id="shelter">
-      </tbody>
-   </table>
-=======
 #contentFrame {
-	position: absolute;
-	left: 15.52%;
-	top: 12.5%;
-	width: 82.95%;
-	height: 95%;
-	background: white;
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 95%;
+   background: white;
 }
 
 #sideFrame{
@@ -107,15 +57,15 @@ fieldset legend {
 }
 
 .ui-widget{
-	font-size: 15px!important;
+   font-size: 15px!important;
 }
 
 button{
-	font-weight: 600!important;
+   font-weight: 600!important;
 }
 
 .overflow{
-	height: 150px;
+   height: 150px;
 }
 
 #shelterList{
@@ -129,12 +79,12 @@ button{
 }
 
 #shelterList td,th,tr{
-	border: 1px solid black;
-	border-collapse: collapse;
+   border: 1px solid black;
+   border-collapse: collapse;
 }
 
 #shelter{
-	text-align: center;
+   text-align: center;
 }
 
 #paging{
@@ -158,7 +108,7 @@ button{
 }
 
 #shelterDetail th{
-	width: 20%;
+   width: 20%;
 }
 
 #map{
@@ -173,101 +123,95 @@ button{
 </head>
 <body>
 <jsp:include page="mainFrame.jsp" />
-	<div id="sideFrame"></div>
-	<div id="contentFrame">
-		<fieldset>
-			<legend>지역 검색</legend>
-				<div id="searchDiv">
-					<select id="sido">
-						<option value="">선택</option>
-						<option value="6110000">서울특별시</option>
-						<option value="6260000">부산광역시</option>
-						<option value="6270000">대구광역시</option>
-						<option value="6280000">인천광역시</option>
-						<option value="6290000">광주광역시</option>
-						<option value="5690000">세종특별자치시</option>
-						<option value="6300000">대전광역시</option>
-						<option value="6310000">울산광역시</option>
-						<option value="6410000">경기도</option>
-						<option value="6420000">강원도</option>
-						<option value="6430000">충청북도</option>
-						<option value="6440000">충청남도</option>
-						<option value="6450000">전라북도</option>
-						<option value="6460000">전라남도</option>
-						<option value="6470000">경상북도</option>
-						<option value="6480000">경상남도</option>
-						<option value="6500000">제주특별자치도</option>
-					</select>
-					
-					<select id="sigundo">
-						<option value="">선택</option>
-					</select>
-					<button id="search">검색</button>
-			</div>
-		</fieldset>
-		<table id="shelterList">
-			<thead>
-				<tr>
-					<th>지역</th>
-					<th>보호소 이름</th>
-				</tr>
-			</thead>
-			<tbody	id="shelter">
-			</tbody>
-		</table>
-			
-		<div id="paging"></div>
-			
-		<div id="map"></div>	
-		<table id="shelterDetail">
-			<tr>
-				<td id="mapField" colspan="6"></td>
-			</tr>
-			<tr>
-				<th>이름</th>
-				<td colspan="2" id="centerName"></td>
-				<th>전화번호</th>
-				<td colspan="2" id="centerTel"></td>				
-			</tr>
-			<tr>
-				<th>위치</th>
-				<td colspan="5" id="centerLocation"></td>
-			</tr>			
-			<tr>
-				<th>평일 운영 시간</th>
-				<td id="weekdayTime"></td>
-				<th>주말 운영 시간</th>
-				<td id="weekendTime"></td>
-				<th>휴일</th>
-				<td id="holiday"></td>
-			</tr>						
-		</table>	
-		
-	</div>
->>>>>>> 97c4706bf606fa1dcd503d75b9f8dcd97b0258d8
+   <div id="sideFrame"></div>
+   <div id="contentFrame">
+      <fieldset>
+         <legend>지역 검색</legend>
+            <div id="searchDiv">
+               <select id="sido">
+                  <option value="">선택</option>
+                  <option value="6110000">서울특별시</option>
+                  <option value="6260000">부산광역시</option>
+                  <option value="6270000">대구광역시</option>
+                  <option value="6280000">인천광역시</option>
+                  <option value="6290000">광주광역시</option>
+                  <option value="5690000">세종특별자치시</option>
+                  <option value="6300000">대전광역시</option>
+                  <option value="6310000">울산광역시</option>
+                  <option value="6410000">경기도</option>
+                  <option value="6420000">강원도</option>
+                  <option value="6430000">충청북도</option>
+                  <option value="6440000">충청남도</option>
+                  <option value="6450000">전라북도</option>
+                  <option value="6460000">전라남도</option>
+                  <option value="6470000">경상북도</option>
+                  <option value="6480000">경상남도</option>
+                  <option value="6500000">제주특별자치도</option>
+               </select>
+               
+               <select id="sigundo">
+                  <option value="">선택</option>
+               </select>
+               <button id="search">검색</button>
+         </div>
+      </fieldset>
+      <table id="shelterList">
+         <thead>
+            <tr>
+               <th>지역</th>
+               <th>보호소 이름</th>
+            </tr>
+         </thead>
+         <tbody   id="shelter">
+         </tbody>
+      </table>
+        
+      <div id="paging"></div>
+      <div id="map"></div>   
+      <table id="shelterDetail">
+         <tr>
+            <td id="mapField" colspan="6"></td>
+         </tr>
+         <tr>
+            <th>이름</th>
+            <td colspan="2" id="centerName"></td>
+            <th>전화번호</th>
+            <td colspan="2" id="centerTel"></td>            
+         </tr>
+         <tr>
+            <th>위치</th>
+            <td colspan="5" id="centerLocation"></td>
+         </tr>         
+         <tr>
+            <th>평일 운영 시간</th>
+            <td id="weekdayTime"></td>
+            <th>주말 운영 시간</th>
+            <td id="weekendTime"></td>
+            <th>휴일</th>
+            <td id="holiday"></td>
+         </tr>                  
+      </table>   
+      
+   </div>
 </body>
 <script>
 var showPageNum = 1;
 
 $(document).ready(function() {
-<<<<<<< HEAD
-   shelterList();
-=======
-	$( "#sido" ).selectmenu({
-		width: 250,
-		change: function( event, ui ) {
-			getSigungu();
-		}
-	}).selectmenu( "menuWidget" ).addClass( "overflow" );
-	
-	$( "#sigundo" ).selectmenu({
-		width: 200
-	}).selectmenu( "menuWidget" ).addClass( "overflow" );
-	
-	$( "#search" ).button();
-	
-	shelterList(showPageNum);
->>>>>>> 97c4706bf606fa1dcd503d75b9f8dcd97b0258d8
+   $( "#sido" ).selectmenu({
+      width: 250,
+      change: function( event, ui ) {
+         getSigungu();
+      }
+   }).selectmenu( "menuWidget" ).addClass( "overflow" );
+   
+   $( "#sigundo" ).selectmenu({
+      width: 200
+   }).selectmenu( "menuWidget" ).addClass( "overflow" );
+   
+   $( "#search" ).button();
+   
+   shelterList(showPageNum);
 });
 
 function getSigungu() {
@@ -293,37 +237,44 @@ function getSigungu() {
 }
 
 function shelterList(page) {
-	$.ajax({
-		"url" : "./shelterList",
-		"type" : "get",
-		"data" : {
-					"sido":$("#sido option:selected").html(),
-					"sigundo":$("#sigundo").val(),
-					"page":page
-				},
-		"success" : function(data) {
-			listPrint(data);
-			console.log(data);
-		},
-		"error" : function(x, o, e) {
-			alert(x.status + ":" + o + ":" + e);
-		}
-	});
+   $.ajax({
+      "url" : "./shelterList",
+      "type" : "get",
+      "data" : {
+               "sido":$("#sido option:selected").html(),
+               "sigundo":$("#sigundo").val(),
+               "page":page
+            },
+      "success" : function(data) {
+         listPrint(data);
+         console.log(data);
+      },
+      "error" : function(x, o, e) {
+         alert(x.status + ":" + o + ":" + e);
+      }
+   });
 }
 
 function listPrint(data) {
-<<<<<<< HEAD
    var content = "";
-   data.forEach(function(item) {
+   data.list.forEach(function(item) {
       var location = item.roadAddr.split(' ');
       content += "<tr>";
       content += "<td>" + location[0]+" "+ location[1] + "</td>";
       content += "<td><span onclick='sehelterDetail(this)' id='"+item.centerName+"'>"+item.centerName+"</span></td>";
-      content += "<td>" + item.phoneNum + "</td>";
       content += "</tr>";
    })
    $("#shelter").empty();
    $("#shelter").append(content);
+   
+   $("#paging").zer0boxPaging({
+        viewRange : 5,
+        currPage : data.currPage,
+        maxPage : data.pageCnt,
+        clickAction : function(e){
+           shelterList($(this).attr('page'));
+        }
+    });
 }
 
 function sehelterDetail(name) {
@@ -333,84 +284,49 @@ function sehelterDetail(name) {
       "data" : {"centetName" : $(name).attr("id")},
       "success" : function(data) {
          console.log(data);
+         
+         $("#centerName").html(data.centerName);
+         $("#centerTel").html(data.phoneNum);
+         $("#centerLocation").html(data.locationAddr);
+         $("#weekdayTime").html(data.weekdayStartTime+" ~ "+data.weekdayEndTime);
+         $("#weekendTime").html(data.weekendStartTime+" ~ "+data.weekendEndTime);
+         $("#holiday").html(data.holiday);
+         
+         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+          mapOption = { 
+              center: new daum.maps.LatLng(data.x, data.y), // 지도의 중심좌표
+              level: 3 // 지도의 확대 레벨
+          };
+
+         var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+         // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+         var mapTypeControl = new daum.maps.MapTypeControl();
+
+         // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+         // daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+         map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+
+         // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+         var zoomControl = new daum.maps.ZoomControl();
+         map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+         
+         // 지도를 클릭한 위치에 표출할 마커입니다
+         var marker = new daum.maps.Marker({ 
+             // 지도 중심좌표에 마커를 생성합니다 
+             position: map.getCenter() 
+         }); 
+         // 지도에 마커를 표시합니다
+         marker.setMap(map);
       },
       "error" : function(x, o, e) {
          alert(x.status + ":" + o + ":" + e);
       }
    });
-=======
-	var content = "";
-	data.list.forEach(function(item) {
-		var location = item.roadAddr.split(' ');
-		content += "<tr>";
-		content += "<td>" + location[0]+" "+ location[1] + "</td>";
-		content += "<td><span onclick='sehelterDetail(this)' id='"+item.centerName+"'>"+item.centerName+"</span></td>";
-		content += "</tr>";
-	})
-	$("#shelter").empty();
-	$("#shelter").append(content);
-	
-	$("#paging").zer0boxPaging({
-        viewRange : 5,
-        currPage : data.currPage,
-        maxPage : data.pageCnt,
-        clickAction : function(e){
-        	shelterList($(this).attr('page'));
-        }
-    });
-}
-
-function sehelterDetail(name) {
-	$.ajax({
-		"url" : "./shelterDetail",
-		"type" : "get",
-		"data" : {"centetName" : $(name).attr("id")},
-		"success" : function(data) {
-			console.log(data);
-			
-			$("#centerName").html(data.centerName);
-			$("#centerTel").html(data.phoneNum);
-			$("#centerLocation").html(data.locationAddr);
-			$("#weekdayTime").html(data.weekdayStartTime+" ~ "+data.weekdayEndTime);
-			$("#weekendTime").html(data.weekendStartTime+" ~ "+data.weekendEndTime);
-			$("#holiday").html(data.holiday);
-			
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = { 
-		        center: new daum.maps.LatLng(data.x, data.y), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };
-
-			var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-			// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-			var mapTypeControl = new daum.maps.MapTypeControl();
-
-			// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-			// daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-			map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
-
-			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-			var zoomControl = new daum.maps.ZoomControl();
-			map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-			
-			// 지도를 클릭한 위치에 표출할 마커입니다
-			var marker = new daum.maps.Marker({ 
-			    // 지도 중심좌표에 마커를 생성합니다 
-			    position: map.getCenter() 
-			}); 
-			// 지도에 마커를 표시합니다
-			marker.setMap(map);
-		},
-		"error" : function(x, o, e) {
-			alert(x.status + ":" + o + ":" + e);
-		}
-	});
->>>>>>> 97c4706bf606fa1dcd503d75b9f8dcd97b0258d8
 }
 
 $( "#search" ).click( function( event ) {
-	shelterList(showPageNum);
+   shelterList(showPageNum);
 } );
 
 </script>

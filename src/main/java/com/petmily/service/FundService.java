@@ -155,12 +155,8 @@ public class FundService {
 					inter.writeFile(key, fileList.get(key), board.getBoard_idx(),main);
 				}
 				inter.writefund(board.getBoard_idx(), board.getFund_centerName(),board.getFund_area());
-				
 			}
-			
-	
 		}
-
 		fileList.clear();
 
 		mav.setViewName(page);
@@ -257,37 +253,33 @@ public class FundService {
 		return photo;
 	}
 
-	public boolean checkonephoto() {
-		boolean photo =false;//사진이 3개 이하면 false 반환
-		logger.info("사진 체크 파일 이름33333:{}",newFileName);
-	   filen = newFileName.split("~")[0];
-		logger.info(" 사진 체크파일 이름:{}", filen);
-		//		if(quizAnswer.equals(answer)) {
-		if (filen.equals("동물")) {// 저장할 파일이 있을 경우
-		
-			i++;//1
-			logger.info("i222:{}", i);
-		}
-		if (filen.equals("영수증")) {// 저장할 파일이 있을 경우
-			j++;//1
-			logger.info("j222:{}", j);
-		}
-		
-			if(i>3||j>3) {
-				photo = true;
-				logger.info("i3433는?:{}", i);
-				logger.info("j3433는?:{}", j);
-				j=0;
-				i=0;
-			}
-		
-		
-		
-	
-		logger.info("포토:{}", photo);
+	   public boolean checkonephoto() {
+		      boolean photo =false;//사진이 3개 이하면 false 반환
+		      logger.info("사진 체크 파일 이름33333:{}",newFileName);
+		      filen = newFileName.split("~")[0];
+		      logger.info(" 사진 체크파일 이름:{}", filen);
+		      //      if(quizAnswer.equals(answer)) {
+		      if (filen.equals("동물")) {// 저장할 파일이 있을 경우
+		      
+		         i++;//1
+		         logger.info("i222:{}", i);
+		      }
+		      if (filen.equals("영수증")) {// 저장할 파일이 있을 경우
+		         j++;//1
+		         logger.info("j222:{}", j);
+		      }
+		      
+		         if(i>3||j>1) {
+		            photo = true;
+		            logger.info("i3433는?:{}", i);
+		            logger.info("j3433는?:{}", j);
+		         
+		         }
 
-		return photo;
-	}
+		      logger.info("포토:{}", photo);
+
+		      return photo;
+		   }
 
 	public ModelAndView upload(MultipartFile file, String root) {
 		logger.info("파일업로드");
@@ -387,7 +379,7 @@ public class FundService {
 		inter = sqlSession.getMapper(BoardInter.class);
 		// 상세보기 정보
 		mav.addObject("dto", inter.funddetail(idx));
-		
+		inter.uphit(idx); //조회수
 
 		// 파일 정보(다운로드 리스트)
 		ArrayList<BoardDTO> files = inter.fundfileList(idx);
@@ -532,5 +524,18 @@ public class FundService {
 			int success = inter.delLikelist(idx);
 			return success;
 		}
+		
+		public ModelAndView funddelete(Model model) {
+	         inter = sqlSession.getMapper(BoardInter.class);
+	         Map<String, Object> map = model.asMap();
+	         HttpServletRequest request = (HttpServletRequest) map.get("request");
+	         int idx = Integer.parseInt(request.getParameter("idx")); // idx = 해당 게시글 번호
+	         logger.info("삭제할 글번호:", idx);
+	         int success = inter.funddelete(idx);
+	         ModelAndView mav = new ModelAndView();
+	         mav.setViewName("redirect:/fundMain");// 삭제 성공시 리스트 이동
+
+	         return mav;
+	      }
 	
 }
