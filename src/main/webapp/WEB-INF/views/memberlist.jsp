@@ -14,6 +14,12 @@ table, th, td {
 	text-align: center;
 
 }
+
+.ui-widget-content {
+    background: #F9F9F9;
+    border: 1px solid #90d93f;
+    color: #222222;
+}
 </style>
 </head>
 <body>
@@ -84,7 +90,7 @@ function memberlistPrint(data) {
 		content += "<td>" + item.member_name + "</td>";
 		content += "<td>" + item.member_email+ "</td>";
 		content += "<td>" + item.member_state +"</td>";
-        if(item.member_state=='일반회원'){
+        if(item.member_state=='멤버'){
 		   content+="<td><input class='delmem' type='button' value='추방'  onclick='delmember(id)' id="+ item.member_id +"></td>";
         }	
         if(item.member_state=='불량회원'){

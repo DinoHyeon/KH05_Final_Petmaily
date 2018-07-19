@@ -12,7 +12,7 @@
 	left: 15.52%;
 	top: 12.5%;
 	width: 82.95%;
-	height: 140%;
+	height: 130%;
 	background: white;
 }
 
@@ -21,15 +21,23 @@
 	left: 0.52%;
 	top: 12.4%;
 	width: 15%;
-	height: 140%;
+	height: 130%;
 	background: black;
+}
+
+#title{
+    position: absolute;
+    font-size: 28px;
+    font-weight: 600;
+    top: 2.5%;
+    left: 44.5%;
 }
 
 #searchTable{
 	position: absolute;
     width: 78%;
-    height: 17%;
-    top: 2%;
+    height: 15%;
+    top: 8.5%;
     left: 11%;
     border: 1px solid black;
     border-collapse: collapse;
@@ -58,7 +66,7 @@ table,td,tr{
 #clearBtn{
 	position: absolute;
     left: 55%;
-    top: 20.5%;
+    top: 25%;
     width: 20% !important;
     height: 3% !important;
     font-weight: 600 !important;
@@ -67,7 +75,7 @@ table,td,tr{
 #searchBtn{
 	position: absolute;
     left: 28%;
-    top: 20.5%;
+    top: 25%;
     width: 20% !important;
     height: 3% !important;
     font-weight: 600 !important;
@@ -76,7 +84,7 @@ table,td,tr{
 #list{
     position: absolute;
     left: 4.9%;
-    top: 26%;
+    top: 30%;
     width: 90%;
     height: 60%;
 }
@@ -84,19 +92,20 @@ table,td,tr{
 #paging{
 	position: absolute;
 	left: 37%;
-	top: 89%;
+	top: 94.5%;
 }
 
 .animalTable{
 	float: left;
 	width: 23%;
-	height: 48%;
+	height: 50%;
 	margin: 1% 1%;
 	font-size: 12px;
 }
 
 .animalTable th{
-	 width: 10%;
+	 width: 50;
+	 height: 26;
 	 background-color: #02886F;
 }
 
@@ -106,6 +115,7 @@ table,td,tr{
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
 	<div id="contentFrame">
+		<span id="title">유기동물 공고</span>
 		<table id="searchTable">
 			<tr>
 				<th>날짜</th>
@@ -333,7 +343,11 @@ function getEnd_day(e) {
 	var content = "";
 	
 	for(var i=1; end_day>=i; i++){
-		content += "<option value="+i+">"+i+"</option>"; 
+		if(i<10){
+			content += "<option value=0"+i+">0"+i+"</option>"; 
+		}else{
+			content += "<option value="+i+">"+i+"</option>"; 
+		}
 	}
 	
 	$("#end_day").empty();
