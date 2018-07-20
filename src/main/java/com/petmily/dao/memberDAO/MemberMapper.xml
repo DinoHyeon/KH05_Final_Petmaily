@@ -3,5 +3,49 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petmily.dao.memberDAO.MemberInter">
-
+	<select id="loginConfirmPage" resultType="String">
+		SELECT member_id FROM member WHERE member_id=#{param1} AND member_pw=#{param2}
+	</select>
+	
+   <insert id="joinConfirmPage" parameterType="MemberDTO">
+      INSERT INTO member(member_id, member_pw, member_name, member_email, member_phone, member_addr, member_state, member_date)
+      VALUES(#{member_id},#{member_pw},#{member_name},#{member_email},#{member_phone},#{member_addr},'멤버', SYSDATE)
+   </insert>
+   
+   	<select id="idChkPage" resultType="String">
+		SELECT member_id FROM member WHERE member_id=#{param1}
+	</select>
+	
+	<select id="idSearchPage" resultType="String">
+		SELECT member_id FROM member WHERE member_name=#{param1} AND member_email=#{param2} AND member_phone=#{param3}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--소현 : 관리자 페이지 회원 상태 리스트 페이징 리스트 출력   -->
+   <select id="getmemberList" resultType="MemberDTO" parameterType="hashMap">
+   Select member_id, member_name, member_email, member_state 
+   From(
+   SELECT member_id, member_name, member_email, member_state,
+   ROW_NUMBER() OVER(ORDER BY member_id DESC) AS rnum
+   from Member
+   ) WHERE rnum BETWEEN #{start} AND #{end}	
+   </select>
+	
+	
+   <!--소현 : 관리자 페이지 회원 상태 리스트 페이징   -->
+    <select id="memberallCount" resultType="Integer" parameterType="hashMap">
+		SELECT COUNT(*) FROM member
+	</select>
+	
+	<!-- 소현 : 관리자 페이지 회원 추방(회원 상태 리스트)  추방 버튼을 누를 시 불량 회원으로 변경한다 -->
+  <update id="getchangeState">
+    UPDATE member SET member_state='불량회원' where member_id=#{param1}
+	</update>
 </mapper>

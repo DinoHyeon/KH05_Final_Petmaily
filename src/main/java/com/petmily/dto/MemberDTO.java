@@ -60,6 +60,4 @@ public class MemberDTO {
 	public void setMember_date(Date member_date) {
 		this.member_date = member_date;
 	}
-
-	
 }

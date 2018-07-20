@@ -6,10 +6,10 @@
 <!-- alias="사용이름" type="클래스 경로" -->
 <configuration>
 	<typeAliases>
-		<typeAlias alias="boardDTO" type="com.petmily.dto.BoardDTO" />
+		<typeAlias alias="BoardDTO" type="com.petmily.dto.BoardDTO" />
 		<typeAlias alias="DiseaseDTO" type="com.petmily.dto.DiseaseDTO" />
 		<typeAlias alias="MemberDTO" type="com.petmily.dto.MemberDTO" />
 		<typeAlias alias="QuizDTO" type="com.petmily.dto.QuizDTO" />
 		<typeAlias alias="ReplyDTO" type="com.petmily.dto.ReplyDTO" />
 	</typeAliases>
-</configuration>   
+</configuration>
