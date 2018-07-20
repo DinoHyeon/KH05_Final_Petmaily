@@ -50,6 +50,7 @@ td {
    height: 150%;
    background: white;
 }
+
 #sideFrame{
    position: absolute;
    left: 0.52%;
@@ -58,7 +59,6 @@ td {
    height: 150%;
    background: black;
 }
-   
 </style>
 </head>
 <body>
@@ -247,10 +247,10 @@ var msg = "${msg}";
          alert("지역을 선택해 주세요.");
          }
       else if($("#title").val()==""){
-         $("#board_title").focus();
+         $("#title").focus();
          alert("제목을 입력해 주세요."); }
       else if($("#center").val()==""){
-         $("#fund_centerName").focus();
+         $("#center").focus();
          alert("병원 정보를 입력해 주세요.");
     }
       else  if(!$("input:radio[name='main']").is(":checked")){
