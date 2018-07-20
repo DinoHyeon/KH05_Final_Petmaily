@@ -29,7 +29,7 @@
         for(var i = start; i<=end;i++){
             if(i <= option.maxPage){
                 if(option.currPage == i){
-                    content +="<li style='background-color:lightgray'>"+i+"</li>";
+                    content +="<li page='"+i+"'style='background-color:lightgray'>"+i+"</li>";
                 }else{
                     content +="<li page='"+i+"'>"+i+"</li>";
                 }

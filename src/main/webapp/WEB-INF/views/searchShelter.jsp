@@ -260,12 +260,15 @@ function shelterList(page) {
 }
 
 function listPrint(data) {
+	var b="blue";
+	var g="green"
+	
    var content = "";
    data.list.forEach(function(item) {
       var location = item.roadAddr.split(' ');
-      content += "<tr>";
+      content += "<tr onmouseenter='this.style.background=\"#EAEAEA\"' onmouseout='this.style.background=\"white\"'>";
       content += "<td>" + location[0]+" "+ location[1] + "</td>";
-      content += "<td><span onclick='sehelterDetail(this)' id='"+item.centerName+"'>"+item.centerName+"</span></td>";
+      content += "<td><span onclick='sehelterDetail(this)' id='"+item.centerName+"' style='cursor: pointer'>"+item.centerName+"</span></td>";
       content += "</tr>";
    })
    $("#shelter").empty();
@@ -276,10 +279,16 @@ function listPrint(data) {
         currPage : data.currPage,
         maxPage : data.pageCnt,
         clickAction : function(e){
+        	console.log($(this).attr('page'));
         	shelterList($(this).attr('page'));
         }
     });
 }
+
+$(document).on('hover', 'tr', function(event) {
+    console.log("안녕");
+});
+
 
 function sehelterDetail(name) {
 	$.ajax({
