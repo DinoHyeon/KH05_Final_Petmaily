@@ -109,6 +109,9 @@ table,td,tr{
 	 background-color: #02886F;
 }
 
+.animalImg:hover {
+	background: rgba(0, 255, 0, 0.1);
+}
 </style>
 </head>
 <body>
@@ -475,25 +478,29 @@ function noticeList(page) {
 
 function listPrint(data) {
 	var content = "";
-	data.list.forEach(function(item) {
-		content+="<table class='animalTable'>";
-		content+="<tr>";
-		content+="<td colspan='2' class='image'><a href='./noticeDetail?idx="+item.noticeNo+"'><img width='255' height='200' src='"+item.popfile+"'></a></td>";
-		content+="</tr>";
-		content+="<tr>";
-		content+="<th>품종</th>";
-		content+="<td>"+item.kindCd+"</td>";
-		content+="</tr>";
-		content+="</tr>";
-		content+="<th>등록일</th>";
-		content+="<td>"+item.happenDt+"</td>";
-		content+="</tr>";
-		content+="</tr>";
-		content+="<th>구조장소</th>";
-		content+="<td>"+item.happenPlace+"</td>";
-		content+="</tr>";
-		content+="</table>";
-	})	
+	if(data.list.length != 0){
+		data.list.forEach(function(item) {
+			content+="<table class='animalTable'>";
+			content+="<tr>";
+			content+="<td colspan='2' class='image'><a class='animalImg' href='./noticeDetail?idx="+item.noticeNo+"'><img width='255' height='200' src='"+item.popfile+"'></a></td>";
+			content+="</tr>";
+			content+="<tr>";
+			content+="<th>품종</th>";
+			content+="<td>"+item.kindCd+"</td>";
+			content+="</tr>";
+			content+="</tr>";
+			content+="<th>등록일</th>";
+			content+="<td>"+item.happenDt+"</td>";
+			content+="</tr>";
+			content+="</tr>";
+			content+="<th>구조장소</th>";
+			content+="<td>"+item.happenPlace+"</td>";
+			content+="</tr>";
+			content+="</table>";
+		});	
+	}else{
+		console.log("안녕");
+	}
 	
 	$("#list").empty();
 	$("#list").append(content);
