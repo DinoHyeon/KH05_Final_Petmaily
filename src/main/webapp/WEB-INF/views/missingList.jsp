@@ -18,6 +18,7 @@ table, tr, td {
 	padding: 1.5% 0.1%;
 }
 
+
 .list {
 	position: absolute;
 	width: 100%;
@@ -64,6 +65,15 @@ table, tr, td {
 	position: absolute;
 	top : 96%;
 	left : 40%;
+}
+
+#bIdx{
+	width : 55px;
+	text-align: center;
+}
+
+#bTitle{
+	text-align: center;
 }
 
 </style>
@@ -156,8 +166,8 @@ function listPrint(data){
 		
 		content += "<table>";
 		content += "<tr>";
-		content += "<td>"+item.board_idx+"</td>";
-		content += "<td><a href='missingDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
+		content += "<td id='bIdx'>"+item.board_idx+"</td>";
+		content += "<td id='bTitle'><a href='missingDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
 		content += "</tr>";
 		content += "<tr>";
 		content += "<td colspan='2'><img width='390' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";
