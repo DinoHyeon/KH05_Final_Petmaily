@@ -3,18 +3,18 @@ package com.petmily.dto;
 public class AnimalDTO {
 
 	private String animalType;
-	private int animalCode;
+	private String animalCode;
 	
 	public void setAnimalType(String animalType) {
 		this.animalType = animalType;
 	}
-	public void setAnimalCode(int animalCode) {
-		this.animalCode = animalCode;
+	public void setAnimalCode(String string) {
+		this.animalCode = string;
 	}
 	public String getAnimalType() {
 		return animalType;
 	}
-	public int getAnimalCode() {
+	public String getAnimalCode() {
 		return animalCode;
 	}
 	

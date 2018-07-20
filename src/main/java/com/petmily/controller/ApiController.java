@@ -77,43 +77,6 @@ public class ApiController {
       return "searchShelter";
    }
 
-   /*
-    * @RequestMapping(value = "getSido") public @ResponseBody
-    * ArrayList<LocationDTO> goQuizMain() { String addr =
-    * "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sido?ServiceKey=";
-    * String serviceKey =
-    * "XCdNWTVmXT3Zk0y%2BK3CpUAV2t4qBVGx34uevgRwA8jGhto%2FVOnbeSyfYnh74wEKL0DGPoql%2FDnZy6cjcbDGnHg%3D%3D";
-    * 
-    * ArrayList<LocationDTO> list = null; LocationDTO dto = new LocationDTO();
-    * 
-    * try { URL url = new URL(addr + serviceKey);
-    * 
-    * XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-    * factory.setNamespaceAware(true); XmlPullParser parser =
-    * factory.newPullParser(); BufferedInputStream bis = new
-    * BufferedInputStream(url.openStream()); parser.setInput(bis, "utf-8");
-    * 
-    * int eventType = parser.getEventType();
-    * 
-    * while (eventType != XmlPullParser.END_DOCUMENT) { switch (eventType) { case
-    * XmlPullParser.END_DOCUMENT: break; case XmlPullParser.START_DOCUMENT: list =
-    * new ArrayList<LocationDTO>(); break; case XmlPullParser.END_TAG: { String tag
-    * = parser.getName(); if (tag.equals("item")) { list.add(dto); dto = null; } }
-    * case XmlPullParser.START_TAG: { String tag = parser.getName(); switch (tag) {
-    * case "item": dto = new LocationDTO(); break;
-    * 
-    * case "orgCd": if (dto != null) {
-    * dto.setSidoCode(Integer.parseInt(parser.nextText())); } break;
-    * 
-    * case "orgdownNm": if (dto != null) { dto.setSidoName(parser.nextText()); }
-    * break; } break; } } eventType = parser.next(); }
-    * 
-    * } catch (Exception e) { // TODO Auto-generated catch block
-    * e.printStackTrace(); }
-    * 
-    * return list; }
-    */
-
    @RequestMapping(value = "getSigungu")
    public @ResponseBody ArrayList<LocationDTO> getSigungu(@RequestParam("sidoCode") String sidoCode) {
       String addr = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sigungu?upr_cd="
@@ -238,7 +201,7 @@ public class ApiController {
 
                case "kindCd":
                   if (dto != null) {
-                     dto.setAnimalCode(Integer.parseInt(parser.nextText()));
+                     dto.setAnimalCode(parser.nextText());
                   }
                   break;
                }

@@ -64,7 +64,6 @@ table, tr {
    font-size: 14px;
    font-weight: 600;
    color: black;
-   text-align: center;
 }
 
 #idx {
@@ -79,6 +78,18 @@ table, tr {
    position: absolute;
    top: 10%;
    left: 20%;
+}
+
+input[value='보내기']{
+   position: absolute;
+   top: 87%;
+   left: 42%;	
+}
+
+#text{
+    position: absolute;
+    top: 2%;
+    left: 43%;
 }
 </style>
 </head>
@@ -102,7 +113,8 @@ table, tr {
 
    <div id="agreedialog">
 
-      <span id="idx"></span><br> 거절사유:
+      <span id="idx"></span><br>
+      <span id="text">거절사유</span>
       <textarea id="noreason"></textarea>
       <input type="button" class="send" value="보내기">
    </div>
@@ -118,7 +130,7 @@ table, tr {
       
       agreelistCall(showPageNum);
       $('#agreedialog').dialog({
-         title : '승인 거부',
+         title : '　 승인 거부',
          autoOpen : false,
          modal : true,
          width : '400',

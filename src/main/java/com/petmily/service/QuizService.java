@@ -26,13 +26,6 @@ public class QuizService {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public ArrayList<String> AnimalList() {
-		ArrayList<String> animalList = new ArrayList<String>();
-		inter = sqlSession.getMapper(QuizInter.class);
-		animalList = inter.getAnimalList();
-		return animalList;
-	}
-
 	public int registQuiz(HashMap<String, String> params) {
 		QuizDTO dto = new QuizDTO();
 		dto.setAnimal_idx(params.get("animal"));
