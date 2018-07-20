@@ -6,32 +6,75 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-table, th, td {
-
-   border-collapse: collapse;
-   padding: 6px 15px;
-   float: left;
-   margin: 0 10px 50px 10px;
-   text-align: center;
+table{
+	border: 1px solid black;
+	border-collapse: collapse;
+	float: left;
+	
 }
-table,tr{
+th, td {
+    padding : 0.7% 0.1%;
+}
+tr{
    border: 1px solid black;
+   padding: 1% 0.1%;
 
+}
+
+#mylistTable{
+	position: absolute;
+	width: 100%;
+	top : 6%;
+	left : 3%;
+}
+
+#contentFrame {
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 150%;
+   background: white;
+}
+
+#sideFrame{
+   position: absolute;
+   left: 0.52%;
+   top: 11.4%;
+   width: 15%;
+   height: 150%;
+   background: black;
+}
+
+#paging{
+	position: absolute;
+	top : 96%;
+	left : 40%;
+}
+#buttonArea{
+	text-align: right;
+}
+#tt{
+	text-align: center;
 }
 
 </style>
 </head>
 <body>
    <jsp:include page="mainFrame.jsp"/>
+   <div id="sideFrame"></div>
+	<div id="contentFrame">
    <div id="mylistTable"></div>
 
 <div id="dialog">
 <span id="reason"></span><span id="content"></span>
 </div>
 
+
+
 <div id="paging" >
    </div>
-
+</div>
 
 </body>
 <script>
@@ -75,23 +118,23 @@ function mylistPrint(data) {
          content += "<table>"; 
          content += "<tr>"; 
          content += "<td>" + item.board_idx + "</td>";
-         content += "<td><a href='funddetail?idx="+item.board_idx+"&call=detail' style='color: black'>"+ item.board_title +"</a></td>";
+         content += "<td id='tt'><a href='funddetail?idx="+item.board_idx+"&call=detail' style='color: black'>"+ item.board_title +"</a></td>";
          content += "</tr>"; 
          content += "<tr>"; 
-         content +="<td><img width='200' height='140' src='./resources/upload/"+item.photo_newName+"'/></td>";
+         content +=	"<td colspan='2'><img width='400' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";
          content += "</tr>"; 
          content += "<tr>"; 
          content += "<td>" + item.fund_state + "</td>";
           if(item.fund_state=='승인대기'){
-         content += "<td><input class='editmy' type='button' value='수정' onClick='edit(id)' id="+ item.board_idx +"><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
+         content += "<td id='buttonArea'><input class='editmy' type='button' value='수정' onClick='edit(id)' id="+ item.board_idx +"><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
           }
           if(item.fund_state=='승인 거절'){
 
-         content += "<td><input class='reason' type='button' value='사유보기' id="+ item.board_idx +"><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
+         content += "<td id='buttonArea'><input class='reason' type='button' value='사유보기' id="+ item.board_idx +"><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
           }
           if(item.fund_state=='승인'){
 
-               content += "<td><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
+               content += "<td id='buttonArea'><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
                 }
          content += "</tr>"; 
          content += "</table>"; 

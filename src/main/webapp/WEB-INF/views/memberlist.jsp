@@ -14,6 +14,7 @@ table, td {
 	text-align: center;
 
 }
+
 th{
 background-color: #A9CB73;
 
@@ -87,6 +88,12 @@ position: absolute;
    top: 52.4%;
    width: 15%;
 
+
+
+.ui-widget-content {
+    background: #F9F9F9;
+    border: 1px solid #90d93f;
+    color: #222222;
 }
 </style>
 </head>

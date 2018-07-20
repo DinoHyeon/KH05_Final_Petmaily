@@ -48,7 +48,7 @@ public class FundService {
 		 inter = sqlSession.getMapper(BoardInter.class);
 			
 	 		 int allCnt = inter.mylistallCount(params);
-		    int pageCnt = allCnt % 10 > 0 ? Math.round(allCnt / 10) + 1 : allCnt / 10;
+		    int pageCnt = allCnt % 6 > 0 ? Math.round(allCnt / 6) + 1 : allCnt / 6;
 		    
 			HashMap<String, Object> myList = new HashMap<String, Object>();
 			
@@ -57,8 +57,8 @@ public class FundService {
 			if (page > pageCnt) {
 				page = pageCnt;
 				}
-			int end = 10 * page;
-			int start = end - 10 + 1;
+			int end = 6 * page;
+			int start = end - 6 + 1;
 			
 			
 			params.put("start", String.valueOf(start));

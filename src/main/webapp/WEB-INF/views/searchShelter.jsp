@@ -108,7 +108,10 @@ button{
 }
 
 #shelterDetail th{
-   width: 20%;
+   width: 13%;
+}
+#shelterDetail td{
+   width: 15%;
 }
 
 #map{
@@ -117,6 +120,18 @@ button{
     left: 24%;
     width: 55%;
     height: 34%;
+}
+td{
+   text-align: center;
+}
+#listTd{
+	width : 40%;
+}
+
+
+
+td{
+	text-align: center;
 }
 
 </style>
@@ -256,12 +271,15 @@ function shelterList(page) {
 }
 
 function listPrint(data) {
+   var b="blue";
+   var g="green"
+   
    var content = "";
    data.list.forEach(function(item) {
       var location = item.roadAddr.split(' ');
-      content += "<tr>";
+      content += "<tr onmouseenter='this.style.background=\"#EAEAEA\"' onmouseout='this.style.background=\"white\"'>";
       content += "<td>" + location[0]+" "+ location[1] + "</td>";
-      content += "<td><span onclick='sehelterDetail(this)' id='"+item.centerName+"'>"+item.centerName+"</span></td>";
+      content += "<td><span onclick='sehelterDetail(this)' id='"+item.centerName+"' style='cursor: pointer'>"+item.centerName+"</span></td>";
       content += "</tr>";
    })
    $("#shelter").empty();
@@ -272,10 +290,16 @@ function listPrint(data) {
         currPage : data.currPage,
         maxPage : data.pageCnt,
         clickAction : function(e){
+           console.log($(this).attr('page'));
            shelterList($(this).attr('page'));
         }
     });
 }
+
+$(document).on('hover', 'tr', function(event) {
+    console.log("안녕");
+});
+
 
 function sehelterDetail(name) {
    $.ajax({
@@ -283,13 +307,27 @@ function sehelterDetail(name) {
       "type" : "get",
       "data" : {"centetName" : $(name).attr("id")},
       "success" : function(data) {
-         console.log(data);
+         var weekdayTime;
+         var weekendTime;
+         
+         if(data.weekdayStartTime == null){
+            weekdayTime="휴무";
+         }else{
+            weekdayTime=data.weekdayStartTime+" ~ "+data.weekdayEndTime;
+         }
+         
+         if(data.weekendStartTime == null){
+            weekendTime="휴무";
+         }else{
+            weekendTime=data.weekdayStartTime+" ~ "+data.weekdayEndTime;
+         }
          
          $("#centerName").html(data.centerName);
          $("#centerTel").html(data.phoneNum);
          $("#centerLocation").html(data.locationAddr);
-         $("#weekdayTime").html(data.weekdayStartTime+" ~ "+data.weekdayEndTime);
-         $("#weekendTime").html(data.weekendStartTime+" ~ "+data.weekendEndTime);
+         
+         $("#weekdayTime").html(weekdayTime);
+         $("#weekendTime").html(weekendTime);
          $("#holiday").html(data.holiday);
          
          var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

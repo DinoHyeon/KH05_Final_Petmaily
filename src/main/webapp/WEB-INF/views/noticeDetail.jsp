@@ -40,7 +40,7 @@
 #imgDiv{
     position: absolute;
     left: 10%;
-        top: 9.8%;
+    top: 8.8%;
     border: 1px solid black;
     text-align: center;
     width: 80%;
@@ -54,10 +54,27 @@
   max-width: 100%;
 }
 
-table{
+#animal{
     position: absolute;
     left: 10%;
-    top: 55%;
+    top: 54%;
+    text-align: center;
+    width: 80.2%;
+    height: 6%;
+}
+
+#noticeText{
+	position: absolute;
+    left: 10%;
+    top: 76%;
+    text-align: center;
+    width: 80.2%;
+}
+
+#animalShelter{
+    position: absolute;
+    left: 10%;
+    top: 80%;
     text-align: center;
     width: 80.2%;
     height: 6%;
@@ -66,6 +83,17 @@ table{
 table,td,tr{
 	border: 1px solid black;
 	border-collapse: collapse;
+}
+
+.ui-widget{
+	font-size: 15px !important;
+	font-weight: 600 !important;
+}
+
+#listBtn{
+	position: absolute;
+	left: 84%;
+	top: 93%;
 }
 </style>
 </head>
@@ -77,7 +105,7 @@ table,td,tr{
 		<div id="imgDiv">
 			<img id="img" src="${dto.popfile}">
 		</div>
-		<table>
+		<table id="animal">
 			<tr>
 				<th colspan="2">${dto.processState}</th>
 				<td colspan="2"><span id="remainderDate"></span> 일 후 입양가능</td>
@@ -100,11 +128,37 @@ table,td,tr{
 				<td colspan="3">${dto.speciaMark}</td>
 			</tr>
 		</table>
+		<div id="noticeText">※ 유기동물 문의는 보호센터에 연락하시기 바랍니다.</div>
+		<table id="animalShelter">
+			<tr>
+				<th>보호센터</th>
+				<td colspan="2">${dto.careNm}</td>
+				<th>전화 번호</th>
+				<td colspan="2">${dto.careTel}</td>		
+			</tr>
+			<tr>
+				<th>보호센터 위치</th>
+				<td colspan="5">${dto.careAddr}</td>	
+			</tr>
+			<tr>
+				<th>관할기관 </th>
+				<td>${dto.orgNm}</td>
+				<th>담당자</th>
+				<td>${dto.chargeNm}</td>
+				<th>연락처</th>
+				<td>${dto.officetel}</td>			
+			</tr>
+		</table>
+		
+		<div id="listBtn">
+			<button>리스트</button>
+		</div>
 	</div>
 </body>
 <script>
 $(document).ready(function() {
 	remainderDate();
+	$( "button" ).button();
 });
 
 function remainderDate() {
@@ -128,5 +182,9 @@ function remainderDate() {
 	
 	$("#remainderDate").html(btDay);
 }
+
+$( "button" ).click( function( event ) {
+	location.href="./animalNotice";
+} );
 </script>
 </html>
