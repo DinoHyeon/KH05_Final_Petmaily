@@ -299,7 +299,7 @@
 	<!-- 소현 : 나의 모금리스트 페이징 처리 (세션처리 필요) -->
 	<select id="mylistallCount" resultType="Integer"
 		parameterType="hashMap">
-		SELECT COUNT(*) FROM board where board_type='모금'
+		SELECT COUNT(*) FROM board where board_type='모금' and board_writer=#{loginWriter}
 	</select>
 
 

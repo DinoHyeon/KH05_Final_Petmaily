@@ -46,6 +46,7 @@ public class FundService {
 	// 소현: getmyList(마이리스트 페이징 처리 list 호출)
 	public HashMap<String, Object> getmyList(HashMap<String, String> params, HttpSession session) {
 		inter = sqlSession.getMapper(BoardInter.class);
+		params.put("loginWriter", (String) session.getAttribute("loginId"));
 
 		int allCnt = inter.mylistallCount(params);
 		int pageCnt = allCnt % 6 > 0 ? Math.round(allCnt / 6) + 1 : allCnt / 6;
@@ -61,7 +62,6 @@ public class FundService {
 
 		params.put("start", String.valueOf(start));
 		params.put("end", String.valueOf(end));
-		params.put("loginWriter", (String) session.getAttribute("loginId"));
 		myList.put("list", inter.getmyList(params));
 
 		myList.put("range", pageCnt);

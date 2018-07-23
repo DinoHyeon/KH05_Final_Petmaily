@@ -160,6 +160,9 @@ table, th, td {
 					type="button" id="fdel" onclick="funddelete()" value="삭제" /></td>
 			</tr>
 
+
+
+
 		</table>
 	</div>
 
@@ -172,6 +175,16 @@ table, th, td {
 		'구조후기' : 'saveMain',
 		'모금' : 'fundMain'
 	};
+	
+	var loginId = "${sessionScope.loginId}";
+	 console.log("모금 상세보기 - 로그인아이디", loginId);
+	 if (loginId == "${dto.board_writer}") {
+
+	 } else {
+	 $("#fedit").hide();
+	 $("#fdel").hide();
+	 } 
+	
 
 	$(document).ready(function() {
 		var content = "";

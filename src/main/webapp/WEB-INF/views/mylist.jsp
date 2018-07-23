@@ -83,15 +83,12 @@ obj.type="get";
 obj.dataType="json";
 obj.error=function(e){console.log(e)};
 var showPageNum = 1
-
+var loginId = "${sessionScope.loginId}";
 
 $(document).ready(function() {
-   if('${sessionScope.loginId}'==""){
-      alert("로그인이 필요한 서비스입니다.");
-      location.href="loginPage";}
-   else{
+  
     mylistCall(showPageNum)
-   }
+   
 });
 
 function mylistCall(page){

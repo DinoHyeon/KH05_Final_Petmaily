@@ -129,7 +129,7 @@ table, th, td {
 			width:322%;
 			height:88%;
 		}
-#selectTable input[type='text']{
+       #selectTable input[type='text']{
 			width:100%;
 			height:100%;
 		}
