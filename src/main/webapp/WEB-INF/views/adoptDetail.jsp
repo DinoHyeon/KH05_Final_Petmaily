@@ -208,6 +208,7 @@
 				</tr>
 			</table>
 			</div>
+			<jsp:include page="reply.jsp"/>
 </body>
 <script>
 	

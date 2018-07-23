@@ -18,13 +18,14 @@
    background: white;
 }
 
-#sideFrame{
-position: absolute;
-    left: 0.52%;
-    top: 12.4%;
-    width: 15%;
-    height: 95%;
-    background: black;
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 
 fieldset {
@@ -139,6 +140,7 @@ td{
 <body>
 <jsp:include page="mainFrame.jsp" />
    <div id="sideFrame"></div>
+   <jsp:include page="sideMenu.jsp" />
    <div id="contentFrame">
       <fieldset>
          <legend>지역 검색</legend>
@@ -211,8 +213,28 @@ td{
 </body>
 <script>
 var showPageNum = 1;
+var menuName = {'보호소센터 찾기':'searchShelter', '퀴즈':'quizSetting', '질병':'diseaseMain', '커뮤니티':'communityMain'};
+
 
 $(document).ready(function() {
+	var content = "";
+	for(var key in menuName){
+		console.log(key);
+		content += "<div class='menuName'";
+		content += "style='"
+		if(key=='보호소센터 찾기'){
+			content += "background:#28977B;color:white;font-weight: 600;";
+		}
+		content += "cursor: pointer'";
+		content += "onclick='pageMove(this)' id="+menuName[key]+">";
+		content += key;
+		content += "</div>";
+	};	
+	
+	$("#sideMenu").empty();
+	$("#sideMenu").append(content);
+
+	
    $( "#sido" ).selectmenu({
       width: 250,
       change: function( event, ui ) {
@@ -228,6 +250,11 @@ $(document).ready(function() {
    
    shelterList(showPageNum);
 });
+
+function pageMove(e) {
+	console.log($(e).attr("id"));
+	location.href="./"+$(e).attr("id");
+};
 
 function getSigungu() {
    $.ajax({

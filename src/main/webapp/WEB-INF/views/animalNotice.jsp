@@ -16,13 +16,14 @@
 	background: white;
 }
 
-#sideFrame{
+#sideFrame {
 	position: absolute;
 	left: 0.52%;
 	top: 12.4%;
-	width: 15%;
-	height: 130%;
-	background: black;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 
 #title{
@@ -117,6 +118,7 @@ table,td,tr{
 <body>
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
+	<jsp:include page="sideMenu.jsp" />
 	<div id="contentFrame">
 		<span id="title">유기동물 공고</span>
 		<table id="searchTable">
@@ -204,8 +206,26 @@ table,td,tr{
 </body>
 <script>
 var showPageNum = 1;
+var menuName = {'유기동물공고':'animalNotice', '입양후기':'adoptMain'};
 
 $(document).ready(function() {
+	var content = "";
+	for(var key in menuName){
+		console.log(key);
+		content += "<div class='menuName'";
+		content += "style='"
+		if(key=='유기동물공고'){
+			content += "background:#28977B;color:white;font-weight: 600;";
+		}
+		content += "cursor: pointer'";
+		content += "onclick='pageMove(this)' id="+menuName[key]+">";
+		content += key;
+		content += "</div>";
+	};	
+	
+	$("#sideMenu").empty();
+	$("#sideMenu").append(content);
+	
 	getYear();
 	getMonth();
 	$( "#start_year" ).selectmenu({width: 100});
@@ -256,6 +276,11 @@ $(document).ready(function() {
 	
 	noticeList(showPageNum);
 });	
+
+function pageMove(e) {
+	console.log($(e).attr("id"));
+	location.href="./"+$(e).attr("id");
+};
 
 function getYear() {
 	var date = new Date();

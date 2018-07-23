@@ -16,13 +16,14 @@
 	background: white;
 }
 
-#sideFrame{
+#sideFrame {
 	position: absolute;
 	left: 0.52%;
 	top: 12.4%;
-	width: 15%;
-	height: 87%;
-	background: black;
+	width: 14.7%;
+	height: 130%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 
 #noticeNo{
@@ -100,6 +101,7 @@ table,td,tr{
 <body>
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
+	<jsp:include page="sideMenu.jsp" />
 	<div id="contentFrame">
 		<div id="noticeNo">[ ${dto.noticeNo} ]</div>
 		<div id="imgDiv">
@@ -156,7 +158,25 @@ table,td,tr{
 	</div>
 </body>
 <script>
+var menuName = {'유기동물공고':'animalNotice', '입양후기':'adoptMain'};
 $(document).ready(function() {
+	var content = "";
+	for(var key in menuName){
+		console.log(key);
+		content += "<div class='menuName'";
+		content += "style='"
+		if(key=='유기동물공고'){
+			content += "background:#28977B;color:white;font-weight: 600;";
+		}
+		content += "cursor: pointer'";
+		content += "onclick='pageMove(this)' id="+menuName[key]+">";
+		content += key;
+		content += "</div>";
+	};	
+	
+	$("#sideMenu").empty();
+	$("#sideMenu").append(content);
+	
 	if("${dto.processState}"== "보호중" || "${dto.processState}" == "공고중"){
 		remainderDate();
 	}
@@ -170,6 +190,12 @@ $(document).ready(function() {
 		$("#gender").html("알 수 없음");
 	}
 });
+
+function pageMove(e) {
+	console.log($(e).attr("id"));
+	location.href="./"+$(e).attr("id");
+};
+
 
 function remainderDate() {
 	var endDate = "${dto.noticeEdt}";

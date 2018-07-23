@@ -8,20 +8,33 @@
 		http://www.springframework.org/schema/mvc 
 		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	
-	<!-- 인터셉터 그룹 생성 -->
 	<mvc:interceptors>
-		<!-- 단일 인터셉터 -->
 		<mvc:interceptor>
-			<!-- 인터셉터 할 특정 요청 -->
-			<!-- /list로 요청이 왔을 경우 -->
 			<mvc:mapping path="/list" />
-			<!-- /detail로 요청이 왔을 경우 -->
-			<!-- *detail은 뒤에 parameter가 붙기 때문에 *를 사용한다 
-						<mvc:mapping path="/detail*" />
-			-->
-
-			<!-- 인터셉터 한 내용에 대한 클래스 매핑 -->
-			<!-- 해당 클래스는 HandlerInterceptorAdapter를 상속받는다 -->
+			<mvc:mapping path="/mylist"/>
+			<mvc:mapping path="/getmyList"/>
+			<mvc:mapping path="/delMylist"/>
+			<mvc:mapping path="/reason"/>
+			<mvc:mapping path="/fundMain"/>
+			<mvc:mapping path="/getfundList"/>
+			<mvc:mapping path="/fundWrite"/>
+			<mvc:mapping path="/writefundbbs"/>
+			<mvc:mapping path="/funddetail"/>
+			<mvc:mapping path="/fundupdateForm"/>
+			<mvc:mapping path="/likelist"/>
+			<mvc:mapping path="/communityForm"/>
+			<mvc:mapping path="/communityWrite"/>
+			<mvc:mapping path="/communityMain"/>
+			<mvc:mapping path="/communityDetail"/>
+			<mvc:mapping path="/communityUpdateForm"/>
+			<mvc:mapping path="/saveMain"/>
+			<mvc:mapping path="/saveForm"/>
+			<mvc:mapping path="/saveDetail"/>
+			<mvc:mapping path="/saveUpdateForm"/>
+			<mvc:mapping path="/adoptMain"/>
+			<mvc:mapping path="/adoptForm"/>
+			<mvc:mapping path="/adoptDetail"/>
+			<mvc:mapping path="/adoptUpdateForm"/>
 			<bean class="com.petmily.interceptor.LoginChk" />
 		</mvc:interceptor>
 	</mvc:interceptors>

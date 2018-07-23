@@ -133,6 +133,7 @@ public class ProtectService {
 		mav.addObject("files", files);
 		mav.addObject("favorite", inter.favoriteChk(map));
 		mav.addObject("size", files.size()); // 첨부파일 유무
+		mav.addObject("reply", board_idx);
 		mav.setViewName("protectDetail");
 		return mav;
 	}

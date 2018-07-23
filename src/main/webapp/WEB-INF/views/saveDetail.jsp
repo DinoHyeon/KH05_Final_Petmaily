@@ -202,6 +202,7 @@
 				</tr>
 			</table>
 			</div>
+			<jsp:include page="reply.jsp"/>
 </body>
 <script>
 	var oriName = '${sDetailPhoto}';

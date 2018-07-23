@@ -381,6 +381,7 @@ public class FundService {
 		ArrayList<BoardDTO> files = inter.fundfileList(idx);
 		mav.addObject("files", files);
 		mav.addObject("size", files.size());// 첨부 파일 유무 확인
+		mav.addObject("reply", idx);
 		mav.setViewName("funddetail");
 		return mav;
 	}

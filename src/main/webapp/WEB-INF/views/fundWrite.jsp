@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
@@ -8,167 +8,192 @@
 <title>Insert title here</title>
 <style>
 table, th, td {
-   border: 1px solid black;
-   border-collapse: collapse;
-   padding: 5px 10px;
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 5px 10px;
 }
 
 table {
-   width: 500px;
+	width: 500px;
 }
 
 input[type='text'] {
-   width: 100%;
+	width: 100%;
 }
 
 textarea {
-   width: 100%;
-   resize: none;
+	width: 100%;
+	resize: none;
 }
 
 td {
-   text-align: center;
+	text-align: center;
 }
 
 #editable {
-   height: 500px;
-   border: 1px solid gray;
-   padding: 5px;
-   overflow: auto;
-   text-align: left;
+	height: 500px;
+	border: 1px solid gray;
+	padding: 5px;
+	overflow: auto;
+	text-align: left;
 }
 
-#sessionId{
-      border: none;
-      text-align: center;
-   }
-   #contentFrame {
-   position: absolute;
-   left: 48.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 150%;
-   background: white;
+#sessionId {
+	border: none;
+	text-align: center;
 }
 
-#sideFrame{
-   position: absolute;
-   left: 0.52%;
-   top: 11.4%;
-   width: 15%;
-   height: 150%;
-   background: black;
-}
-	
-#attachArea{
-float:left;
-padding:1%;
+#contentFrame {
+	position: absolute;
+	left: 48.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 150%;
+	background: white;
 }
 
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+}
 
+#attachArea {
+	float: left;
+	padding: 1%;
+}
 </style>
 </head>
 <body>
-<jsp:include page="mainFrame.jsp"/>
-<div id="sideFrame"></div>
-<div id="contentFrame">
+	<jsp:include page="mainFrame.jsp" />
+	<div id="sideFrame"></div>
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
 
-   <form id="sendForm" action="./writefundbbs" method="post">
-      <table>
-      <tr>
-            <th>지역</th>
-            <td>
-               <input type="hidden" id="location" name ="sido">
-               <select id="sido" onchange="getSigungu()">
-               <option value="">선택</option>
-                  <option value="6110000">서울특별시</option>
-                  <option value="6260000">부산광역시</option>
-                  <option value="6270000">대구광역시</option>
-                  <option value="6280000">인천광역시</option>
-                  <option value="6290000">광주광역시</option>
-                  <option value="5690000">세종특별자치시</option>
-                  <option value="6300000">대전광역시</option>
-                  <option value="6310000">울산광역시</option>
-                  <option value="6410000">경기도</option>
-                  <option value="6420000">강원도</option>
-                  <option value="6430000">충청북도</option>
-                  <option value="6440000">충청남도</option>
-                  <option value="6450000">전라북도</option>
-                  <option value="6460000">전라남도</option>
-                  <option value="6470000">경상북도</option>
-                  <option value="6480000">경상남도</option>
-                  <option value="6500000">제주특별자치도</option>
-               </select> 
-               <select id="sigundo" name="sigundo">
-               </select> 
-            </td>
-         </tr>
-         <tr>
-         
-         
-            <th>게시판명</th>
-            <td>모금 게시판</td>
-         </tr>
-         <tr>
-               <th>작성자</th>
-               <td><input id="sessionId" type ="text" value="${sessionScope.loginId}"  name="board_writer" readonly="readonly" /></td>
-         </tr>
-         <tr>
-               <th colspan='2'>※동물사진 3장 , 영수증사진 1장 이상 첨부 필수※</th>
-         </tr>
-         <tr>
-               <th colspan='2'>※병원 정보 등록 필수※</th>
-         </tr>
-         <tr>
-            <th>제목</th>
-            <td><input type="text" id="title" name="board_title" /></td>
-         </tr>
-         
-         <tr>
-            <th>내용</th>
-            <td>
-               <!-- div 에서 내용을 받아 보여준다. -->
-               <div id="editable" contenteditable="true"></div> 
-               <!-- 전송은 hidden 에 담아서 한다. -->
-               <input id="contentForm" type="hidden" name="board_content" />
-               
-            </td>
-         </tr>
-         
-      
-         <tr>
-               <th>동물 병원 정보</th>
-               <td><input type="text" id="center" name="fund_centerName"/></td>
-         </tr>
-         
-         <tr>
-            <th>동물사진 첨부</th>
-            <td colspan="2"><input type="button" onclick="fileUp()" value="파일 업로드" /></td>
-         </tr>
-         
-         <tr>
-            <td colspan="3"><div id="animalList"></div></td>
-         </tr>
-                     
-         <tr>
-            <th>영수증사진 첨부</th>
-            <td><input type="button" onclick="photoUp()"value="파일 업로드" /></td>
-         </tr>
-         <tr>
-            <td colspan="3"><div id="receiptList"></div></td>
-         </tr>
-         <tr>
-            <td colspan="2">
-            <!-- ./ 현재의 루트 --> &nbsp;&nbsp; 
-            <input id="savefund" type="button" value="글 저장" />
-            </td>            
-         </tr>
-      </table>
-   </form>
-   </div>
+		<form id="sendForm" action="./writefundbbs" method="post">
+			<table>
+				<tr>
+					<th>지역</th>
+					<td><input type="hidden" id="location" name="sido"> <select
+						id="sido" onchange="getSigungu()">
+							<option value="">선택</option>
+							<option value="6110000">서울특별시</option>
+							<option value="6260000">부산광역시</option>
+							<option value="6270000">대구광역시</option>
+							<option value="6280000">인천광역시</option>
+							<option value="6290000">광주광역시</option>
+							<option value="5690000">세종특별자치시</option>
+							<option value="6300000">대전광역시</option>
+							<option value="6310000">울산광역시</option>
+							<option value="6410000">경기도</option>
+							<option value="6420000">강원도</option>
+							<option value="6430000">충청북도</option>
+							<option value="6440000">충청남도</option>
+							<option value="6450000">전라북도</option>
+							<option value="6460000">전라남도</option>
+							<option value="6470000">경상북도</option>
+							<option value="6480000">경상남도</option>
+							<option value="6500000">제주특별자치도</option>
+					</select> <select id="sigundo" name="sigundo">
+					</select></td>
+				</tr>
+				<tr>
+
+
+					<th>게시판명</th>
+					<td>모금 게시판</td>
+				</tr>
+				<tr>
+					<th>작성자</th>
+					<td><input id="sessionId" type="text"
+						value="${sessionScope.loginId}" name="board_writer"
+						readonly="readonly" /></td>
+				</tr>
+				<tr>
+					<th colspan='2'>※동물사진 3장 , 영수증사진 1장 이상 첨부 필수※</th>
+				</tr>
+				<tr>
+					<th colspan='2'>※병원 정보 등록 필수※</th>
+				</tr>
+				<tr>
+					<th>제목</th>
+					<td><input type="text" id="title" name="board_title" /></td>
+				</tr>
+
+				<tr>
+					<th>내용</th>
+					<td>
+						<!-- div 에서 내용을 받아 보여준다. -->
+						<div id="editable" contenteditable="true"></div> <!-- 전송은 hidden 에 담아서 한다. -->
+						<input id="contentForm" type="hidden" name="board_content" />
+
+					</td>
+				</tr>
+
+
+				<tr>
+					<th>동물 병원 정보</th>
+					<td><input type="text" id="center" name="fund_centerName" /></td>
+				</tr>
+
+				<tr>
+					<th>동물사진 첨부</th>
+					<td colspan="2"><input type="button" onclick="fileUp()"
+						value="파일 업로드" /></td>
+				</tr>
+
+				<tr>
+					<td colspan="3"><div id="animalList"></div></td>
+				</tr>
+
+				<tr>
+					<th>영수증사진 첨부</th>
+					<td><input type="button" onclick="photoUp()" value="파일 업로드" /></td>
+				</tr>
+				<tr>
+					<td colspan="3"><div id="receiptList"></div></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<!-- ./ 현재의 루트 --> &nbsp;&nbsp; <input id="savefund" type="button"
+						value="글 저장" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 <script>
 var msg = "${msg}";
+var menuName = {'구조후기':'saveMain', '모금':'fundMain'};
+
+$(document).ready(function() {
+	var content = "";
+	for(var key in menuName){
+		console.log(key);
+		content += "<div class='menuName'";
+		content += "style='"
+		if(key=='모금'){
+			content += "background:#28977B;color:white;font-weight: 600;";
+		}
+		content += "cursor: pointer'";
+		content += "onclick='pageMove(this)' id="+menuName[key]+">";
+		content += key;
+		content += "</div>";
+	};	
+	
+	$("#sideMenu").empty();
+	$("#sideMenu").append(content);
+});
+
+function pageMove(e) {
+	console.log($(e).attr("id"));
+	location.href="./"+$(e).attr("id");
+};
    
    function getSigungu() {
       $.ajax({
