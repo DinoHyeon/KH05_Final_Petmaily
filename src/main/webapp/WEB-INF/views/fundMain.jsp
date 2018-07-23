@@ -9,18 +9,161 @@
 table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
-	padding: 6px 15px;
-	margin: 170px 10px 105px 440px;
+	padding: 6% 15%;
+	margin: 17% 10% 10.5% 44%;
 	text-align: center;
 
 }
+		#write{
+			position:absolute;
+			top:63%;
+			left:82%;
+			background-color: #28977B;
+			border-color:#28977B;
+			border-style:solid;
+			font-weight: 600;
+			color: white;
+			cursor: pointer;
+			width:8%;
+			height: 4%;
+		}
+	#paging{
+			position:absolute;
+			top:82%;
+			left:53%;
+		}
+		
 
-
+	
+	#conDiv {
+			position: absolute;
+			left: 15.52%;
+			top: 12.5%;
+			width: 82.95%;
+			height: 150%;
+			background: white;
+		}
+	#conDiv input[type='button']{
+			width:46%;
+			height: 69%;
+			left:298%;
+			top:13%;
+			background-color: #28977B;
+			border-color:#28977B;
+			border-style:solid;
+			font-weight: 600;
+			color: white;
+			cursor: pointer;
+		}
+		#conDiv h1{
+			position: absolute;
+			left:40%; 
+			margin: 5% 0% 2.5% 0%;
+			text-align: center;
+			color: #28977B;
+			font-weight: 600;
+			font-size: 30px;
+		}
+		#listTable{
+			position:absolute;
+			top:18%;
+			left:10%;
+			width:80%;
+			margin: 2% 0.5% 20% 0.5%;
+			border-collapse: collapse;
+			padding: 0.5% 0.1%;
+		}
+		#listTable input[type='text']{
+			width:100%;
+		}
+		#listTable textarea{
+			width:100%;
+			resize:none;
+			margin:0;
+		}
+		#listTable td{
+			text-align: center;
+			border: 1px solid white;
+			border-collapse: collapse;
+			padding: 0.2% 0.2%;
+		}
+		#listTable th{
+			border: 1px solid white;
+			border-collapse: collapse;
+			padding: 0.5% 0.1%;
+			background-color: #28977B;
+			color: white;
+		}
+		#sideFrame {
+			position: absolute;
+			left: 0.52%;
+			top: 11.4%;
+			width: 15%;
+			height: 150%;
+			background: black;
+		}
+		/* 셀렉트박스 테이블 */
+		#selectTable{
+ 			top:12%;
+			left:15%;
+			width:5-%;
+			height: 50px;
+			position:absolute;
+			float: left;
+				padding: 5px 10px 5px 10px;
+		}
+		
+		#searchbtn{
+		top:12%;
+			left:38%;
+			width:5-%;
+			height: 50px;
+			position:absolute;
+			float: left;
+				padding: 5px 10px 5px 10px;
+		
+		
+		}
+		
+		#searchbtn input[type='text']{
+			width:322%;
+			height:88%;
+		}
+#selectTable input[type='text']{
+			width:100%;
+			height:100%;
+		}
+		#selectTable select { 
+			width: 150px; /* 원하는 너비설정 */ 
+			padding: .8em .5em; /* 여백으로 높이 설정 */ 
+			font-family: inherit; /* 폰트 상속 */ 
+			background: url(resources/arrowIcon.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+			border: 1px solid #999; border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+			-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+			-moz-appearance: none; 
+			appearance: none; 
+		}
+		#cSearchKey{
+			color:#28977B;
+			font-weight:600;
+			font-size:13px;
+		}
+		#fundTable a:link{
+			text-decoration: none;
+			color: black;
+		}
 </style>
 </head>
 <body>
+
+	
+
 	<jsp:include page="mainFrame.jsp"/>
-			<select id="sido" onchange="getSigungu()">
+		<div id="sideFrame"></div>
+	<div id="conDiv">
+		<h1>모금 게시판</h1>
+		<div id="selectTable">
+			<select id="sido" onchange="getSigungu()" id="cSearchKey" >
 		      <option value="">선택</option>
 		      <option value="6110000">서울특별시</option>
 		      <option value="6260000">부산광역시</option>
@@ -40,19 +183,25 @@ table, th, td {
 		      <option value="6480000">경상남도</option>
 		      <option value="6500000">제주특별자치도</option>
    		</select>
-		<select id="sigundo">
+   		
+		<select id="sigundo" id="cSearchKey" name="cSearchKey">
 			<option value="">선택</option>
 		</select>
+		</div>
+		<div id="searchbtn">
 		<input type="text" id="keyWord" placeholder="검색어를 입력해주세요." /> 
-		<input type="button" onclick="fundlistCall(showPageNum)" value="검색" />
-	<table>
+		<input type="button" id="searchBtn" onclick="fundlistCall(showPageNum)" value="검색" />
+</div>
+	<table id="listTable">
 	<thead>
 		<tr>
-					<th>글번호</th>
-					<th>글제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th style="width: 150px">글번호</th>
+					<th style="width: 450px">글제목</th>
+					<th style="width: 150px">작성자</th>
+							<th style="width: 150px">지역</th>
+					<th style="width: 150px">작성일</th>
+				
+					<th style="width: 150px">조회수</th>
 					
 					
 				</tr>
@@ -60,7 +209,8 @@ table, th, td {
 						<tbody id="fundTable">
 			</tbody>
 	</table>
-	<button onclick="location.href='./fundWrite'">글 작성</button>
+	<button onclick="location.href='./fundWrite'" id="write">글 작성</button>
+		</div>
 		<div id="paging" >
 	</div>
 	
@@ -74,13 +224,13 @@ obj.error=function(e){console.log(e)};
 var showPageNum = 1
 
 $(document).ready(function() {
-	
+	/* 
 	if('${sessionScope.loginId}'==""){
 		alert("로그인이 필요한 서비스입니다.");
-		location.href="loginPage";}
-	else{
-		fundlistCall(showPageNum)
-	}
+		location.href="loginPage";} */
+		//else{
+		fundlistCall(showPageNum);
+	//}
 
 });
 
@@ -120,7 +270,7 @@ function fundlistCall(page){
 		},
 		success : function(data) {
 			fundlistPrint(data);
-			showPageNum=data.currPage;  //보여지는 페이지 = 현재 페이지 (data.currPage)
+		/* 	showPageNum=data.currPage;  //보여지는 페이지 = 현재 페이지 (data.currPage) */
 
 		},
 		error : function(e) {
@@ -137,11 +287,15 @@ function fundlistPrint(data) {
 		data.list.forEach(function(item,idx) {
 			content += "<tr>"; 
 			content += "<td>" + item.board_idx + "</td>";
-		 content += "<td><a href='funddetail?idx="+item.board_idx+"&call=detail' style='color: blue'>"+ item.board_title +"</a></td>";
+		 content += "<td><a href='funddetail?idx="+item.board_idx+"&call=detail'>"+ item.board_title +"</a></td>";
 		content += "<td>" + item.board_writer+ "</td>";
+		content += "<td>" + item.fund_area +"</td>";
 		var date = new Date(item.board_regDate);			
 		content +="<td>"+date.toLocaleDateString("ko-KR")+"</td>"
+	
+
 		content += "<td>" + item.board_hit +"</td>";
+		
        			content += "</tr>"; 
 		})
 		$("#fundTable").empty();

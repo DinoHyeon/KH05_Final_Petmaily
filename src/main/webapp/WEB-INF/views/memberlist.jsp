@@ -6,19 +6,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자 페이지 회원 상태 리스트</title>
 <style>
-table, td {
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding: 6px 15px;
-	margin: 170px 10px 105px 440px;
-	text-align: center;
+table {
+   border-collapse: collapse;
+   padding: 0.6% 1.5%;
+   margin: 17% 1% 10.5% 44%;
+   text-align: center;
+}
 
+td{
+color: black;
+    padding: 0.6% 1.5%;
+   margin: 17% 1% 10.5% 44%;
+   text-align: center;
+}
+ tr {
+   border: 1px solid gray;
+   
+   
 }
 
 th{
-background-color: #A9CB73;
+   border: 1px solid gray;
 
 
+background-color: #217D65;
+	color:white;
+	   padding: 0.6% 1.5%;
+   margin: 17% 1% 10.5% 44%;
 
 }
 
@@ -88,7 +102,7 @@ position: absolute;
    top: 52.4%;
    width: 15%;
 
-
+}
 
 .ui-widget-content {
     background: #F9F9F9;
@@ -222,7 +236,6 @@ function ajaxCall(param){
 	console.log(param);
 	$.ajax(param);
 }
-
 
 
 

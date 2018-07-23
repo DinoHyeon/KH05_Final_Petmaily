@@ -332,8 +332,9 @@
 	<!--소현: 모금 게시판 페이징 처리 -->
 	<select id="fundlistallCount" resultType="Integer"
 		parameterType="hashMap">
-		SELECT COUNT(*) FROM board_fund
-		<where>
+		SELECT COUNT(*) FROM board b, board_fund f
+		where b.board_idx = f.board_idx
+		
 			<if test="!sido.equals('선택') and sido!=null">
 				AND fund_area LIKE '%'||#{sido}||'%'
 			</if>
@@ -341,10 +342,10 @@
 				AND fund_area LIKE '%'||#{sigundo}||'%'
 			</if>
 
-			<if test="keyword!='' and keyword!=null">
-				AND board_title LIKE '%'||#{keyword}||'%'
+			<if test="keyWord!='' and keyWord!=null">
+				AND board_title LIKE '%'||#{keyWord}||'%'
 			</if>
-		</where>
+		
 
 
 	</select>
@@ -358,7 +359,7 @@
 		FROM(
 		SELECT b.board_idx, b.board_title, b.board_writer, b.board_regDate,
 		b.board_hit, f.fund_area,
-		ROW_NUMBER() OVER(ORDER BY b.board_idx DESC) AS rnum
+		ROW_NUMBER() OVER(ORDER BY f.board_idx DESC) AS rnum
 		FROM board b, board_fund f
 		where b.board_idx = f.board_idx
 		<if test="!sido.equals('선택') and sido!=null">
@@ -367,8 +368,9 @@
 		<if test="sigundo!='' and sigundo!=null">
 			AND fund_area LIKE '%'||#{sigundo}||'%'
 		</if>
-		<if test="keyword!='' and keyword!=null">
-			AND board_title LIKE '%'||#{keyword}||'%'
+		<if test="keyWord!='' and keyWord!=null">
+	
+			AND board_title LIKE '%'||#{keyWord}||'%'
 		</if>
 		)
 		WHERE rnum BETWEEN #{start} AND #{end}
@@ -406,8 +408,9 @@
 
 	<!--소현: 모금게시판 상세보기 -->
 	<select id="funddetail" resultType="BoardDTO">
-		SELECT * FROM board WHERE
-		board_idx=#{param1}
+		SELECT * from board b, board_fund f
+		where b.board_idx=f.board_idx and
+		f.board_idx=#{param1}
 	</select>
 
 
@@ -495,5 +498,101 @@
 	<update id="uphit">
 		UPDATE board SET board_hit=board_hit+1 WHERE board_idx=#{param1}
 	</update>
+	
+	
+	
+	<!-- ///////////////////////////보네///////////////////////////// -->
+	
+	<!-- 보네 - (커뮤니티) 글 작성 -->
+ 	<insert id="communityWrite" parameterType="boardDTO" useGeneratedKeys="true" keyProperty="board_idx" 	keyColumn="board_idx">
+	 	INSERT INTO Board(board_idx, board_type, board_title, board_content, board_writer, board_regDate, board_hit)
+	 		VALUES(board_seq.NEXTVAL,'커뮤니티',#{board_title},#{board_content},#{board_writer},SYSDATE,0)
+	</insert>
+	
+	<!-- 파일 리스트 -->
+	<select id="cFileList" resultType="BoardDTO">
+		SELECT * FROM photo WHERE board_idx = #{param1}
+	</select>
+	
+	<!-- 보네 - (커뮤니티) 파일 등록 -->
+ 	<insert id="cWriteFile">
+		INSERT INTO Photo(photo_idx, board_idx, photo_type, photo_oriName, photo_newName, mainPhoto) VALUES (photo_seq.NEXTVAL, #{param3}, '사진', #{param2}, #{param1}, 'x')
+	</insert>
+
+	<!-- 보네 - (커뮤니티) 파일 삭제 -->
+	<delete id="cFileDelete">
+		DELETE FROM Photo WHERE Photo_newName = #{param1}
+	</delete>
+	
+	<!-- 보네 - (커뮤니티) 삭제 파일명 존재 여부 확인 -->
+	<select id="cDelFileName" resultType="String">
+		SELECT Photo_newName FROM Photo WHERE Photo_newName = #{param1}
+	</select>
+
+  	<!-- 보네 - (커뮤니티) 리스트, 검색, 페이징 -->
+ 	<select id="communityList" resultType="BoardDTO">
+		SELECT board_idx, board_title, board_writer, board_regDate, board_hit FROM (SELECT board_idx, board_title, board_writer,
+		board_regDate, board_hit, ROW_NUMBER() OVER (ORDER BY
+		board_idx DESC) AS rNUM FROM board 
+		<where>
+			<choose>
+				<when test="cSearchVal != null and cSearchKey== '제목'">
+					board_type ='커뮤니티' AND board_title LIKE '%'||#{cSearchVal}||'%')
+				</when>
+				<when test="cSearchVal != null and cSearchKey== '내용'">
+				board_type ='커뮤니티' AND board_content LIKE '%'||#{cSearchVal}||'%')
+				</when>
+				<when test="cSearchVal != null and cSearchKey== '작성자'">
+					board_type ='커뮤니티' AND board_writer LIKE '%'||#{cSearchVal}||'%')
+				</when>
+				<otherwise>
+					board_type ='커뮤니티')
+				</otherwise>
+			</choose>
+		</where>
+		<if test="start != null and end != null">
+			WHERE rNum BETWEEN #{start} AND #{end} ORDER BY board_idx DESC
+		</if>
+	</select>
+	
+	<!-- 보네 - (커뮤니티) 조회수 증가 -->
+	<update id="cUpHit">
+		UPDATE board SET board_hit = board_hit+1 WHERE board_idx = #{param1}
+	</update>
+	
+	<!-- 보네 - (커뮤니티) 상세보기 -->
+		<select id="communityDetail" parameterType="Integer"	resultType="BoardDTO">
+		SELECT board_idx, board_type, board_title, board_content, board_writer, board_regDate, board_hit
+		FROM board WHERE board_idx = #{param1}
+	</select>
+	
+	<!-- 보네 - (커뮤니티) 상세보기 -->
+	<!-- ora11버전부터만 사용가능 - listagg -->
+	<!-- oriFileName 다시 가져오려면 주석해제 -->
+<!-- 	<select id="cDetailPhoto" parameterType="Integer"	resultType="String">
+		SELECT LISTAGG(photo_oriname, 'a\a') WITHIN GROUP (ORDER BY photo_oriname) AS photo_oriname FROM photo
+		<where>
+			board_idx=#{param1}
+		</where>
+	</select> -->
+	
+	<!-- 보네 - (커뮤니티) 글 삭제 -->
+	<!-- CASCADE 조건에 따라 추가로 사진, 댓글 삭제할지 여부 결정 - 우선은 글 삭제 -->
+	<delete id="communityDelete" parameterType="Integer">
+		DELETE FROM board WHERE board_idx = #{param1}
+	</delete>
+	
+	<!-- 보네 - (커뮤니티) 글 수정 폼 -->
+	<select id="communityUpdateForm" parameterType="Integer"	resultType="BoardDTO">
+		SELECT board_idx, board_title, board_content, board_writer, board_regDate, board_hit
+		FROM board WHERE board_idx = #{param1}
+	</select>
+
+	<!-- 보네 - (커뮤니티) 글 수정 -->
+	<update id="communityUpdate" parameterType="boardDTO">
+		UPDATE board SET board_title = #{board_title}, board_content = #{board_content}
+			WHERE board_idx = #{board_idx}
+	</update>
+	
 
 </mapper>

@@ -27,9 +27,7 @@ td{
 
 }
 
-#editable{
-	height: 600px;
-}
+
 
 #fileUpBtn {
 	position: absolute;
@@ -76,41 +74,174 @@ td{
 input[type="text"]{
 	width : 100%;
 }
-#buttonArea{
-	position: absolute;
-	left : 45%;
-	top : 70%;
+#conDiv {
+			position: absolute;
+			left: 15.52%;
+			top: 12.5%;
+			width: 82.95%;
+			height: 150%;
+			background: white;
+		}
+		/* 타이틀 */
+		#conDiv h1 {
+			left: 39%;
+			margin: 50px 0px 25px 0px;
+			text-align: center;
+			color: #28977B;
+			font-weight: 700;
+			font-size: 30;
+			position: absolute;
+		}		
+		#conDiv table, th, td {
+			border: 1px solid gray;
+			border-collapse: collapse;
+			padding: 6px 15px;
+			text-align: center;
+		}
+		#conDiv #editable{
+			border: 1px solid gray;
+			height: 250px;
+			height: 500px;
+			padding: 5px;
+			overflow: auto;
+			text-align: left;
+		}
+		/* 글 테이블 */
+		#detailTable{
+			top:14%;
+			left:11%;
+			width: 1000px;
+			margin: 0px 5px 5px 5px;
+			border-collapse: collapse;
+			padding: 5px 10px;
+			position:absolute;
+		}
+		#detailTable input[type='text']{
+			width:100%;
+			height:30px;
+		}
+		#detailTable textarea{
+			width:100%;
+			resize:none;
+			margin:0;
+		}
+		#detailTable td{
+			text-align: center;
+			border: 1px solid white;
+			border-collapse: collapse;
+			padding: 2px 2px;
+			margin: 0px;
+		}
+		#detailTable th{
+			border: 1px solid white;
+			border-collapse: collapse;
+			padding: 5px 10px;
+			background-color: #28977B;
+			color: white;
+		}
+		#detailTable input[type='button'] {
+			 height:40px;
+	         width:120px;
+	    
+	         background-color: #28977B;
+	         border-color:#28977B;
+	         border-style:solid;
+	         font-weight: 600;
+	         color: white;
+	         cursor: pointer;
+		}
+		/* 업로드 테이블 */
+		#uploadTable{
+			position: absolute;
+			top:65%;
+			left: 11%;
+			border: 1px solid gray;
+			width: 1000px;
+			height: 150px;
+			margin: 50px 5px 100px 5px;
+			border-collapse: collapse;
+			padding: 5px 10px;
+		}
+		#uploadTable tr,td{
+			font-weight:600;
+			font-family:"나눔고딕 보통";
+			border:1px solid gray;
+			text-align:center;
+		}
+		#uploadTable input[type='button']{
+			width:60px;
+			height: 30px;
+			     top:1.6%;
+			     left:93%;
+	           
+			font-family:"나눔고딕 보통";
+			background-color: #28977B;
+			border-color:#28977B;
+			border-style:solid;
+			font-weight: 600;
+			color: white;
+			cursor: pointer;
+		}
+		
+		#detailTable select { 
+			width: 150px; /* 원하는 너비설정 */ 
+			padding: .8em .5em; /* 여백으로 높이 설정 */ 
+			font-family: inherit; /* 폰트 상속 */ 
+			background: url(resources/arrowIcon.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+			border: 1px solid #999; border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+			-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+			-moz-appearance: none; 
+			appearance: none; 
+			left:30%;
+		}
+			
+#attachArea{
+float:left;
+padding:1%;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
-<div id="contentFrame">
+	<div id="conDiv">
+		<h1>실종게시판 수정</h1>
 	<form id="sendForm" action="missingUpdate" method="post">
-		<table>
-			<tr>
-				<td id="d_title"><input type="text" name="board_title" value="${missingDetail.board_title}" /> 
-					<input type="hidden" name="board_idx" value="${missingDetail.board_idx}" /></td>
-				<td id="d_writer">${missingDetail.board_writer}</td>
-				<td id="d_hit">${missingDetail.board_hit}</td>
-			</tr>
-			<tr>
-				<td id="d_animal">
-					<!-- 동물종 --> 동물 종 : <select id="animal" onchange="getAnimalType()">
+		<input type="hidden" name="board_idx" value="${missingDetail.board_idx}" /></td>
+		
+		<table id="detailTable" style="border:1px solid gray">
+			<tr class = "littleTr">
+		<th style="width:100px">작성자</th><td class="littleTd">${missingDetail.board_writer}</td>
+			
+		   <th style="width:100px">작성일</th><td>${missingDetail.board_regDate}</td>
+				</tr>
+				<tr class = "littleTr">
+				<th style="width:100px">제목</th><td class="littleTd" >		<input type="text" name="board_title" value="${missingDetail.board_title}" /> </td>
+				<th style="width:100px">조회수</th><td id="d_hit">${missingDetail.board_hit}</td>
+				</tr>
+						
+				
+		<tr class = "littleTr">
+		<th style="width:100px">동물 종</th>
+				<td class="littleTd">
+				
+					 <select id="animal" onchange="getAnimalType()">
 						<option value="417000">개</option>
 						<option value="422400">고양이</option>
 						<option value="429900">기타</option>
 						<input type="hidden" id="selectAnimal" name="animal" />
 				</select>
 				</td>
-				<td colspan="2" id="d_animal">
-					<!-- 품종 --> 품종 : <select id="animalType" name="animalType">
+<th style="width:100px">품종</th>
+				<td colspan="2" id="d_animal" class="litteTd">
+					
+				 <select id="animalType" name="animalType">
 				</select>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">실종 위치 : <select id="sido"
+			<th style="width:100px">실종 위치 </th>
+				<td colspan="5" class="littleTd"> <select id="sido"
 					onchange="getSigungu()">
 						<option value="">선택</option>
 						<option value="6110000">서울특별시</option>
@@ -135,31 +266,41 @@ input[type="text"]{
 						<input type="hidden" id="location" name="sido">
 				</select>
 				</td>
-				<td id="d_reg">${missingDetail.board_regDate}</td>
+				
 			</tr>
 			<tr>
-				<td colspan="3">
+					<th colspan=5 style="width:1000px; border:1px solid gray;">내　용</th>
+				</tr>
+			<tr>
+					<td colspan=5 style="text-align: left; border:1px solid gray;">
 					<div id="editable" contenteditable="true">${missingDetail.board_content}</div>
 					<input id="contentForm" type="hidden" name="board_content" />
 				</td>
 			</tr>
-			<tr>
+			
+		</table>
+		<table id="uploadTable">
+		<tr>
 				<th id="field">사진 첨부</th>
-				<td colspan="2"><input type="button" id="fileUpBtn"
+				<td colspan="5"><input type="button" id="fileUpBtn"
 					onclick="fileUp()" value="첨부" /></td>
 			</tr>
 			<tr>
-				<td colspan="3" height="50px">
+				<td colspan="5" height="50px">
 					<div id="attach"></div>
 					<input type="hidden" name="mainPhoto">
 				</td>
 			</tr>
-		</table>
-	</form>
-	<div id="buttonArea">
-	<input type="button" id="btn_Update" value="수정" />
+		<tr>
+								<td colspan="3" style="text-align: right; border:1px solid white;">
+		<input type="button" id="btn_Update" value="수정" />
 	<input type="button" id="back" value="취소" />
-	</div>
+		</tr>
+		
+		</table>
+		
+	</form>
+	
 	</div>
 </body>
 <script>

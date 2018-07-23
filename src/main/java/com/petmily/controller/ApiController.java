@@ -13,6 +13,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,12 +27,34 @@ import com.petmily.dto.AnimalDTO;
 import com.petmily.dto.LocationDTO;
 import com.petmily.dto.NoticeDTO;
 import com.petmily.dto.ShelterDTO;
+import com.petmily.dto.NoticeDTO;
 
 @Controller
 public class ApiController {
+	
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	////////////////////////보네 - 메인페이지에서 사용//////////////////////////
+	
+	   int mtotalCount=0;//분기별 유기동물 총 카운트
+		int prot=0;//보호중
+		int nDie=0;//종료(자연사)
+		int ret=0;//종료(반환)
+		int adpt=0;//종료(입양)
+		int bDie=0;//종료(안락사)
+		int give=0;//종료(기증)
+		int netu=0;//종료(방사)
+		int fullCnt=0;//동물상태 카운트 - 전체수
+		//ArrayList<NoticeDTO> mainList = new ArrayList<NoticeDTO>();//메인페이지 유기동물 리스트
+		HashMap<String, Integer> map = new HashMap<>();//동물상태 담을  map
+		
+		//////////////////////////////////////////////////////////////////////////
 
    // 보호소 전체 리스트
    ArrayList<ShelterDTO> shelterList = new ArrayList<ShelterDTO>();
+   
+   //메인페이지에서 상세보기로 연결하기위해 보네 같이사용
    ArrayList<NoticeDTO> noticeList = new ArrayList<NoticeDTO>();
    int shelterListAllCnt = 0;
 
@@ -570,5 +594,351 @@ public class ApiController {
       
       return mav;
    }
+   
+   
+   
+   //////////////////////////////보네/////////////////////////////////////////
+   
+   
+   
+
+	
+	//보네 - 분기별 유기동물 수
+	@RequestMapping(value = "getTotalCount")
+	public @ResponseBody int getTotalCount(@RequestParam("bgnde") String bgnde, @RequestParam("endde") String endde) {
+		logger.info("getTotalCount실행");
+		String addr1 = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?bgnde=";
+		String addr2 = "&endde=";
+		String addr3 = "&ServiceKey=XCdNWTVmXT3Zk0y%2BK3CpUAV2t4qBVGx34uevgRwA8jGhto%2FVOnbeSyfYnh74wEKL0DGPoql%2FDnZy6cjcbDGnHg%3D%3D";
+			try {
+				URL url = new URL(addr1+bgnde+addr2+endde+addr3);
+				logger.info("url:"+url);
+				logger.info("시작일 : "+bgnde);
+				logger.info("종료일 : "+endde);
+
+				XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+				factory.setNamespaceAware(true);
+				XmlPullParser parser = factory.newPullParser();
+				BufferedInputStream bis = new BufferedInputStream(url.openStream());
+				parser.setInput(bis, "utf-8");
+
+				int eventType = parser.getEventType();
+
+				while (eventType != XmlPullParser.END_DOCUMENT) {
+					switch (eventType) {
+						case XmlPullParser.START_TAG: {
+							String tag = parser.getName();
+							switch (tag) {
+							case "totalCount":
+								mtotalCount=Integer.parseInt(parser.nextText());
+								logger.info("totalCount"+mtotalCount);
+								break;
+							}
+						}
+					}
+					eventType = parser.next();
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return mtotalCount;
+		}
+
+	//보네 - 오늘기준 동물 상태 수치화
+	@RequestMapping(value = "getAnimalCnt")
+	public @ResponseBody HashMap<String, Integer> getAnimalCnt(@RequestParam("bgnde") String bgnde, @RequestParam("endde") String endde) {
+		if(nDie==0 && ret==0 && adpt==0 && bDie==0 && give==0 && netu==0) {
+			logger.info("getAnimalCnt실행");
+			String addr1 = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?bgnde=";
+			String addr2 = "&endde=";
+			String addr3 = "&numOfRows=100000&ServiceKey=XCdNWTVmXT3Zk0y%2BK3CpUAV2t4qBVGx34uevgRwA8jGhto%2FVOnbeSyfYnh74wEKL0DGPoql%2FDnZy6cjcbDGnHg%3D%3D";
+
+			try {
+				URL url = new URL(addr1+bgnde+addr2+endde+addr3);
+				logger.info("url:"+url);
+				logger.info("시작일 : "+bgnde);
+				logger.info("종료일 : "+endde);
+
+				XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+				factory.setNamespaceAware(true);
+				XmlPullParser parser = factory.newPullParser();
+				BufferedInputStream bis = new BufferedInputStream(url.openStream());
+				parser.setInput(bis, "utf-8");
+
+				int eventType = parser.getEventType();
+
+				while (eventType != XmlPullParser.END_DOCUMENT) {
+					switch (eventType) {
+						case XmlPullParser.START_TAG: {
+						String tag = parser.getName();
+						switch (tag) {
+							case "processState":
+								String processState = parser.nextText();
+								if(processState.equals("종료(자연사)")) {
+									nDie++;
+								}else if(processState.equals("종료(반환)")) {
+									ret++;
+								}else if(processState.equals("종료(입양)")) {
+									adpt++;
+								}else if(processState.equals("종료(안락사)")) {
+									bDie++;
+								}else if(processState.equals("종료(기증)")) {
+									give++;
+								}else if(processState.equals("종료(방사)")) {
+									netu++;
+								}
+								logger.info(processState);
+								fullCnt++;
+								logger.info("종료(자연사): "+nDie+" 종료(반환): "+ret+" 종료(입양): "+adpt+" 종료(안락사): "+bDie+" 종료(기증): "+give+" 종료(방사): "+netu);
+								break;
+							}
+						}
+					}
+					eventType = parser.next();
+				}
+				logger.info("종료(자연사): "+nDie+" 종료(반환): "+ret+" 종료(입양): "+adpt+" 종료(안락사): "+bDie+" 종료(기증): "+give+" 종료(방사): "+netu);
+				
+				map.put("nDie", nDie);//종료(자연사)
+				map.put("ret",ret);//종료(반환)
+				map.put("adpt", adpt);//종료(입양)
+				map.put("bDie",bDie);//종료(안락사)
+				map.put("give", give);//종료(기증)
+				map.put("netu",netu);//종료(방사)
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return map;
+		}
+		return map;
+	}
+	
+	//보네 - 분기별 유기동물 수
+	@RequestMapping(value = "getFindHome")
+	public @ResponseBody int getFindHome(@RequestParam("bgnde") String bgnde, @RequestParam("endde") String endde) {
+		if(prot==0) {
+			logger.info("getFindHome실행");
+			String addr1 = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?bgnde=";
+			String addr2 = "&endde=";
+			String addr3 = "&numOfRows=100000&ServiceKey=XCdNWTVmXT3Zk0y%2BK3CpUAV2t4qBVGx34uevgRwA8jGhto%2FVOnbeSyfYnh74wEKL0DGPoql%2FDnZy6cjcbDGnHg%3D%3D";
+			
+			try {
+				URL url = new URL(addr1+bgnde+addr2+endde+addr3);
+				logger.info("url:"+url);
+				logger.info("시작일 : "+bgnde);
+				logger.info("종료일 : "+endde);
+
+				XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+				factory.setNamespaceAware(true);
+				XmlPullParser parser = factory.newPullParser();
+				BufferedInputStream bis = new BufferedInputStream(url.openStream());
+				parser.setInput(bis, "utf-8");
+
+				int eventType = parser.getEventType();
+
+				while (eventType != XmlPullParser.END_DOCUMENT) {
+					switch (eventType) {
+
+						case XmlPullParser.START_TAG: {
+							String tag = parser.getName();
+							switch (tag) {
+							case "processState":
+								String processState = parser.nextText();
+								if(processState.equals("보호중")) {
+									prot++;
+								}
+								logger.info("보호중 : "+prot);
+								break;
+							}
+						}
+					}
+					eventType = parser.next();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return prot;
+		}
+		logger.info("getFindHome끝");
+		return prot;
+		}
+	
+	
+	//보네 - 메인리스트
+	@RequestMapping(value = "getMainList")
+	public @ResponseBody HashMap<String, Object> getMainList(@RequestParam("bgnde") String bgnde,
+			@RequestParam("endde") String endde,  @RequestParam("showPageNum") String showPageNum) {
+		noticeList.clear();
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		//String numOfRows;
+		String totalCount = null;
+
+		String addr1 = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?bgnde=";
+		String addr2 = "&endde=";
+		String addr3 = "&pageNo=";
+		String addr4 = "&numOfRows=5&ServiceKey=XCdNWTVmXT3Zk0y%2BK3CpUAV2t4qBVGx34uevgRwA8jGhto%2FVOnbeSyfYnh74wEKL0DGPoql%2FDnZy6cjcbDGnHg%3D%3D";
+
+		NoticeDTO NoticeDTO = new NoticeDTO();
+
+		try {
+			URL url = new URL(addr1+bgnde+addr2+endde+addr3+showPageNum+addr4);
+
+			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+			factory.setNamespaceAware(true);
+			XmlPullParser parser = factory.newPullParser();
+			BufferedInputStream bis = new BufferedInputStream(url.openStream());
+			parser.setInput(bis, "utf-8");
+
+			int eventType = parser.getEventType();
+
+			while (eventType != XmlPullParser.END_DOCUMENT) {
+				switch (eventType) {
+				case XmlPullParser.START_DOCUMENT:
+					noticeList = new ArrayList<NoticeDTO>();
+					break;
+				case XmlPullParser.END_TAG: {
+					String tag = parser.getName();
+					if (tag.equals("item")) {
+						noticeList.add(NoticeDTO);
+					}
+				}
+				case XmlPullParser.START_TAG: {
+					
+					String tag = parser.getName();
+					switch (tag) {
+					case "item":
+						NoticeDTO = new NoticeDTO();
+						break;
+					case "age":
+						if (NoticeDTO != null) {
+							NoticeDTO.setAge(parser.nextText());
+						}
+						break;
+					case "careAddr":
+						if (NoticeDTO != null) {
+							NoticeDTO.setCareAddr(parser.nextText());
+						}
+						break;
+					case "careNm":
+						if (NoticeDTO != null) {
+							NoticeDTO.setCareNm(parser.nextText());
+						}
+						break;
+					case "careTel":
+						if (NoticeDTO != null) {
+							NoticeDTO.setCareTel(parser.nextText());
+						}
+						break;
+					case "chargeNm":
+						if (NoticeDTO != null) {
+							NoticeDTO.setChargeNm(parser.nextText());
+						}
+						break;
+					case "colorCd":
+						if (NoticeDTO != null) {
+							NoticeDTO.setColorCd(parser.nextText());
+						}
+						break;
+					case "desertionNo":
+						if (NoticeDTO != null) {
+							NoticeDTO.setDesertionNo(parser.nextText());
+						}
+						break;
+					case "filename":
+						if (NoticeDTO != null) {
+							NoticeDTO.setFileName(parser.nextText());
+						}
+						break;
+					case "happenDt":
+						if (NoticeDTO != null) {
+							NoticeDTO.setHappenDt(parser.nextText());
+						}
+						break;
+					case "happenPlace":
+						if (NoticeDTO != null) {
+							NoticeDTO.setHappenPlace(parser.nextText());
+						}
+						break;
+					case "kindCd":
+						if (NoticeDTO != null) {
+							NoticeDTO.setKindCd(parser.nextText());
+						}
+						break;
+					case "neuterYn":
+						if (NoticeDTO != null) {
+							NoticeDTO.setNeuterYn(parser.nextText());
+						}
+						break;
+					case "noticeEdt":
+						if (NoticeDTO != null) {
+							NoticeDTO.setNoticeEdt(parser.nextText());
+						}
+						break;
+					case "noticeNo":
+						if (NoticeDTO != null) {
+							NoticeDTO.setNoticeNo(parser.nextText());
+						}
+						break;
+					case "noticeSdt":
+						if (NoticeDTO != null) {
+							NoticeDTO.setNoticeSdt(parser.nextText());
+						}
+						break;
+					case "officetel":
+						if (NoticeDTO != null) {
+							NoticeDTO.setOfficetel(parser.nextText());
+						}
+						break;
+					case "orgNm":
+						if (NoticeDTO != null) {
+							NoticeDTO.setOrgNm(parser.nextText());
+						}
+						break;
+					case "speciaMark":
+						if (NoticeDTO != null) {
+							NoticeDTO.setSpeciaMark(parser.nextText());
+						}
+						break;
+					case "popfile":
+						if (NoticeDTO != null) {
+							NoticeDTO.setPopfile(parser.nextText());
+						}
+						break;
+					case "processState":
+						if (NoticeDTO != null) {
+							NoticeDTO.setProcessState(parser.nextText());
+						}
+						break;
+					case "sexCd":
+						if (NoticeDTO != null) {
+							NoticeDTO.setSexCd(parser.nextText());
+						}
+						break;
+					case "weight":
+						if (NoticeDTO != null) {
+							NoticeDTO.setWeight(parser.nextText());
+						}
+						break;
+					case "totalCount":
+						totalCount = parser.nextText();
+						break;
+					}
+					break;
+				}
+				}
+				eventType = parser.next();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int pageCnt = Integer.parseInt(totalCount) % 10 > 0 ? Math.round(Integer.parseInt(totalCount) / 10) + 1
+				: Integer.parseInt(totalCount) / 10;
+		map.put("list", noticeList);
+		map.put("currPage", showPageNum);
+		map.put("pageCnt", pageCnt);
+		return map;
+	}
    
 }

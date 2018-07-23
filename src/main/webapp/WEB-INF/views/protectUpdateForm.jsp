@@ -7,17 +7,126 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-table, tr, td{
-		border : 1px solid black;
-		border-collapse: collapse;
-        padding: 5px 10px; 
-        margin: auto;
-	}
+#sideFrame {
+			position: absolute;
+			left: 0.52%;
+			top: 11.4%;
+			width: 15%;
+			height: 150%;
+			background: black;
+		}
+		
 	
-th{
-	width: 70px;
-}
-
+#attachArea{
+float:left;
+padding:1%;
+}		
+		
+		#conDiv {
+			position: absolute;
+			left: 15.52%;
+			top: 12.5%;
+			width: 82.95%;
+			height: 150%;
+			background: white;
+		}
+		/* 타이틀 */
+		#conDiv h1 {
+			left: 39%;
+			margin: 50px 0px 25px 0px;
+			text-align: center;
+			color: #28977B;
+			font-weight: 700;
+			font-size: 30;
+			position: absolute;
+		}		
+		#conDiv table, th, td {
+			border: 1px solid gray;
+			border-collapse: collapse;
+			padding: 6px 15px;
+			text-align: center;
+		}
+		#conDiv #editable {
+			border: 1px solid gray;
+			height: 250px;
+			height: 500px;
+			padding: 5px;
+			overflow: auto;
+			text-align: left;
+		}
+		/* 글 테이블 */
+		#detailTable{
+			top:14%;
+			left:11%;
+			width: 1000px;
+			margin: 0px 5px 5px 5px;
+			border-collapse: collapse;
+			padding: 5px 10px;
+			position:absolute;
+		}
+		#detailTable input[type='text']{
+			width:100%;
+			height:30px;
+		}
+		#detailTable textarea{
+			width:100%;
+			resize:none;
+			margin:0;
+		}
+		#detailTable td{
+			text-align: center;
+			border: 1px solid white;
+			border-collapse: collapse;
+			padding: 2px 2px;
+			margin: 0px;
+		}
+		#detailTable th{
+			border: 1px solid white;
+			border-collapse: collapse;
+			padding: 5px 10px;
+			background-color: #28977B;
+			color: white;
+		}
+		#detailTable input[type='button'] {
+			 height:40px;
+	         width:120px;
+	         background-color: #28977B;
+	         border-color:#28977B;
+	         border-style:solid;
+	         font-weight: 600;
+	         color: white;
+	         cursor: pointer;
+		}
+		/* 업로드 테이블 */
+		#uploadTable{
+			position: absolute;
+			top:65%;
+			left: 11%;
+			border: 1px solid gray;
+			width: 1000px;
+			height: 150px;
+			margin: 50px 5px 100px 5px;
+			border-collapse: collapse;
+			padding: 5px 10px;
+		}
+		#uploadTable tr,td{
+			font-weight:600;
+			font-family:"나눔고딕 보통";
+			border:1px solid gray;
+			text-align:center;
+		}
+		#uploadTable input[type='button']{
+			width:60px;
+			height: 30px;
+			font-family:"나눔고딕 보통";
+			background-color: #28977B;
+			border-color:#28977B;
+			border-style:solid;
+			font-weight: 600;
+			color: white;
+			cursor: pointer;
+		}
+		
 #fileUpBtn {
 	margin-left: 300px;
 }
@@ -26,25 +135,48 @@ th{
 	width: 80px;
 	height: 80px;
 }
+	#detailTable select { 
+			width: 150px; /* 원하는 너비설정 */ 
+			padding: .8em .5em; /* 여백으로 높이 설정 */ 
+			font-family: inherit; /* 폰트 상속 */ 
+			background: url(resources/arrowIcon.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+			border: 1px solid #999; border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+			-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+			-moz-appearance: none; 
+			appearance: none; 
+			left:30%;
+		}
+		
 
 </style>
 </head>
 <body>
 <jsp:include page="mainFrame.jsp"/>
+		<div id="sideFrame"></div>
+
 	<form id="sendForm" action="protectUpdate" method="post">
-	<table>
-		<tr>
-			<td>
-				<input type="text" name="board_title" value="${protectDetail.board_title}"/>
-				<input type="hidden" name="board_idx" value="${protectDetail.board_idx}"/>
+				<div id="conDiv">
+		<h1>보호게시글 수정</h1>
+	<input type="hidden" name="board_idx" value="${protectDetail.board_idx}"/>
+		
+	<table id="detailTable" style="border:1px solid gray">		<tr>
+		<tr class = "littleTr">	
+		<th style="width:100px">작성자</th><td class="littleTd" style="width:500px">${protectDetail.board_writer}</td>
+		<th style="width:100px">작성일</th><td>${protectDetail.board_regDate}</td>
+</tr>
+		<tr class = "littleTr">	
+	<th style="width:100px">제　목</th>
+		<td class="littleTd" style="width:500px">
+		<input type="text" name="board_title" value="${protectDetail.board_title}"/>
 			</td>
-			<td>${protectDetail.board_writer}</td>
+	<th style="width:100px">조회수</th>	
 			<td>${protectDetail.board_hit}</td>
 		</tr>
-		<tr>
-			<td>
-				<!-- 동물종 -->
-				동물 종 :
+		<tr class="littleTd">
+		<th style="width:100px">동물 종 </th>	
+			<td class="littleTd" style="width:500px">
+			
+				
 				<select id="animal" onchange="getAnimalType()">
 					<option value="417000">개</option>
 					<option value="422400">고양이</option>
@@ -52,7 +184,9 @@ th{
 					<input type="hidden" id="selectAnimal" name="animal"/>
 				</select>
 			</td>
-			<td colspan="2">
+					<th style="width:100px">동물 종 </th>	
+			
+			<td class="littleTd" style="width:500px">
 				<!-- 품종 -->
 				품종 :
 				<select id="animalType" name="animalType">
@@ -60,7 +194,9 @@ th{
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">위치 : 
+			<th style="width:100px">위치 </th>	
+		
+			<td colspan="5" class="littleTd" style="width:500px">
 			<select id="sido" onchange="getSigungu()">
 		      <option value="">선택</option>
 		      <option value="6110000">서울특별시</option>
@@ -86,28 +222,45 @@ th{
 			<input type="hidden" id="location" name="sido">
 			</select>
 			</td>
-			<td>작성일 : ${protectDetail.board_regDate}</td>
+
 		</tr>
+			<tr>
+					<th colspan=4 style="width:1000px; border:1px solid gray;">내　용</th>
+				</tr>
 		<tr>
-			<td colspan="3">
+					<td colspan=5 style="text-align: left; border:1px solid gray;">
 			<div id="editable" contenteditable="true">${protectDetail.board_content}</div>
 			<input id="contentForm" type="hidden" name="board_content"/>
 			</td>
 		</tr>
-		<tr>
-				<th id="field">사진 첨부</th>
-				<td colspan="2"><input type="button" id="fileUpBtn" onclick="fileUp()" value="첨부" /></td>
+
+				
+	</table>
+				<table id="uploadTable">
+	
+	
+	<tr>
+<td>사 진 첨 부  
+			<input type="button" id="fileUpBtn" onclick="fileUp()" value="첨부" /></td>
 			</tr>
 			<tr>
-				<td colspan="3" height="50px"><div id="attach"></div>
+		<td colspan="5" style="height:120px; border:1px solid gray;">
+<div id="attach"></div>
 				<input type="hidden" name="mainPhoto">
 				</td>
 			</tr>
-	</table>
+			
+			<tr>
+			<td colspan="5" style="text-align: right; border:1px solid white;">
+			
+			<input type="button" id="btn_Update" value="수정"/>
+	<input type="button" id="back" value="취소"/>
+			</tr>
+			</table>
+	</div>
 	</form>
 	
-	<input type="button" id="btn_Update" value="수정"/>
-	<input type="button" id="back" value="취소"/>
+	
 </body>
 <script>
 	var fullLoc = "${protectDetail.protect_loc}"; //지역 값 전체 받아오기

@@ -95,4 +95,21 @@ public interface BoardInter {
 	int delLikelist(int idx);
 	int funddelete(int idx);
 	void uphit(String idx);
+	
+	
+	/////////////////////////////////보네////////////////////////////////////
+	
+	int communityWrite(BoardDTO boardDTO);//보네 - (커뮤니티) 글 작성
+	void cWriteFile(String key, String string, int board_idx);//보네 - (커뮤니티) 파일 등록
+	ArrayList<BoardDTO> cFileList(int board_idx); //보네 - (커뮤니티) 파일 리스트
+	int cFileDelete(String fileName);//보네 - (커뮤니티) 파일 DB에서 삭제
+	String cDelFileName(String fileName);//보네 - (커뮤니티) 삭제 파일명 존재 확인
+	ArrayList<BoardDTO> communityList(HashMap<String, String> map);//보네 - (커뮤니티) 리스트
+	void cUpHit(int board_idx);//보네 - (커뮤니티) 조회수 증가
+	BoardDTO communityDetail(int board_idx);//보네 - (커뮤니티) 상세페이지
+	String cDetailPhoto(int board_idx);//보네 - (커뮤니티) 상세페이지 내 사진
+	int communityDelete(int board_idx);//보네 - (커뮤니티) 글 삭제
+	BoardDTO communityUpdateForm(int board_idx);//보네 - (커뮤니티) 글 수정 폼
+	ArrayList<BoardDTO> cUpdateFormPhoto(int board_idx);//보네 - (커뮤니티) 수정 폼 내 사진
+	int communityUpdate(BoardDTO boardDTO);//보네 - (커뮤니티) 글 수정
 }

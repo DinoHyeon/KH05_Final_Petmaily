@@ -13,7 +13,7 @@ table {
 }
 
 table, tr, td {
-	border: 1px solid black;
+	border: solid 1px black;
 	border-collapse: collapse;
 	padding: 1.5% 0.1%;
 }
@@ -58,7 +58,7 @@ table, tr, td {
 #searchArea{
 	position: absolute;
 	top: 6%;
-	left : 2%;
+	left : 5%;
 }
 
 #paging{
@@ -76,6 +76,52 @@ table, tr, td {
 	text-align: center;
 }
 
+#searchArea select { 
+			width: 150px; /* 원하는 너비설정 */ 
+			padding: .8em .5em; /* 여백으로 높이 설정 */ 
+			font-family: inherit; /* 폰트 상속 */ 
+			background: url(resources/arrowIcon.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+			border: 1px solid #999; border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+			-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+			-moz-appearance: none; 
+			appearance: none; 
+			left:30%;
+		}
+		
+#searchArea input[type='text']{
+position:absolute;
+			width:40%;
+		top:14%;
+		left:89%;
+		height:80%;
+		}	
+		
+
+		#contentFrame input[type='button']{
+			width:80px;
+			height: 40px;
+			background-color: #28977B;
+			border-color:#28977B;
+			border-style:solid;
+			font-weight: 600;
+			color: white;
+			cursor: pointer;
+	
+		}					
+
+#missingbtn{
+
+position:relative;
+left:42%;
+top:30%;
+
+
+}
+.list a:link{
+			text-decoration: none;
+			color: white;
+		}
+}
 </style>
 </head>
 <body>
@@ -120,7 +166,7 @@ table, tr, td {
 		<select id="animalType" name="animalType">
 		</select> 
 		<input type="text" id="keyWord" placeholder="검색어를 입력해주세요." /> 
-		<input type="button" onclick="listCall(showPageNum)" value="검색" />
+		<input type="button" onclick="listCall(showPageNum)" value="검색" id="missingbtn"/>
 		</div>
 	<div class="list">
 	</div>
@@ -166,8 +212,8 @@ function listPrint(data){
 		
 		content += "<table>";
 		content += "<tr>";
-		content += "<td id='bIdx'>"+item.board_idx+"</td>";
-		content += "<td id='bTitle'><a href='missingDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
+		content += "<td id='bIdx' style='background:#CEFBC9; color:white'>"+item.board_idx+"</td>";
+		content += "<td id='bTitle' ><a href='missingDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
 		content += "</tr>";
 		content += "<tr>";
 		content += "<td colspan='2'><img width='390' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";

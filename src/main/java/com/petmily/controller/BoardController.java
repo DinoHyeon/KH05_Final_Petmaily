@@ -512,4 +512,86 @@ public class BoardController {
 	            model.addAttribute("request", request);//는 request 로 넘어온 값들을 model 로 저장을 합니다
 	            return fund.funddelete(model);
 	         }
+	         
+	         ////////////////////////////////////보네///////////////////////////////////////////
+	         
+	      // 보네 - (커뮤니티) 작성 폼 이동
+	 		@RequestMapping(value = "/communityForm")
+	 		public String communityForm () {
+	 			logger.info("communityForm 이동-controller");
+	 			return "communityForm";
+	 		}
+	 		
+	 		// 보네 - (커뮤니티) 파일 업로드 폼 이동
+	 		@RequestMapping(value = "/cFileUploadForm")
+	 		public String cFileUploadForm() {
+	 			logger.info("파일 업로드 페이지 이동");
+	 			return "cFileUploadForm";
+	 		}
+
+	 		//보네 - (커뮤니티) 파일 업로드
+	 		@RequestMapping(value = "/cFileUpload")
+	 		public ModelAndView cFileUpload(MultipartFile file, HttpSession session) {
+	 			logger.info("cFileUpload 요청");
+	 			String root = session.getServletContext().getRealPath("/");
+	 			return Community.cFileUpload(file,root);
+	 		}
+	 		
+	 		// 보네 - (커뮤니티) 글 작성 중 파일 삭제
+	 		@RequestMapping(value = "/cFileDel")
+	 		public @ResponseBody HashMap<String, Integer> 
+	 		cFileDel(@RequestParam("fileName") String fileName, HttpSession session) {
+	 			//RequestParam을 통해 fileName을, Session을 통해 경로를 뽑아온다.
+	 			String root = session.getServletContext().getRealPath("/");
+	 			logger.info("cFileDel 요청");
+	 			return Community.cFileDel(root,fileName);
+	 		}
+	 		
+	 		// 보네 - (커뮤니티) 글쓰기
+	 		@RequestMapping(value = "/communityWrite")
+	 		public ModelAndView communityWrite (@RequestParam HashMap<String, String> map) {
+	 			logger.info("communityWrite 요청");
+	 			return Community.communityWrite(map);
+	 		}
+	 		
+	 		// 보네 - (커뮤니티) 메인
+	 		@RequestMapping(value = "/communityMain")
+	 		public String communityMain() {
+	 			return "communityMain";
+	 		}
+	 		
+	 		// 보네 - (커뮤니티) 리스트
+	 		@RequestMapping(value = "/communityList")
+	 		public @ResponseBody HashMap<String, Object> communityList(@RequestParam HashMap<String, String> map) {
+	 			logger.info("커뮤니티 리스트 요청");
+	 			return  Community.communityList(map);
+	 		}
+	 		
+	 		// 보네 - (커뮤니티) 상세 글 보기
+	 		@RequestMapping(value = "/communityDetail")
+	 		public ModelAndView communityDetail(@RequestParam("board_idx") String board_idx) {
+	 			logger.info("커뮤니티 상세보기 : "+ board_idx);
+	 			return Community.communityDetail(board_idx);
+	 		}
+	 		
+	 		// 보네 - (커뮤니티) 글 삭제
+	 		@RequestMapping(value = "/communityDelete")
+	 		public String communityDelete(@RequestParam("board_idx") String board_idx) {
+	 			logger.info("커뮤니티 글 삭제 : "+board_idx);
+	 			return Community.communityDelete(board_idx);
+	 		}
+	 		
+	 		// 보네 - (커뮤니티) 글 수정 폼
+	 		@RequestMapping(value = "/communityUpdateForm")
+	 		public ModelAndView communityUpdateForm(@RequestParam("board_idx") String board_idx) {
+	 			logger.info("커뮤니티 수정 폼 : "+ board_idx);
+	 			return Community.communityUpdateForm(board_idx);
+	 		}
+	 		
+	 		// 보네 - (커뮤니티) 글 수정
+	 		@RequestMapping(value = "/communityUpdate")
+	 		public ModelAndView communityUpdate (@RequestParam HashMap<String, String> map) {
+	 			logger.info("communityUpdate 요청");
+	 			return Community.communityUpdate(map);
+	 		}
 }
