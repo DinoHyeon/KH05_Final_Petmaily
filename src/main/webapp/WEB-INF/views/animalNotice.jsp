@@ -123,12 +123,12 @@ table,td,tr{
 			<tr>
 				<th>날짜</th>
 				<td colspan="5" id="date">
-					<select id="start_year"></select>년
-					<select id="start_month"></select>월
-					<select id="start_day"><option value=''>선택</option></select>일 ~ 
-					<select id="end_year"></select>년
-					<select id="end_month"></select>월
-					<select id="end_day"><option value=''>선택</option></select>일
+					<select id="start_year"><option value="">선택</option></select>년
+					<select id="start_month"><option value="" selected="selected">선택</option></select>월
+					<select id="start_day"><option value='' selected="selected">선택</option></select>일 ~ 
+					<select id="end_year"><option value="" >선택</option></select>년
+					<select id="end_month"><option value="" selected="selected">선택</option></select>월
+					<select id="end_day"><option value='' selected="selected">선택</option></select>일
 				</td>
 			</tr>
 			<tr>
@@ -443,7 +443,20 @@ function getShelter() {
 }
 
 $( "#clearBtn" ).click( function( event ) {
-	console.log("삭제");
+	$(".ui-selectmenu-text").html("선택");
+	$("#start_year").val("");
+	$("#start_month").val("");
+	$("#start_day").val("");
+	$("#end_year").val("");
+	$("#end_month").val("");
+	$("#end_day").val("");
+	$("#sido").val("");
+	$("#sigundo").val("");
+	$("#shelter").val("");
+	$("#animal").val("");
+	$("#animalType").val("");
+	$("#statement").val("");
+	noticeList(1);//첫 페이지 이동을 위해 인자 값으로 '1'을 줬음
 } );
 
 $( "#searchBtn" ).click( function( event ) {
@@ -452,13 +465,28 @@ $( "#searchBtn" ).click( function( event ) {
 } );
   
 function noticeList(page) {
+	var start_day;
+	var end_day;
+	
+	if($("#start_day").val()==null){
+		start_day = "";
+	}else{
+		start_day = $("#start_day").val();
+	}
+	
+	if($("#end_day").val()==null){
+		end_day = "";
+	}else{
+		end_day = $("#end_day").val();
+	}
+	
 	$.ajax({
 		"url" : "./noticeList",
 		"type" : "get",
 		"data" : {
 			"showPageNum":page,
-			"start_date":$("#start_year").val()+$("#start_month").val()+$("#start_day").val(),
-			"end_date":$("#end_year").val()+$("#end_month").val()+$("#end_day").val(),
+			"start_date":$("#start_year").val()+$("#start_month").val()+start_day,
+			"end_date":$("#end_year").val()+$("#end_month").val()+end_day,
 			"sido":$("#sido").val(),
 			"sigundo":$("#sigundo").val(),
 			"shelter":$("#shelter").val(),

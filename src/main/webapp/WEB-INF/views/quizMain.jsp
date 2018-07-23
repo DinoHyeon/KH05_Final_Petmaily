@@ -225,10 +225,10 @@ td{
 			alert("동물 또는 카테고리를 선택해주세요.");
 		}else if($("#quizAsk").val()==""){
 			alert("퀴즈를 입력해주세요.");
-		}else if(!$("input:radio[name='answer']").is(":checked")){
-			alert("퀴즈정답을 입력해주세요.");
 		}else if($("#registQuizContent").val()==""){
 			alert("퀴즈 해설을 입력해주세요.");
+		}else if(!$("input:radio[name='answer']").is(":checked")){
+			alert("퀴즈정답을 입력해주세요.");
 		}else{
 			$.ajax({
 				type : "get",
@@ -295,7 +295,7 @@ td{
 			})	
 		}else{
 			content += "<tr>";
-			content += "<td id='noLisd' colspan='5'>검색결과가 없습니다.</td>"
+			content += "<td id='noLisd' colspan='5'>데이터가 없습니다.</td>"
 			content += "</tr>";
 		}
 		
