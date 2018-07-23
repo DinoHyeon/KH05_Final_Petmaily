@@ -176,8 +176,6 @@ function listPrint(data){
 		}
 		
 		
-	    	
-		//content += "<td><div id='"+item.reply_idx+"' contenteditable='true'>"+item.reply_content+"</div></td>";
 		content += "<td><textarea class='content' id='"+item.reply_idx+"' cols='80' id='"+item.reply_idx+"' onkeyup='autoSize()' readonly='true' disabled>"+item.reply_content+"</textarea></td>";
 		if(item.reply_writer.indexOf("비회원")!=-1){
 			content += "<c:set var='loginId' value='${sessionScope.loginId}'/>";
