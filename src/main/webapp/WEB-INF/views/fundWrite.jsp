@@ -59,6 +59,13 @@ td {
    height: 150%;
    background: black;
 }
+	
+#attachArea{
+float:left;
+padding:1%;
+}
+
+
 </style>
 </head>
 <body>

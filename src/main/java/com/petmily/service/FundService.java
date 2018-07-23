@@ -94,7 +94,7 @@ public class FundService {
 	public HashMap<String, Object> getfundList(HashMap<String, String> params) {
 		inter = sqlSession.getMapper(BoardInter.class);
 		int allCnt = inter.fundlistallCount(params);
-		int pageCnt = allCnt % 10 > 0 ? Math.round(allCnt / 10) + 1 : allCnt / 10;
+		int pageCnt = allCnt % 15 > 0 ? Math.round(allCnt / 15) + 1 : allCnt / 15;
 		HashMap<String, Object> fundList = new HashMap<String, Object>();
 		int page = Integer.parseInt(params.get("showPageNum"));
 	
@@ -102,14 +102,14 @@ public class FundService {
 			page = pageCnt;
 		}
 
-		int end = 10 * page;
-		int start = end - 10 + 1;
+		int end = 15 * page;
+		int start = end - 15 + 1;
 
 		params.put("start", String.valueOf(start));
 		params.put("end", String.valueOf(end));
-		params.put("sido", (String) params.get("sido"));
+		/*params.put("sido", (String) params.get("sido"));
 		params.put("sigundo", (String) params.get("sigundo"));
-
+*/
 
 		fundList.put("list", inter.getfundList(params));
 		// 생성 페이지의 수

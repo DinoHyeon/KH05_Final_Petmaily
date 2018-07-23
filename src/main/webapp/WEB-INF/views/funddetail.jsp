@@ -18,42 +18,140 @@ table, th, td {
     top : 44%;
     left : 38%;
 }
+
+#sideFrame {
+				position: absolute;
+				left: 0.52%;
+				top: 11.4%;
+				width: 15%;
+				height: 150%;
+				background: black;
+			}
+			#conDiv {
+				position: absolute;
+				left: 15.52%;
+				top: 12.5%;
+				width: 82.95%;
+				height: 150%;
+				background: white;
+			}
+			/* 타이틀 */
+			#conDiv h1 {
+				left: 39%;
+				margin: 50px 0px 25px 0px;
+				text-align: center;
+				color: #28977B;
+				font-weight: 700;
+				font-size: 30;
+				position: absolute;
+			}
+			#conDiv table, th, td {
+				border: 1px solid gray;
+				border-collapse: collapse;
+				padding: 6px 15px;
+				text-align: center;
+			}
+			#conDiv td {
+				text-align: center;
+			}
+			
+			/* 글 테이블 */
+			#detailTable{
+				top:14%;
+				left:11%;
+				width: 1000px;
+				margin: 0px 5px 5px 5px;
+				border-collapse: collapse;
+				padding: 5px 10px;
+				position:absolute;
+			}
+			#detailTable input[type='text']{
+				width:100%;
+				height:30px;
+			}
+			#detailTable textarea{
+				width:100%;
+				resize:none;
+				margin:0;
+			}
+			#detailTable td{
+				text-align: center;
+				border: 1px solid white;
+				border-collapse: collapse;
+				padding: 2px 2px;
+				margin: 0px;
+			}
+			#detailTable th{
+				border: 1px solid white;
+				border-collapse: collapse;
+				padding: 5px 10px;
+				background-color: #28977B;
+				color: white;
+			}
+			#detailTable input[type='button'] {
+				 height:40px;
+		         width:120px;
+		         background-color: #28977B;
+		         border-color:#28977B;
+		         border-style:solid;
+		         font-weight: 600;
+		         color: white;
+		         cursor: pointer;
+			}
+			
+      #flist, #fedit, #fdel{
+      	width:80px;
+				height: 40px;
+				font-family:"나눔고딕 보통";
+				font-size:20px;
+				background-color: #28977B;
+				border-color:#28977B;
+				border-style:solid;
+				font-weight: 600;
+				color: white;
+				cursor: pointer;
+      
+      
+      }
 </style>
 </head>
 <body>
 <jsp:include page="mainFrame.jsp"/>
-   <h1>${dto.board_title }</h1>
-   <hr />
-   <table>
-      <tr>
-         <td>글번호</td>
-         <td>${dto.board_idx }</td>
-      </tr>
-      <tr>
-         <th>조회수</th>
-         <td>${dto.board_hit}</td>
-      </tr>
-      <tr>
-         <th>작성자</th>
-         <td>${dto.board_writer }</td>
-      </tr>
-      <tr>
-         <th>제 목</th>
-         <td>${dto.board_title }</td>
-      </tr>
-      <tr>
-         <th>내 용</th>
-         <td>${dto.board_content}</td>
-      </tr>
-
+		<div id="sideFrame"></div>
+		<div id="conDiv">
+			<h1>${dto.board_title}</h1>
+			<input type="hidden" id="board_idx" value="${dto.board_idx}" />
+			<table id="detailTable" style="border:1px solid gray">
+				<tr class = "littleTr">
+					<th style="width:100px">작성자</th><td class="littleTd" style="width:500px">${dto.board_writer}</td>
+					<th style="width:100px">작성일</th><td>${dto.board_regDate}</td>
+				</tr>
+				<tr class = "littleTr">
+					<th style="width:100px">제　목</th><td class="littleTd" style="width:500px">${dto.board_title}</td>
+					<th style="width:100px">조회수</th><td>${dto.board_hit}</td>
+				</tr>
+				<tr class="littleTr">
+				<th style="width:100px">지역</th><td class="littleTd" style="width:500px">${dto.fund_area}</td>
+				<tr>
+					<th colspan=4 style="width:1000px; border:1px solid gray;">내　용</th>
+				</tr>
+				<tr>
+					<td colspan=4 style="text-align: left; border:1px solid gray;">
+					${dto.board_content}
+					</td>
+				</tr>
+<tr>
+<td colspan=4 style="text-align:right">
+ <input type="button" id="flist" onclick="fundList()" value="글목록"/>
+      <input type="button" id="fedit" onclick="fundedit()" value="수정"/>
+      <input type="button" id="fdel" onclick="funddelete()" value="삭제"/>
+    </td>
+</tr>
       
 </table>
+</div>
 
-      <div id ="buttonarea">
-      <input type="button" onclick="fundList()" value="리스트"/>
-      <input type="button" onclick="fundedit()" value="수정"/>
-      <input type="button" onclick="funddelete()" value="삭제"/>
-      </div>
+     
   
 </body>
 <script>

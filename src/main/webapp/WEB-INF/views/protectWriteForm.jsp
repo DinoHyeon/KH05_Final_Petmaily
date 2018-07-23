@@ -40,6 +40,11 @@ input[type='text'] {
 	width: 80px;
 	height: 80px;
 }
+	
+#attachArea{
+float:left;
+padding:1%;
+}
 </style>
 </head>
 <body>
