@@ -1,10 +1,6 @@
 src/test/
 target/
-<<<<<<< HEAD
-/.metadata/
-=======
 resources/log4j.xml
 .classpath
 /.metadata/
 RemoteSystemsTempFiles/.project
->>>>>>> 2d2efcfcf2a0a73b01e031ad372a13129271d86f

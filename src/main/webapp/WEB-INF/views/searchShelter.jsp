@@ -275,13 +275,20 @@ function listPrint(data) {
    var g="green"
    
    var content = "";
-   data.list.forEach(function(item) {
-      var location = item.roadAddr.split(' ');
-      content += "<tr onmouseenter='this.style.background=\"#EAEAEA\"' onmouseout='this.style.background=\"white\"'>";
-      content += "<td>" + location[0]+" "+ location[1] + "</td>";
-      content += "<td><span onclick='sehelterDetail(this)' id='"+item.centerName+"' style='cursor: pointer'>"+item.centerName+"</span></td>";
-      content += "</tr>";
-   })
+	if(data.list.length!=0){
+		data.list.forEach(function(item) {
+		      var location = item.roadAddr.split(' ');
+		      content += "<tr onmouseenter='this.style.background=\"#EAEAEA\"' onmouseout='this.style.background=\"white\"'>";
+		      content += "<td>" + location[0]+" "+ location[1] + "</td>";
+		      content += "<td><span onclick='sehelterDetail(this)' id='"+item.centerName+"' style='cursor: pointer'>"+item.centerName+"</span></td>";
+		      content += "</tr>";
+		   })
+	}else{
+		 content += "<tr>";
+	     content += "<td colspan='2'>데이터가 없습니다.</td>";
+	     content += "</tr>";
+	}
+   
    $("#shelter").empty();
    $("#shelter").append(content);
    
