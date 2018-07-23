@@ -222,6 +222,7 @@ obj.type="get";
 obj.dataType="json";
 obj.error=function(e){console.log(e)};
 var showPageNum = 1
+var menuName = {'구조후기':'saveMain', '모금':'fundMain'};
 
 $(document).ready(function() {
 	/* 
@@ -231,8 +232,29 @@ $(document).ready(function() {
 		//else{
 		fundlistCall(showPageNum);
 	//}
+		var content = "";
+		for ( var key in menuName) {
+			console.log(key);
+			content += "<div class='menuName'";
+			content += "style='"
+			if (key == '모금') {
+				content += "background:#28977B;color:white;font-weight: 600;";
+			}
+			content += "cursor: pointer'";
+			content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
+			content += key;
+			content += "</div>";
+		}
+		;
 
+		$("#sideMenu").empty();
+		$("#sideMenu").append(content);
 });
+
+function pageMove(e) {
+	console.log($(e).attr("id"));
+	location.href="./"+$(e).attr("id");
+};
 
 function getSigungu() {
 	console.log();

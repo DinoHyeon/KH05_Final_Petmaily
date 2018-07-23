@@ -3,24 +3,68 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petmily.dao.memberDAO.MemberInter">
+	<!-- 로그인 체크 -->
 	<select id="loginConfirmPage" resultType="String">
-		SELECT member_id FROM member WHERE member_id=#{param1} AND member_pw=#{param2}
+		SELECT member_id FROM member WHERE member_id=#{param1
+		} AND (member_state='member' OR member_state='administer')
 	</select>
 	
+	<!-- 회원가입 요청 -->
    <insert id="joinConfirmPage" parameterType="MemberDTO">
       INSERT INTO member(member_id, member_pw, member_name, member_email, member_phone, member_addr, member_state, member_date)
-      VALUES(#{member_id},#{member_pw},#{member_name},#{member_email},#{member_phone},#{member_addr},'멤버', SYSDATE)
+      VALUES(#{member_id},#{member_pw},#{member_name},#{member_email},#{member_phone},#{member_addr},'member', SYSDATE)
    </insert>
    
+   <!-- 아이디 중복확인 요청 -->
    	<select id="idChkPage" resultType="String">
 		SELECT member_id FROM member WHERE member_id=#{param1}
 	</select>
 	
+	<!-- 아이디 찾기 요청 -->
 	<select id="idSearchPage" resultType="String">
 		SELECT member_id FROM member WHERE member_name=#{param1} AND member_email=#{param2} AND member_phone=#{param3}
 	</select>
 	
+	<!-- 비밀번호 찾기 요청 -->
+	<select id="pwSearchPage" resultType="String">
+		SELECT member_id FROM member WHERE member_id=#{param1} AND member_email=#{param2}
+	</select>
 	
+	<!-- 비밀번호 변경 요청 -->
+	<update id="changePwPage" parameterType="String">
+		UPDATE member SET member_pw=#{param2} WHERE member_id=#{param1}
+	</update>
+	
+	<!-- 회원정보 수정을 위한 비밀번호 확인 -->
+	<select id="memberUpdateConfirm" resultType="String">
+		SELECT member_id FROM member WHERE member_id =#{param1} AND member_pw=#{param2}
+	</select>
+	
+	<!-- 회원 정보 수정 페이지 -->
+	<select id="memberUpdateForm" resultType="MemberDTO">
+	 	SELECT * FROM member WHERE member_id= #{param1}
+	 </select>
+	 
+	 <!-- 회원정보 수정 요청 -->
+	<update id="memberUpdatePage" parameterType="MemberDTO">
+	 UPDATE member
+	 	<set>
+	 		<if test="!member_pw.equals('')">member_pw = #{member_pw},</if>
+	 		<if test="!member_phone.equals('')">member_phone = #{member_phone},</if>
+	 		<if test="!member_addr.equals('')">member_addr = #{member_addr}</if>
+	 	</set>	 
+	 	WHERE member_id = #{member_id}
+	 </update>
+	 
+	 <!-- 회원 정보 탈퇴 요청 -->
+	 <update id="deleteUpdatePage" parameterType="String">
+		UPDATE member SET member_state='leave' WHERE member_id=#{param1}
+	</update>
+	
+	<!-- 비밀번호 암호화 -->
+	<select id="protectPwChk" resultType="String">
+		SELECT member_pw FROM member WHERE member_id=#{param1}
+	</select>
 	
 	
 	

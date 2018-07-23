@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <title>파일 첨부</title>
-<style></style>
+<style>
+</style>
 </head>
 <body>
 	<form id="fileUpload" action="./mupload" method="post" enctype="multipart/form-data">
@@ -28,11 +29,12 @@
 			var elem = window.opener.document.getElementById("editable");
 			var elem2 = window.opener.document.getElementById("attach");
 			content +="<img id='"+imgId+"' width='250' src='${path}'/>";
-			elem.innerHTML += content+"<br/>";
+			
+			elem.innerHTML += content;
 			content ="";//content 초기화
 			content +="<div id='attachArea'><img width='250' src='${path}'/>";
 			content +="<input id='${path}' type='button' value='삭제' onclick='mDel(this)'><input type='radio' name='main' value='"+imgId+"'></div>";
-	
+			
 			elem2.innerHTML += content;
 			self.close();
 		}

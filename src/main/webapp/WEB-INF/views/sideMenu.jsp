@@ -3,7 +3,7 @@
 #sideMenu{
 	position: absolute;
     left: 0.6%;
-    top: 12.4%;
+    top: 12.5%;
     width: 14.7%;
     height: 95%;
     background: white;
@@ -13,7 +13,6 @@
 	width: 100%;
 	height: 6.5%;
 	color: black;
-	border-top: 1px solid gray;
 	border-bottom: 1px solid gray;
 	text-align: center;
 	line-height: 2.7;

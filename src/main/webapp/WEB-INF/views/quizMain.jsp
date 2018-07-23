@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>퀴즈 페이지</title>
 <style>
 /* 전체(배경) */
 #contentFrame {
@@ -26,10 +26,54 @@
     border-left: 1px solid gray;
 }
 
+/* 첫번째 타이틀 */
+#title1 h1 {
+	top: 3%;
+	left: 44%;
+	margin: 50px 0px 25px 0px;
+	text-align: center;
+	color: #A9CB73;
+	font-weight: 700;
+	font-size: 40;
+	position: absolute;
+}
+#title1 h5 {
+	top: 22%;
+	left: 64%;
+	margin: 10px 0px 40px 0px;
+	text-align: right;
+	color: gray;
+	font-weight: 700;
+	font-size: 15;
+	position: absolute;
+}
+
+/* 두번째 타이틀 */
+#title2 h1 {
+	top: 90%;
+	left: 44%;
+	margin: 50px 0px 25px 0px;
+	text-align: center;
+	color: #A9CB73;
+	font-weight: 700;
+	font-size: 40;
+	position: absolute;
+}
+#title2 h5 {
+	top: 102%;
+	left: 74%;
+	margin: 10px 0px 40px 0px;
+	text-align: right;
+	color: gray;
+	font-weight: 700;
+	font-size: 15;
+	position: absolute;
+}
+
 /* selectBox(동물종/카테고리) */
 #registSelectBox{
 	position: absolute;
-	top : 5.5%;
+	top : 31.5%;
 	left : 20%;
 }
 
@@ -37,7 +81,7 @@
 /* 정답 div */
 #registAnswerRadio{
 	position: absolute;
-	top : 45%;
+	top : 81%;
 	left : 20%;
 }
 
@@ -70,7 +114,7 @@ textarea {
 	height : 6%;
 	border: 1px solid black;
 	position: absolute;
-	top : 11%;
+	top : 37%;
 	left : 20%;
 }
 
@@ -80,14 +124,14 @@ textarea {
 	height: 26%;
 	border: 1px solid black;
 	position: absolute;
-	top : 18%;
+	top : 44%;
 	left : 20%;
 }
 
 /* 버튼(문제등록) */
 #registBtn{
 	position: absolute;
-	top : 52%;
+	top : 74%;
 	left : 48%;
 }
 
@@ -98,19 +142,19 @@ textarea {
 /* 리스트 */
 #quizList{
 	position: absolute;
-	top : 100%;
+	top : 110%;
 }
 /* 페이징 */
 #paging{
 	position: absolute;
-	top : 133%;
+	top : 169%;
 	left : 47%;
 }
 
 /* selectBox(검색) */
 #quizListDiv{
 	position: absolute;
-	top : 72%;
+	top : 108%;
 	left : 17%;
 	width: 73%;
 }
@@ -128,7 +172,7 @@ td{
 }
 
 #a{
-	margin-top: 36%;
+	margin-top: 55%;
 }
 border-right: 1px solid gray;
 </style>
@@ -139,7 +183,10 @@ border-right: 1px solid gray;
 	<jsp:include page="sideMenu.jsp" />
 	
 	<div id="contentFrame">
-	<h3 id="qqq">Quiz 등록</h3>
+			<div id=title1>
+				<h1>퀴즈 등록</h1>
+				<h5>임의의 동물과 주제로 퀴즈를 등록합니다</h5>
+			</div>
 		<div id="registSelectBox">
 			<select id="aniamlList">
 				<option value="동물">동물 선택</option>
@@ -170,6 +217,10 @@ border-right: 1px solid gray;
 		<input type="button" onclick="registQuiz()" value="문제 등록">
 		</div>
 		<hr id="a">
+		<div id=title2>
+			<h1>퀴즈 목록</h1>
+			<h5>등록된 퀴즈들의 목록입니다</h5>
+		</div>
 		<div id="quizListDiv">
 			<select id="searchAniamlList">
 				<option value="전체">전체</option>
@@ -186,7 +237,7 @@ border-right: 1px solid gray;
 				<option value="기타">기타</option>
 			</select> 
 			문제 : <input id="searchWord" type="text">
-			<input type="button" onclick="quizListCall(showPageNum)" value="검색">
+			<input type="button" onclick="quizListCall(showPageNum)" value="검색" >
 			<table id="quizListTable">
 				<thead>
 					<tr>
@@ -197,6 +248,7 @@ border-right: 1px solid gray;
 						<th>정답</th>
 					</tr>
 				</thead>
+				
 				<tbody id="quizList">
 				</tbody>
 			</table>
@@ -207,7 +259,7 @@ border-right: 1px solid gray;
 <script>
 	//현재 보여줄 페이지
 	var showPageNum = 1;
-	var menuName = {'보호소센터 찾기':'searchShelter', '퀴즈':'quizSetting', '질병':'', '커뮤니티':'communityMain'};
+	var menuName = {'보호소센터 찾기':'searchShelter', '퀴즈':'quizSetting', '질병':'diseaseMain', '커뮤니티':'communityMain'};
 	$(document).ready(function() {
 		var content = "";
 		for(var key in menuName){

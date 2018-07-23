@@ -10,8 +10,10 @@ public class BoardDTO {
 	private String board_writer;
 	private Date board_regDate;
 	private int board_hit;
-	private String save_loc;
-	private String adopt_loc;
+	private String save_loc1;
+	private String save_loc2;
+	private String adopt_loc1;   
+	private String adopt_loc2;
 	private String animal_idx;
 	private String animal_type;
 	private String fund_area;
@@ -32,15 +34,6 @@ public class BoardDTO {
 	private String mainPhoto;
 	private int favorite_idx;
 	private String member_id;
-	
-	
-	
-	public String getPreMainPhoto() {
-		return preMainPhoto;
-	}
-	public void setPreMainPhoto(String preMainPhoto) {
-		this.preMainPhoto = preMainPhoto;
-	}
 	public int getBoard_idx() {
 		return board_idx;
 	}
@@ -83,17 +76,29 @@ public class BoardDTO {
 	public void setBoard_hit(int board_hit) {
 		this.board_hit = board_hit;
 	}
-	public String getSave_loc() {
-		return save_loc;
+	public String getSave_loc1() {
+		return save_loc1;
 	}
-	public void setSave_loc(String save_loc) {
-		this.save_loc = save_loc;
+	public void setSave_loc1(String save_loc1) {
+		this.save_loc1 = save_loc1;
 	}
-	public String getAdopt_loc() {
-		return adopt_loc;
+	public String getSave_loc2() {
+		return save_loc2;
 	}
-	public void setAdopt_loc(String adopt_loc) {
-		this.adopt_loc = adopt_loc;
+	public void setSave_loc2(String save_loc2) {
+		this.save_loc2 = save_loc2;
+	}
+	public String getAdopt_loc1() {
+		return adopt_loc1;
+	}
+	public void setAdopt_loc1(String adopt_loc1) {
+		this.adopt_loc1 = adopt_loc1;
+	}
+	public String getAdopt_loc2() {
+		return adopt_loc2;
+	}
+	public void setAdopt_loc2(String adopt_loc2) {
+		this.adopt_loc2 = adopt_loc2;
 	}
 	public String getAnimal_idx() {
 		return animal_idx;
@@ -191,6 +196,12 @@ public class BoardDTO {
 	public void setPhoto_newName(String photo_newName) {
 		this.photo_newName = photo_newName;
 	}
+	public String getPreMainPhoto() {
+		return preMainPhoto;
+	}
+	public void setPreMainPhoto(String preMainPhoto) {
+		this.preMainPhoto = preMainPhoto;
+	}
 	public String getMainPhoto() {
 		return mainPhoto;
 	}
@@ -209,6 +220,10 @@ public class BoardDTO {
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
+	
+	
+	
+	
 	
 	
 	

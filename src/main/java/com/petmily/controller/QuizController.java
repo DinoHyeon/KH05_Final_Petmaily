@@ -1,6 +1,5 @@
 package com.petmily.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.petmily.dto.QuizDTO;
 import com.petmily.service.QuizService;
 
 @Controller
@@ -81,24 +79,24 @@ public class QuizController {
 	@RequestMapping(value = "cleanQuiz")
 	public @ResponseBody void cleanQuiz() {
 		logger.info("퀴즈 초기화");
-		service.cleanQuiz(); 
+		service.cleanQuiz();
 	}
 
 	@RequestMapping(value = "nextQuiz")
-	public @ResponseBody HashMap<String, Object> nextQuiz () {
+	public @ResponseBody HashMap<String, Object> nextQuiz() {
 		logger.info("퀴즈 풀이");
 		return service.nextQuiz();
 	}
-	
+
 	@RequestMapping(value = "knowledge")
 	public String knowledge() {
 		logger.info("지식 페이지 접근");
 		return "knowledge";
 	}
-	
+
 	@RequestMapping(value = "QuizSettingChk")
 	public @ResponseBody Boolean QuizSettingChk(@RequestParam HashMap<String, String> params) {
 		return service.QuizSettingChk(params);
 	}
-	
+
 }

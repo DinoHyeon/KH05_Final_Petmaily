@@ -9,16 +9,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
-	
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home (Model model) {
-		logger.info("/실행. 나중에 바꾸기 - 보네");
+	public String home(Model model) {
+		logger.info("Fetmily 실행");
 		return "jsp";
 	}
+
 	@RequestMapping(value = "/mainFrame", method = RequestMethod.GET)
-	public String mainFrame (Model model) {
+	public String mainFrame(Model model) {
 		return "mainFrame";
 	}
-	
+
 }
