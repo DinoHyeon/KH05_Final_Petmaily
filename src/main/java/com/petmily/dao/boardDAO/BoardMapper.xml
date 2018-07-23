@@ -470,7 +470,7 @@
 	<!--소현 : 마이페이지 즐겨찾기 페이징 처리 (세션처리 필요) -->
 	<select id="likeallCount" resultType="Integer"
 		parameterType="hashMap">
-		SELECT COUNT(*) FROM favorite
+		SELECT COUNT(*) FROM favorite where member_id=#{loginWriter}
 	</select>
 
 	<!--소현 : 즐겨찾기 리스트 출력 페이징 처리 (세션처리 해야함) -->
@@ -482,6 +482,7 @@
 		ROW_NUMBER() OVER(ORDER BY favorite_idx DESC) AS rnum
 		FROM favorite f, board b
 		WHERE b.board_idx=f.board_idx
+		and f.member_id=#{loginWriter}
 		) WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
 

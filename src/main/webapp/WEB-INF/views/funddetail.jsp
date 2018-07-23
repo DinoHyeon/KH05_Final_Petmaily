@@ -120,6 +120,7 @@ table, th, td {
 	color: white;
 	cursor: pointer;
 }
+
 </style>
 </head>
 <body>

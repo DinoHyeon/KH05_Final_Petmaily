@@ -132,6 +132,11 @@ position: absolute;
    width: 15%;
 
 }
+	#agreeTable a:link{
+			text-decoration: none;
+			color: black;
+			
+		}
 </style>
 </head>
 <body>
@@ -208,7 +213,7 @@ position: absolute;
                content += "<tr>";
                content += "<td style='background:#217D65'>" + item.board_idx + "</td>";
                content += "<td><a href='funddetail?idx=" + item.board_idx
-                     + "&call=detail' style='color: blue'>"
+                     + "&call=detail' style='color: black'>"
                      + item.board_title + "</a></td>";
              
                content += "<td><input class='yes' type='button' value='승인' id="+ item.board_idx +"><input class='no' type='button' value='거부' id="

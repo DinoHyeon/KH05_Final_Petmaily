@@ -101,7 +101,6 @@ position: absolute;
    left: 0.52%;
    top: 52.4%;
    width: 15%;
-
 }
 
 .ui-widget-content {
@@ -182,10 +181,10 @@ function memberlistPrint(data) {
 		content += "<td>" + item.member_name + "</td>";
 		content += "<td>" + item.member_email+ "</td>";
 		content += "<td>" + item.member_state +"</td>";
-        if(item.member_state=='멤버'){
+        if(item.member_state=='member'){
 		   content+="<td><input class='delmem' type='button' value='추방'  onclick='delmember(id)' id="+ item.member_id +"></td>";
         }	
-        if(item.member_state=='불량회원'){
+        else{
  		   content+="<td></td>";
         }	
 			content += "</tr>"; 

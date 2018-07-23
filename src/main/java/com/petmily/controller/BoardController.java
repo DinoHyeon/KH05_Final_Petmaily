@@ -479,9 +479,9 @@ public class BoardController {
 
 	// 소현 : 즐겨찾기 리스트 페이징 처리
 	@RequestMapping(value = "getlikeList")
-	public @ResponseBody HashMap<String, Object> getlikeList(@RequestParam HashMap<String, String> params) {
+	public @ResponseBody HashMap<String, Object> getlikeList(@RequestParam HashMap<String, String> params,HttpSession session) {
 		logger.info("즐겨찾기 리스트 호출");
-		return fund.getlikeList(params);
+		return fund.getlikeList(params,session);
 	}
 
 	// 소현 : 나의 즐겨찾기 리스트 삭제

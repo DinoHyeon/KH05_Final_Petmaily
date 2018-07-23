@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
 table{
-	border: 1px solid black;
+	border: 1px solid white;
 	border-collapse: collapse;
 	float: left;
 	
@@ -16,7 +16,7 @@ th, td {
     padding : 0.7% 0.1%;
 }
 tr{
-   border: 1px solid black;
+   border: 1px solid white;
    padding: 1% 0.1%;
 
 }
@@ -56,6 +56,20 @@ tr{
 }
 #tt{
 	text-align: center;
+}
+
+
+ .delmy, .reason, .editmy {
+	width: 30%;
+	
+	font-family: "나눔고딕 보통";
+	font-size: 12px;
+	background-color: #A5DE9F;
+	border-color: #A5DE9F;
+	border-style: solid;
+	font-weight: 600;
+	color: black;
+	cursor: pointer;
 }
 
 </style>
@@ -114,26 +128,26 @@ function mylistPrint(data) {
       data.list.forEach(function(item) {
          content += "<table>"; 
          content += "<tr>"; 
-         content += "<td>" + item.board_idx + "</td>";
-         content += "<td id='tt'><a href='funddetail?idx="+item.board_idx+"&call=detail' style='color: black'>"+ item.board_title +"</a></td>";
+         content += "<td  style='background:#A5DE9F'>" + item.board_idx + "</td>";
+         content += "<td id='tt' style='background:#A5DE9F'><a href='funddetail?idx="+item.board_idx+"&call=detail' style='color: black'>"+ item.board_title +"</a></td>";
          content += "</tr>"; 
          content += "<tr>"; 
          content +=	"<td colspan='2'><img width='400' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";
          content += "</tr>"; 
          content += "<tr>"; 
-         content += "<td>" + item.fund_state + "</td>";
+         content += "<td style='background:#A5DE9F; color:red'>" + item.fund_state + "</td>";
           if(item.fund_state=='승인대기'){
-         content += "<td id='buttonArea'><input class='editmy' type='button' value='수정' onClick='edit(id)' id="+ item.board_idx +"><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
+         content += "<td id='buttonArea' style='background:#A5DE9F'><input class='editmy' type='button' value='수정' onClick='edit(id)' id="+ item.board_idx +"><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
           }
           if(item.fund_state=='승인 거절'){
 
-         content += "<td id='buttonArea'><input class='reason' type='button' value='사유보기' id="+ item.board_idx +"><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
+         content += "<td id='buttonArea' style='background:#A5DE9F'><input class='reason' type='button' value='사유보기' id="+ item.board_idx +"><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
           }
           if(item.fund_state=='승인'){
 
-               content += "<td id='buttonArea'><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
+               content += "<td id='buttonArea' style='background:#A5DE9F'><input class='delmy' type='button' value='삭제' id="+ item.board_idx +"></td>";
                 }
-         content += "</tr>"; 
+         content += "</tr>";  
          content += "</table>"; 
       })
       $("#mylistTable").empty();

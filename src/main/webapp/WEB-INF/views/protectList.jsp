@@ -13,7 +13,7 @@ table {
 }
 
 table, tr, td {
-	border: 1px solid black;
+	border: 1px solid white;
 	border-collapse: collapse;
 	padding: 1.5% 0.1%;
 }
@@ -60,7 +60,7 @@ table, tr, td {
 #searchArea {
 	position: absolute;
 	top: 6%;
-	left: 2%;
+	left: 4%;
 }
 
 #paging {
@@ -77,6 +77,47 @@ table, tr, td {
 #bTitle {
 	text-align: center;
 }
+#protectbtn{
+position:relative;
+left:42%;
+top:30%;
+
+
+
+}
+#searchArea input[type='text']{
+	position:absolute;
+	width:40%;
+	top:14%;
+	left:89%;
+	height:80%;
+}	
+		
+
+#contentFrame input[type='button']{
+	width:80px;
+	height: 40px;
+	background-color: #28977B;
+	border-color:#28977B;
+	border-style:solid;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+
+}					
+
+
+#searchArea select { 
+	width: 150px; /* 원하는 너비설정 */ 
+	padding: .8em .5em; /* 여백으로 높이 설정 */ 
+	font-family: inherit; /* 폰트 상속 */ 
+	background: url(resources/arrowIcon.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+	border: 1px solid #999; border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+	-moz-appearance: none; 
+	appearance: none; 
+	left:30%;
+}
 </style>
 </head>
 <body>
@@ -85,6 +126,7 @@ table, tr, td {
 	<jsp:include page="sideMenu.jsp" />
 	<div id="contentFrame">
 		<h2 id="aaa">보호 게시판</h2>
+		
 		<!-- 지역 -->
 		<div id="searchArea">
 			<select id="sido" onchange="getSigungu()">
@@ -120,7 +162,7 @@ table, tr, td {
 			<!-- 품종 -->
 			<select id="animalType" name="animalType">
 			</select> <input type="text" id="keyWord" placeholder="검색어를 입력해주세요." /> <input
-				type="button" onclick="listCall(showPageNum)" value="검색" />
+				type="button" onclick="listCall(showPageNum)" value="검색" id="protectbtn"/>
 		</div>
 
 		<div class="list"></div>
@@ -186,8 +228,8 @@ function listPrint(data){
 	data.list.forEach(function(item){
 		content += "<table>";
 		content += "<tr>";
-		content += "<td id='bIdx'>"+item.board_idx+"</td>";
-		content += "<td id='bTitle'><a href='protectDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
+		content += "<td id='bIdx' style='background:#28977B; color:white'>"+item.board_idx+"</td>";
+		content += "<td id='bTitle' style='background:#A5DE9F; color:white'><a href='protectDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
 		content += "</tr>";
 		content += "<tr>";
 		content += "<td colspan='2'><img width='390' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";

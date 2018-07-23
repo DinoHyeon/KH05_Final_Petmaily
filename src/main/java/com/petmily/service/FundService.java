@@ -481,8 +481,10 @@ public class FundService {
 	}
 
 	/* 소현 :즐겨찾기 리스트 출력 페이징 처리 */
-	public HashMap<String, Object> getlikeList(HashMap<String, String> params) {
+	public HashMap<String, Object> getlikeList(HashMap<String, String> params, HttpSession session) {
 		inter = sqlSession.getMapper(BoardInter.class);
+		params.put("loginWriter", (String) session.getAttribute("loginId"));
+
 		int allCnt = inter.likeallCount(params);
 		// 생성 가능한 페이지 수 구하기
 		int pageCnt = allCnt % 10 > 0 ? Math.round(allCnt / 10) + 1 : allCnt / 10;

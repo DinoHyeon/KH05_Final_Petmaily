@@ -13,7 +13,7 @@ table {
 }
 
 table, tr, td {
-	border: solid 1px black;
+	border: solid 1px white;
 	border-collapse: collapse;
 	padding: 1.5% 0.1%;
 }
@@ -119,10 +119,7 @@ top:30%;
 
 
 }
-.list a:link{
-			text-decoration: none;
-			color: white;
-		}
+
 }
 </style>
 </head>
@@ -131,7 +128,7 @@ top:30%;
 <div id="sideFrame"></div>
 <jsp:include page="sideMenu.jsp" />
 <div id="contentFrame">
-	<h2 id="aaa">실종 게시판</h2>
+<h2 id="aaa">실종 게시판</h2>
 		<div id="searchArea">
 		<!-- 지역 -->
 		<select id="sido" onchange="getSigungu()">
@@ -237,14 +234,14 @@ function listPrint(data){
 		
 		content += "<table>";
 		content += "<tr>";
-		content += "<td id='bIdx' style='background:#CEFBC9; color:white'>"+item.board_idx+"</td>";
-		content += "<td id='bTitle' ><a href='missingDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
+		content += "<td id='bIdx' style='background:#28977B; color:white'>"+item.board_idx+"</td>";
+		content += "<td id='bTitle' style='background:#A5DE9F; color:white'><a href='missingDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
 		content += "</tr>";
 		content += "<tr>";
 		content += "<td colspan='2'><img width='390' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";
 		content += "</tr>";
 		content += "<tr>";
-		content += "<td colspan='2'>"+date.toLocaleDateString("en-KOR")+"</td>";
+		content += "<td colspan='2'  style='background:#A5DE9F'>"+date.toLocaleDateString("en-KOR")+"</td>";
 		content += "</tr>";
 		content += "</table>";
 	})

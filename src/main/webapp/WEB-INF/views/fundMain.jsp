@@ -16,7 +16,7 @@ table, th, td {
 }
 		#write{
 			position:absolute;
-			top:63%;
+			top:53%;
 			left:82%;
 			background-color: #28977B;
 			border-color:#28977B;
@@ -29,7 +29,7 @@ table, th, td {
 		}
 	#paging{
 			position:absolute;
-			top:82%;
+			top:92%;
 			left:53%;
 		}
 		
@@ -196,9 +196,9 @@ table, th, td {
 	<thead>
 		<tr>
 					<th style="width: 150px">글번호</th>
-					<th style="width: 450px">글제목</th>
+					<th style="width: 350px">글제목</th>
 					<th style="width: 150px">작성자</th>
-							<th style="width: 150px">지역</th>
+							<th style="width: 400px">지역</th>
 					<th style="width: 150px">작성일</th>
 				
 					<th style="width: 150px">조회수</th>
