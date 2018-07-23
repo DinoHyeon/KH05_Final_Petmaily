@@ -32,6 +32,7 @@ public class ApiController {
    // 보호소 전체 리스트
    ArrayList<ShelterDTO> shelterList = new ArrayList<ShelterDTO>();
    ArrayList<NoticeDTO> noticeList = new ArrayList<NoticeDTO>();
+   HashMap<String, String> noticeConditions = new HashMap<String,String>();
    int shelterListAllCnt = 0;
 
    @RequestMapping(value = "apiPage")
@@ -282,13 +283,15 @@ public class ApiController {
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
+      
+      System.out.println("결과 길이"+list.size());
       return list;
    }
 
    @RequestMapping(value = "shelterList")
    public @ResponseBody HashMap<String, Object> shelterList(@RequestParam("sido") String sido,
-         @RequestParam("sigundo") String sigundo, @RequestParam("page") int page) {
-      
+         @RequestParam("sigundo") String sigundo, @RequestParam("page") int page, HttpSession session) {
+	   
       System.out.println(sido+"/"+sigundo);
       HashMap<String, Object> map = new HashMap<String, Object>();
       ArrayList<ShelterDTO> list = new ArrayList<ShelterDTO>();
@@ -318,21 +321,19 @@ public class ApiController {
 
       int end = 5 * page - 1;
       int start = end - 5 + 1;
-      
-      System.out.println(end);
-      System.out.println(start);
-      System.out.println(shelterListAllCnt);
-      
-      if(end>shelterListAllCnt) {
-         for(int i=start; i<=shelterListAllCnt-1; i++) {
-            list.add(tempList.get(i));
-         }   
-      }else {
-         for(int i=start; i<=end; i++) {
-            list.add(tempList.get(i));
-         }      
-      }
 
+      if(shelterListAllCnt != 0) {
+    	  if(end>shelterListAllCnt) {
+    	         for(int i=start; i<=shelterListAllCnt-1; i++) {
+    	            list.add(tempList.get(i));
+    	         }   
+    	      }else {
+    	         for(int i=start; i<=end; i++) {
+    	            list.add(tempList.get(i));
+    	         }      
+    	      }
+      }
+      
       map.put("list", list);
       map.put("currPage", page);
       map.put("pageCnt", pageCnt);
@@ -360,22 +361,40 @@ public class ApiController {
    @RequestMapping(value = "noticeList")
    public @ResponseBody HashMap<String, Object> noticeList(@RequestParam HashMap<String, String> params) {
       noticeList.clear();
-      String showPageNum = params.get("showPageNum");
-      String start_date = params.get("start_date");
-      System.out.println(start_date);
-      String end_date = params.get("end_date");
-      System.out.println(end_date);
-      String sido = params.get("sido");
+      
+      String showPageNum = "";
+      String start_date = "";
+      String end_date = "";
+      String sido = "";
+      String sigundo = ""; 
+      String shelter = "";
+      String animal = "";
+      String animalType = "";
+      String statement = "";
+      
+      
+      System.out.println("뷰에서 받은 날짜 " + params.get("start_date"));
+      showPageNum = params.get("showPageNum");
+      System.out.println("요청 페이지"+showPageNum);
+      if(params.get("start_date")!=null) {
+    	  start_date = params.get("start_date");
+      }
+      System.out.println("시작 일"+start_date);
+      if(params.get("end_date")!=null) {
+    	  end_date = params.get("end_date");
+      }
+      System.out.println("종료 일"+end_date);
+      sido = params.get("sido");
       System.out.println(sido);
-      String sigundo = params.get("sigundo");
+      sigundo = params.get("sigundo");
       System.out.println(sigundo);
-      String shelter = params.get("shelter");
+      shelter = params.get("shelter");
       System.out.println(shelter);
-      String animal = params.get("animal");
+      animal = params.get("animal");
       System.out.println(animal);
-      String animalType = params.get("animalType");
+      animalType = params.get("animalType");
       System.out.println(animalType);
-      String statement = params.get("statement");
+      statement = params.get("statement");
       System.out.println(statement);
 
       HashMap<String, Object> map = new HashMap<String, Object>();
@@ -387,7 +406,7 @@ public class ApiController {
       String addr = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?serviceKey="
             + serviceKey + "&bgnde=" + start_date + "&endde=" + end_date + "&upkind=" + animal + "&kind="
             + animalType + "&upr_cd=" + sido + "&org_cd=" + sigundo + "&care_reg_no=" + shelter + "&state="
-            + statement + "&pageNo=" + showPageNum + "&startPage=" + 1 + "&numOfRows=" + 8 + "&pageSize=10";
+            + statement + "&pageNo=" + params.get("showPageNum") + "&startPage=" + 1 + "&numOfRows=" + 8 + "&pageSize=10";
 
       NoticeDTO dto = new NoticeDTO();
 
@@ -546,10 +565,11 @@ public class ApiController {
          e.printStackTrace();
       }
 
+      System.out.println(noticeList.size());
       int pageCnt = Integer.parseInt(totalCount) % 10 > 0 ? Math.round(Integer.parseInt(totalCount) / 10) + 1 : Integer.parseInt(totalCount) / 10;
 
       map.put("list", noticeList);
-      map.put("currPage", showPageNum);
+      map.put("currPage", params.get("showPageNum"));
       map.put("pageCnt", pageCnt);
 
       return map;

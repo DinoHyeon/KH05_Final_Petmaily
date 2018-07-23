@@ -108,10 +108,10 @@ table,td,tr{
 		<table id="animal">
 			<tr>
 				<th colspan="2">${dto.processState}</th>
-				<td colspan="2"><span id="remainderDate"></span> 일 후 입양가능</td>
+				<td colspan="2"><span id="remainderDate"></span></td>
 			</tr>
 			<tr>
-				<td colspan="4">${dto.kindCd}/${dto.sexCd} / ${dto.colorCd} / ${dto.age} / ${dto.weight}</td>
+				<td colspan="4">${dto.kindCd}/ <span id="gender"></span> / ${dto.colorCd} / ${dto.age} / ${dto.weight}</td>
 			</tr>
 			<tr>
 				<th>공고번호</th>
@@ -157,8 +157,18 @@ table,td,tr{
 </body>
 <script>
 $(document).ready(function() {
-	remainderDate();
+	if("${dto.processState}"== "보호중" || "${dto.processState}" == "공고중"){
+		remainderDate();
+	}
+	
 	$( "button" ).button();
+	if("${dto.sexCd}" == "M"){
+		$("#gender").html("수컷");
+	}else if("${dto.sexCd}" == "F"){
+		$("#gender").html("암컷");
+	}else{
+		$("#gender").html("알 수 없음");
+	}
 });
 
 function remainderDate() {
@@ -180,7 +190,13 @@ function remainderDate() {
 	var btMs = endday.getTime() - today.getTime() ;
 	var btDay = Math.floor(btMs / (1000 * 60 * 60 * 24));
 	
-	$("#remainderDate").html(btDay);
+	if(btDay < 1){
+		$("#remainderDate").html("현재 입양가능");
+	}else{
+		$("#remainderDate").html(btDay+" 일 후 입양가능");
+	}
+	
+	
 }
 
 $( "button" ).click( function( event ) {

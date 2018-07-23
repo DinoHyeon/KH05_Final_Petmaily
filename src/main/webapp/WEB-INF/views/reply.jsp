@@ -211,6 +211,20 @@ function listPrint(data){
 }
 
 function regist() {
+	if($("#replyContent").val()==""){
+		alert("댓글 내용을 입력해주세요.");
+	}else if('${sessionScope.loginId}'==""){
+		if($("#noneMemberPass").val()==""){
+			alert("비밀번호를 입력해주세요.");
+		}else{
+			registAjax();
+		}
+	}else{
+		registAjax();
+	};
+}
+
+function registAjax() {
 	$.ajax({
 		type : "get",
 		url : "./replyRegist",
