@@ -134,7 +134,7 @@ td{
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
-	<div id="sideFrame"></div>
+	<jsp:include page="sideMenu.jsp" />
 	<div id="contentFrame">
 	<h3 id="qqq">Quiz 등록</h3>
 		<div id="registSelectBox">
