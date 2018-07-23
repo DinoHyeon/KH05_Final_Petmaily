@@ -79,8 +79,7 @@ input[type='text']{
 	<div id="contentFrame">
 	
 	<form id="sendForm" action="fundupdate" method="post">
-		<table>
-			
+		<table>	
 			<tr>
 			<td style="background:#217D65">	<input type="hidden" value=${dto.board_idx} name="idx"></td>
 	<td id="ttitle" style="background:#A9CB73">제목</td>

@@ -10,7 +10,7 @@
 table, tr, td {
 	border: 1px solid black;
 	border-collapse: collapse;
-	padding: 5px 10px;
+	padding: 1% 1%;
 	margin: auto;
 }
 
@@ -31,6 +31,11 @@ input[type='text']{
 			text-align:left;
 			overflow: auto;
 }
+#attachArea{
+	padding : 1%;
+	float : left;
+}
+
 #attach {
 	overflow: auto;
 }
@@ -38,6 +43,7 @@ input[type='text']{
 #attach img {
 	width: 80px;
 	height: 80px;
+	float: left;
 }
 
 #contentFrame {
@@ -118,7 +124,7 @@ input[type='text']{
 			<tr>
 				<th>제목</th>
 				<td>
-					<input type="text" name="board_title" />
+					<input type="text" name="board_title" id="bTitle"/>
 				</td>
 			</tr>
 			<tr>
@@ -259,8 +265,8 @@ input[type='text']{
 		}else if($("#animal option:selected").html()=="선택"){
 			$("#animal").focus();
 			alert("동물종을 선택해 주세요.");
-		}else if($("#board_title").val()==""){
-			$("#board_title").focus();
+		}else if($("#bTitle").val() == ""){
+			$("#bTitle").focus();
 			alert("제목을 입력해 주세요.");
 		}else if(!mcheckphoto()){
 			alert("파일을 등록해주세요.");

@@ -26,6 +26,10 @@ td{
 	padding : 15px;
 
 }
+#attachArea{
+	padding : 1%;
+	float : left;
+}
 
 #editable{
 	height: 600px;
@@ -90,7 +94,7 @@ input[type="text"]{
 	<form id="sendForm" action="missingUpdate" method="post">
 		<table>
 			<tr>
-				<td id="d_title"><input type="text" name="board_title" value="${missingDetail.board_title}" /> 
+				<td id="d_title"><input type="text" name="board_title" id="bTitle" value="${missingDetail.board_title}" /> 
 					<input type="hidden" name="board_idx" value="${missingDetail.board_idx}" /></td>
 				<td id="d_writer">${missingDetail.board_writer}</td>
 				<td id="d_hit">${missingDetail.board_hit}</td>
@@ -318,16 +322,48 @@ input[type="text"]{
 	$("#back").click(function() {
 		location.href = "./missingList";
 	});
+	
+	/* 사진체크 */
+	function mcheckphoto() {
+      var photoChk;
+      $.ajax({
+         url:"./mcheckphoto",
+         type:"get",
+         async: false,
+         success:function(data){
+            photoChk = data;
+         },
+         error:function(e){
+            console.log(e);
+         }
+      });
+      
+      return photoChk;
+      
+   }
 
 	//수정
 	$("#btn_Update").click(function() {
-		$("#editable input[type='button']").remove();//삭제 버튼 제거
-		$("input[name='mainPhoto']").val($("input:radio[name='main']:checked").val());
-		$("#attach input[type='radio']").remove();//체크박스 버튼 제거
-		$("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
-		$("#location").val($("#sido option:selected").html());//지역 내용 담기
-		$("#selectAnimal").val($("#animal option:selected").html());//동물 내용 담기
-		$("#sendForm").submit();
+		if($("#bTitle").val()==""){
+			$("#bTitle").focus();
+			alert("제목을 입력해 주세요.");
+		}else if($("#sido option:selected").html()=="선택"){
+			$("#sido").focus();
+			alert("지역을 선택해 주세요.");
+		}else if(!mcheckphoto()){
+			alert("파일을 등록해주세요.");
+		}else if(!$("input:radio[name='main']").is(":checked")){
+			$("input:radio[name='main']").focus();
+			alert("대표이미지를 선택해 주세요.");
+		}else{
+			$("#editable input[type='button']").remove();//삭제 버튼 제거
+			$("input[name='mainPhoto']").val($("input:radio[name='main']:checked").val());
+			$("#attach input[type='radio']").remove();//체크박스 버튼 제거
+			$("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
+			$("#location").val($("#sido option:selected").html());//지역 내용 담기
+			$("#selectAnimal").val($("#animal option:selected").html());//동물 내용 담기
+			$("#sendForm").submit();
+		}	
 	});
 </script>
 </html>

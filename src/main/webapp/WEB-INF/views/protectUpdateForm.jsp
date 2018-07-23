@@ -7,19 +7,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-table, tr, td{
-		border : 1px solid black;
-		border-collapse: collapse;
-        padding: 5px 10px; 
-        margin: auto;
-	}
-	
-th{
+table{
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 5px 10px;
+	margin: auto;
+	width : 70%;
+   	top : 10%;
+    left : 10%;
+}
+
+th {
 	width: 70px;
+}
+td{
+	border : 1px solid black;
+	border-collapse: collapse;
+	padding : 15px;
+
+}
+#attachArea{
+	padding : 1%;
+	float : left;
+}
+
+#editable{
+	height: 600px;
 }
 
 #fileUpBtn {
-	margin-left: 300px;
+	position: absolute;
+	top : 55.6%;
+    left: 82%;
 }
 
 #attach img {
@@ -27,22 +46,63 @@ th{
 	height: 80px;
 }
 
+#contentFrame {
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 150%;
+   background: white;
+}
+
+#sideFrame{
+   position: absolute;
+   left: 0.52%;
+   top: 11.4%;
+   width: 15%;
+   height: 150%;
+   background: black;
+}
+#d_title{
+	 width : 40%;
+}
+#d_writer{
+	 text-align: center;
+	 width : 20%;
+}
+#d_hit{
+	text-align: center;
+	width : 10%;
+}
+#d_reg{
+	text-align: center;
+}
+input[type="text"]{
+	width : 100%;
+}
+#buttonArea{
+	position: absolute;
+	left : 45%;
+	top : 70%;
+}
 </style>
 </head>
 <body>
 <jsp:include page="mainFrame.jsp"/>
+<div id="sideFrame"></div>
+<div id="contentFrame">
 	<form id="sendForm" action="protectUpdate" method="post">
 	<table>
 		<tr>
-			<td>
-				<input type="text" name="board_title" value="${protectDetail.board_title}"/>
+			<td id="d_title">
+				<input type="text" name="board_title" id="bTitle" value="${protectDetail.board_title}"/>
 				<input type="hidden" name="board_idx" value="${protectDetail.board_idx}"/>
 			</td>
-			<td>${protectDetail.board_writer}</td>
-			<td>${protectDetail.board_hit}</td>
+			<td id="d_writer">${protectDetail.board_writer}</td>
+			<td id="d_hit">${protectDetail.board_hit}</td>
 		</tr>
 		<tr>
-			<td>
+			<td id="d_animal">
 				<!-- 동물종 -->
 				동물 종 :
 				<select id="animal" onchange="getAnimalType()">
@@ -52,7 +112,7 @@ th{
 					<input type="hidden" id="selectAnimal" name="animal"/>
 				</select>
 			</td>
-			<td colspan="2">
+			<td colspan="2" id="d_animal">
 				<!-- 품종 -->
 				품종 :
 				<select id="animalType" name="animalType">
@@ -105,9 +165,11 @@ th{
 			</tr>
 	</table>
 	</form>
-	
+	<div id="buttonArea">
 	<input type="button" id="btn_Update" value="수정"/>
 	<input type="button" id="back" value="취소"/>
+	</div>
+	</div>
 </body>
 <script>
 	var fullLoc = "${protectDetail.protect_loc}"; //지역 값 전체 받아오기
@@ -262,15 +324,47 @@ th{
 		location.href="./protectList";
 	});
 	
+	/* 사진 체크 */
+	function pcheckphoto() {
+		var photoChk;
+	      $.ajax({
+	         url:"./pcheckphoto",
+	         type:"get",
+	         async: false,
+	         success:function(data){
+	            photoChk = data;
+	         },
+	         error:function(e){
+	            console.log(e);
+	         }
+	      });
+	      
+	      return photoChk;
+	      
+	   }
+	
 	//수정
 	$("#btn_Update").click(function(){
-		$("#editable input[type='button']").remove();//삭제 버튼 제거
-		$("input[name='mainPhoto']").val($("input:radio[name='main']:checked").val());
-		$("#attach input[type='radio']").remove();//체크박스 버튼 제거
-		$("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
-		$("#location").val($("#sido option:selected").html());//지역 내용 담기
-		$("#selectAnimal").val($("#animal option:selected").html());//동물 내용 담기
-		$("#sendForm").submit();
+		if($("#bTitle").val()==""){
+			$("#bTitle").focus();
+			alert("제목을 입력해 주세요.");
+		}else if($("#sido option:selected").html()=="선택"){
+			$("#sido").focus();
+			alert("지역을 선택해 주세요.");
+		}else if(!mcheckphoto()){
+			alert("파일을 등록해주세요.");
+		}else if(!$("input:radio[name='main']").is(":checked")){
+			$("input:radio[name='main']").focus();
+			alert("대표이미지를 선택해 주세요.");
+		}else{
+			$("#editable input[type='button']").remove();//삭제 버튼 제거
+			$("input[name='mainPhoto']").val($("input:radio[name='main']:checked").val());
+			$("#attach input[type='radio']").remove();//체크박스 버튼 제거
+			$("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
+			$("#location").val($("#sido option:selected").html());//지역 내용 담기
+			$("#selectAnimal").val($("#animal option:selected").html());//동물 내용 담기
+			$("#sendForm").submit();
+		}
 	});
 	
 </script>

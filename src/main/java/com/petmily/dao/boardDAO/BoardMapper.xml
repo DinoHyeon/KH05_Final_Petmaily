@@ -152,7 +152,7 @@
 		VALUES(#{board_idx}, #{protect_loc}, #{animal_type},
 		#{animal_idx}, #{protect_pw})
 	</insert>
-
+	
 	<!-- 보호_사진 등록 -->
 	<insert id="protectWriteFile" parameterType="BoardDTO">
 		INSERT INTO

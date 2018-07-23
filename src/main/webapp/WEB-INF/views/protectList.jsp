@@ -18,6 +18,7 @@ table, tr, td {
 	padding: 1.5% 0.1%;
 }
 
+
 .list {
 	position: absolute;
 	width: 100%;

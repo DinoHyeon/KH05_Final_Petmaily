@@ -15,23 +15,26 @@ table, tr, td {
 }
 
 th {
-	width: 70px;
+	width : 70px;
 }
 
-input[type='text'] {
-	width: 100%;
+input[type='text']{
+	width:100%;
 }
 
 #fileUpBtn {
 	margin-left: 600px;
 }
-
-#editable {
-	height: 400px;
-	text-align: left;
-	overflow: auto;
+#attachArea{
+	padding : 1%;
+	float : left;
 }
 
+#editable{
+			height : 400px;
+			text-align:left;
+			overflow: auto;
+}
 #attach {
 	overflow: auto;
 }
@@ -40,10 +43,30 @@ input[type='text'] {
 	width: 80px;
 	height: 80px;
 }
+
+#contentFrame {
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 150%;
+   background: white;
+}
+
+#sideFrame{
+   position: absolute;
+   left: 0.52%;
+   top: 11.4%;
+   width: 15%;
+   height: 150%;
+   background: black;
+}
 </style>
 </head>
 <body>
 <jsp:include page="mainFrame.jsp"/>
+<div id="sideFrame"></div>
+<div id="contentFrame">
 	<center>
 		<h3>보호 글 등록</h3>
 	</center>
@@ -98,7 +121,7 @@ input[type='text'] {
 			<tr>
 				<th>제목</th>
 				<td>
-					<input type="text" name="board_title" name="board_title"/>
+					<input type="text" name="board_title" id="bTitle"/>
 				</td>
 			</tr>
 			<tr>
@@ -125,12 +148,13 @@ input[type='text'] {
 		<center>
 			<c:set var="loginId" value="${sessionScope.login}"/>
     		<c:if test="${empty loginId}">
-				<input name="pass" type="password" placeholder="비밀번호"/> 
+				<input name="pass" id="pass" type="password" placeholder="비밀번호"/> 
     		</c:if>
 			<input type="button" id="btn_protectWrite" value="등록"> 
 			<input type="button" id="back" value="취소">
 		</center>
 	</form>
+	</div>
 </body>
 <script>
 	//지역
@@ -237,8 +261,8 @@ input[type='text'] {
 		}else if($("#animal option:selected").html()=="선택"){
 			$("#animal").focus();
 			alert("동물종을 선택해 주세요.");
-		}else if($("#board_title").val()==""){
-			$("#board_title").focus();
+		}else if($("#bTitle").val() == ""){
+			$("#bTitle").focus();
 			alert("제목을 입력해 주세요.");
 		}else if(!pcheckphoto()){
 			alert("파일을 등록해주세요.");
