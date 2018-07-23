@@ -132,6 +132,7 @@
 				</tr>
 			</table>
 		</div>
+		<jsp:include page="reply.jsp"/>
 	</body>
 	<script>
 		//로그인 아이디 체크 -> 버튼 활성화/비활성화

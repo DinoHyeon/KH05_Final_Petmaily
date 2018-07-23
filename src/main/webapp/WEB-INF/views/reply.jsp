@@ -61,7 +61,6 @@ td{
 </style>
 </head>
 <body>
-<jsp:include page="mainFrame.jsp" />
 <div id="noneMemberPassChk" title="비회원 댓글 삭제">
 	<div>
 		<h1>비밀번호를 입력해주세요.</h1>
@@ -94,12 +93,13 @@ td{
 <div id="paging"></div>
 </body>
 <script>
-var replyIdx;
+var replyIdx='${reply}';
+console.log("replyIdx",replyIdx);
 var request;
-var showPageNum = 1;
+var reShowPageNum = 1;
 
 $(document).ready(function() {
-	replyListCall(showPageNum);
+	replyListCall(reShowPageNum);
 	$( "#noneMemberPassChk" ).dialog({
 		autoOpen: false,
      	resizable: false,
@@ -119,8 +119,8 @@ function replyListCall(page) {
 		type : "get",
 		url : "./replyListCall",
 		data : {
-			"idx": 1,
-			"showPageNum":page
+			"idx": replyIdx,
+			"reShowPageNum":page
 		},
 		success : function(data) {
 			listPrint(data);
@@ -227,14 +227,14 @@ function registAjax() {
 		type : "get",
 		url : "./replyRegist",
 		data : {
-			"idx": 1,
+			"idx": replyIdx,
 			"content":$("#replyContent").val(),
 			"pass":$("#noneMemberPass").val()
 		},
 		success : function(data) {
 			$("#replyContent").val("");
 			$("#noneMemberPass").val("");
-			replyListCall(showPageNum);
+			replyListCall(reShowPageNum);
 		},
 		error : function(e) {
 			console.log(e);
@@ -254,7 +254,7 @@ function replyDel(idx) {
 			success : function(data) {
 				if(data==1){
 					alert("댓글이 삭제되었습니다");
-					replyListCall(showPageNum);
+					replyListCall(reShowPageNum);
 				}
 				
 			},
@@ -282,7 +282,7 @@ function replyModi(data) {
 		success : function(result) {
 			if(result==1){
 				alert("댓글이 수정되었습니다.");
-				replyListCall(showPageNum);
+				replyListCall(reShowPageNum);
 			}
 			
 		},

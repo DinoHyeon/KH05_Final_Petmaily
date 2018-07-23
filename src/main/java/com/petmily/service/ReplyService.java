@@ -47,7 +47,7 @@ public class ReplyService {
 		int pageCnt = allCnt % 15 > 0 ? Math.round(allCnt / 15) + 1 : allCnt / 15;
 		HashMap<String, Object> replyList = new HashMap<String, Object>();
 
-		int page = Integer.parseInt(params.get("showPageNum"));
+		int page = Integer.parseInt(params.get("reShowPageNum"));
 
 		if (page > pageCnt) {
 			page = pageCnt;

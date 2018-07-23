@@ -147,6 +147,7 @@ public class CommunityService {
 		mav.addObject("cDetail", inter.communityDetail(Integer.parseInt(board_idx)));
 		// mav.addObject("cDetailPhoto",
 		// inter.cDetailPhoto(Integer.parseInt(board_idx)));
+		mav.addObject("reply", board_idx);
 		mav.setViewName("communityDetail");
 		return mav;
 	}
