@@ -6,17 +6,35 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자페이지 승인대기</title>
 <style>
-table, th, td {
+table {
    border-collapse: collapse;
-   padding: 6px 15px;
-   margin: 170px 10px 105px 440px;
+   padding: 0.6% 1.5%;
+   margin: 17% 1% 10.5% 44%;
    text-align: center;
 }
 
+td{
+color:white;
+    padding: 0.6% 1.5%;
+   margin: 17% 1% 10.5% 44%;
+   text-align: center;
+}
 table, tr {
-   border: 1px solid black;
+   border: 1px solid gray;
+   
+   
 }
 
+th{
+   border: 1px solid gray;
+
+
+background-color: #217D65;
+	color:white;
+	   padding: 0.6% 1.5%;
+   margin: 17% 1% 10.5% 44%;
+
+}
 #noreason {
    resize: none;
    width: 250px;
@@ -66,6 +84,15 @@ table, tr {
    color: black;
 }
 
+#agree{
+   position: absolute;
+   right: 15%;
+   top: -10%;
+   width: 59.95%;
+   height: 6%;
+   background: white;
+
+}
 #idx {
    font-size: 29px;
    font-weight: 600;
@@ -79,7 +106,14 @@ table, tr {
    top: 10%;
    left: 20%;
 }
-
+#sideFrame{
+   position: absolute;
+   left: 0.52%;
+   top: 11.4%;
+   width: 15%;
+   height: 150%;
+   background: black;
+}
 input[value='보내기']{
    position: absolute;
    top: 87%;
@@ -91,16 +125,25 @@ input[value='보내기']{
     top: 2%;
     left: 43%;
 }
+#paging{
+position: absolute;
+   left: 50%;
+   top: 80.4%;
+   width: 15%;
+
+}
 </style>
 </head>
 <body>
    <jsp:include page="mainFrame.jsp" />
-   <table>
+   	<div id="sideFrame"></div>
+   
+	<table id="agree">
       <thead>
          <tr>
-            <th>글번호</th>
+            <th style=width:10%>글번호</th>
             <th>글제목</th>
-            <th>승인상태</th>
+          
             <th>[승인/거부]</th>
          </tr>
       </thead>
@@ -163,11 +206,11 @@ input[value='보내기']{
       data.list
             .forEach(function(item) {
                content += "<tr>";
-               content += "<td>" + item.board_idx + "</td>";
+               content += "<td style='background:#217D65'>" + item.board_idx + "</td>";
                content += "<td><a href='funddetail?idx=" + item.board_idx
                      + "&call=detail' style='color: blue'>"
                      + item.board_title + "</a></td>";
-               content += "<td>" + item.fund_state + "</td>";
+             
                content += "<td><input class='yes' type='button' value='승인' id="+ item.board_idx +"><input class='no' type='button' value='거부' id="
                      + item.board_idx + "></td>";
                content += "</tr>";

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,42 +8,36 @@
 <title>실종 게시글 수정</title>
 <style>
 table{
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding: 5px 10px;
-	margin: auto;
-	width : 70%;
-   	top : 10%;
+   border: 1px solid black;
+   border-collapse: collapse;
+   padding: 5px 10px;
+   margin: auto;
+   width : 70%;
+      top : 10%;
     left : 10%;
 }
 
 th {
-	width: 70px;
+   width: 70px;
 }
 td{
-	border : 1px solid black;
-	border-collapse: collapse;
-	padding : 15px;
+   border : 1px solid black;
+   border-collapse: collapse;
+   padding : 15px;
 
 }
-#attachArea{
-	padding : 1%;
-	float : left;
-}
 
-#editable{
-	height: 600px;
-}
+
 
 #fileUpBtn {
-	position: absolute;
-	top : 55.6%;
+   position: absolute;
+   top : 55.6%;
     left: 82%;
 }
 
 #attach img {
-	width: 80px;
-	height: 80px;
+   width: 80px;
+   height: 80px;
 }
 
 #contentFrame {
@@ -64,107 +58,250 @@ td{
    background: black;
 }
 #d_title{
-	 width : 40%;
+    width : 40%;
 }
 #d_writer{
-	 text-align: center;
-	 width : 20%;
+    text-align: center;
+    width : 20%;
 }
 #d_hit{
-	text-align: center;
-	width : 10%;
+   text-align: center;
+   width : 10%;
 }
 #d_reg{
-	text-align: center;
+   text-align: center;
 }
 input[type="text"]{
-	width : 100%;
+   width : 100%;
 }
-#buttonArea{
-	position: absolute;
-	left : 45%;
-	top : 70%;
+#conDiv {
+         position: absolute;
+         left: 15.52%;
+         top: 12.5%;
+         width: 82.95%;
+         height: 150%;
+         background: white;
+      }
+      /* 타이틀 */
+      #conDiv h1 {
+         left: 39%;
+         margin: 50px 0px 25px 0px;
+         text-align: center;
+         color: #28977B;
+         font-weight: 700;
+         font-size: 30;
+         position: absolute;
+      }      
+      #conDiv table, th, td {
+         border: 1px solid gray;
+         border-collapse: collapse;
+         padding: 6px 15px;
+         text-align: center;
+      }
+      #conDiv #editable{
+         border: 1px solid gray;
+         height: 250px;
+         height: 500px;
+         padding: 5px;
+         overflow: auto;
+         text-align: left;
+      }
+      /* 글 테이블 */
+      #detailTable{
+         top:14%;
+         left:11%;
+         width: 1000px;
+         margin: 0px 5px 5px 5px;
+         border-collapse: collapse;
+         padding: 5px 10px;
+         position:absolute;
+      }
+      #detailTable input[type='text']{
+         width:100%;
+         height:30px;
+      }
+      #detailTable textarea{
+         width:100%;
+         resize:none;
+         margin:0;
+      }
+      #detailTable td{
+         text-align: center;
+         border: 1px solid white;
+         border-collapse: collapse;
+         padding: 2px 2px;
+         margin: 0px;
+      }
+      #detailTable th{
+         border: 1px solid white;
+         border-collapse: collapse;
+         padding: 5px 10px;
+         background-color: #28977B;
+         color: white;
+      }
+      #detailTable input[type='button'] {
+          height:40px;
+            width:120px;
+       
+            background-color: #28977B;
+            border-color:#28977B;
+            border-style:solid;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+      }
+      /* 업로드 테이블 */
+      #uploadTable{
+         position: absolute;
+         top:65%;
+         left: 11%;
+         border: 1px solid gray;
+         width: 1000px;
+         height: 150px;
+         margin: 50px 5px 100px 5px;
+         border-collapse: collapse;
+         padding: 5px 10px;
+      }
+      #uploadTable tr,td{
+         font-weight:600;
+         font-family:"나눔고딕 보통";
+         border:1px solid gray;
+         text-align:center;
+      }
+      #uploadTable input[type='button']{
+         width:60px;
+         height: 30px;
+              top:1.6%;
+              left:93%;
+              
+         font-family:"나눔고딕 보통";
+         background-color: #28977B;
+         border-color:#28977B;
+         border-style:solid;
+         font-weight: 600;
+         color: white;
+         cursor: pointer;
+      }
+      
+      #detailTable select { 
+         width: 150px; /* 원하는 너비설정 */ 
+         padding: .8em .5em; /* 여백으로 높이 설정 */ 
+         font-family: inherit; /* 폰트 상속 */ 
+         background: url(resources/arrowIcon.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+         border: 1px solid #999; border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+         -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+         -moz-appearance: none; 
+         appearance: none; 
+         left:30%;
+      }
+         
+#attachArea{
+float:left;
+padding:1%;
 }
 </style>
 </head>
 <body>
-	<jsp:include page="mainFrame.jsp" />
-	<div id="sideFrame"></div>
-<div id="contentFrame">
-	<form id="sendForm" action="missingUpdate" method="post">
-		<table>
-			<tr>
-				<td id="d_title"><input type="text" name="board_title" id="bTitle" value="${missingDetail.board_title}" /> 
-					<input type="hidden" name="board_idx" value="${missingDetail.board_idx}" /></td>
-				<td id="d_writer">${missingDetail.board_writer}</td>
-				<td id="d_hit">${missingDetail.board_hit}</td>
-			</tr>
-			<tr>
-				<td id="d_animal">
-					<!-- 동물종 --> 동물 종 : <select id="animal" onchange="getAnimalType()">
-						<option value="417000">개</option>
-						<option value="422400">고양이</option>
-						<option value="429900">기타</option>
-						<input type="hidden" id="selectAnimal" name="animal" />
-				</select>
-				</td>
-				<td colspan="2" id="d_animal">
-					<!-- 품종 --> 품종 : <select id="animalType" name="animalType">
-				</select>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">실종 위치 : <select id="sido"
-					onchange="getSigungu()">
-						<option value="">선택</option>
-						<option value="6110000">서울특별시</option>
-						<option value="6260000">부산광역시</option>
-						<option value="6270000">대구광역시</option>
-						<option value="6280000">인천광역시</option>
-						<option value="6290000">광주광역시</option>
-						<option value="5690000">세종특별자치시</option>
-						<option value="6300000">대전광역시</option>
-						<option value="6310000">울산광역시</option>
-						<option value="6410000">경기도</option>
-						<option value="6420000">강원도</option>
-						<option value="6430000">충청북도</option>
-						<option value="6440000">충청남도</option>
-						<option value="6450000">전라북도</option>
-						<option value="6460000">전라남도</option>
+   <jsp:include page="mainFrame.jsp" />
+   <div id="sideFrame"></div>
+   <div id="conDiv">
+      <h1>실종게시판 수정</h1>
+   <form id="sendForm" action="missingUpdate" method="post">
+      <input type="hidden" name="board_idx" value="${missingDetail.board_idx}" /></td>
+      
+      <table id="detailTable" style="border:1px solid gray">
+         <tr class = "littleTr">
+      <th style="width:100px">작성자</th><td class="littleTd">${missingDetail.board_writer}</td>
+         
+         <th style="width:100px">작성일</th><td>${missingDetail.board_regDate}</td>
+            </tr>
+            <tr class = "littleTr">
+            <th style="width:100px">제목</th><td class="littleTd" >      <input type="text" name="board_title" value="${missingDetail.board_title}" /> </td>
+            <th style="width:100px">조회수</th><td id="d_hit">${missingDetail.board_hit}</td>
+            </tr>
+                  
+            
+      <tr class = "littleTr">
+      <th style="width:100px">동물 종</th>
+            <td class="littleTd">
+            
+                <select id="animal" onchange="getAnimalType()">
+                  <option value="417000">개</option>
+                  <option value="422400">고양이</option>
+                  <option value="429900">기타</option>
+                  <input type="hidden" id="selectAnimal" name="animal" />
+            </select>
+            </td>
+<th style="width:100px">품종</th>
+            <td colspan="2" id="d_animal" class="litteTd">
+               
+             <select id="animalType" name="animalType">
+            </select>
+            </td>
+         </tr>
+         <tr>
+         <th style="width:100px">실종 위치 </th>
+            <td colspan="5" class="littleTd"> <select id="sido"
+               onchange="getSigungu()">
+                  <option value="">선택</option>
+                  <option value="6110000">서울특별시</option>
+                  <option value="6260000">부산광역시</option>
+                  <option value="6270000">대구광역시</option>
+                  <option value="6280000">인천광역시</option>
+                  <option value="6290000">광주광역시</option>
+                  <option value="5690000">세종특별자치시</option>
+                  <option value="6300000">대전광역시</option>
+                  <option value="6310000">울산광역시</option>
+                  <option value="6410000">경기도</option>
+                  <option value="6420000">강원도</option>
+                  <option value="6430000">충청북도</option>
+                  <option value="6440000">충청남도</option>
+                  <option value="6450000">전라북도</option>
+                  <option value="6460000">전라남도</option>
 
-						<option value="6470000">경상북도</option>
-						<option value="6480000">경상남도</option>
-						<option value="6500000">제주특별자치도</option>
-				</select> </select> <select id="sigundo" name="sigundo">
-						<input type="hidden" id="location" name="sido">
-				</select>
-				</td>
-				<td id="d_reg">${missingDetail.board_regDate}</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<div id="editable" contenteditable="true">${missingDetail.board_content}</div>
-					<input id="contentForm" type="hidden" name="board_content" />
-				</td>
-			</tr>
-			<tr>
-				<th id="field">사진 첨부</th>
-				<td colspan="2"><input type="button" id="fileUpBtn"
-					onclick="fileUp()" value="첨부" /></td>
-			</tr>
-			<tr>
-				<td colspan="3" height="50px">
-					<div id="attach"></div>
-					<input type="hidden" name="mainPhoto">
-				</td>
-			</tr>
-		</table>
-	</form>
-	<div id="buttonArea">
-	<input type="button" id="btn_Update" value="수정" />
-	<input type="button" id="back" value="취소" />
-	</div>
-	</div>
+                  <option value="6470000">경상북도</option>
+                  <option value="6480000">경상남도</option>
+                  <option value="6500000">제주특별자치도</option>
+            </select> </select> <select id="sigundo" name="sigundo">
+                  <input type="hidden" id="location" name="sido">
+            </select>
+            </td>
+            
+         </tr>
+         <tr>
+               <th colspan=5 style="width:1000px; border:1px solid gray;">내　용</th>
+            </tr>
+         <tr>
+               <td colspan=5 style="text-align: left; border:1px solid gray;">
+               <div id="editable" contenteditable="true">${missingDetail.board_content}</div>
+               <input id="contentForm" type="hidden" name="board_content" />
+            </td>
+         </tr>
+         
+      </table>
+      <table id="uploadTable">
+      <tr>
+            <th id="field">사진 첨부</th>
+            <td colspan="5"><input type="button" id="fileUpBtn"
+               onclick="fileUp()" value="첨부" /></td>
+         </tr>
+         <tr>
+            <td colspan="5" height="50px">
+               <div id="attach"></div>
+               <input type="hidden" name="mainPhoto">
+            </td>
+         </tr>
+      <tr>
+                        <td colspan="3" style="text-align: right; border:1px solid white;">
+      <input type="button" id="btn_Update" value="수정" />
+   <input type="button" id="back" value="취소" />
+      </tr>
+      
+      </table>
+      
+   </form>
+   
+   </div>
 </body>
 <script>
 	var fullLoc = "${missingDetail.missing_loc}"; //지역 값 전체 받아오기

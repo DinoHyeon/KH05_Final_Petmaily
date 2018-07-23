@@ -35,9 +35,9 @@
            elem.innerHTML += content+"<br/>";
            elem.innerHTML += "<hr>";
            content ="";//content 초기화
-           content +="<div><img width='250' src='${path}'/>";
+           content +="<div id='attachArea'><img width='250' src='${path}'/>";
            content +="<input id='${path}' type='button' value='삭제' onclick='deltwo(this)'><div>";
-           content +="<br/>";
+           
            elem2.innerHTML += content;
            self.close();   
       }

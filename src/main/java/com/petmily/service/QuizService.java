@@ -3,13 +3,11 @@ package com.petmily.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.petmily.dao.quizDAO.QuizInter;
@@ -49,8 +47,8 @@ public class QuizService {
 		// 리턴을 위한 맵 생성
 		HashMap<String, Object> QuizList = new HashMap<String, Object>();
 
-		logger.info("전체 글 수 : "+allCnt);
-		
+		logger.info("전체 글 수 : " + allCnt);
+
 		int page = Integer.parseInt(params.get("showPageNum"));
 
 		// 클라이언트가 원한 페이지가 최종 페이지보다 높은 경우..
@@ -149,7 +147,7 @@ public class QuizService {
 
 		mav.setViewName("quiz");
 		mav.addObject("animal", animal);
-		mav.addObject("category",category);
+		mav.addObject("category", category);
 		mav.addObject("quizNum", quizNum);
 
 		return mav;
@@ -158,7 +156,7 @@ public class QuizService {
 	public HashMap<String, Object> nextQuiz() {
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
+
 		QuizDTO quiz = new QuizDTO();
 
 		if (quizNum == list.size()) {
@@ -168,12 +166,12 @@ public class QuizService {
 			quiz.setQuiz_ask(list.get(quizNum).getQuiz_ask());
 			quiz.setQuiz_answer(list.get(quizNum).getQuiz_answer());
 			quiz.setQuiz_content(list.get(quizNum).getQuiz_content());
-			
+
 			map.put("quiz", quiz);
-			
+
 			quizNum++;
 		}
-		
+
 		return map;
 	}
 
@@ -182,21 +180,21 @@ public class QuizService {
 	}
 
 	public Boolean QuizSettingChk(HashMap<String, String> params) {
-		
+
 		logger.info("퀴즈 설정 확인");
-		
+
 		inter = sqlSession.getMapper(QuizInter.class);
 		int reqQuizNum = Integer.parseInt(params.get("quiz_num"));
 		int resQuizNum = inter.getAllCnt(params);
 		boolean quizSettingResult = true;
-		
+
 		logger.info(reqQuizNum + "/" + resQuizNum);
-		
-		if(reqQuizNum>resQuizNum) {
+
+		if (reqQuizNum > resQuizNum) {
 			logger.info("문제 부족");
 			quizSettingResult = false;
 		}
-		
+
 		return quizSettingResult;
 	}
 }

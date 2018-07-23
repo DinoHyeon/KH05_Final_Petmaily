@@ -25,17 +25,19 @@ public class MailController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value = "/emailChkPage")
+	/*회원가입 인증 메일 발송*/
+	@RequestMapping(value = "/joinEmailSendPage")
 	@ResponseBody
 	public Map<Object, Object> mailSending(@RequestBody String email, HttpSession session) {
-		
-		logger.info("인증 메일 발송");
+		logger.info("회원가입 인증 메일 발송");
 	
-		int ran = new Random().nextInt(100000) + 10000; 
+		int confirmNum = new Random().nextInt(100000) + 10000; 
 		
-		String ranResult = Integer.toString(ran);
+		String ranResult = Integer.toString(confirmNum);
 		
 		session.setAttribute("emailConfirmNum", ranResult);
+		
+		String msg = null;
 		
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
@@ -47,26 +49,32 @@ public class MailController {
 			messageHelper.setText("인증번호: "+ranResult); 
 
 			mailSender.send(message);
+			
+			msg = "인증번호를 발송했습니다.";
 		} catch (Exception e) {
 			System.out.println(e);
+			msg = "인증번호 발송에 실패했습니다.";
 		}
 
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("success", "성공");
+		map.put("msg", msg);
 		return map;
 	}
 	
-	@RequestMapping(value = "/pwSearchChkPage")
+	/*비밀번호 찾기 인증 메일 발송*/
+	@RequestMapping(value = "/pwSearchEmailSendPage")
 	@ResponseBody
 	public Map<Object, Object> pwMailSending(@RequestBody String email, HttpSession session) {
 		
 		logger.info("비밀번호 인증 메일 발송");
 	
-		int ran = new Random().nextInt(100000) + 10000; 
+		int pwSearchNum = new Random().nextInt(100000) + 10000; 
 		
-		String pwRanResult = Integer.toString(ran);
+		String pwSearchResult = Integer.toString(pwSearchNum);
 		
-		session.setAttribute("pwSearchConfirmNum", pwRanResult);
+		session.setAttribute("pwSearchConfirmNum", pwSearchResult);
+		
+		String msg = null;
 		
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
@@ -75,15 +83,19 @@ public class MailController {
 			messageHelper.setFrom("doecc336@gmail.com"); 
 			messageHelper.setTo(email);
 			messageHelper.setSubject("petMily 비밀번호 찾기 인증번호 발송");
-			messageHelper.setText("인증번호: "+pwRanResult); 
+			messageHelper.setText("인증번호: "+pwSearchNum); 
 
 			mailSender.send(message);
+			
+			msg = "인증번호를 발송했습니다.";
 		} catch (Exception e) {
 			System.out.println(e);
+			
+			msg = "인증번호 발송에 실패했습니다.";
 		}
 
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("success", "성공");
+		map.put("msg", msg);
 		return map;
 	}
 }

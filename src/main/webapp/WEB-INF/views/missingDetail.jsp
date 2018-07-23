@@ -27,8 +27,8 @@ td{
   width: 100px;
   height: 100px;
   position: absolute;
-  left: 93%;
-  top: 22%;
+  left: 86%;
+  top: 33%;
   transform: translate(-50%, -50%);
   background: url("resources/img/heart.png") repeat;  
   
@@ -41,15 +41,33 @@ td{
   transition: background 1s steps(28);
 }
 
-#contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 150%;
-   background: white;
-}
-
+#conDiv {
+				position: absolute;
+				left: 15.52%;
+				top: 12.5%;
+				width: 82.95%;
+				height: 150%;
+				background: white;
+			}
+			/* 타이틀 */
+			#conDiv h1 {
+				left: 39%;
+				margin: 50px 0px 25px 0px;
+				text-align: center;
+				color: #28977B;
+				font-weight: 700;
+				font-size: 30;
+				position: absolute;
+			}
+			#conDiv table, th, td {
+				border: 1px solid gray;
+				border-collapse: collapse;
+				padding: 6px 15px;
+				text-align: center;
+			}
+			#conDiv td {
+				text-align: center;
+			}
 #sideFrame{
    position: absolute;
    left: 0.52%;
@@ -81,35 +99,116 @@ td{
 	text-align: center;
 }
 
+#mlist, #modi, #del{
+width:80px;
+				height: 40px;
+				font-family:"나눔고딕 보통";
+				font-size:20px;
+				background-color: #28977B;
+				border-color:#28977B;
+				border-style:solid;
+				font-weight: 600;
+				color: white;
+				cursor: pointer;
+
+}
+
+/* 글 테이블 */
+			#detailTable{
+				top:14%;
+				left:11%;
+				width: 1000px;
+				margin: 0px 5px 5px 5px;
+				border-collapse: collapse;
+				padding: 5px 10px;
+				position:absolute;
+			}
+			#detailTable input[type='text']{
+				width:100%;
+				height:30px;
+			}
+			#detailTable textarea{
+				width:100%;
+				resize:none;
+				margin:0;
+			}
+			#detailTable td{
+				text-align: center;
+                border: 1px solid white;
+				border-collapse: collapse;
+				padding: 2px 2px;
+				margin: 0px;
+			}
+			#detailTable th{
+				border: 1px solid white;
+				border-collapse: collapse;
+				padding: 5px 10px;
+				background-color: #28977B;
+				color: white;
+			}
+			#detailTable input[type='button'] {
+				 height:40px;
+		         width:120px;
+		         background-color: #28977B;
+		         border-color:#28977B;
+		         border-style:solid;
+		         font-weight: 600;
+		         color: white;
+		         cursor: pointer;
+			}
+			
+
 </style>
 </head>
 <body>
 <jsp:include page="mainFrame.jsp"/>
 <div id="sideFrame"></div>
-<div id="contentFrame">
+<div id="conDiv">
+<h1>실종게시판</h1>
 <div id="missingNonmemberChk" title="비회원">
 	<div>
 		<h1>비밀번호를 입력해주세요.</h1>
 		<input id="pass" type="password">
 	</div>
 </div>
-	<table>
-		<tr>
-			<td id="d_title">${missingDetail.board_title}</td>
-			<td id="d_writer"><span id="writer"></span></td>
-			<td id="d_hit">${missingDetail.board_hit}</td>
+			<table id="detailTable" style="border:1px solid gray">
+		<tr class = "littleTr">
+			<th style="width:10%">작성자</th><td  class="littleTd" style="width:50%"><span id="writer"></span></td>
+			<th style="width:10%">작성일</th><td  class="littleTd">${missingDetail.board_regDate}</td>
 		</tr>
 		<tr>
-			<td id="d_animal">동물종 : [ ${missingDetail.animal_idx} ]</td>
-			<td id="d_animal">품종 : [ ${missingDetail.animal_type} ]</td>
+			<tr class = "littleTr">
+		<th style="width:10%">제　목</th><td  class="littleTd">${missingDetail.board_title}</td>
+		<th style="width:10%">조회수</th><td>${missingDetail.board_hit}</td>
+		</tr>
+		<tr>
+		<tr class = "littleTr">
+		<th style="width:10%">동물종 </th>	<td id="d_animal"> [ ${missingDetail.animal_idx} ]</td>
+		<th style="width:10%">품종  </th>		<td id="d_animal"> [ ${missingDetail.animal_type} ]</td>
+			
+		</tr>
+		<tr>
+		<tr class = "littleTr">
+		<th style="width:12%">실종 위치 </th>
+			<td> ${missingDetail.missing_loc}</td>
+			<th style="width:10%">찜하기 </th>
 			<td><div id="favorite" class="heart"></div></td>
 		</tr>
+			<tr>
+					<th colspan=4 style="width:1000px; border:1px solid gray;">내　용</th>
+				</tr>
 		<tr>
-			<td colspan="2">실종 위치 : ${missingDetail.missing_loc}</td>
-			<td id="d_reg">${missingDetail.board_regDate}</td>
+		
+		<td colspan=4 style="text-align: left; border:1px solid gray;">${missingDetail.board_content}</td>
 		</tr>
 		<tr>
-			<td colspan="3">${missingDetail.board_content}</td>
+				<td colspan=4 style="text-align:right">
+		
+		
+	<input type="button" id="mlist" onclick="missingList()" value="리스트"/>
+	<input type="button" id="modi" onclick="missingNonmemberChk('modi')" value="수정"/>
+	<input type="button" id="del" onclick="missingNonmemberChk('del')" value="삭제"/>
+		</td>
 		</tr>
 	</table>
 	
@@ -117,11 +216,9 @@ td{
 	<%-- <jsp:include page="reply.jsp"/> --%>
 	
 	
-	<div id="buttonArea">
-	<input type="button" onclick="missingList()" value="리스트"/>
-	<input type="button" id="modi" onclick="missingNonmemberChk('modi')" value="수정"/>
-	<input type="button" id="del" onclick="missingNonmemberChk('del')" value="삭제"/>
-	</div>
+
+
+	
 	</div>
 </body>
 <script>

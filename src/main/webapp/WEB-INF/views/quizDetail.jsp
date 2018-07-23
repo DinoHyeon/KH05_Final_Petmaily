@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="resources/plugIn/jquery-ui.theme.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="resources/plugIn/jquery-ui.js"></script>
-<title>Insert title here</title>
+<title>퀴즈 상세보기 페이지</title>
 <style>
 /* 전체(배경) */
 #contentFrame {
@@ -28,35 +28,72 @@
 	height: 100%;
 	background: black;
 }
-textarea {
-	resize: none;
-	width: 100%;
+
+/* 타이틀 */
+#title h1 {
+	top: 3%;
+	left: 38%;
+	margin: 50px 0px 25px 0px;
+	text-align: center;
+	color: #A9CB73;
+	font-weight: 700;
+	font-size: 40;
+	position: absolute;
 }
-table{
-	border : 1px solid black;
+
+#title h5 {
+	top: 26%;
+	left: 62%;
+	margin: 10px 0px 40px 0px;
+	text-align: right;
+	color: gray;
+	font-weight: 700;
+	font-size: 15;
+	position: absolute;
+}
+#quiz textarea {
+	width: 100%;
+	resize: none;
+	margin: 0;
+	border:none;
+}
+#quiz table{
+	border : 2px solid lightgray;
 	border-collapse: collapse;
+	top: 18%;
+	left: 12%;
 	width: 70%;
 	margin: auto;
 	margin-top: 8%;
-}
-th{
-border : 1px solid black;
-width: 18%;
-background-color: #A9CB73;
+	position: absolute;
 }
 
-td{
-	padding : 0.5% 0.5%;
+#quiz th{
+	border: 2px solid lightgray;
+	border-collapse: collapse;
+	padding: 5px 10px;
+	background-color: #A9CB73;
+	color: white;
+}
+
+#quiz td{
+	text-align: center;
+	border: 2px solid lightgray;
+	border-collapse: collapse;
+	padding: 2px 2px;
+	margin: 0px;
 }
 
 #td_cont{
-	border : 1px solid black;
 	text-align: center;
 }
 #buttonArea{
+	left:35%;
+	top:75%;
 	margin-top: 3%;
 	margin-left : 4%;
 	text-align: center;
+	position: absolute;
 }
 .ui-widget{
     font-size: 16px !important;
@@ -67,12 +104,19 @@ td{
 <jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
 	<div id="contentFrame">
+	<div id="quiz">
+		<div id=title>
+			<h1>퀴즈 상세보기</h1>
+			<h5>
+				등록된 퀴즈의 상세 정보를 확인합니다
+			</h5>
+		</div>
 	<table>
 		<tr>
-			<th>동물</th>
-			<td id="td_cont">${dto.animal_idx}</td>
-			<th>주제</th>
-			<td id="td_cont">${dto.quiz_category}</td>
+			<th style="width:15%">동물</th>
+			<td id="td_cont" style="font-weight: 600; width:35%;">${dto.animal_idx}</td>
+			<th style="width:15%" >주제</th>
+			<td id="td_cont" style="font-weight: 600; width:35%;">${dto.quiz_category}</td>
 		</tr>
 		<tr>
 			<th>문제</th>
@@ -81,7 +125,7 @@ td{
 		<tr>
 			<th>정답</th>
 			<td colspan="3" id="td_cont">
-				<div id="quizAnswerDiv">
+				<div id="quizAnswerDiv" style="text-align: left">
 					<label>
 							O<input type="radio" name="answer" value="O">
 					</label>
@@ -105,7 +149,7 @@ td{
 	<button onclick="location.href='./quizMain'">리스트</button>
 	</div>
 	</div>
-</body>
+	</div>
 <script>
 	$(document).ready(function() {
 		//$("input[name='answer").not('input[value="${dto.quiz_answer}"]').attr("disabled",true);

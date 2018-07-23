@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>보호 게시글 작성</title>
 <style>
-table, tr, td {
+/* table, tr, td {
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 5px 10px;
@@ -16,14 +16,160 @@ table, tr, td {
 
 th {
 	width : 70px;
-}
+} */
 
 input[type='text']{
 	width:100%;
 }
 
+/* 타이틀 */
+#title h1 {
+	top: 8%;
+	left: 40%;
+	margin: 50px 0px 25px 0px;
+	text-align: center;
+	color: #28977B;
+	font-weight: 700;
+	position: absolute;
+}
+
+#title h5 {
+	top: 27%;
+	left: 50%;
+	margin: 10px 0px 40px 0px;
+	text-align: right;
+	color: black;
+	font-weight: 700;
+	font-size: 10;
+	position: absolute;
+}
+
+/* 셀렉트박스 테이블 */
+#contentFrame  #selectTable {
+	top: 27.5%;
+	left: 10%;
+	padding: 1px 1px 1px 1px;
+	margin: 25px auto auto 3px;
+	position: absolute;
+	float: left;
+}
+
+.tap {
+	background-color: #28977B;
+	font-weight: 600;
+	color: white;
+	height: 30px;
+	margin: auto auto auto auto;
+	text-align: center;
+	width: 100px;
+}
+
+#selectTable th {
+	background-color: #28977B;
+	height: 30px;
+	width: 1000px;
+	color: white;
+	font-weight: 600;
+}
+
+#selectTable td {
+	padding: 5px 10px 5px 10px;
+}
+/* IE 10, 11의 네이티브 화살표 숨기기 */
+#selectTable select::-ms-expand {
+	display: none;
+}
+
+#selectTable select {
+	width: 180px; /* 원하는 너비설정 */
+	height: 30px;
+	font-family: inherit; /* 폰트 상속 */
+	background: url(resources/arrowIcon.jpg) no-repeat 95% 50%;
+	/* 네이티브 화살표 대체 */
+	border: 1px solid #999;
+	border-radius: 0px; /* iOS 둥근모서리 제거 */
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+
+/* 글 작성 테이블 */
+#contentFrame #writeTable {
+	top: 40%;
+	left: 10%;
+	width: 1000px;
+	margin: 0px 5px 5px 5px;
+	border-collapse: collapse;
+	padding: 5px 10px;
+	position: absolute;
+}
+
+#writeTable #editable {
+	height: 300px;
+	text-align: left;
+	border: 1px solid lightgray;
+}
+
+
+
+#writeTable input[type='text'] {
+	width: 100%;
+	height: 30px;
+}
+
+#writeTable textarea {
+	width: 100%;
+	resize: none;
+	margin: 0;
+}
+
+#writeTable td {
+	text-align: center;
+	border: 1px solid white;
+	border-collapse: collapse;
+	padding: 2px 2px;
+	margin: 0px;
+}
+
+#writeTable th {
+	border: 1px solid white;
+	border-collapse: collapse;
+	padding: 5px 10px;
+	background-color: #28977B;
+	color: white;
+}
+
+#btnTable {
+	left: 56%;
+	top: 95%;
+	position: absolute;
+	margin: auto auto 50px auto;
+}
+
+.btn {
+	height: 40px;
+	width: 107px;
+	background-color: #28977B;
+	border-color: #28977B;
+	border-style: solid;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+}
+
 #fileUpBtn {
-	margin-left: 600px;
+	left: 71%;
+	top: -73px;
+	
+	height: 40px;
+	width: 107px;
+	background-color: #28977B;
+	border-color: #28977B;
+	border-style: solid;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+	position: absolute;
 }
 #attachArea{
 	padding : 1%;
@@ -44,22 +190,23 @@ input[type='text']{
 	height: 80px;
 }
 
+
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 150%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 150%;
+	background: white;
 }
 
-#sideFrame{
-   position: absolute;
-   left: 0.52%;
-   top: 11.4%;
-   width: 15%;
-   height: 150%;
-   background: black;
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 11.4%;
+	width: 15%;
+	height: 150%;
+	background: black;
 }
 </style>
 </head>
@@ -68,93 +215,115 @@ input[type='text']{
 <div id="sideFrame"></div>
 <div id="contentFrame">
 	<center>
-		<h3>보호 글 등록</h3>
+		<div id=title>
+			<h1 style="font-size: 30;">보호 동물 등록</h1>
+			<h5>
+				보호중인 동물을 등록합니다, 동물의 종류와 품종,  보호중인 지역을 선택해 주세요
+			</h5>
+		</div>
 	</center>
 	<form id="protectSend" action="protectWrite" method="post">
-		<table>
+		<table id="selectTable">
 			<tr>
-				<th>지역</th>
+				<th colspan=2 style="width: 1000px">필수 선택 항목</th>
+			</tr>
+				<td class="tap">지역</td>
 				<td>
 				<select id="sido" onchange="getSigungu()">
-			      <option value="">선택</option>
-			      <option value="6110000">서울특별시</option>
-			      <option value="6260000">부산광역시</option>
-			      <option value="6270000">대구광역시</option>
-			      <option value="6280000">인천광역시</option>
-			      <option value="6290000">광주광역시</option>
-			      <option value="5690000">세종특별자치시</option>
-			      <option value="6300000">대전광역시</option>
-			      <option value="6310000">울산광역시</option>
-			      <option value="6410000">경기도</option>
-			      <option value="6420000">강원도</option>
-			      <option value="6430000">충청북도</option>
-			      <option value="6440000">충청남도</option>
-			      <option value="6450000">전라북도</option>
-			      <option value="6460000">전라남도</option>
-			      <option value="6470000">경상북도</option>
-			      <option value="6480000">경상남도</option>
-			      <option value="6500000">제주특별자치도</option>
-			   </select>
-				<select id="sigundo" name="sigundo">
-					<option value="">선택</option>
-				</select>
-				
-				<input type="hidden" id="location" name="sido">
+				      <option value="">선택</option>
+				      <option value="6110000">서울특별시</option>
+				      <option value="6260000">부산광역시</option>
+				      <option value="6270000">대구광역시</option>
+				      <option value="6280000">인천광역시</option>
+				      <option value="6290000">광주광역시</option>
+				      <option value="5690000">세종특별자치시</option>
+				      <option value="6300000">대전광역시</option>
+				      <option value="6310000">울산광역시</option>
+				      <option value="6410000">경기도</option>
+				      <option value="6420000">강원도</option>
+				      <option value="6430000">충청북도</option>
+				      <option value="6440000">충청남도</option>
+				      <option value="6450000">전라북도</option>
+				      <option value="6460000">전라남도</option>
+				      <option value="6470000">경상북도</option>
+				      <option value="6480000">경상남도</option>
+				      <option value="6500000">제주특별자치도</option>
+				   </select>
+					<select id="sigundo" name="sigundo">
+						<option value="">선택</option>
+					</select>
+					<input type="hidden" id="location" name="sido">
 				</td>
 			</tr>
 			<tr>
-				<th>동물</th>
+				<td class="tap">동물</td>
 				<td>
+					<!-- 동물종 -->
 					<select id="animal" onchange="getAnimalType()">
 						<option value="">선택</option>
 						<option value="417000">개</option>
 						<option value="422400">고양이</option>
 						<option value="429900">기타</option>
 						<input type="hidden" id="selectAnimal" name="animal">
-					</select> 
+					</select>
 					
+					<!-- 품종 -->
 					<select id="animalType" name="animalType">
 						<option value="">선택</option>
 					</select>
 				</td>
 			</tr>
+			</table>
+			
+			<table id="writeTable">
 			<tr>
-				<th>제목</th>
+				<th style="width: 100px">작성자</th>
+				<c:set var="loginId" value="${sessionScope.login}"/>
+				<td><input id="board_writer" type="text" name="board_writer" readOnly value="${sessionScope.login}" /></td>
+			</tr>
+			
+			<tr>
+				<th style="width: 100px">제목</th>
 				<td>
-					<input type="text" name="board_title" id="bTitle"/>
+					<input type="text" name="board_title" />
 				</td>
+			</tr>
+			<tr>
+				<th colspan="2" style="width: 1000px">내 용</th>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<div id="editable" contenteditable="true"></div>
-					<input id="contentForm" type="hidden" name="board_content" />
+					<div id="editable" contenteditable="true"></div> 
+					<input id="contentForm" type="hidden" name="board_content"/>
 				</td>
 			</tr>
+			
 			<tr>
-				<th id="field">사진 첨부</th>
-				<td>
-					<input type="button" id="fileUpBtn" onclick="fileUp()" value="첨부" />
-					</td>
+				<th colspan="2" style="width: 1000px">사진 첨부</th>
 			</tr>
 			<tr>
-				<td colspan="3" height="50px">
-					<div id="attach"></div>
+				<td colspan="3"  style="height:150px; border:1px solid lightgray;">
+				<div id="attach"></div>
+				</td>
+			</tr>
+			
+		</table>
+		<table id="btnTable">
+			<tr>
+				<td>
+				<center>
+					<input type="button"  class="btn" id="fileUpBtn" onclick="fileUp()" value="첨부" />
+    				<c:if test="${empty loginId}">
+						<input id="pass" name="pass" type="password" placeholder="비밀번호" style="height:35px;"/> 
+    				</c:if>
+					<input type="button"  class="btn" id="btn_missingWrite" value="등록"> 
+					<input type="button"  class="btn" id="back" value="취소">
+				</center>
 				</td>
 			</tr>
 		</table>
-		<p>
-		<p>
-		<p>
-		<center>
-			<c:set var="loginId" value="${sessionScope.login}"/>
-    		<c:if test="${empty loginId}">
-				<input name="pass" id="pass" type="password" placeholder="비밀번호"/> 
-    		</c:if>
-			<input type="button" id="btn_protectWrite" value="등록"> 
-			<input type="button" id="back" value="취소">
-		</center>
 	</form>
-	</div>
+</div>
 </body>
 <script>
 	//지역

@@ -102,7 +102,7 @@ public class MissingService {
 		missingList.put("range", pageCnt);
 		// 현재 페이지 번호
 		missingList.put("currPage", page);
-		
+
 		System.out.println(missingList.get("list"));
 
 		return missingList;
@@ -111,26 +111,26 @@ public class MissingService {
 	/* 실종 게시판 상세보기 */
 	public ModelAndView missingDetail(int board_idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
-		String id="";
-		if(session.getAttribute("loginId")==null) {
-			id="비회원";
-		}else {
-			/*session.setAttribute("login", session.getAttribute("loginId"));*/
+
+		String id = "";
+		if (session.getAttribute("loginId") == null) {
+			id = "비회원";
+		} else {
+			/* session.setAttribute("login", session.getAttribute("loginId")); */
 			id = (String) session.getAttribute("loginId");
 		}
-		
+
 		inter = sqlSession.getMapper(BoardInter.class);
-		
+
 		// 상세보기 정보
 		mav.addObject("missingDetail", inter.missingDetail(board_idx));
 		// 첨부파일 정보
 		ArrayList<BoardDTO> files = inter.fileList(board_idx);
-		HashMap<String, Object>map = new HashMap<>();
-		
+		HashMap<String, Object> map = new HashMap<>();
+
 		map.put("board_idx", board_idx);
 		map.put("id", id);
-		
+
 		mav.addObject("files", files);
 		mav.addObject("favorite", inter.favoriteChk(map));
 		mav.addObject("size", files.size());// 첨부파일 유무
@@ -152,14 +152,14 @@ public class MissingService {
 		dto.setBoard_content(map.get("board_content"));
 		dto.setMainPhoto(map.get("main"));
 
-		if(session.getAttribute("loginId")==null) { //loginId에 값이 없으면
-			dto.setBoard_writer("비회원 "+ipAddr); //작성자 : 비회원+ip주소
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //암호화
+		if (session.getAttribute("loginId") == null) { // loginId에 값이 없으면
+			dto.setBoard_writer("비회원 " + ipAddr); // 작성자 : 비회원+ip주소
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); // 암호화
 			dto.setMissing_pw(encoder.encode(map.get("pass")));
-		}else {
+		} else {
 			dto.setBoard_writer((String) session.getAttribute("loginId"));
 			dto.setMissing_pw("회원");
-			
+
 		}
 
 		// DB에 글 등록
@@ -181,7 +181,7 @@ public class MissingService {
 			inter.board_missingWrite(dto);// board_missing 테이블에 글 등록
 		}
 		fileList.clear();// 글 작성 후 파일리스트를 한번 비워야지 다음 글쓰기시 중복X
-		System.out.println("글 등록 완료 후 파일 리스트 : "+fileList.size());
+		System.out.println("글 등록 완료 후 파일 리스트 : " + fileList.size());
 		mav.setViewName(page);
 		return mav;
 	}
@@ -198,7 +198,7 @@ public class MissingService {
 		ArrayList<BoardDTO> files = inter.fileList(board_idx);
 		for (BoardDTO dto : files) {
 			fileList.put(dto.getPhoto_newName(), dto.getPhoto_oriName());
-			
+
 		}
 
 		mav.addObject("files", files);
@@ -264,18 +264,18 @@ public class MissingService {
 
 		// 파라메터 값 받기
 		String board_idx = map.get("board_idx");
-		String missing_loc = map.get("sido")+map.get("sigundo");
+		String missing_loc = map.get("sido") + map.get("sigundo");
 		String animal_idx = map.get("animal");
 		String animal_type = map.get("animalType");
 		String board_title = map.get("board_title");
 		String board_content = map.get("board_content");
-		
+
 		BoardDTO dto = new BoardDTO();
 		dto.setMainPhoto(map.get("mainPhoto"));
 		System.out.println(map.get("mainPhoto"));
-	
+
 		inter = sqlSession.getMapper(BoardInter.class);
-		//수정 실패
+		// 수정 실패
 		String page = "redirect:/missingUpdateForm?board_idx=" + board_idx;
 
 		// 쿼리 실행
@@ -308,24 +308,24 @@ public class MissingService {
 	}
 
 	public boolean mcheckphoto() {
-		  boolean photo = false;//사진이 없으면 false 반환
-	      System.out.println("파일: "+fileList.size());
-	      if (fileList.size() > 0) {// 저장할 파일이 있을 경우
-	         photo = true;
-	      }
+		boolean photo = false;// 사진이 없으면 false 반환
+		System.out.println("파일: " + fileList.size());
+		if (fileList.size() > 0) {// 저장할 파일이 있을 경우
+			photo = true;
+		}
 
-	      return photo;
-	   }
+		return photo;
+	}
 
-	public boolean passChk(HashMap<String,String> params) {
+	public boolean passChk(HashMap<String, String> params) {
 		inter = sqlSession.getMapper(BoardInter.class);
-		//param값으로 해당 글의 pass 출력
+		// param값으로 해당 글의 pass 출력
 		String writingPass = inter.getPass(params);
-		//비교해서 결과 값 return
+		// 비교해서 결과 값 return
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		System.out.println("DB비밀번호 : "+writingPass);
-		System.out.println("입력비밀번호 : "+params.get("pass"));
-		return encoder.matches(params.get("pass"),writingPass);
+		System.out.println("DB비밀번호 : " + writingPass);
+		System.out.println("입력비밀번호 : " + params.get("pass"));
+		return encoder.matches(params.get("pass"), writingPass);
 	}
 
 	public int favoriteRegist(HashMap<String, String> map) {

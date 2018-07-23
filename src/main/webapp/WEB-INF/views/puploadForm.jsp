@@ -28,10 +28,12 @@
 			var elem = window.opener.document.getElementById("editable");
 			var elem2 = window.opener.document.getElementById("attach");
 			content +="<img id='"+imgId+"' width='250' src='${path}'/>";
+
 			elem.innerHTML += content;
 			content ="";//content 초기화
 			content +="<div id='attachArea'><img width='250' src='${path}'/>";
 			content +="<input id='${path}' type='button' value='삭제' onclick='pDel(this)'><input type='radio' name='main' value='"+imgId+"'></div>";
+
 			elem2.innerHTML += content;
 			self.close();
 		}
