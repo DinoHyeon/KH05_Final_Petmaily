@@ -19,7 +19,7 @@
 }
 
 #sideFrame{
-position: absolute;
+	position: absolute;
     left: 0.52%;
     top: 12.4%;
     width: 15%;

@@ -1,21 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <style>
 #sideMenu{
 	position: absolute;
-	left: 0.52%;
-	top: 10.5%;
-	width: 15%;
-	height: 100%;
-	background: black;
+    left: 0.6%;
+    top: 12.4%;
+    width: 14.7%;
+    height: 95%;
+    background: white;
+}
+
+.menuName{
+	width: 100%;
+	height: 6.5%;
+	color: black;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	text-align: center;
+	line-height: 2.7;
 }
 </style>
-</head>
+
 <body>
 	<div id="sideMenu">
+
 	</div>
 </body>
-</html>

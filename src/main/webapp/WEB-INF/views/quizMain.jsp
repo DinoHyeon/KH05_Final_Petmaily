@@ -16,15 +16,15 @@
 	background: white;
 }
 
-#sideFrame {
-	position: absolute;
-	left: 0.52%;
-	top: 10.5%;
-	width: 15%;
-	height: 140%;
-	background: black;
+#sideFrame{
+    position: absolute;
+    left: 0.52%;
+    top: 12.4%;
+    width: 14.7%;
+    height: 139%;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
 }
-
 
 /* selectBox(동물종/카테고리) */
 #registSelectBox{
@@ -130,11 +130,14 @@ td{
 #a{
 	margin-top: 36%;
 }
+border-right: 1px solid gray;
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
+	<div id="sideFrame"></div>
 	<jsp:include page="sideMenu.jsp" />
+	
 	<div id="contentFrame">
 	<h3 id="qqq">Quiz 등록</h3>
 		<div id="registSelectBox">
@@ -203,8 +206,26 @@ td{
 </body>
 <script>
 	//현재 보여줄 페이지
-	var showPageNum = 1
+	var showPageNum = 1;
+	var menuName = {'보호소센터 찾기':'searchShelter', '퀴즈':'quizSetting', '질병':'', '커뮤니티':'communityMain'};
 	$(document).ready(function() {
+		var content = "";
+		for(var key in menuName){
+			content += "<div class='menuName'";
+			content += "style='"
+			if(key=='퀴즈'){
+				console.log("퀴즈");
+				content += "background:#28977B;color:white;font-weight: 600;";
+			}
+			content += "cursor: pointer'";
+			content += "onclick='pageMove(this)' id="+menuName[key]+">";
+			content += key;
+			content += "</div>";
+		};	
+		
+		$("#sideMenu").empty();
+		$("#sideMenu").append(content);
+		
 		$( "#aniamlList" ).selectmenu();
 		$( "#category" ).selectmenu();
 		$( "#searchAniamlList" ).selectmenu();
@@ -214,6 +235,11 @@ td{
 		quizListCall(showPageNum);
 	});
 
+	function pageMove(e) {
+		console.log($(e).attr("id"));
+		location.href="./"+$(e).attr("id");
+	}
+	
 	function registQuiz() {
 		console.log($("#quizAsk"));
 		console.log("퀴즈 내용 : "+$("#quizAsk").val())
