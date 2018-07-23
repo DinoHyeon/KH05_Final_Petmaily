@@ -20,16 +20,25 @@
           position:absolute;
       }
       .navi #petmily{/* 팻밀리로고 */
+<<<<<<< HEAD
          left:30px;
          width:160px;
          height:50px;
+=======
+         left:3%;
+         width:11%;
+>>>>>>> 540be413489d4c365c56db6e8f015face3adada0
       }
       .navi #frame2{/* 2번째프레임 */
          background-color: #28977B;
          position:absolute;
          top:7.3%;   
          width:99.2%;
+<<<<<<< HEAD
          height:33px;
+=======
+         height:4.3%;
+>>>>>>> 540be413489d4c365c56db6e8f015face3adada0
          margin-left:0;
       }
       .navi #frame3{/* 3번째프레임 */
@@ -74,7 +83,11 @@
          font-family:"나눔고딕 보통";
          font-weight:600;
          font-size:18px;
+<<<<<<< HEAD
           top:7.5%;
+=======
+         top:7.5%;
+>>>>>>> 540be413489d4c365c56db6e8f015face3adada0
       }
       .navi #frame2lost{/* 실종 */
          left:20.6%;

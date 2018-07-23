@@ -39,8 +39,8 @@ public class FundService {
 	String filen;
 	String newFileName;
 	
-	public int i=0;
-	public int j=0;
+	int i=0;
+	int j=0;
 	
 	
 	// 소현: getmyList(마이리스트 페이징 처리 list 호출)
@@ -48,7 +48,7 @@ public class FundService {
 		 inter = sqlSession.getMapper(BoardInter.class);
 			
 	 		 int allCnt = inter.mylistallCount(params);
-		    int pageCnt = allCnt % 10 > 0 ? Math.round(allCnt / 10) + 1 : allCnt / 10;
+		    int pageCnt = allCnt % 6 > 0 ? Math.round(allCnt / 6) + 1 : allCnt / 6;
 		    
 			HashMap<String, Object> myList = new HashMap<String, Object>();
 			
@@ -57,8 +57,8 @@ public class FundService {
 			if (page > pageCnt) {
 				page = pageCnt;
 				}
-			int end = 10 * page;
-			int start = end - 10 + 1;
+			int end = 6 * page;
+			int start = end - 6 + 1;
 			
 			
 			params.put("start", String.valueOf(start));
@@ -155,6 +155,8 @@ public class FundService {
 					inter.writeFile(key, fileList.get(key), board.getBoard_idx(),main);
 				}
 				inter.writefund(board.getBoard_idx(), board.getFund_centerName(),board.getFund_area());
+				i=0;
+				j=0;
 			}
 		}
 		fileList.clear();
@@ -170,7 +172,7 @@ public class FundService {
 	public HashMap<String, Integer> fileDel(String root, String fileName) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		i--;
-		logger.info("삭제 i:{}", i);
+		logger.info("삭제 i:iiii{}", i);
 		int success = 0;
 		try {
 			String fullPath = root + "resources/upload/" + fileName;
@@ -208,7 +210,7 @@ public class FundService {
 	public HashMap<String, Integer> filetwoDel(String root, String fileName) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		j--;
-		logger.info("삭제 j:{}", i);
+		logger.info("삭제 j:{}", j);
 		int success = 0;
 		try {
 			String fullPath = root + "resources/upload/" + fileName;
@@ -273,12 +275,11 @@ public class FundService {
 		            photo = true;
 		            logger.info("i3433는?:{}", i);
 		            logger.info("j3433는?:{}", j);
-		         
-		         }
-
-		      logger.info("포토:{}", photo);
+		           }
+		         logger.info("포토:{}", photo);
 
 		      return photo;
+		    
 		   }
 
 	public ModelAndView upload(MultipartFile file, String root) {
@@ -305,6 +306,7 @@ public class FundService {
 		newFileName = fname+slash+System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf("."));
 		String msg ="성공";
 		//String filen = newFileName.split("~")[0];
+		
 		checkonephoto();
 
 		logger.info("파일 이름1111:{}",newFileName);

@@ -108,7 +108,10 @@ button{
 }
 
 #shelterDetail th{
-   width: 20%;
+   width: 13%;
+}
+#shelterDetail td{
+   width: 15%;
 }
 
 #map{
@@ -118,6 +121,14 @@ button{
     width: 55%;
     height: 34%;
 }
+td{
+   text-align: center;
+}
+#listTd{
+	width : 40%;
+}
+
+
 
 td{
 	text-align: center;
@@ -260,9 +271,9 @@ function shelterList(page) {
 }
 
 function listPrint(data) {
-	var b="blue";
-	var g="green"
-	
+   var b="blue";
+   var g="green"
+   
    var content = "";
 	if(data.list.length!=0){
 		data.list.forEach(function(item) {
@@ -286,8 +297,8 @@ function listPrint(data) {
         currPage : data.currPage,
         maxPage : data.pageCnt,
         clickAction : function(e){
-        	console.log($(this).attr('page'));
-        	shelterList($(this).attr('page'));
+           console.log($(this).attr('page'));
+           shelterList($(this).attr('page'));
         }
     });
 }
@@ -298,65 +309,65 @@ $(document).on('hover', 'tr', function(event) {
 
 
 function sehelterDetail(name) {
-	$.ajax({
-		"url" : "./shelterDetail",
-		"type" : "get",
-		"data" : {"centetName" : $(name).attr("id")},
-		"success" : function(data) {
-			var weekdayTime;
-			var weekendTime;
-			
-			if(data.weekdayStartTime == null){
-				weekdayTime="휴무";
-			}else{
-				weekdayTime=data.weekdayStartTime+" ~ "+data.weekdayEndTime;
-			}
-			
-			if(data.weekendStartTime == null){
-				weekendTime="휴무";
-			}else{
-				weekendTime=data.weekdayStartTime+" ~ "+data.weekdayEndTime;
-			}
-			
-			$("#centerName").html(data.centerName);
-			$("#centerTel").html(data.phoneNum);
-			$("#centerLocation").html(data.locationAddr);
-			
-			$("#weekdayTime").html(weekdayTime);
-			$("#weekendTime").html(weekendTime);
-			$("#holiday").html(data.holiday);
-			
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = { 
-		        center: new daum.maps.LatLng(data.x, data.y), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };
+   $.ajax({
+      "url" : "./shelterDetail",
+      "type" : "get",
+      "data" : {"centetName" : $(name).attr("id")},
+      "success" : function(data) {
+         var weekdayTime;
+         var weekendTime;
+         
+         if(data.weekdayStartTime == null){
+            weekdayTime="휴무";
+         }else{
+            weekdayTime=data.weekdayStartTime+" ~ "+data.weekdayEndTime;
+         }
+         
+         if(data.weekendStartTime == null){
+            weekendTime="휴무";
+         }else{
+            weekendTime=data.weekdayStartTime+" ~ "+data.weekdayEndTime;
+         }
+         
+         $("#centerName").html(data.centerName);
+         $("#centerTel").html(data.phoneNum);
+         $("#centerLocation").html(data.locationAddr);
+         
+         $("#weekdayTime").html(weekdayTime);
+         $("#weekendTime").html(weekendTime);
+         $("#holiday").html(data.holiday);
+         
+         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+          mapOption = { 
+              center: new daum.maps.LatLng(data.x, data.y), // 지도의 중심좌표
+              level: 3 // 지도의 확대 레벨
+          };
 
-			var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+         var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-			// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-			var mapTypeControl = new daum.maps.MapTypeControl();
+         // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+         var mapTypeControl = new daum.maps.MapTypeControl();
 
-			// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-			// daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-			map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+         // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+         // daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+         map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
 
-			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-			var zoomControl = new daum.maps.ZoomControl();
-			map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-			
-			// 지도를 클릭한 위치에 표출할 마커입니다
-			var marker = new daum.maps.Marker({ 
-			    // 지도 중심좌표에 마커를 생성합니다 
-			    position: map.getCenter() 
-			}); 
-			// 지도에 마커를 표시합니다
-			marker.setMap(map);
-		},
-		"error" : function(x, o, e) {
-			alert(x.status + ":" + o + ":" + e);
-		}
-	});
+         // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+         var zoomControl = new daum.maps.ZoomControl();
+         map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+         
+         // 지도를 클릭한 위치에 표출할 마커입니다
+         var marker = new daum.maps.Marker({ 
+             // 지도 중심좌표에 마커를 생성합니다 
+             position: map.getCenter() 
+         }); 
+         // 지도에 마커를 표시합니다
+         marker.setMap(map);
+      },
+      "error" : function(x, o, e) {
+         alert(x.status + ":" + o + ":" + e);
+      }
+   });
 }
 
 $( "#search" ).click( function( event ) {
