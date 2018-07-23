@@ -9,19 +9,92 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 10.5%;
+	width: 15%;
+	height: 140%;
+	background: black;
+}
+#contentFrame {
+	margin: 5px;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 100%;
+	background: white;
+}
+
+/* 타이틀 */
+/* 첫번째 타이틀 */
+#title1 h1 {
+	top: 3%;
+	left: 34%;
+	margin: 50px 0px 25px 0px;
+	text-align: center;
+	color: #A9CB73;
+	font-weight: 700;
+	font-size: 40;
+	position: absolute;
+}
+#title1 h5 {
+	top: 12%;
+	left: 55%;
+	margin: 10px 0px 40px 0px;
+	text-align: right;
+	color: gray;
+	font-weight: 700;
+	font-size: 15;
+	position: absolute;
+}
+/* 두번째 타이틀 */
+#title2 h1 {
+	top: 43%;
+	left: 34%;
+	margin: 50px 0px 25px 0px;
+	text-align: center;
+	color: #A9CB73;
+	font-weight: 700;
+	font-size: 40;
+	position: absolute;
+}
+#title2 h5 {
+	top: 52%;
+	left: 55%;
+	margin: 10px 0px 40px 0px;
+	text-align: right;
+	color: gray;
+	font-weight: 700;
+	font-size: 15;
+	position: absolute;
+}
+/* 세번째 타이틀 */
+#title3 h1 {
+	top: 73%;
+	left: 32%;
+	margin: 50px 0px 25px 0px;
+	text-align: center;
+	color: #A9CB73;
+	font-weight: 700;
+	font-size: 40;
+	position: absolute;
+}
+#title3 h5 {
+	top: 82%;
+	left: 55%;
+	margin: 10px 0px 40px 0px;
+	text-align: right;
+	color: gray;
+	font-weight: 700;
+	font-size: 15;
+	position: absolute;
+}
 
 #animal {
 	position: absolute;
 	left: 50%;
-}
-
-#contentFrame {
-	position: absolute;
-	left: 0.8%;
-	top: 12.9%;
-	width: 98%;
-	height: 100%;
-	background: white;
 }
 
 #quizPlaySetting {
@@ -32,8 +105,8 @@
 
 #animalChoice {
 	position: absolute;
-	left: 15%;
-	top: 8%;
+	left: 6.5%;
+	top: 20%;
 	width: 70%;
 	height: 34%;
 }
@@ -87,44 +160,59 @@
 
 #categoryChoice{
 	position: absolute;
-	top : 50%;
-	left : 20%;
+	top : 64%;
+	left : 28%;
 	
 }
 
 #quizNumChoice{
 	position: absolute;
-	left : 21%;
+	top: 93%;
+	left : 36%;
 }
 
 #categoryFieldset {
 	border: none;
 }
 
+/* 문제풀기! 버튼 스타일 */
 #play{
 	position: absolute;
-	margin-top: 10%;
-	margin-left: 80%;
+	margin-top: 20%;
+	margin-left: 33.5%;
+	height: 60px;
+	width: 180px;
+	font-weight: 800;
+	font-size: 16;
+	text-align: center;
+	border: 2.5px solid white;
+	background-color: #A9CB73;
+	color: white;
+	cursor: pointer;
 }
 
 #one{
-	margin-top: 250px;
+	margin-top: 28%;
 }
 
 #two{
-	margin-top: 125px;
+	margin-top: 16%;
 }
 
 </style>
-<title>Insert title here</title>
+<title>퀴즈 풀기 페이지</title>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
-
+	<div id="sideFrame"></div>
 	<div id="contentFrame">
 		<form action="quizPlaySetting" id="quizPlaySetting">
 
-		  <h4>●동물 선택</h4>
+		  <div id=title1>
+				<h1>동물 선택</h1>
+				<h5>동물의 종류를 선택합니다</h5>
+			</div>
+			
 			<div id="animalChoice">
 				<div class="animal" id="dog">
 					<img class="animalImg" id="강아지" alt="강아지"
@@ -161,9 +249,12 @@
 			</div>
 
 			<hr id="one">
-			 <h4>●Quiz 카테고리</h4>
+			 <div id=title2>
+				<h1>주제 선택</h1>
+				<h5>퀴즈의 주제를 선택 합니다</h5>
+			</div>
 			<div id="categoryChoice">
-				<fieldset id="categoryFieldset">
+				<fieldset id="categoryFieldset" style="height:40px">
 					<label>전체 <input type="radio" value="전체" name="category">
 					</label> <label>음식 <input type="radio" value="음식" name="category">
 					</label> <label>습성 <input type="radio" value="습성" name="category">
@@ -175,7 +266,10 @@
 			</div>
 			
 			<hr id="two">
-			<h4>●Quiz 갯수</h4>
+			<div id=title3>
+				<h1>문제 수 선택</h1>
+				<h5>풀이할 퀴즈의 숫자를 선택합니다</h5>
+			</div>
 			<div id="quizNumChoice">
 				<label>3 <input type="radio" value="3" name="quizNum">
 				</label> <label>5 <input type="radio" value="5" name="quizNum">
@@ -183,7 +277,7 @@
 				</label>
 			</div>
 
-			<input type="button" id="play" onclick="quizPlay()" value="문제풀기">
+			<input type="button" id="play" onclick="quizPlay()" value="퀴즈  시작">
 		</form>
 	</div>
 </body>

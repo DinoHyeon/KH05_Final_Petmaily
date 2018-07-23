@@ -190,7 +190,7 @@
 		</table>
 	</div>
 
-	<%-- <jsp:include page="reply.jsp"/> --%>
+	<jsp:include page="reply.jsp"/>
 
 
 

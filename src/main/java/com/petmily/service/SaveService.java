@@ -167,6 +167,7 @@ public class SaveService {
 		mav.addObject("sDetail", inter.saveDetail(Integer.parseInt(board_idx)));
 		mav.addObject("sDetailPhoto", inter.sDetailPhoto(Integer.parseInt(board_idx)));
 		mav.addObject("boardSaveDetail", inter.boardSaveDetail(Integer.parseInt(board_idx)));
+		mav.addObject("reply", board_idx);
 		mav.setViewName("saveDetail");
 		return mav;
 	}

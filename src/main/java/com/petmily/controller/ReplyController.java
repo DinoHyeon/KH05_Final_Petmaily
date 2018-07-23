@@ -27,8 +27,6 @@ public class ReplyController {
 	@RequestMapping(value = "reply")
 	public String reply(HttpSession session) {
 		session.removeAttribute("loginId");
-
-		// session.setAttribute("loginId", "test01");
 		System.out.println("ssss :" + session.getAttribute("loginId"));
 		return "reply";
 	}

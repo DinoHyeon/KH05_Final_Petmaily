@@ -224,12 +224,7 @@ td {
 			</tr>
 		</table>
 
-
-		<%-- <jsp:include page="reply.jsp"/> --%>
-
-
-
-
+		<jsp:include page="reply.jsp"/>
 
 	</div>
 </body>

@@ -175,6 +175,7 @@ public class AdoptService {
 		mav.addObject("aDetail", inter.adoptDetail(Integer.parseInt(board_idx)));
 		mav.addObject("aDetailPhoto", inter.aDetailPhoto(Integer.parseInt(board_idx)));
 		mav.addObject("boardAdoptDetail", inter.boardAdoptDetail(Integer.parseInt(board_idx)));
+		mav.addObject("reply", board_idx);
 		mav.setViewName("adoptDetail");
 		return mav;
 	}

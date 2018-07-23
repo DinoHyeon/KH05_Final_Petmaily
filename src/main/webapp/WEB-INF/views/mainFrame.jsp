@@ -157,7 +157,7 @@
          
       <a href="./searchShelter" class="classBtn4" id="frame2center">보호센터 찾기</a>
       <a class="classBtn4" id="sl4_1" onclick="javascript:void(0)">/</a>
-      <a href="./quizMain" class="classBtn4" id="frame2quiz">퀴즈</a>
+      <a href="./quizSetting" class="classBtn4" id="frame2quiz">퀴즈</a>
       <a class="classBtn4" id="sl4_2" onclick="javascript:void(0)">/</a>
       <a href="./diseaseMain" class="classBtn4" id="frame2disease">질병</a>
       <a class="classBtn4" id="sl4_3" onclick="javascript:void(0)">/</a>

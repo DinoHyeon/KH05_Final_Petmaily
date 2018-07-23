@@ -46,7 +46,7 @@ public class MemberService {
 			loginChkResult = inter.loginConfirmPage(id);
 		}
 
-		String page = "testMain"; // 이 부분은 수정이 필요한 테스트 코드
+		String page = "main";
 		String msg = "success";
 		String loginId = null;
 

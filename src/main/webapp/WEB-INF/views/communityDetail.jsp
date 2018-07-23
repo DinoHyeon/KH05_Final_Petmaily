@@ -147,8 +147,10 @@
 			</tr>
 		</table>
 	</div>
+	<jsp:include page="reply.jsp"/>
 </body>
 <script>
+
 	var menuName = {
 		'보호소센터 찾기' : 'searchShelter',
 		'퀴즈' : 'quizSetting',

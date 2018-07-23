@@ -165,7 +165,7 @@ table, th, td {
 
 		</table>
 	</div>
-
+	<jsp:include page="reply.jsp"/>
 
 
 </body>
