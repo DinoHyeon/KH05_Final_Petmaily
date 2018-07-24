@@ -156,10 +156,13 @@
 					id="listBtn" value="글 목록" onclick="location.href='./communityMain'" />
 				</td>
 			</tr>
+			<tr>
+				<td><jsp:include page="reply.jsp"/></td>
+			</tr>
 		</table>
 	</div>
 	</div>
-	<jsp:include page="reply.jsp"/>
+	
 </body>
 <script>
 
