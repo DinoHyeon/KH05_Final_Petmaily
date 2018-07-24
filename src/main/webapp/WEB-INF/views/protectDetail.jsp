@@ -196,10 +196,15 @@
 					value="수정" /> <input type="button" id="del"
 					onclick="protectNonmemberChk('del')" value="삭제" /></td>
 			</tr>
+			<tbody>
+				<tr>
+			<td>	<jsp:include page="reply.jsp"/>
+			</td>
+			</tr>
+			</tbody>
 		</table>
 	</div>
 
-	<jsp:include page="reply.jsp"/>
 	<c:if test="${!empty loginId}">
 		<div id="favorite" class="heart"></div>
 	</c:if>
