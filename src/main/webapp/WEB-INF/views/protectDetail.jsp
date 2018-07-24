@@ -98,11 +98,8 @@
 .heart {
 	width: 100px;
 	height: 100px;
-	position: absolute;
-	left: 88%;
-	top: 17%;
-	transform: translate(-50%, -50%);
-	background: url("resources/img/heart.png") repeat;
+	transform: translate(111%, -18%);
+	background: url(resources/img/heart.png) repeat;
 	cursor: pointer;
 }
 
@@ -117,6 +114,12 @@
 	font-weight: 600;
 	color: white;
 	cursor: pointer;
+}
+
+#favorite {
+	position: absolute;
+	top: 43.5%;
+	left: 66.5%;
 }
 
 .heart-blast {
@@ -164,12 +167,18 @@
 
 			</tr>
 			<tr class="littleTr">
-				<th style="width: 100px">위치</th>
-				<td class="littleTd">${protectDetail.protect_loc}</td>
-				<th style="width: 100px">즐겨찾기</th>
-				<td class="littleTd">
-					<div id="favorite" class="heart"></div>
-				</td>
+				<c:set var="loginId" value="${sessionScope.loginId}" />
+				<c:if test="${!empty loginId}">
+					<th style="width: 100px">위치</th>
+					<td class="littleTd">${protectDetail.protect_loc}</td>
+					<th style="width: 100px">즐겨찾기</th>
+					<td class="littleTd"></td>
+				</c:if>
+				<c:if test="${empty loginId}">
+					<th style="width: 100px">위치</th>
+					<td class="littleTd" colspan="3">${protectDetail.protect_loc}</td>
+				</c:if>
+				
 			</tr>
 			<tr>
 				<th colspan=4 style="width: 1000px; border: 1px solid gray;">내
@@ -187,10 +196,18 @@
 					value="수정" /> <input type="button" id="del"
 					onclick="protectNonmemberChk('del')" value="삭제" /></td>
 			</tr>
+			<tbody>
+				<tr>
+			<td>	<jsp:include page="reply.jsp"/>
+			</td>
+			</tr>
+			</tbody>
 		</table>
 	</div>
 
-	<jsp:include page="reply.jsp"/>
+	<c:if test="${!empty loginId}">
+		<div id="favorite" class="heart"></div>
+	</c:if>
 
 
 
