@@ -25,11 +25,8 @@ td {
 .heart {
 	width: 100px;
 	height: 100px;
-	position: absolute;
-	left: 86%;
-	top: 25%;
-	transform: translate(-50%, -50%);
-	background: url("resources/img/heart.png") repeat;
+	transform: translate(111%, -18%);
+	background: url(resources/img/heart.png) repeat;
 	cursor: pointer;
 }
 
@@ -68,14 +65,20 @@ td {
 	text-align: center;
 }
 
-#sideFrame{
-    position: absolute;
-    left: 0.52%;
-    top: 12.4%;
-    width: 14.7%;
-    height: 150%;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
+#favorite {
+	position: absolute;
+	top: 43.5%;
+	left: 66.5%;
+}
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 
 #buttonArea {
@@ -164,11 +167,12 @@ td {
 	color: white;
 	cursor: pointer;
 }
-#reply{
+
+#reply {
 	height: 100%;
 	width: 100%;
 	position: relative;
-	top:30%;
+	top: 30%;
 }
 </style>
 </head>
@@ -208,10 +212,17 @@ td {
 			</tr>
 			<tr>
 			<tr class="littleTr">
-				<th style="width: 12%">실종 위치</th>
-				<td>${missingDetail.missing_loc}</td>
-				<th style="width: 10%">찜하기</th>
-				<td><div id="favorite" class="heart"></div></td>
+				<c:set var="loginId" value="${sessionScope.loginId}" />
+				<c:if test="${!empty loginId}">
+					<th style="width: 12%">실종 위치</th>
+					<td>${missingDetail.missing_loc}</td>
+					<th style="width: 10%">찜하기</th>
+					<td></td>
+				</c:if>
+				<c:if test="${empty loginId}">
+					<th style="width: 12%">실종 위치</th>
+					<td colspan="3">${missingDetail.missing_loc}</td>
+				</c:if>
 			</tr>
 			<tr>
 				<th colspan=4 style="width: 1000px; border: 1px solid gray;">내
@@ -230,7 +241,10 @@ td {
 			</tr>
 		</table>
 	</div>
-	<div id="reply"><jsp:include page="reply.jsp"/></div>
+	<div id="reply"><jsp:include page="reply.jsp" /></div>
+	<c:if test="${!empty loginId}">
+		<div id="favorite" class="heart"></div>
+	</c:if>
 	
 </body>
 <script>
