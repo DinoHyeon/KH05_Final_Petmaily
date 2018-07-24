@@ -12,7 +12,7 @@
 	left: 0.52%;
 	top: 12.4%;
 	width: 14.7%;
-	height: 150%;
+	height: 250%;
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
 }
@@ -135,6 +135,7 @@
 	<jsp:include page="sideMenu.jsp" />
 	<!-- 내용시작 -->
 	<div id="conDiv">
+	<h1>보호게시판</h1>
 		<div id="protectNonmemberChk" title="비회원">
 			<div>
 				<h1>비밀번호를 입력해주세요.</h1>
@@ -181,8 +182,7 @@
 				
 			</tr>
 			<tr>
-				<th colspan=4 style="width: 1000px; border: 1px solid gray;">내
-					용</th>
+				<th colspan=4 style="width: 1000px; border: 1px solid gray;">내용</th>
 			</tr>
 
 			<tr>
@@ -196,10 +196,15 @@
 					value="수정" /> <input type="button" id="del"
 					onclick="protectNonmemberChk('del')" value="삭제" /></td>
 			</tr>
+			<tbody>
+				<tr>
+			<td>	<jsp:include page="reply.jsp"/>
+			</td>
+			</tr>
+			</tbody>
 		</table>
 	</div>
 
-	<jsp:include page="reply.jsp"/>
 	<c:if test="${!empty loginId}">
 		<div id="favorite" class="heart"></div>
 	</c:if>

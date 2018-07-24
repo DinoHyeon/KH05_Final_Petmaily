@@ -32,7 +32,7 @@
 /* 셀렉트박스 테이블 */
 #contentFrame  #selectTable {
 	top: 11.5%;
-	left: 10%;
+	left: 13%;
 	padding: 1px 1px 1px 1px;
 	margin: 25px auto auto 3px;
 	position: absolute;
@@ -81,7 +81,7 @@
 /* 글 작성 테이블 */
 #contentFrame #writeTable {
 	top: 19.5%;
-	left: 10%;
+	left: 12.8%;
 	width: 1000px;
 	margin: 0px 5px 5px 5px;
 	border-collapse: collapse;
@@ -188,7 +188,7 @@ input[type='text'] {
     left: 0.52%;
     top: 12.4%;
     width: 14.7%;
-    height: 150%;
+    height: 250%;
     border-right: 1px solid gray;
     border-left: 1px solid gray;
 }

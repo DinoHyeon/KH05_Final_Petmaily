@@ -49,7 +49,7 @@ tr{
 
 #paging{
 	position: absolute;
-	top : 96%;
+	top : 145%;
 	left : 40%;
 }
 #buttonArea{

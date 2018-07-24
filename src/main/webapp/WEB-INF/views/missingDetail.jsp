@@ -7,21 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-table {
-	border: 1px solid black;
-	border-collapse: collapse;
-	position: absolute;
-	width: 70%;
-	top: 10%;
-	left: 10%;
-}
-
-td {
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding: 20px;
-}
-
 .heart {
 	width: 100px;
 	height: 100px;
@@ -241,10 +226,15 @@ td {
 					value="수정" /> <input type="button" id="del"
 					onclick="missingNonmemberChk('del')" value="삭제" /></td>
 			</tr>
+			<tbody>
+				<tr>
+			<td>	<jsp:include page="reply.jsp"/>
+			</td>
+			</tr>
+			</tbody>
 		</table>
 	</div>
-
-	<jsp:include page="reply.jsp" />
+	
 	<c:if test="${!empty loginId}">
 		<div id="favorite" class="heart"></div>
 	</c:if>

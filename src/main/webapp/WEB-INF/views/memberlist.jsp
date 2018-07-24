@@ -71,8 +71,8 @@ background-color: #217D65;
 
 #member{
    position: absolute;
-   right: 65%;
-   top: -8.5%;
+   right: 24%;
+   top: -15.5%;
    width: 59.95%;
    height: 6%;
    background: white;
@@ -98,8 +98,8 @@ background-color: #217D65;
 }
 #paging{
 position: absolute;
-   left: 0.52%;
-   top: 52.4%;
+   left: 39.52%;
+   top: 82.4%;
    width: 15%;
 }
 

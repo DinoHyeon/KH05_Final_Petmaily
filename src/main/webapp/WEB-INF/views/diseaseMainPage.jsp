@@ -15,7 +15,10 @@
 			}
 		
 			#keywordSearchList{
-				padding: 10px 370px;
+				padding: 3% 3%;
+				position: absolute;
+				top: 20%;
+				left : 20%;
 			}
 		
 			fieldset{
@@ -33,18 +36,18 @@
 				border-top:none;
 				border-bottom:none;
 			}
-		
-			input[type='button']{
-				width: 100pt;
-				height: 30pt;
-			}
 			
 			#keywordSearch{
-				margin-top: 35px;
-				margin-left: 330px;
-				width: 20%;
-				border : 3px solid black;
-				border-collapse : collapse;
+				position: absolute;
+    width: 145px;
+    height: 55px;
+    top: 105%;
+    left: 44%;
+    background-color: #28977B;
+    border-color: #28977B;
+    border-style: solid;
+    font-weight: 900;
+    color: white;
 			}
 			#contentFrame {
    position: absolute;
@@ -54,15 +57,71 @@
    height: 95%;
    background: white;
 }
+#aaa{
+	position: absolute;
+	left : 45%;
+	top : 3%;
+}
 
 #sideFrame {
 	position: absolute;
 	left: 0.52%;
 	top: 12.4%;
 	width: 14.7%;
-	height: 150%;
+	height: 100%;
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
+}
+
+#searchArea{
+	position: absolute;
+	top: 12%;
+	left : 19%;
+	margin : 1.5% 1.5%;
+}
+#contentFrame input[type='button']{
+	width: 120px;
+    height: 85px;
+    background-color: #A9CB73;
+    border-color: #28977B;
+    border-style: solid;
+    font-weight: 900;
+    color: white;
+    cursor: pointer;
+
+}
+
+
+#searchArea select { 
+	width: 250px; /* 원하는 너비설정 */ 
+	padding: .8em .5em; /* 여백으로 높이 설정 */ 
+	font-family: inherit; /* 폰트 상속 */ 
+	background: url(resources/arrowIcon.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+	border: 1px solid #999; border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+	-moz-appearance: none; 
+	appearance: none; 
+	left:30%;
+}
+		
+#searchArea input[type='text']{
+	position:absolute;
+	width:60%;
+	top:14%;
+	left:101%;
+	height:80%;
+}	
+#search{
+	position: absolute;
+    width: 75px;
+    height: 34px;
+    top: 12%;
+    left: 163%;
+    background-color: #28977B;
+    border-color: #28977B;
+    border-style: solid;
+    font-weight: 900;
+    color: white;
 }
 		</style>
 	</head>
@@ -71,10 +130,9 @@
 		<div id="sideFrame"></div>
    <jsp:include page="sideMenu.jsp" />
    <div id="contentFrame">
-		<h3>질병 검색</h3>
-		<hr>
+		<h2 id="aaa">질병 검색</h2>
 		<form id="inputSearchList" action="diseaseSearchListPage" method="post">
-			<fieldset>
+			<div id="searchArea">
 				<select name="animal">
 					<option>품종선택</option>
 					<option value="Dog">개</option>
@@ -86,8 +144,8 @@
 					<option value="disease">질병</option>
 				</select>
 				<input type="text" name="inputSearch" placeholder="검색어를 입력 하세요" /> 
-				<input type="submit" value="검색" />
-			</fieldset>
+				<input type="submit" id="search" value="검색" />
+			</div>
 		</form>
 		
 		<form id="keywordSearchList" action="diseaseKeywordListPage" method="post">

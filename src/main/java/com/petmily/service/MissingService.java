@@ -124,6 +124,7 @@ public class MissingService {
 
 		// 상세보기 정보
 		mav.addObject("missingDetail", inter.missingDetail(board_idx));
+		inter.uphit(board_idx); // 조회수
 		// 첨부파일 정보
 		ArrayList<BoardDTO> files = inter.fileList(board_idx);
 		HashMap<String, Object> map = new HashMap<>();

@@ -76,7 +76,7 @@ td{
 			비밀번호 <input type="password" id="noneMemberPass">
     	</c:if>
 	<input type="button" onclick="regist()" value="저장">
-</div>
+
 <div class="replyArea">
 	<table style="width: 100%">
 		<thead>
@@ -90,6 +90,7 @@ td{
 		</tbody>
 	</table>
 	<div id="paging"></div>
+	</div>
 </div>
 </div>
 </body>

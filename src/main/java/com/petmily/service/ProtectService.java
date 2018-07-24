@@ -123,6 +123,7 @@ public class ProtectService {
 
 		// 상세보기 정보
 		mav.addObject("protectDetail", inter.protectDetail(board_idx));
+		inter.uphit(board_idx); // 조회수
 		// 첨부파일 정보
 		ArrayList<BoardDTO> files = inter.fileList(board_idx);
 		HashMap<String, Object> map = new HashMap<>();
