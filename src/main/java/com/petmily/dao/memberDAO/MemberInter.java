@@ -7,7 +7,7 @@ import com.petmily.dto.MemberDTO;
 
 public interface MemberInter {
 
-	String loginConfirmPage(String id); //로그인 체크
+	MemberDTO loginConfirmPage(String id); //로그인 체크
 	
 	int joinConfirmPage(MemberDTO dto); //회원가입 요청 
 

@@ -4,8 +4,8 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petmily.dao.memberDAO.MemberInter">
 	<!-- 로그인 체크 -->
-	<select id="loginConfirmPage" resultType="String">
-		SELECT member_id FROM member WHERE member_id=#{param1
+	<select id="loginConfirmPage" resultType="MemberDTO">
+		SELECT member_id, member_state FROM member WHERE member_id=#{param1
 		} AND (member_state='member' OR member_state='administer')
 	</select>
 	

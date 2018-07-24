@@ -41,7 +41,7 @@ public class MemberService {
 		boolean success = encoder.matches(pass, hash);
 		logger.info("일치 여부 : " + success);
 
-		String loginChkResult = null;
+		MemberDTO loginChkResult = null;
 		if (success == true) {
 			loginChkResult = inter.loginConfirmPage(id);
 		}
@@ -54,7 +54,8 @@ public class MemberService {
 			page = "loginPage";
 			msg = "fail";
 		} else {
-			session.setAttribute("loginId", id);
+			session.setAttribute("loginId", loginChkResult.getMember_id());
+			session.setAttribute("state", loginChkResult.getMember_state());
 			loginId = (String) session.getAttribute("loginId");
 		}
 
@@ -71,6 +72,7 @@ public class MemberService {
 		logger.info("로그아웃");
 
 		session.removeAttribute("loginId");
+		session.removeAttribute("state");
 
 		String loginId = (String) session.getAttribute("loginId");
 

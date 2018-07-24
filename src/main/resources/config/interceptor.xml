@@ -38,5 +38,24 @@
 			<bean class="com.petmily.interceptor.LoginChk" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/getmemberList" />
+			<mvc:mapping path="/changeState" />
+			<mvc:mapping path="/memberlist" />
+			<mvc:mapping path="/getagreeList" />
+			<mvc:mapping path="/agreeAdmin" />
+			<mvc:mapping path="/sendno" />
+			<mvc:mapping path="/sendreason" />
+			<mvc:mapping path="/quizMain" />
+			<mvc:mapping path="/registQuiz" />
+			<mvc:mapping path="/quizDetailPage" />
+			<mvc:mapping path="/quizUpdatePage" />
+			<mvc:mapping path="/quizUpdate" />
+			<mvc:mapping path="/quizDelete" />
+			<bean class="com.petmily.interceptor.AdminChk" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 </beans>
