@@ -61,16 +61,16 @@ public class BoardController {
 
 	/* 즐겨 찾기 등록 */
 	@RequestMapping(value = "/favoriteRegist")
-	public @ResponseBody int favoriteRegist(@RequestParam HashMap<String, String> map) {
+	public @ResponseBody int favoriteRegist(@RequestParam HashMap<String, String> map, HttpSession session) {
 		logger.info("즐겨찾기 등록");
-		return missing.favoriteRegist(map);
+		return missing.favoriteRegist(map,session);
 	}
 
 	/* 즐겨 찾기 삭제 */
 	@RequestMapping(value = "/favoriteDel")
-	public @ResponseBody int favoriteDel(@RequestParam HashMap<String, String> map) {
+	public @ResponseBody int favoriteDel(@RequestParam HashMap<String, String> map, HttpSession session) {
 		logger.info("즐겨찾기 삭제");
-		return missing.favoriteDel(map);
+		return missing.favoriteDel(map,session);
 	}
 
 	/* 보호 게시판 리스트 */

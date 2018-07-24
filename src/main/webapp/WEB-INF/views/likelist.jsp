@@ -6,25 +6,50 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>마이페이지 즐겨찾기 리스트 출력 </title>
 <style>
-table, th, td {
-	border-collapse: collapse;
-	padding: 6px 23px;
-	margin: 170px 10px 105px 440px;
-	text-align: center;
+table {
+   border-collapse: collapse;
+   padding: 0.6% 1.5%;
+   margin: 17% 1% 10.5% 44%;
+   text-align: center;
 }
-table, tr{
-		border: 1px solid black;
 
+td{
+color: black;
+    padding: 0.6% 1.5%;
+   margin: 17% 1% 10.5% 44%;
+   text-align: center;
+   height: 30%;
+}
+ tr {
+   border: 1px solid gray;
+   
+   
+}
+
+th{
+   border: 1px solid gray;
+
+
+background-color: #217D65;
+	color:white;
+	   padding: 2.6% -0.5%;
+   margin: 17% 1% 10.5% 44%;
+
+}
+#tlike{
+
+position:absolute;
+top:-10%;
+left:-16%;
 
 }
 
 .heart {
   width: 100px;
   height: 100px;
-  position: absolute;
-  left: 93%;
-  top: 22%;
-  transform: translate(-50%, -50%);
+  top:30px;
+  left:10px;
+  transform: translate(-4px, -4px);
   background: url("resources/img/heart.png") repeat;  
   
   cursor: pointer;
@@ -35,20 +60,35 @@ table, tr{
   transition: background 1s steps(28);
   
 }
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+}
+#paging{
+position: absolute;
+   left: 52.52%;
+   top: 93.4%;
+   width: 15%;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp"/>
-	<table>
+	   	<div id="sideFrame"></div>
+	<table id="tlike">
 			<thead>
 				<tr>
-				    <th>즐겨찾기 번호</th>
-		
+				    <th style="width: 200px">즐겨찾기 번호</th>
 			
-					<th>게시판 제목</th>
-					<th>글제목</th>
-					<th>작성자</th>
-					<th>찜</th>
+					<th style="width: 200px">게시판 제목</th>
+					<th style="width: 200px">글제목</th>
+					<th style="width: 200px">작성자</th>
+					<th style="width: 100px">찜</th>
 				</tr>
 				</thead>			
 				<tbody id="likelistTable">
