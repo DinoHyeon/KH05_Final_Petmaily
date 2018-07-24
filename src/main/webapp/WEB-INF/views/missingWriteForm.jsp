@@ -7,21 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>실종 게시글 작성</title>
 <style>
-/* table, tr, td {
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding: 1% 1%;
-	margin: auto;
-}
-
-th {
-	width : 70px;
-} */
-
 /* 타이틀 */
 #title h1 {
-	top: 8%;
-	left: 40%;
+	top: 2%;
+	left: 39%;
 	margin: 50px 0px 25px 0px;
 	text-align: center;
 	color: #28977B;
@@ -30,8 +19,8 @@ th {
 }
 
 #title h5 {
-	top: 27%;
-	left: 53%;
+	top: 16%;
+	left: 49%;
 	margin: 10px 0px 40px 0px;
 	text-align: right;
 	color: black;
@@ -42,8 +31,8 @@ th {
 
 /* 셀렉트박스 테이블 */
 #contentFrame  #selectTable {
-	top: 27.5%;
-	left: 10%;
+	top: 16.5%;
+	left: 13%;
 	padding: 1px 1px 1px 1px;
 	margin: 25px auto auto 3px;
 	position: absolute;
@@ -91,8 +80,8 @@ th {
 
 /* 글 작성 테이블 */
 #contentFrame #writeTable {
-	top: 40%;
-	left: 10%;
+	top: 27%;
+	left: 13%;
 	width: 1000px;
 	margin: 0px 5px 5px 5px;
 	border-collapse: collapse;
@@ -134,8 +123,8 @@ th {
 }
 
 #btnTable {
-	left: 56%;
-	top: 95%;
+	left: 51%;
+    top: 76%;
 	position: absolute;
 	margin: auto auto 50px auto;
 }
@@ -156,7 +145,7 @@ input[type='text'] {
 }
 
 #fileUpBtn {
-	left: 71%;
+	left: 73%;
 	top: -73px;
 	height: 40px;
 	width: 107px;

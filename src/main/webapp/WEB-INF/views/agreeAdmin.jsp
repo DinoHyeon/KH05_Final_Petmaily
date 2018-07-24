@@ -21,14 +21,10 @@ color:white;
 }
 table, tr {
    border: 1px solid gray;
-   
-   
 }
 
 th{
    border: 1px solid gray;
-
-
 background-color: #217D65;
 	color:white;
 	   padding: 0.6% 1.5%;

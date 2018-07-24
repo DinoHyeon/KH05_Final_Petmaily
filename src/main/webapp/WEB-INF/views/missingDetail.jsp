@@ -27,7 +27,7 @@ td {
 	height: 100px;
 	position: absolute;
 	left: 86%;
-	top: 33%;
+	top: 25%;
 	transform: translate(-50%, -50%);
 	background: url("resources/img/heart.png") repeat;
 	cursor: pointer;
@@ -164,6 +164,12 @@ td {
 	color: white;
 	cursor: pointer;
 }
+#reply{
+	height: 100%;
+	width: 100%;
+	position: relative;
+	top:30%;
+}
 </style>
 </head>
 <body>
@@ -223,10 +229,9 @@ td {
 					onclick="missingNonmemberChk('del')" value="삭제" /></td>
 			</tr>
 		</table>
-
-		<jsp:include page="reply.jsp"/>
-
 	</div>
+	<div id="reply"><jsp:include page="reply.jsp"/></div>
+	
 </body>
 <script>
 	var writer;
