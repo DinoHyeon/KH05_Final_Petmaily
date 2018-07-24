@@ -13,6 +13,23 @@
 <title>구조 후기 글 수정 페이지</title>
 </head>
 <style>
+#contentFrame {
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 150%;
+   background: white;
+}
+
+#sideFrame{
+    position: absolute;
+    left: 0.52%;
+    top: 12.4%;
+    width: 14.7%;
+    height: 150%;
+    border-right: 1px solid gray;
+   
 /* 타이틀 */
 #title h1 {
 	top: 16%;
@@ -176,6 +193,9 @@
 </style>
 <body>
 	<jsp:include page="mainFrame.jsp" />
+		<div id="sideFrame"></div>
+<jsp:include page="sideMenu.jsp" />
+<div id="contentFrame">
 	<div class="adopt">
 
 		<div id=title>
@@ -217,7 +237,7 @@
 					<input id="selsido" name="selsido" type="hidden"/>
 				</td>
 			</tr>
-
+		</table>
 
 				<table id="writeTable">
 					<tr>
@@ -267,10 +287,37 @@
 				</table>
 				</form>
 				</div>
+				</div>
 </body>
 <script>
+var menuName = {'구조후기':'saveMain', '모금':'fundMain'};
 var conImg = $("#content_div").children('img');
 var content="";
+
+$(document).ready(function() {
+	var content = "";
+	for ( var key in menuName) {
+		console.log(key);
+		content += "<div class='menuName'";
+		content += "style='"
+		if (key == '구조후기') {
+			content += "background:#28977B;color:white;font-weight: 600;";
+		}
+		content += "cursor: pointer'";
+		content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
+		content += key;
+		content += "</div>";
+	}
+	;
+
+	$("#sideMenu").empty();
+	$("#sideMenu").append(content);
+});
+
+function pageMove(e) {
+console.log($(e).attr("id"));
+location.href="./"+$(e).attr("id");
+};
 for(var i = 0; i<conImg.length; i++){
 	content+="<img width='100px' height='100px' src='"+conImg[i].src+"'/>";
 	}

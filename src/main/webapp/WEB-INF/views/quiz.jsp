@@ -21,21 +21,22 @@
 }
 
 #contentFrame {
-	position: absolute;
-	left: 15.52%;
-	top: 12.5%;
-	width: 82.95%;
-	height: 87%;
-	background: white;
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 95%;
+   background: white;
 }
 
 #sideFrame {
 	position: absolute;
 	left: 0.52%;
-	top: 12.5%;
-	width: 15%;
-	height: 87%;
-	background: black;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 
 fieldset {
@@ -180,8 +181,9 @@ fieldset legend {
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
-	<div id="sideFrame"></div>
-	<div id="contentFrame">
+	 <div id="sideFrame"></div>
+   <jsp:include page="sideMenu.jsp" />
+   <div id="contentFrame">
 		<div id="dialog-confirm" title="퀴즈 시작 !">
 			<p>열심히 풀어주세요 !</p>
 		</div>
@@ -218,8 +220,26 @@ fieldset legend {
 	var quiz_answer;
 	var rightNum=0;
 	var wrongNum=0;
-	
+	var menuName = {'보호소센터 찾기':'searchShelter', '퀴즈':'quizSetting', '질병':'diseaseMain', '커뮤니티':'communityMain'};
 	$(document).ready(function() {
+		var content = "";
+		for(var key in menuName){
+			console.log(key);
+			content += "<div class='menuName'";
+			content += "style='"
+			if(key=='퀴즈'){
+				content += "background:#28977B;color:white;font-weight: 600;";
+			}
+			content += "cursor: pointer'";
+			content += "onclick='pageMove(this)' id="+menuName[key]+">";
+			content += key;
+			content += "</div>";
+		};	
+		
+		$("#sideMenu").empty();
+		$("#sideMenu").append(content);
+		
+		
 		console.log();
 	  	//dialog plugin적용
 	    $( "#dialog-confirm" ).dialog({
@@ -251,6 +271,11 @@ fieldset legend {
 		$("#reqNum").html('${quizNum}');
 		
 	});
+	
+	function pageMove(e) {
+		console.log($(e).attr("id"));
+		location.href="./"+$(e).attr("id");
+	};
 
 	//다음 퀴즈
 	function nextQuiz() {

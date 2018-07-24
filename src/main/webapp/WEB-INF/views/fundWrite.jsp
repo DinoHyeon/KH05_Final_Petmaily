@@ -183,14 +183,14 @@ input[type='text'] {
 	background: white;
 }
 
-#sideFrame {
-	position: absolute;
-	left: 0.52%;
-	top: 12.4%;
-	width: 14.7%;
-	height: 150%;
-	border-right: 1px solid gray;
-	border-left: 1px solid gray;
+#sideFrame{
+    position: absolute;
+    left: 0.52%;
+    top: 12.4%;
+    width: 14.7%;
+    height: 150%;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
 }
 
 #attachArea {

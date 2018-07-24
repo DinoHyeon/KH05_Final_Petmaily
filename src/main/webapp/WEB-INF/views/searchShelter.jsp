@@ -78,6 +78,10 @@ button{
     border: 1px solid black;
     border-collapse: collapse;
 }
+#shelterList td{
+   width: 15%;
+}
+
 
 #shelterList td,th,tr{
    border: 1px solid black;
@@ -127,12 +131,6 @@ td{
 }
 #listTd{
 	width : 40%;
-}
-
-
-
-td{
-	text-align: center;
 }
 
 </style>

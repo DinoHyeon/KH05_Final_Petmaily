@@ -142,10 +142,32 @@
 	color: white;
 	cursor: pointer;
 }
+
+#contentFrame {
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 150%;
+   background: white;
+}
+
+#sideFrame{
+    position: absolute;
+    left: 0.52%;
+    top: 12.4%;
+    width: 14.7%;
+    height: 150%;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
+	<div id="sideFrame"></div>
+<jsp:include page="sideMenu.jsp" />
+<div id="contentFrame">
 	<div class="adopt">
 	
 		<div id=title>
@@ -168,6 +190,7 @@
 				<td style="font-weight: 300">${boardAdoptDetail.adopt_loc1}
 					${boardAdoptDetail.adopt_loc2}</td>
 			</tr>
+			</table>
 			<table id="writeTable">
 				<input type="hidden" id="board_idx" value="${aDetail.board_idx}" />
 				<tr class="littleTr">
@@ -208,13 +231,39 @@
 				</tr>
 			</table>
 			</div>
+			</div>
+			
 			<jsp:include page="reply.jsp"/>
 </body>
 <script>
 	
-	
+var menuName = {'유기동물공고':'animalNotice', '입양후기':'adoptMain'};
 	var oriName = '${aDetailPhoto}';
 	var del = $("#board_idx").val();
+	
+	$(document).ready(function() {
+		var content = "";
+		for(var key in menuName){
+			console.log(key);
+			content += "<div class='menuName'";
+			content += "style='"
+			if(key=='입양후기'){
+				content += "background:#28977B;color:white;font-weight: 600;";
+			}
+			content += "cursor: pointer'";
+			content += "onclick='pageMove(this)' id="+menuName[key]+">";
+			content += key;
+			content += "</div>";
+		};	
+		
+		$("#sideMenu").empty();
+		$("#sideMenu").append(content);
+		});
+	
+	function pageMove(e) {
+		console.log($(e).attr("id"));
+		location.href="./"+$(e).attr("id");
+	};
 	
 	//파일명에 넣을 수 없는 \기호를 사용
 	var newStr = oriName.replace( /a\a/gi, "<br/>");

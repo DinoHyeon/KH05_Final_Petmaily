@@ -8,22 +8,22 @@
 <style>
 /* 전체(배경) */
 #contentFrame {
-	position: absolute;
-	left: 15.52%;
-	top: 12.5%;
-	width: 82.95%;
-	height: 100%;
-	background: white;
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 95%;
+   background: white;
 }
 
-#sideFrame{
-    position: absolute;
-    left: 0.52%;
-    top: 12.4%;
-    width: 14.7%;
-    height: 139%;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 
 /* 첫번째 타이틀 */
@@ -180,7 +180,8 @@ border-right: 1px solid gray;
 <body>
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
-	<jsp:include page="sideMenu.jsp" />
+   <jsp:include page="sideMenu.jsp" />
+   <div id="contentFrame">
 	
 	<div id="contentFrame">
 			<div id=title1>
@@ -252,6 +253,7 @@ border-right: 1px solid gray;
 				<tbody id="quizList">
 				</tbody>
 			</table>
+		</div>
 		</div>
 		<div id="paging"></div>
 	</div>

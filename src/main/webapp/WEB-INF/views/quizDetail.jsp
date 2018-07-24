@@ -12,21 +12,22 @@
 <style>
 /* 전체(배경) */
 #contentFrame {
-	position: absolute;
-	left: 15.52%;
-	top: 12.5%;
-	width: 82.95%;
-	height: 100%;
-	background: white;
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 95%;
+   background: white;
 }
 
 #sideFrame {
 	position: absolute;
 	left: 0.52%;
-	top: 10.5%;
-	width: 15%;
-	height: 100%;
-	background: black;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 
 /* 타이틀 */
@@ -103,7 +104,8 @@
 <body>
 <jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
-	<div id="contentFrame">
+   <jsp:include page="sideMenu.jsp" />
+   <div id="contentFrame">
 	<div id="quiz">
 		<div id=title>
 			<h1>퀴즈 상세보기</h1>
@@ -151,7 +153,27 @@
 	</div>
 	</div>
 <script>
+var menuName = {'보호소센터 찾기':'searchShelter', '퀴즈':'quizSetting', '질병':'diseaseMain', '커뮤니티':'communityMain'};
+
 	$(document).ready(function() {
+		var content = "";
+		for(var key in menuName){
+			console.log(key);
+			content += "<div class='menuName'";
+			content += "style='"
+			if(key=='퀴즈'){
+				content += "background:#28977B;color:white;font-weight: 600;";
+			}
+			content += "cursor: pointer'";
+			content += "onclick='pageMove(this)' id="+menuName[key]+">";
+			content += key;
+			content += "</div>";
+		};	
+		
+		$("#sideMenu").empty();
+		$("#sideMenu").append(content);
+		
+		
 		//$("input[name='answer").not('input[value="${dto.quiz_answer}"]').attr("disabled",true);
 		$("input[value='${dto.quiz_answer}']").attr("checked",true);
 		$("input[name='answer']").attr("disabled",true);
@@ -159,6 +181,11 @@
 		$('input[type="radio"]').checkboxradio({icon: false});
 		$( "input[type=submit], button, input[type=button]" ).button();
 	});
+	
+	function pageMove(e) {
+		console.log($(e).attr("id"));
+		location.href="./"+$(e).attr("id");
+	};
 	
 	function del() {
 		var del = confirm("해당 문제를 삭제하시겠습니까?");

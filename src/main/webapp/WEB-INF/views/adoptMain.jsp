@@ -155,10 +155,31 @@
          background-color: lightgray;   /* 크롬, 모질라 등, 기타 브라우저 */
       }
       
+      #contentFrame {
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 150%;
+   background: white;
+}
+
+#sideFrame{
+    position: absolute;
+    left: 0.52%;
+    top: 12.4%;
+    width: 14.7%;
+    height: 150%;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+}
    </style>   
    </head>
    <body>
    <jsp:include page="mainFrame.jsp"/>
+   <div id="sideFrame"></div>
+<jsp:include page="sideMenu.jsp" />
+<div id="contentFrame">
       <div class = "adopt">
       
          <div id=title>
@@ -228,15 +249,32 @@
          		</td>
          	</tr>
          </table>
+         </div>
     </div>
    </body>
    <script>
    /* 리스트 출력 및 검색 기능 */
    //현재 보여줄 페이지
   var showPageNum = 1;
+  var menuName = {'유기동물공고':'animalNotice', '입양후기':'adoptMain'};
   var page=1;
    $(document).ready(function() {
-	   
+	   var content = "";
+		for(var key in menuName){
+			console.log(key);
+			content += "<div class='menuName'";
+			content += "style='"
+			if(key=='입양후기'){
+				content += "background:#28977B;color:white;font-weight: 600;";
+			}
+			content += "cursor: pointer'";
+			content += "onclick='pageMove(this)' id="+menuName[key]+">";
+			content += key;
+			content += "</div>";
+		};	
+		
+		$("#sideMenu").empty();
+		$("#sideMenu").append(content);
 	   
       adoptList(showPageNum);
    });
@@ -265,6 +303,12 @@
          }
       });
    }
+   
+   function pageMove(e) {
+		console.log($(e).attr("id"));
+		location.href="./"+$(e).attr("id");
+	};
+   
    function listPrint(data) {
       var content = "";
       data.aList.forEach(function(item) {

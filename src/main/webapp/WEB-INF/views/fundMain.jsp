@@ -152,6 +152,24 @@ table, th, td {
 			text-decoration: none;
 			color: black;
 		}
+		#contentFrame {
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 150%;
+	background: white;
+}
+
+#sideFrame{
+    position: absolute;
+    left: 0.52%;
+    top: 12.4%;
+    width: 14.7%;
+    height: 150%;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+}
 </style>
 </head>
 <body>
@@ -159,7 +177,9 @@ table, th, td {
 	
 
 	<jsp:include page="mainFrame.jsp"/>
-		<div id="sideFrame"></div>
+	<div id="sideFrame"></div>
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
 	<div id="conDiv">
 		<h1>모금 게시판</h1>
 		<div id="selectTable">
@@ -213,7 +233,7 @@ table, th, td {
 		</div>
 		<div id="paging" >
 	</div>
-	
+	</div>
 </body>
 <script>
 

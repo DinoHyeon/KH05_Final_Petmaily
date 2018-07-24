@@ -46,10 +46,31 @@
 				border : 3px solid black;
 				border-collapse : collapse;
 			}
+			#contentFrame {
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 95%;
+   background: white;
+}
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+}
 		</style>
 	</head>
 	<body>
 		<jsp:include page="mainFrame.jsp" />
+		<div id="sideFrame"></div>
+   <jsp:include page="sideMenu.jsp" />
+   <div id="contentFrame">
 		<h3>질병 검색</h3>
 		<hr>
 		<form id="inputSearchList" action="diseaseSearchListPage" method="post">
@@ -103,10 +124,37 @@
 			<input type="hidden" id="arrKey" name="arrKey"/>
 			<input type="submit" id="keywordSearch" value="키워드 검색" />
 		</form>
+		</div>
 	</body>
 	<script>
+	var menuName = {'보호소센터 찾기':'searchShelter', '퀴즈':'quizSetting', '질병':'diseaseMain', '커뮤니티':'communityMain'};
+
 		var keyArr = [];
 		var i;
+		
+		$(document).ready(function() {
+			var content = "";
+			for(var key in menuName){
+				console.log(key);
+				content += "<div class='menuName'";
+				content += "style='"
+				if(key=='질병'){
+					content += "background:#28977B;color:white;font-weight: 600;";
+				}
+				content += "cursor: pointer'";
+				content += "onclick='pageMove(this)' id="+menuName[key]+">";
+				content += key;
+				content += "</div>";
+			};	
+			
+			$("#sideMenu").empty();
+			$("#sideMenu").append(content);
+		});
+		
+		function pageMove(e) {
+			console.log($(e).attr("id"));
+			location.href="./"+$(e).attr("id");
+		};
 	
 		function keyword(now){
 			var selectCondition = document.getElementById(now.id);
