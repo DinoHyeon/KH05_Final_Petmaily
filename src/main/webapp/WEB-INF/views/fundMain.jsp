@@ -105,14 +105,7 @@ table, th, td {
 	color: white;
 }
 
-#sideFrame {
-	position: absolute;
-	left: 0.52%;
-	top: 11.4%;
-	width: 15%;
-	height: 95%;
-	background: black;
-}
+
 /* 셀렉트박스 테이블 */
 #selectTable {
 	top: 8%;
@@ -182,7 +175,7 @@ table, th, td {
 	left: 0.52%;
 	top: 12.4%;
 	width: 14.7%;
-	height: 95%;
+	height: 285%;
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
 }

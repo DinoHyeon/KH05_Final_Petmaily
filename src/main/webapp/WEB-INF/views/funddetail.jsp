@@ -33,7 +33,7 @@ table, th, td {
     left: 0.52%;
     top: 12.4%;
     width: 14.7%;
-    height: 150%;
+    height: 280%;
     border-right: 1px solid gray;
     border-left: 1px solid gray;
 }

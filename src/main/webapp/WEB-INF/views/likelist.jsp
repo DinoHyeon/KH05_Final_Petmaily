@@ -39,8 +39,8 @@ background-color: #217D65;
 #tlike{
 
 position:absolute;
-top:-10%;
-left:-16%;
+top:-11%;
+left:-28%;
 
 }
 

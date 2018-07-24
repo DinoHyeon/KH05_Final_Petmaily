@@ -82,8 +82,8 @@ background-color: #217D65;
 
 #agree{
    position: absolute;
-   right: 15%;
-   top: -10%;
+   right: 26%;
+   top: -20%;
    width: 59.95%;
    height: 6%;
    background: white;
@@ -133,7 +133,7 @@ input[value='보내기']{
 }
 #paging{
 position: absolute;
-   left: 50%;
+   left: 38%;
    top: 80.4%;
    width: 15%;
 
