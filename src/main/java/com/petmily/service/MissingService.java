@@ -329,13 +329,15 @@ public class MissingService {
 		return encoder.matches(params.get("pass"), writingPass);
 	}
 
-	public int favoriteRegist(HashMap<String, String> map) {
+	public int favoriteRegist(HashMap<String, String> map, HttpSession session) {
 		inter = sqlSession.getMapper(BoardInter.class);
+		map.put("id", (String) session.getAttribute("loginId"));
 		return inter.favoriteRegist(map);
 	}
 
-	public int favoriteDel(HashMap<String, String> map) {
+	public int favoriteDel(HashMap<String, String> map, HttpSession session) {
 		inter = sqlSession.getMapper(BoardInter.class);
+		map.put("id", (String) session.getAttribute("loginId"));
 		return inter.favoriteDel(map);
 	}
 
