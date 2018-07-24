@@ -27,9 +27,9 @@
 
 #registArea{
 	position: absolute;
-	width : 100%;
-	top : 15%;
-	left: 30%;
+    width: 100%;
+    top: 108%;
+    left: 0.4%;
 }
 
 #replyContent{
@@ -37,9 +37,9 @@
 }
 
 .replyArea{
+	width: 100%;
 	position: absolute;
-	top :23%;
-	left: 30%;
+	top: 115%;
 }
 
 th{
@@ -54,13 +54,14 @@ td{
 
 #paging{
 	position: absolute;
-	top :105%;
+	top :103%;
 	left: 50%;
 }
 
 </style>
 </head>
 <body>
+<div>
 <div id="noneMemberPassChk" title="비회원 댓글 삭제">
 	<div>
 		<h1>비밀번호를 입력해주세요.</h1>
@@ -68,7 +69,7 @@ td{
 	</div>
 </div>
 
-<div class="registArea" id="registArea">
+<div id="registArea">
 	<input type="text" id="replyContent" placeholder="내용">
 	<c:set var="loginId" value="${sessionScope.loginId}"/>
     	<c:if test="${empty loginId}">
@@ -77,7 +78,7 @@ td{
 	<input type="button" onclick="regist()" value="저장">
 </div>
 <div class="replyArea">
-	<table>
+	<table style="width: 100%">
 		<thead>
 			<tr>
 				<th>작성자</th>
@@ -88,9 +89,9 @@ td{
 		<tbody id="replyList">
 		</tbody>
 	</table>
+	<div id="paging"></div>
 </div>
-
-<div id="paging"></div>
+</div>
 </body>
 <script>
 var replyIdx='${reply}';
