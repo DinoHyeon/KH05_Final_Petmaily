@@ -106,13 +106,23 @@ background-color: #217D65;
    top: 10%;
    left: 20%;
 }
-#sideFrame{
+#contentFrame {
    position: absolute;
-   left: 0.52%;
-   top: 11.4%;
-   width: 15%;
-   height: 150%;
-   background: black;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 95%;
+   background: white;
+}
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 input[value='보내기']{
    position: absolute;
@@ -142,7 +152,8 @@ position: absolute;
 <body>
    <jsp:include page="mainFrame.jsp" />
    	<div id="sideFrame"></div>
-   
+   <jsp:include page="sideMenu.jsp" />
+   <div id="contentFrame">
 	<table id="agree">
       <thead>
          <tr>
@@ -166,14 +177,37 @@ position: absolute;
       <textarea id="noreason"></textarea>
       <input type="button" class="send" value="보내기">
    </div>
-
+</div>
 
 
 </body>
 <script>
    var showPageNum = 1
-
+   var menuName = {
+			'회원관리' : 'memberlist',
+			'모금글관리' : 'agreeAdmin',
+			'퀴즈등록' : 'quizMain'
+		};
    $(document).ready(function() {
+	   var content = "";
+		for ( var key in menuName) {
+			console.log(key);
+			content += "<div class='menuName'";
+			content += "style='"
+			if (key == '모금글관리') {
+				content += "background:#28977B;color:white;font-weight: 600;";
+			}
+			content += "cursor: pointer'";
+			content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
+			content += key;
+			content += "</div>";
+		}
+		;
+
+		$("#sideMenu").empty();
+		$("#sideMenu").append(content);
+	   
+	   
       $("input[type=button]").button();
       
       agreelistCall(showPageNum);
@@ -187,6 +221,10 @@ position: absolute;
       });
    });
 
+   function pageMove(e) {
+		console.log($(e).attr("id"));
+		location.href = "./" + $(e).attr("id");
+	};
    function agreelistCall(page) {
       $.ajax({
          type : "get",

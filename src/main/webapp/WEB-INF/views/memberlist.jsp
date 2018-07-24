@@ -42,8 +42,6 @@ background-color: #217D65;
    border:none;
  width:59%;
 
- 
-
 }
 
 .delmem:hover{
@@ -80,21 +78,23 @@ background-color: #217D65;
    background: white;
 
 }
-  #contentFrame {
+#contentFrame {
    position: absolute;
-   left: 48.52%;
+   left: 15.52%;
    top: 12.5%;
    width: 82.95%;
-   height: 150%;
+   height: 95%;
    background: white;
 }
-#sideFrame{
-   position: absolute;
-   left: 0.52%;
-   top: 11.4%;
-   width: 15%;
-   height: 150%;
-   background: black;
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 #paging{
 position: absolute;
@@ -113,7 +113,8 @@ position: absolute;
 <body>
 	<jsp:include page="mainFrame.jsp"/>
 	<div id="sideFrame"></div>
-	<div id="contentFrame">
+   <jsp:include page="sideMenu.jsp" />
+   <div id="contentFrame">
 	
 	<table id="member">
 	<thead>
@@ -124,14 +125,10 @@ position: absolute;
 					<th>상태</th>
 					<th>추방</th>
 					
-					
 				</tr>
 				</thead>
 						<tbody id="memberTable">
-						
 			</tbody>
-			
-	
 	</table>
 		<div id="paging" >
 	</div>
@@ -144,13 +141,39 @@ obj.type="get";
 obj.dataType="json";
 obj.error=function(e){console.log(e)};
 var showPageNum = 1 
+var menuName = {
+		'회원관리' : 'memberlist',
+		'모금글관리' : 'agreeAdmin',
+		'퀴즈등록' : 'quizMain'
+	};
 
 $(document).ready(function() {
+	var content = "";
+	for ( var key in menuName) {
+		console.log(key);
+		content += "<div class='menuName'";
+		content += "style='"
+		if (key == '회원관리') {
+			content += "background:#28977B;color:white;font-weight: 600;";
+		}
+		content += "cursor: pointer'";
+		content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
+		content += key;
+		content += "</div>";
+	}
+	;
+
+	$("#sideMenu").empty();
+	$("#sideMenu").append(content);
 	
 	memberlistCall(showPageNum)
 
 });
 
+function pageMove(e) {
+	console.log($(e).attr("id"));
+	location.href = "./" + $(e).attr("id");
+};
 
 function memberlistCall(page){
 	$.ajax({

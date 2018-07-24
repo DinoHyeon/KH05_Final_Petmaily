@@ -261,14 +261,17 @@ border-right: 1px solid gray;
 <script>
 	//현재 보여줄 페이지
 	var showPageNum = 1;
-	var menuName = {'보호소센터 찾기':'searchShelter', '퀴즈':'quizSetting', '질병':'diseaseMain', '커뮤니티':'communityMain'};
+	 var menuName = {
+				'회원관리' : 'memberlist',
+				'모금글관리' : 'agreeAdmin',
+				'퀴즈등록' : 'quizMain'
+			};
 	$(document).ready(function() {
 		var content = "";
 		for(var key in menuName){
 			content += "<div class='menuName'";
 			content += "style='"
-			if(key=='퀴즈'){
-				console.log("퀴즈");
+			if(key=='퀴즈등록'){
 				content += "background:#28977B;color:white;font-weight: 600;";
 			}
 			content += "cursor: pointer'";

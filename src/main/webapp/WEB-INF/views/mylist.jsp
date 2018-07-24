@@ -33,17 +33,18 @@ tr{
    left: 15.52%;
    top: 12.5%;
    width: 82.95%;
-   height: 150%;
+   height: 95%;
    background: white;
 }
 
-#sideFrame{
-   position: absolute;
-   left: 0.52%;
-   top: 11.4%;
-   width: 15%;
-   height: 150%;
-   background: black;
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 
 #paging{
@@ -76,8 +77,9 @@ tr{
 </head>
 <body>
    <jsp:include page="mainFrame.jsp"/>
-   <div id="sideFrame"></div>
-	<div id="contentFrame">
+  <div id="sideFrame"></div>
+   <jsp:include page="sideMenu.jsp" />
+   <div id="contentFrame">
    <div id="mylistTable"></div>
 
 <div id="dialog">
@@ -98,12 +100,40 @@ obj.dataType="json";
 obj.error=function(e){console.log(e)};
 var showPageNum = 1
 var loginId = "${sessionScope.loginId}";
+var menuName = {
+		'내정보' : 'memberUpdateForm',
+		'내가작성한모금게시글' : 'mylist',
+		'즐겨찾기' : 'likelist'
+	};
 
 $(document).ready(function() {
+	
+	var content = "";
+	for ( var key in menuName) {
+		console.log(key);
+		content += "<div class='menuName'";
+		content += "style='"
+		if (key == '내가작성한모금게시글') {
+			content += "background:#28977B;color:white;font-weight: 600;";
+		}
+		content += "cursor: pointer'";
+		content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
+		content += key;
+		content += "</div>";
+	}
+	;
+
+	$("#sideMenu").empty();
+	$("#sideMenu").append(content);
   
     mylistCall(showPageNum)
    
 });
+
+function pageMove(e) {
+	console.log($(e).attr("id"));
+	location.href = "./" + $(e).attr("id");
+};
 
 function mylistCall(page){
    $.ajax({

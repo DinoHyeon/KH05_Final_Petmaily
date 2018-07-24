@@ -60,6 +60,15 @@ left:-16%;
   transition: background 1s steps(28);
   
 }
+#contentFrame {
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 95%;
+   background: white;
+}
+
 #sideFrame {
 	position: absolute;
 	left: 0.52%;
@@ -79,7 +88,9 @@ position: absolute;
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp"/>
-	   	<div id="sideFrame"></div>
+	<div id="sideFrame"></div>
+   <jsp:include page="sideMenu.jsp" />
+   <div id="contentFrame">
 	<table id="tlike">
 			<thead>
 				<tr>
@@ -96,6 +107,7 @@ position: absolute;
 	</table>
 	<div id="paging" >
 	</div>
+	</div>
 </body>
 <script>
 
@@ -104,12 +116,36 @@ obj.type="get";
 obj.dataType="json";
 obj.error=function(e){console.log(e)};
 var showPageNum = 1
-
+var menuName = {
+		'내정보' : 'memberUpdateForm',
+		'내가작성한모금게시글' : 'mylist',
+		'즐겨찾기' : 'likelist'
+	};
 /* 즐겨찾기 리스트 */
 $(document).ready(function() {
+	var content = "";
+	for ( var key in menuName) {
+		console.log(key);
+		content += "<div class='menuName'";
+		content += "style='"
+		if (key == '즐겨찾기') {
+			content += "background:#28977B;color:white;font-weight: 600;";
+		}
+		content += "cursor: pointer'";
+		content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
+		content += key;
+		content += "</div>";
+	}
+	;
+
+	$("#sideMenu").empty();
+	$("#sideMenu").append(content);
 	 likelistCall(showPageNum);
 });
-
+function pageMove(e) {
+	console.log($(e).attr("id"));
+	location.href = "./" + $(e).attr("id");
+};
 
 function likelistCall(page){
 	$.ajax({
