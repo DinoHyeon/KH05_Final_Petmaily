@@ -228,9 +228,14 @@ td {
 					value="수정" /> <input type="button" id="del"
 					onclick="missingNonmemberChk('del')" value="삭제" /></td>
 			</tr>
+				<tbody>
+				<tr>
+					<td><jsp:include page="reply.jsp"/></td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
-	<div id="reply"><jsp:include page="reply.jsp"/></div>
+
 	
 </body>
 <script>

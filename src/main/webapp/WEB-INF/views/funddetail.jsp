@@ -6,11 +6,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-table, th, td {
+table {
+		border: 1px solid black;
+	border-collapse: collapse;
+	position: absolute;
+	width: 70%;
+	top: 10%;
+	left: 10%;
+}
+td {
 	border: 1px solid black;
 	border-collapse: collapse;
-	padding: 6px 15px;
-	text-align: center;
+	padding: 20px;
 }
 
 #buttonarea {
