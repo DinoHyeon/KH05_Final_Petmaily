@@ -135,6 +135,7 @@
 	<jsp:include page="sideMenu.jsp" />
 	<!-- 내용시작 -->
 	<div id="conDiv">
+	<h1>보호게시판</h1>
 		<div id="protectNonmemberChk" title="비회원">
 			<div>
 				<h1>비밀번호를 입력해주세요.</h1>
@@ -181,8 +182,7 @@
 				
 			</tr>
 			<tr>
-				<th colspan=4 style="width: 1000px; border: 1px solid gray;">내
-					용</th>
+				<th colspan=4 style="width: 1000px; border: 1px solid gray;">내용</th>
 			</tr>
 
 			<tr>

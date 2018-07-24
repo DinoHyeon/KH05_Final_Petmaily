@@ -9,6 +9,8 @@ public interface BoardInter {
 
 	/////////////////////////////////////////////////// 윤영//////////////////////////////////////////////////
 
+	void uphit(int board_idx); /*조회수*/
+	
 	ArrayList<BoardDTO> protectList(HashMap<String, String> map); /* 보호 게시판 리스트 */
 
 	ArrayList<BoardDTO> missingList(HashMap<String, String> map); /* 실종 게시판 리스트 */
@@ -208,4 +210,6 @@ public interface BoardInter {
 
 	String adoptDelFileName(String fileName); // 삭제 파일명 존재 확인
 	/* 입양후기 */
+
+	
 }
