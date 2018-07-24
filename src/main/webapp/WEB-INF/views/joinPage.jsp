@@ -7,114 +7,162 @@
       <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
       <title>회원가입</title>      
       <style>
-         input[type='text']{
-            width: 250px;
+      /* 타이틀 회원가입 텍스트 */
+      #title h1 {
+            top: 17%;
+            left: 13%;
+            margin: 50px 0px 40px 0px;
+            text-align: center;
+            color: gray;
+            font-weight: 700;
+            font-size: 30;
+            position: absolute;
          }
-         
-         input[type='password']{
-            width: 250px;
+      /* 페이지 안내 문구 */
+      #title h5 {
+            top: 28%;
+            left: 82%;
+            text-align: right;
+            color: black;
+            font-weight: 700;
+            font-size: 14;
+            position: absolute;
          }
-      
-         form{
-            padding: 10px 600px;
+      /* hr 선 설정 */
+      .join hr{
+            border:none;
+               width:1300px;
+               border:1px solid gray;
+               color:gray;    /* IE */
+             border-color: gray;  /* 사파리 */
+                background-color: gray;   /* 크롬, 모질라 등, 기타 브라우저 */
+                position: absolute;
+                left:10%;
+                top:33%;
          }
-         
-         table, th, td{
-            border : 1px solid black;
+         #joinTable {
+            border:none;
             border-collapse : collapse;
             padding : 7px 15px;
-         
-            border-right:none;
-            border-left:none;
-            border-top:none;
-            border-bottom:none;
+            position: absolute;
+            margin: auto auto 150px auto;
+            width:1000px;
+                left:20%;
+                top:48%;
          }
-         
-         h3{
-            padding: 20px 600px 5px 740px;
+         #joinTable tr{
+            border:none;
+            border-collapse : collapse;
+            padding : 7px 15px;
          }
-      
-         button{
-            width: 70pt;
-            height: 20pt;
+         #joinTable th{
+            border:none;
+            border-collapse : collapse;
+            margin: auto 20px auto auto;
+            padding : 7px 15px;
+            text-align: right;
+            color:black;
+            opacity:0.9;
+            font-weight:700;
+            width:150px;
          }
+         #joinTable td{
+            border:none;
+            border-collapse : collapse;
+            padding : 7px 15px;
+            text-align: left;
+         }
+         /* input박스 스타일 */
+         .inp{
+            width:200px;
+            height: 40px;
+         }
+         /* 버튼 스타일 */
+         .btn{
+               position:relative;
+               height : 45px;
+               width: 120px;
+               font-weight: 800;
+               font-size:14;
+               text-align:center;
+               margin: auto 10px auto 10px; 
+              padding: 5px 0 5px 0;
+               border:2.5px solid white;
+               background-color : #28977B;
+               color: white;
+               cursor: pointer;
+            }
          
          #loginFail{
             color: red;
             display: none;
          }
-         
-         #joinBtn{
-            margin-top: 20px;
-            margin-left: 410px;
-         } 
-         
-         .inp {
-            display: none;
-         }
-         
-         #joinEmailName{
-            width: 100px;
-         }
-         
-         #joinEmailAddr{
-            width: 110px;
-         }
       </style>
    </head>
    <body>
+   
+      <div class="join">
       <jsp:include page="mainFrame.jsp" />
-      <h3>JOIN</h3>
+      <div id="title">
+         <h1 style="font-size: 50">회원 가입</h1>
+         <h5>회원 정보를 등록합니다</h5>
+      </div>
       <hr>
 
       <form id="joinConfirm" action="joinConfirmPage" method="post">
-         <table>
+         <table id="joinTable">
             <tr>
                <th>이름</th>
-               <td colspan="3"><input type="text" id="joinName" name="name" placeholder="이름 입력" maxlength="20" /></td>
+               <td><input type="text" class="inp" id="joinName" name="name" placeholder="이름 입력" maxlength="20" /></td>
             </tr>
             <tr>
-               <th>ID</th>
-               <td><input type="text" id="joinId" name="id" placeholder="아이디 입력" maxlength="20" /></td>
-               <td><input type="button" id="idChk" style="width:80pt; height:20pt;" value="중복확인"></td>
+               <th>아이디</th>
+               <td><input type="text" class="inp" id="joinId" name="id" placeholder="아이디 입력" maxlength="20" />
+               <input type="button" class="btn" id="idChk" style="margin:auto auto auto 33px" value="중복확인"></td>
             </tr>
             <tr>
-               <th>PW</th>
-               <td colspan="3"><input type="password" id="joinPw" name="pw" placeholder="비밀번호 입력" maxlength="20" /></td>
+               <th>비밀번호</th>
+               <td><input type="password" class="inp" id="joinPw" name="pw" placeholder="비밀번호 입력" maxlength="20" /></td>
             </tr>
             <tr>
-               <th>PW&nbsp;CHECK</th>
-               <td><input type="password" id="joinPwChk" name="pwChk" placeholder="비밀번호 확인" maxlength="20" /></td>
-               <td><input type="button" id="pwChk" style="width:80pt; height:20pt;" value="비밀번호확인"></td>
+               <th>비밀번호 확인</th>
+               <td><input type="password" class="inp" id="joinPwChk" name="pwChk" placeholder="비밀번호 확인" maxlength="20" />
+               <input type="button" class ="btn" id="pwChk" style="margin:auto auto auto 33px" value="비밀번호확인"></td>
             </tr>
             <tr>
-               <th>E-MAIL</th>
+               <th>이메일</th>
                <td>
-                  <input type="text" id="joinEmailName" name="emailName" placeholder="이메일 입력" maxlength="20" />&nbsp;&nbsp;@&nbsp;
-                  <input type="text" id="joinEmailAddr" name="emailAddr" placeholder="이메일 주소 입력" maxlength="20" />
+                  <input type="text" class="inp" id="joinEmailName" name="emailName" placeholder="이메일 입력" maxlength="20" />&nbsp;&nbsp;@&nbsp;
+                  <input type="text" class="inp" id="joinEmailAddr" name="emailAddr" placeholder="이메일 주소 입력" maxlength="20" />
+                  <input type="button" class="btn" id="joinEmailSend" value="인증번호 발송">
                </td>
-               <td colspan="2"><input type="button" id="joinEmailSend" style="width:80pt; height:20pt;" value="인증번호 발송"></td>
             </tr>
             <tr>
-               <th></th>
-               <td><input type="text" id="joinEmailChk" name="emailChk" placeholder="인증번호 입력" maxlength="20" /></td>
-               <td colspan="2"><input type="button" id="joinEmailConfirm" style="width:80pt; height:20pt;" value="인증번호 확인"></td>
+               <th>이메일 인증</th>
+               <td><input type="text" class="inp" id="joinEmailChk" name="emailChk" placeholder="인증번호 입력" maxlength="20" style="margin:auto auto auto 238px"/>
+               <input type="button" class="btn" id="joinEmailConfirm" value="인증번호 확인"></td>
             </tr>
             <tr>
-               <th>PHONE</th>
-               <td colspan="3"><input type="text" id="joinPhone" name="phone" placeholder="휴대폰번호 입력" maxlength="20" /></td>
+               <th>전화번호</th>
+               <td><input type="text" class="inp" id="joinPhone" name="phone" placeholder="'-'없이 번호만 입력" maxlength="20" /></td>
+            </tr>
+            <tr style="margin: auto auto 20px auto">
+               <th>주소</th>
+               <td><input type="text" class="inp" name="address" id="joinAddress" placeholder="주소 입력" style="margin: 4 0 4 0" readOnly> 
+               <input class="inp" class="inp" type="text" id="sample4_postcode" placeholder="우편번호" style="margin: 4 0 4 0" readOnly>
+               <input class="inp" class="inp" type="text" id="sample4_jibunAddress" placeholder="지번주소" style="margin: 4 0 4 0" readOnly>
+               <input type="button" class="btn" id="path" onclick="sample4_execDaumPostcode()" style="width:80pt; height:35pt;" value="주소 찾기">
+               <span class="inp" id="guide" style="color: #999"></span></td>
             </tr>
             <tr>
-               <th>ADDRESS</th>
-               <td><input type="text" name="address" id="joinAddress" placeholder="주소 입력" style="margin: 4 0 4 0" readOnly></td> 
-               <td><input type="button" id="path" onclick="sample4_execDaumPostcode()" style="width:80pt; height:20pt;" value="주소 찾기"></td>
-               <td><input class="inp" type="text" id="sample4_postcode" placeholder="우편번호" style="margin: 4 0 4 0"></td>
-               <td><input class="inp" type="text" id="sample4_jibunAddress" placeholder="지번주소" style="margin: 4 0 4 0"></td>
-               <td><span class="inp" id="guide" style="color: #999"></span></td>
+               <td colspan="2">
+                  <input type="button" class="btn" onclick="joinChk()" id="joinBtn" value="가입하기" style="left:84%; margin:60px auto auto auto;"/>
+                  <input type="button" class="btn" onclick="location.href='./' " value="취소" style="left:57%; margin:60px auto auto auto;"/>
+               </td>
             </tr>
          </table>               
-         <input type="button" onclick="joinChk()" id="joinBtn" value="가입하기"/>
       </form>
+      </div>
    </body>
    <script>
       var idChk = 0;
@@ -164,7 +212,6 @@
       $(function() {
           $("#idChk").click(function() {
               var joinId=  $("#joinId").val(); 
-              
               $.ajax({
                   async: true,
                   type : 'POST',
@@ -193,7 +240,7 @@
       $(function() {
           $("#pwChk").click(function() { 
             if($("#joinPw").val() == $("#joinPwChk").val()){
-               alert("비밀번호을 확인했습니다.");
+               alert("비밀번호를 확인했습니다.");
                $('#joinPw').prop('readonly', true);
                $('#joinPwChk').prop('readonly', true);
                pwChk = 1;
@@ -295,8 +342,6 @@
       }
    </script>
 </html>
-
-
 
 
 

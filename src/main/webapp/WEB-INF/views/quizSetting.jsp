@@ -15,15 +15,14 @@
    top: 12.5%;
    width: 82.95%;
    height: 95%;
-   background: white;
 }
 
 #sideFrame {
 	position: absolute;
 	left: 0.52%;
 	top: 12.4%;
-	width: 14.7%;
-	height: 150%;
+	width: 14.8%;
+	height: 106%;
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
 }
@@ -178,18 +177,34 @@
 
 /* 문제풀기! 버튼 스타일 */
 #play{
+    position: absolute;
+    top: 100%;
+    left: 34.5%;
+    height: 60px;
+    width: 180px;
+    font-weight: 800;
+    font-size: 16;
+    text-align: center;
+    border: 2.5px solid white;
+    background-color: #A9CB73;
+    color: white;
+    cursor: pointer;
+}
+
+#knowledge{
 	position: absolute;
-	margin-top: 20%;
-	margin-left: 33.5%;
-	height: 60px;
-	width: 180px;
-	font-weight: 800;
-	font-size: 16;
-	text-align: center;
-	border: 2.5px solid white;
-	background-color: #A9CB73;
-	color: white;
-	cursor: pointer;
+	z-index: 50;
+    top: 2%;
+    left: 88.5%;
+    height: 60px;
+    width: 180px;
+    font-weight: 800;
+    font-size: 16;
+    text-align: center;
+    border: 2.5px solid white;
+    background-color: #A9CB73;
+    color: white;
+    cursor: pointer;
 }
 
 #one{
@@ -208,6 +223,8 @@
 	<div id="sideFrame"></div>
    <jsp:include page="sideMenu.jsp" />
    <div id="contentFrame">
+   		<input type="button" id="knowledge" onclick="knowledgePage()" value="퀴즈 리스트">
+   
 		<form action="quizPlaySetting" id="quizPlaySetting">
 
 		  <div id=title1>
@@ -313,6 +330,10 @@ var menuName = {'보호소센터 찾기':'searchShelter', '퀴즈':'quizSetting'
 	        event.preventDefault();
 	    } );
 	});
+	
+	function knowledgePage() {
+		location.href="./knowledge";
+	}
 	
 	function pageMove(e) {
 		console.log($(e).attr("id"));

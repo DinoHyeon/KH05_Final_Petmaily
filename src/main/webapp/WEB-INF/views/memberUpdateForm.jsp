@@ -25,111 +25,183 @@
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
 }
-			input[type='text']{
-				width: 250px;
-			}
-			
-			input[type='password']{
-				width: 250px;
-			}
-		
-			form{
-				padding: 10px 600px;
-			}
-			
-			table, th, td{
-				border : 1px solid black;
-				border-collapse : collapse;
-				padding : 7px 15px;
-			
-				border-right:none;
-				border-left:none;
-				border-top:none;
-				border-bottom:none;
-			}
-			
-			h3{
-				padding: 20px 600px 5px 740px;
-			}
-		
-			button{
-				width: 70pt;
-				height: 20pt;
-			}
-			
-			#loginFail{
-				color: red;
-				display: none;
-			}
-			
-			#joinBtn{
-				margin-top: 20px;
-				margin-left: 410px;
-			} 
-			
-			.inp {
-				display: none;
-			}
-			
-			#joinEmailName{
-				width: 100px;
-			}
-			
-			#joinEmailAddr{
-				width: 110px;
-			}
+#title h1 {
+   top: 17%;
+   left: 13%;
+   margin: 50px 0px 40px 0px;
+   text-align: center;
+   color: gray;
+   font-weight: 700;
+   font-size: 30;
+   position: absolute;
+}
+/* 페이지 안내 문구 */
+#title h5 {
+   top: 28%;
+   left: 82%;
+   text-align: right;
+   color: black;
+   font-weight: 700;
+   font-size: 14;
+   position: absolute;
+}
+/* hr 선 설정 */
+.join hr {
+   border: none;
+   width: 1300px;
+   border: 1px solid gray;
+   color: gray; /* IE */
+   border-color: gray; /* 사파리 */
+   background-color: gray; /* 크롬, 모질라 등, 기타 브라우저 */
+   position: absolute;
+   left: 10%;
+   top: 33%;
+}
+
+#update {
+   border: none;
+   border-collapse: collapse;
+   padding: 7px 15px;
+   position: absolute;
+   margin: auto auto 150px auto;
+   width: 1000px;
+   left: 28%;
+   top: 40%;
+}
+
+#update tr {
+   border: none;
+   border-collapse: collapse;
+   padding: 7px 15px;
+}
+
+#update th {
+   border: none;
+   border-collapse: collapse;
+   margin: auto 20px auto auto;
+   padding: 7px 15px;
+   text-align: right;
+   color: black;
+   opacity: 0.9;
+   font-weight: 700;
+   width: 150px;
+}
+
+#update td {
+   border: none;
+   border-collapse: collapse;
+   padding: 7px 1px;
+   text-align: left;
+}
+/* input박스 스타일 */
+.inp {
+   width: 400px;
+   height: 40px;
+}
+/* 버튼 스타일 */
+.btn {
+   height: 45px;
+   width: 120px;
+   font-weight: 800;
+   font-size: 14;
+   text-align: center;
+   margin: auto 10px auto 10px;
+   padding: 5px 0 5px 0;
+   border: 2.5px solid white;
+   background-color: #28977B;
+   color: white;
+   cursor: pointer;
+}
+
+.inp2 {
+   display: none;
+}
+
+#loginFail {
+   color: red;
+   display: none;
+}
+
+#btn2 {
+    position: absolute;
+    top: 85%;
+    left: 46%;
+}
+
+#btn3 {
+   position: absolute;
+    top: 85%;
+    left: 54%;
+}
 		</style>
 	</head>
 	<body>
-		<jsp:include page="mainFrame.jsp" />
-		<div id="sideFrame"></div>
+   <div class="join">
+      <jsp:include page="mainFrame.jsp" />
+<div id="sideFrame"></div>
    <jsp:include page="sideMenu.jsp" />
    <div id="contentFrame">
-		<h3>회원정보 수정</h3>
-		<hr>
-	
-		<form id="memberUpdateFinal" action="memberUpdatePage" method="post">
-			<table>
-			<c:forEach items = "${memberInfo}" var = "dto">
-				<tr>
-					<th>이름</th>
-					<td colspan="3">${dto.member_name}</td>
-				</tr>
-				<tr>
-					<th>ID</th>
-					<td>${dto.member_id}</td>
-				</tr>
-				<tr>
-					<th>PW</th>
-					<td colspan="3"><input type="password" id="joinPw" name="pw" placeholder="비밀번호 입력" maxlength="20" /></td>
-				</tr>
-				<tr>
-					<th>PW&nbsp;CHECK</th>
-					<td><input type="password" id="joinPwChk" name="pwChk" placeholder="비밀번호 확인" maxlength="20" /></td>
-					<td><input type="button" id="pwChk" style="width:80pt; height:20pt;" value="비밀번호확인"></td>
-				</tr>
-				<tr>
-					<th>E-MAIL</th>
-					<td>${dto.member_email}</td>
-				</tr>
-				<tr>
-					<th>PHONE</th>
-					<td colspan="3"><input type="text" id="joinPhone" name="phone" placeholder="휴대폰번호 입력" maxlength="20" /></td>
-				</tr>
-				<tr>
-					<th>ADDRESS</th>
-					<td><input type="text" name="address" id="joinAddress" placeholder="주소 입력" style="margin: 4 0 4 0" readOnly></td> 
-					<td><input type="button" id="path" onclick="sample4_execDaumPostcode()" style="width:80pt; height:20pt;" value="주소 찾기"></td>
-					<td><input class="inp" type="text" id="sample4_postcode" placeholder="우편번호" style="margin: 4 0 4 0"></td>
-					<td><input class="inp" type="text" id="sample4_jibunAddress" placeholder="지번주소" style="margin: 4 0 4 0"></td>
-					<td><span class="inp" id="guide" style="color: #999"></span></td>
-				</tr>
-				</c:forEach>
-			</table>					
-			<input type="button" onclick="joinChk()" id="joinBtn" value="수정하기"/>
-		</form>
-		</div>
-	</body>
+      <div id="title">
+         <h1 style="font-size: 50">회원 정보 수정</h1>
+         <h5>회원 정보를 등록합니다</h5>
+      </div>
+      <hr>
+
+
+      <form id="memberUpdateFinal" action="memberUpdatePage" method="post">
+         <table id="update">
+            <c:forEach items="${memberInfo}" var="dto">
+               <tr>
+                  <th>이름</th>
+                  <td>${dto.member_name}</td>
+               </tr>
+               <tr>
+                  <th>ID</th>
+                  <td>${dto.member_id}</td>
+               </tr>
+               <tr>
+                  <th>PW</th>
+                  <td><input type="password" id="joinPw" name="pw" class="inp"
+                     placeholder="비밀번호 입력" maxlength="20" /></td>
+               </tr>
+               <tr>
+                  <th>PW&nbsp;CHECK</th>
+                  <td><input type="password" id="joinPwChk" name="pwChk"
+                     class="inp" placeholder="비밀번호 확인" maxlength="20" /> <input
+                     type="button" id="pwChk" class="btn" value="비밀번호확인"></td>
+               </tr>
+               <tr>
+                  <th>E-MAIL</th>
+                  <td>${dto.member_email}</td>
+               </tr>
+               <tr>
+                  <th>PHONE</th>
+                  <td><input type="text" id="joinPhone" name="phone"
+                     class="inp" placeholder="휴대폰번호 입력" maxlength="20" /></td>
+               </tr>
+               <tr>
+                  <th>ADDRESS</th>
+                  <td><input type="text" name="address" id="joinAddress"
+                     class="inp" placeholder="주소 입력" style="margin: 4 0 4 0" readOnly>
+                     <input type="button" id="path" class="btn"
+                     onclick="sample4_execDaumPostcode()" value="주소 찾기"> <input
+                     class="inp2" type="text" id="sample4_postcode" placeholder="우편번호"
+                     style="margin: 4 0 4 0"> <input class="inp2" type="text"
+                     id="sample4_jibunAddress" placeholder="지번주소"
+                     style="margin: 4 0 4 0"> <span class="inp2" id="guide"
+                     style="color: #999"></span></td>
+               </tr>
+            </c:forEach>
+         </table>
+         <input type="button" class="btn" id="btn2" onclick="joinChk()"
+            id="joinBtn" value="수정하기" />
+      </form>
+      <form action="deleteUpdate" method="post">
+         <input type="submit" class="btn" id="btn3" id="deleteBtn"
+            value="탈퇴하기" />
+      </form>
+   </div>
+</body>
 	<script>
 	var menuName = {
 			'내정보' : 'memberUpdateForm',

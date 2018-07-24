@@ -4,8 +4,8 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petmily.dao.memberDAO.MemberInter">
 	<!-- 로그인 체크 -->
-	<select id="loginConfirmPage" resultType="String">
-		SELECT member_id FROM member WHERE member_id=#{param1
+	<select id="loginConfirmPage" resultType="MemberDTO">
+		SELECT member_id, member_state FROM member WHERE member_id=#{param1
 		} AND (member_state='member' OR member_state='administer')
 	</select>
 	
@@ -57,9 +57,9 @@
 	 </update>
 	 
 	 <!-- 회원 정보 탈퇴 요청 -->
-	 <update id="deleteUpdatePage" parameterType="String">
-		UPDATE member SET member_state='leave' WHERE member_id=#{param1}
-	</update>
+    <update id="deleteUpdatePage" parameterType="String">
+      UPDATE member m SET  m.member_state='leave',m.member_date=SYSDATE+7 WHERE member_id=#{param1}
+   </update>
 	
 	<!-- 비밀번호 암호화 -->
 	<select id="protectPwChk" resultType="String">
@@ -67,6 +67,10 @@
 	</select>
 	
 	
+	<!--회원 완전 삭제  -->
+   <delete id="deleteFinish" parameterType="hashMap">
+      DELETE FROM member WHERE member_state=#{param1}
+   </delete>
 	
 	
 	

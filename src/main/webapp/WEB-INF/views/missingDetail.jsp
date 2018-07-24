@@ -154,10 +154,12 @@
 }
 
 #reply {
-	height: 100%;
-	width: 100%;
-	position: relative;
-	top: 30%;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 87%;
+    left: 16%;
+    background: black;
 }
 </style>
 </head>
@@ -236,6 +238,7 @@
 	<c:if test="${!empty loginId}">
 		<div id="favorite" class="heart"></div>
 	</c:if>
+
 	
 </body>
 <script>

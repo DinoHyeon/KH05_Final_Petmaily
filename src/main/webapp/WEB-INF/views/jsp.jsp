@@ -198,11 +198,13 @@
    var endde=20180630;//종료일(url에넣을) 변수
    var showPage = 1;
    var pageCnt = "";
+   var msg = "${msg}";
    $(document).ready(function() {
       fn_getToday();
       fn_getFindHome();//getFindHome
       fn_getList();//아래쪽리스트
    });
+
    //divHide 한번에
    function divHide(){
       $("#showDiv1").hide();
