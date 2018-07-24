@@ -12,227 +12,242 @@ table, th, td {
 	padding: 6% 15%;
 	margin: 17% 10% 10.5% 44%;
 	text-align: center;
-
 }
-		#write{
-			position:absolute;
-			top:53%;
-			left:82%;
-			background-color: #28977B;
-			border-color:#28977B;
-			border-style:solid;
-			font-weight: 600;
-			color: white;
-			cursor: pointer;
-			width:8%;
-			height: 4%;
-		}
-	#paging{
-			position:absolute;
-			top:92%;
-			left:53%;
-		}
-		
 
-	
-	#conDiv {
-			position: absolute;
-			left: 15.52%;
-			top: 12.5%;
-			width: 82.95%;
-			height: 150%;
-			background: white;
-		}
-	#conDiv input[type='button']{
-			width:46%;
-			height: 69%;
-			left:298%;
-			top:13%;
-			background-color: #28977B;
-			border-color:#28977B;
-			border-style:solid;
-			font-weight: 600;
-			color: white;
-			cursor: pointer;
-		}
-		#conDiv h1{
-			position: absolute;
-			left:40%; 
-			margin: 5% 0% 2.5% 0%;
-			text-align: center;
-			color: #28977B;
-			font-weight: 600;
-			font-size: 30px;
-		}
-		#listTable{
-			position:absolute;
-			top:18%;
-			left:10%;
-			width:80%;
-			margin: 2% 0.5% 20% 0.5%;
-			border-collapse: collapse;
-			padding: 0.5% 0.1%;
-		}
-		#listTable input[type='text']{
-			width:100%;
-		}
-		#listTable textarea{
-			width:100%;
-			resize:none;
-			margin:0;
-		}
-		#listTable td{
-			text-align: center;
-			border: 1px solid white;
-			border-collapse: collapse;
-			padding: 0.2% 0.2%;
-		}
-		#listTable th{
-			border: 1px solid white;
-			border-collapse: collapse;
-			padding: 0.5% 0.1%;
-			background-color: #28977B;
-			color: white;
-		}
-		#sideFrame {
-			position: absolute;
-			left: 0.52%;
-			top: 11.4%;
-			width: 15%;
-			height: 150%;
-			background: black;
-		}
-		/* 셀렉트박스 테이블 */
-		#selectTable{
- 			top:12%;
-			left:15%;
-			width:5-%;
-			height: 50px;
-			position:absolute;
-			float: left;
-				padding: 5px 10px 5px 10px;
-		}
-		
-		#searchbtn{
-		top:12%;
-			left:38%;
-			width:5-%;
-			height: 50px;
-			position:absolute;
-			float: left;
-				padding: 5px 10px 5px 10px;
-		
-		
-		}
-		
-		#searchbtn input[type='text']{
-			width:322%;
-			height:88%;
-		}
-       #selectTable input[type='text']{
-			width:100%;
-			height:100%;
-		}
-		#selectTable select { 
-			width: 150px; /* 원하는 너비설정 */ 
-			padding: .8em .5em; /* 여백으로 높이 설정 */ 
-			font-family: inherit; /* 폰트 상속 */ 
-			background: url(resources/arrowIcon.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
-			border: 1px solid #999; border-radius: 0px; /* iOS 둥근모서리 제거 */ 
-			-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
-			-moz-appearance: none; 
-			appearance: none; 
-		}
-		#cSearchKey{
-			color:#28977B;
-			font-weight:600;
-			font-size:13px;
-		}
-		#fundTable a:link{
-			text-decoration: none;
-			color: black;
-		}
-		#contentFrame {
+#write {
 	position: absolute;
-	left: 15.52%;
-	top: 12.5%;
+	top: 36%;
+	left: 82%;
+	height: 30%;
+	margin: 46% 1% 1.5% 13%;
+	padding: 2.0% 0.1% 3.3% 0.2%;
+	background-color: #28977B;
+	border-color: #28977B;
+	border-style: solid;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+	width: 8%;
+	height: 2%;
+}
+
+#paging {
+	position: absolute;
+	top: 55%;
+	left: 41%;
+	margin: 40% 0% 2.5% 0%;
+}
+
+#conDiv {
+	position: absolute;
+	left: 4.52%;
+	top: 0.5%;
 	width: 82.95%;
 	height: 150%;
 	background: white;
 }
 
-#sideFrame{
-    position: absolute;
-    left: 0.52%;
-    top: 12.4%;
-    width: 14.7%;
-    height: 150%;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
+#conDiv input[type='button'] {
+	width: 46%;
+	height: 69%;
+	left: 298%;
+	top: 13%;
+	background-color: #28977B;
+	border-color: #28977B;
+	border-style: solid;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+}
+
+#conDiv h1 {
+	position: absolute;
+	left: 40%;
+	margin: -5% 0% 2.5% 0%;
+	text-align: center;
+	color: #28977B;
+	font-weight: 600;
+	font-size: 30px;
+}
+
+#listTable {
+	position: absolute;
+	top: 13%;
+	left: 10%;
+	width: 80%;
+	margin: 6% 0.5% 20% 0.5%;
+	border-collapse: collapse;
+	padding: 0.5% 0.1%;
+}
+
+#listTable input[type='text'] {
+	width: 100%;
+}
+
+#listTable textarea {
+	width: 100%;
+	resize: none;
+	margin: 0;
+}
+
+#listTable td {
+	text-align: center;
+	border: 1px solid white;
+	border-collapse: collapse;
+	padding: 0.2% 0.2%;
+}
+
+#listTable th {
+	border: 1px solid white;
+	border-collapse: collapse;
+	padding: 0.5% 0.1%;
+	background-color: #28977B;
+	color: white;
+}
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 11.4%;
+	width: 15%;
+	height: 95%;
+	background: black;
+}
+/* 셀렉트박스 테이블 */
+#selectTable {
+	top: 8%;
+	left: 11%;
+	width: 5-%;
+	height: 50px;
+	position: absolute;
+	float: left;
+	padding: 5px 10px 5px 10px;
+}
+
+#searchbtn {
+	top: 8%;
+	left: 40%;
+	width: 5-%;
+	height: 50px;
+	position: absolute;
+	float: left;
+	padding: 5px 10px 5px 10px;
+}
+
+#searchbtn input[type='text'] {
+	width: 322%;
+	height: 88%;
+}
+
+#selectTable input[type='text'] {
+	width: 100%;
+	height: 100%;
+}
+
+#selectTable select {
+	width: 150px; /* 원하는 너비설정 */
+	padding: .8em .5em; /* 여백으로 높이 설정 */
+	font-family: inherit; /* 폰트 상속 */
+	background: url(resources/arrowIcon.jpg) no-repeat 95% 50%;
+	/* 네이티브 화살표 대체 */
+	border: 1px solid #999;
+	border-radius: 0px; /* iOS 둥근모서리 제거 */
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+
+#cSearchKey {
+	color: #28977B;
+	font-weight: 600;
+	font-size: 13px;
+}
+
+#fundTable a:link {
+	text-decoration: none;
+	color: black;
+}
+
+#contentFrame {
+	position: absolute;
+	left: 15.52%;
+	top: 22.5%;
+	width: 82.95%;
+	height: 0%;
+	background: white;
+}
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 95%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 </style>
 </head>
 <body>
 
-	
 
-	<jsp:include page="mainFrame.jsp"/>
+
+	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
 	<jsp:include page="sideMenu.jsp" />
 	<div id="contentFrame">
-	<div id="conDiv">
-		<h1>모금 게시판</h1>
-		<div id="selectTable">
-			<select id="sido" onchange="getSigungu()" id="cSearchKey" >
-		      <option value="">선택</option>
-		      <option value="6110000">서울특별시</option>
-		      <option value="6260000">부산광역시</option>
-		      <option value="6270000">대구광역시</option>
-		      <option value="6280000">인천광역시</option>
-		      <option value="6290000">광주광역시</option>
-		      <option value="5690000">세종특별자치시</option>
-		      <option value="6300000">대전광역시</option>
-		      <option value="6310000">울산광역시</option>
-		      <option value="6410000">경기도</option>
-		      <option value="6420000">강원도</option>
-		      <option value="6430000">충청북도</option>
-		      <option value="6440000">충청남도</option>
-		      <option value="6450000">전라북도</option>
-		      <option value="6460000">전라남도</option>
-		      <option value="6470000">경상북도</option>
-		      <option value="6480000">경상남도</option>
-		      <option value="6500000">제주특별자치도</option>
-   		</select>
-   		
-		<select id="sigundo" id="cSearchKey" name="cSearchKey">
-			<option value="">선택</option>
-		</select>
-		</div>
-		<div id="searchbtn">
-		<input type="text" id="keyWord" placeholder="검색어를 입력해주세요." /> 
-		<input type="button" id="searchBtn" onclick="fundlistCall(showPageNum)" value="검색" />
-</div>
-	<table id="listTable">
-	<thead>
-		<tr>
-					<th style="width: 150px">글번호</th>
-					<th style="width: 350px">글제목</th>
-					<th style="width: 150px">작성자</th>
-							<th style="width: 400px">지역</th>
-					<th style="width: 150px">작성일</th>
-				
-					<th style="width: 150px">조회수</th>
-					
-					
-				</tr>
+		<div id="conDiv">
+			<h1>모금 게시판</h1>
+			<div id="selectTable">
+				<select id="sido" onchange="getSigungu()" id="cSearchKey">
+					<option value="">선택</option>
+					<option value="6110000">서울특별시</option>
+					<option value="6260000">부산광역시</option>
+					<option value="6270000">대구광역시</option>
+					<option value="6280000">인천광역시</option>
+					<option value="6290000">광주광역시</option>
+					<option value="5690000">세종특별자치시</option>
+					<option value="6300000">대전광역시</option>
+					<option value="6310000">울산광역시</option>
+					<option value="6410000">경기도</option>
+					<option value="6420000">강원도</option>
+					<option value="6430000">충청북도</option>
+					<option value="6440000">충청남도</option>
+					<option value="6450000">전라북도</option>
+					<option value="6460000">전라남도</option>
+					<option value="6470000">경상북도</option>
+					<option value="6480000">경상남도</option>
+					<option value="6500000">제주특별자치도</option>
+				</select> <select id="sigundo" id="cSearchKey" name="cSearchKey">
+					<option value="">선택</option>
+				</select>
+			</div>
+			<div id="searchbtn">
+				<input type="text" id="keyWord" placeholder="검색어를 입력해주세요." /> <input
+					type="button" id="searchBtn" onclick="fundlistCall(showPageNum)"
+					value="검색" />
+			</div>
+			<table id="listTable">
+				<thead>
+					<tr>
+						<th style="width: 150px">글번호</th>
+						<th style="width: 350px">글제목</th>
+						<th style="width: 150px">작성자</th>
+						<th style="width: 400px">지역</th>
+						<th style="width: 150px">작성일</th>
+
+						<th style="width: 150px">조회수</th>
+
+
+					</tr>
 				</thead>
-						<tbody id="fundTable">
-			</tbody>
-	</table>
-	<button onclick="location.href='./fundWrite'" id="write">글 작성</button>
+				<tbody id="fundTable">
+				</tbody>
+			</table>
+			<button onclick="location.href='./fundWrite'" id="write">글
+				작성</button>
 		</div>
-		<div id="paging" >
-	</div>
+		<div id="paging"></div>
 	</div>
 </body>
 <script>

@@ -80,8 +80,8 @@ table, th, td {
 }
 
 #detailTable input[type='text'] {
-	width: 100%;
-	height: 30px;
+	width: 87%;
+    height: 30px;
 }
 
 #detailTable textarea {
@@ -169,13 +169,18 @@ table, th, td {
 					type="button" id="fedit" onclick="fundedit()" value="수정" /> <input
 					type="button" id="fdel" onclick="funddelete()" value="삭제" /></td>
 			</tr>
-
+			<tbody>
+				<tr>
+					<td><jsp:include page="reply.jsp"/></td>
+				</tr>
+			</tbody>
+			
 
 
 
 		</table>
 	</div>
-	<jsp:include page="reply.jsp"/>
+	
 
 
 </body>
