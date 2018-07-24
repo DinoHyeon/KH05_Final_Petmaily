@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-		<title>ID/PW 찾기</title>		
-		<style>
-		     /* 타이틀 회원가입 텍스트 */
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+      <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+      <title>ID/PW 찾기</title>      
+      <style>
+           /* 타이틀 회원가입 텍스트 */
       #title h1 {
             top: 17%;
             margin: 50px 0px 40px 0px;
@@ -90,11 +90,11 @@
          }
       
 
-			
-		</style>
-	</head>
-	<body>
-		   <jsp:include page="mainFrame.jsp" />
+         
+      </style>
+   </head>
+   <body>
+         <jsp:include page="mainFrame.jsp" />
       <div class="LSP">
       
       <div id="title">
@@ -127,21 +127,21 @@
       
          <hr style="width:1px; top:44%; height:48%; left:50%;"/>
       
-      <form action="" method="post">
+      <form action="pwChangePage" method="post" id="pwChange">
          <table id="pwTable" style="left:55%;  top:55%;">
             <tr>
                <th>아이디</th>
-               <td><input type="text" class="inp" id="idSearch" name="id" placeholder="아이디 입력" maxlength="20" /></td>
+               <td><input type="text" class="inp" id="idSearch" name="pwId" placeholder="아이디 입력" maxlength="20" /></td>
             </tr>
             <tr>
                <th>이메일</th>
                <td><input type="text" class="inp" id="pwEmailSearch" name="pwEmail" placeholder="아메일 입력" maxlength="20" /></td>
-               <td><input type="button" class="btn" id="emailSend" value="인증번호 발송"/></td>
+               <td><input type="button" class="btn" id="pwSearchEmailSend" value="인증번호 발송"/></td>
             </tr>
             <tr>
                <th>인증번호</th>
-               <td><input type="text" class="inp"  name="pwEmailNumSearch" placeholder="인증번호 입력" maxlength="20" /></td>
-               <td><input type="button" class="btn" id="emailNumConfirm" value="인증번호 확인"/></td>
+               <td><input type="text" class="inp"  id="pwSearchEmailChk" name="pwSearchEmailChk" placeholder="인증번호 입력" maxlength="20" /></td>
+               <td><input type="button" class="btn" id="pwSearchEmailConfirm" value="인증번호 확인"/></td>
             </tr>
             <tr>
                <td colspan="2"><input type="button" class="btn" id="pwSearchBtn" value="비밀번호 찾기" style="left:42%; width:180px; margin:50px auto auto auto;"/></td>
@@ -151,128 +151,128 @@
       
       </div>
 
-	</body>
-	<script>
-		$(function() {
-	    	$("#idSearchBtn").click(function() {
-	    		if($("#nameSearch").val() == ""){
-					$("#nameSearch").focus();
-					alert("이름을 적어주세요.");
-				} else if($("#emailSearch").val() == ""){
-					$("#emailSearch").focus();
-					alert("이메일을 적어주세요.");
-				} else if($("#phoneSearch").val() == ""){
-					$("#phoneSearch").focus();
-					alert("휴대폰번호를 적어주세요.");
-				} else{
-					 var name=  $("#nameSearch").val(); 
-					 var email=  $("#emailSearch").val(); 
-					 var phone=  $("#phoneSearch").val(); 
-				 
-			        $.ajax({
-			            type : 'get',
-			            url : "idSearchPage",
-			            data : {"name": name, "email": email, "phone": phone},		            
-			            dataType : "json",	
-			            contentType: "application/json; charset=UTF-8",
-		  	      		success : function(data) {
-			            	 alert(data.findId);
-		            	},
-		            	error : function(error) {
-		                	alert("다시 작성해주세요.");
-		            	}
-		        	});
-				}
-			});
-		});
-		
-		$(function() {
-			$("#pwSearchEmailSend").click(function() {
-				var email = $("#pwSearchEmail").val();
+   </body>
+   <script>
+      $(function() {
+          $("#idSearchBtn").click(function() {
+             if($("#nameSearch").val() == ""){
+               $("#nameSearch").focus();
+               alert("이름을 적어주세요.");
+            } else if($("#emailSearch").val() == ""){
+               $("#emailSearch").focus();
+               alert("이메일을 적어주세요.");
+            } else if($("#phoneSearch").val() == ""){
+               $("#phoneSearch").focus();
+               alert("휴대폰번호를 적어주세요.");
+            } else{
+                var name=  $("#nameSearch").val(); 
+                var email=  $("#emailSearch").val(); 
+                var phone=  $("#phoneSearch").val(); 
+             
+                 $.ajax({
+                     type : 'get',
+                     url : "idSearchPage",
+                     data : {"name": name, "email": email, "phone": phone},                  
+                     dataType : "json",   
+                     contentType: "application/json; charset=UTF-8",
+                       success : function(data) {
+                         alert(data.findId);
+                     },
+                     error : function(error) {
+                         alert("다시 작성해주세요.");
+                     }
+                 });
+            }
+         });
+      });
+      
+      $(function() {
+         $("#pwSearchEmailSend").click(function() {
+            var email = $("#pwEmailSearch").val();
 
-				$.ajax({
-					async : true,
-					type : 'POST',
-					data : email,
-					url : "pwSearchEmailSendPage",
-					dataType : "json",
-					contentType : "application/json; charset=UTF-8",
-					success : function(data) {
-						alert(data.msg);
-					},
-					error : function(error) {
-						alert("다시 작성해주세요.");
-					}
-				});
-			});
-		});
-		
-		var pwSearchChk = 0;
-		$(function() {
-			$("#pwSearchEmailConfirm").click(function() {
-				var pwSearchNum = $("#pwSearchEmailChk").val();
+            $.ajax({
+               async : true,
+               type : 'POST',
+               data : email,
+               url : "pwSearchEmailSendPage",
+               dataType : "json",
+               contentType : "application/json; charset=UTF-8",
+               success : function(data) {
+                  alert(data.msg);
+               },
+               error : function(error) {
+                  alert("다시 작성해주세요.");
+               }
+            });
+         });
+      });
+      
+      var pwSearchChk = 0;
+      $(function() {
+         $("#pwSearchEmailConfirm").click(function() {
+            var pwSearchNum = $("#pwSearchEmailChk").val();
+            
 
-				$.ajax({	  
-					type : 'get',
-					url : "pwSearchConfirmPage",
-					data : {"pwSearchNum": pwSearchNum},	
-					dataType : "json",
-					contentType : "application/json; charset=UTF-8",
-					success : function(data) {
-						if (data.pwEmailChkCnt == 1) {
-							alert("인증이 완료되었습니다.");
-							$('#pwSearchEmailChk').prop('readonly', true);
-							pwSearchChk = 1;
-						} else {
-							alert("인증번호를 다시 확인해주세요.");
-							$("#pwSearchEmailChk").focus();
-						}
-					},
-					error : function(error) {
-						alert("인증번호를 다시 확인해주세요.");
-					}
-				});
-			});
-		});
-		
-		$(function() {
-			$("#pwSearchBtn").click(function() {
-				if ($("#pwSearchId").val() == "") {
-					$("#pwSearchId").focus();
-					alert("아이디를 적어주세요.");
-				} else if ($("#pwSearchEmail").val() == "") {
-					$("#pwSearchEmail").focus();
-					alert("이메일을 적어주세요.");
-				} else if ($("#pwSearchEmailChk").val() == "") {
-					$("#pwSearchEmailChk").focus();
-					alert("인증번호를 적어주세요.");
-				} else if (pwSearchChk == 0) {
-					alert("인증번호를 확인해주세요.");
-				} else {
-					$("#pwChange").submit();
-				}
-			});
-		});
-		
-		var msg = "${msg}";
-		var changeMsg = "${changeMsg}";
-		
-		if(msg=="fail"){
-			var searchFail = document.getElementById("searchFail");
-			
-			searchFail.style.display = "block";
-			
-			var aaa = document.getElementById("aaa");
-			
-			aaa.style.display = "none";
-		}
-		
-		if(changeMsg=="success"){
-			alert("변경을 완료했습니다.");
-		}
-	</script>
+            $.ajax({     
+               type : 'get',
+               url : "pwSearchConfirmPage",
+               data : {"pwSearchNum": pwSearchNum},   
+               dataType : "json",
+               contentType : "application/json; charset=UTF-8",
+               success : function(data) {
+                  if (data.pwEmailChkCnt == 1) {
+                     alert("인증이 완료되었습니다.");
+                     $('#pwSearchEmailChk').prop('readonly', true);
+                     pwSearchChk = 1;
+                  } else {
+                     alert("인증번호를 다시 확인해주세요.");
+                     $("#pwSearchEmailChk").focus();
+                  }
+               },
+               error : function(error) {
+                  alert("인증번호를 다시 확인해주세요.");
+               }
+            });
+         });
+      });
+      
+      $(function() {
+         $("#pwSearchBtn").click(function() {
+            if ($("#pwSearchId").val() == "") {
+               $("#pwSearchId").focus();
+               alert("아이디를 적어주세요.");
+            } else if ($("#pwSearchEmail").val() == "") {
+               $("#pwSearchEmail").focus();
+               alert("이메일을 적어주세요.");
+            } else if ($("#pwSearchEmailChk").val() == "") {
+               $("#pwSearchEmailChk").focus();
+               alert("인증번호를 적어주세요.");
+            } else if (pwSearchChk == 0) {
+               alert("인증번호를 확인해주세요.");
+            } else {
+               $("#pwChange").submit();
+            }
+         });
+      });
+      
+      var msg = "${msg}";
+      var changeMsg = "${changeMsg}";
+      
+      if(msg=="fail"){
+         var searchFail = document.getElementById("searchFail");
+         
+         searchFail.style.display = "block";
+         
+         var aaa = document.getElementById("aaa");
+         
+         aaa.style.display = "none";
+      }
+      
+      if(changeMsg=="success"){
+         alert("변경을 완료했습니다.");
+      }
+   </script>
 </html>
-
 
 
 
