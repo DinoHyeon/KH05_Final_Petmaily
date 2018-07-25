@@ -336,7 +336,7 @@ public class MemberService {
    }
    
    //회원정보 자동 삭제
-   int min = 0;
+   /*int min = 0;
    @Scheduled(fixedRate=5000)
    public void loop() {
       logger.info("탈퇴확인중...");
@@ -375,7 +375,7 @@ public class MemberService {
              logger.info("7일이 경과하면 삭제처리");
           }
       }
-   }
+   }*/
 
 	/////////////////////////////////////////////////////////// 소현//////////////////////////////////////////////////////////
 
