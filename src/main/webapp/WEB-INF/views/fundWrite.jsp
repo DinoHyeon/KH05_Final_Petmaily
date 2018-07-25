@@ -198,6 +198,10 @@ input[type='text'] {
 	padding: 1%;
 }
 
+#attachani {
+	float: left;
+
+}
 
 </style>
 </head>

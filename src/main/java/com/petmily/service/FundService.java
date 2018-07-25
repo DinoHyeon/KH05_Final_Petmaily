@@ -90,6 +90,8 @@ public class FundService {
 
 	// 소현: 모금게시판 페이징 처리 list 호출
 	public HashMap<String, Object> getfundList(HashMap<String, String> params) {
+		i=0;
+		j=0;
 		inter = sqlSession.getMapper(BoardInter.class);
 		int allCnt = inter.fundlistallCount(params);
 		int pageCnt = allCnt % 15 > 0 ? Math.round(allCnt / 15) + 1 : allCnt / 15;
