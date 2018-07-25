@@ -267,7 +267,7 @@ public class FundService {
 			logger.info("j222:{}", j);
 		}
 
-		if (i > 3 || j > 1) {
+		if (i >= 3 && j >= 1) {
 			photo = true;
 			logger.info("i3433는?:{}", i);
 			logger.info("j3433는?:{}", j);
@@ -373,9 +373,11 @@ public class FundService {
 	public ModelAndView funddetail(String idx) {
 		ModelAndView mav = new ModelAndView();
 		inter = sqlSession.getMapper(BoardInter.class);
+		inter.uphit(Integer.parseInt(idx)); // 조회수
+
 		// 상세보기 정보
 		mav.addObject("dto", inter.funddetail(idx));
-		inter.uphit(idx); // 조회수
+		
 
 		// 파일 정보(다운로드 리스트)
 		ArrayList<BoardDTO> files = inter.fundfileList(idx);

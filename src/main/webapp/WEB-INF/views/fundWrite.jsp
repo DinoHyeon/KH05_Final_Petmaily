@@ -446,12 +446,13 @@ $("#back").click(function() {
          $("#editable input[type='checkbox']").remove();//체크박스 버튼 제거
          $("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
          $("#location").val($("#sido option:selected").html());
-          $("#sendForm").submit();
+         $("#sendForm").submit();
       }else{
          alert("※동물사진 3개이상, 영수증 사진 1개 이상 등록해주세요※");
       }  
  
-      
+  
+
    
       
    });

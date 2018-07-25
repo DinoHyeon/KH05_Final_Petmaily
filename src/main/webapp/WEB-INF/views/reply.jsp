@@ -55,7 +55,7 @@ td{
 #paging{
 	position: absolute;
 	top :103%;
-	left: 50%;
+	left: 43%;
 }
 
 </style>
