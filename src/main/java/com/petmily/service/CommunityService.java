@@ -94,7 +94,6 @@ public class CommunityService {
 			}
 			// 해당 파일명이 DB에 있으면 ?-> DB에서 삭제
 			if (fileList.get(fileName) != null) {// map에 해당 파일 명이 존재하면
-				System.out.println("여기유" + fileList.get(fileName));
 				inter = sqlSession.getMapper(BoardInter.class);
 				// fileName이 DB에 있는지 확인
 				if (inter.cDelFileName(fileName) != null) {

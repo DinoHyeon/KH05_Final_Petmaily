@@ -25,18 +25,17 @@
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
 }
-
 #conDiv {
 	position: absolute;
-	left: 15.52%;
-	top: 12.5%;
+	left: 0%;
+	top: 0%;
 	width: 82.95%;
 	height: 150%;
 	background: white;
 }
 /* 타이틀 */
 #conDiv h1 {
-	left: 39%;
+	left: 46%;
 	margin: 50px 0px 25px 0px;
 	text-align: center;
 	color: #28977B;
@@ -111,7 +110,7 @@
 /* 업로드 테이블 */
 #uploadTable {
 	position: absolute;
-	top: 65%;
+	top: 68%;
 	left: 11%;
 	border: 1px solid gray;
 	width: 1000px;
@@ -138,6 +137,14 @@
 	font-weight: 600;
 	color: white;
 	cursor: pointer;
+}
+#content_div img{
+	width:130px;
+	height:130px;
+}
+#photo_div img{
+	width:100px;
+	height:100px;
 }
 </style>
 </head>
@@ -180,11 +187,6 @@
 					</td>
 				</tr>
 				<tr>
-					<%-- <td colspan=4 style="text-align:right">
-						<input type="button" onclick="location.href='./communityUpdateForm?board_idx=${cDetail.board_idx}'" value="수정" />
-						<input type="button" id="delBtn" onclick="communityDel()" value="삭제" />
-						<input type="button" value="커뮤니티 글 목록" onclick="location.href='./communityMain'" />
-					</td> --%>
 				</tr>
 			</table>
 			<table id="uploadTable">
@@ -199,8 +201,8 @@
 				</tr>
 				<tr>
 					<td colspan="3" style="text-align: right; border: 1px solid white;">
-						<input type="button" value="수정" onclick="communityUpdate()" /> <input
-						type="button" value="취소"
+						<input type="button" value="수정" onclick="communityUpdate()" />
+						<input type="button" value="취소"
 						onclick="location.href='./communityDetail?board_idx=${cUpdateForm.board_idx}'" />
 					</td>
 				</tr>
@@ -331,23 +333,27 @@
 			}
 		});
 	}
-	/* function del(elem) {//이미지+버튼 삭제
-		//content_div에 있는 id 찾아오기
-		var findId = $(elem).prev().attr('src') + "img";
-		document.getElementById(findId).remove();//content_div 이미지삭제
-		$(elem).prev().remove();//photo_div 이미지삭제
-		$(elem).remove();//photo_div 버튼삭제
-	} */
 	//파일 업로드
 	function cFileUp() {
 		//fileUpload 새 창을 띄운다.
 		var myWin = window.open("./cFileUploadForm", "파일 업로드",
 				"width=400, height=100");
 	}
+	
+	
 	//수정 요청
 	function communityUpdate() {
 		$("#contentForm").val($("#content_div").html());//div 내용을 hidden에 담기
-		$("#communityUpdate").submit();
+		//null 들어가지 않도록 설정
+		if ($("input[name='board_title']").val() == "") {//제목
+			alert("제목을 작성해주세요!");
+			$("input[name='board_title']").focus();
+		} else if ($("input[name='board_content']").val() == "") {//내용
+			alert("내용을 작성해주세요!!");
+			$("input[name='board_content']").focus();
+		} else {
+			$("#communityUpdate").submit();
+		}
 	}
 </script>
 </html>

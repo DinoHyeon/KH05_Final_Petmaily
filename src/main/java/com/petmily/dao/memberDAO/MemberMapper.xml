@@ -71,6 +71,11 @@
    <delete id="deleteFinish" parameterType="hashMap">
       DELETE FROM member WHERE member_state=#{param1}
    </delete>
+   
+   <!-- 비밀번호 찾을때 이메일과 아이디 확인 -->
+   <select id="ChkPwEmail" resultType="String">
+      SELECT member_id FROM member WHERE member_id=#{param1} AND member_email=#{param2}
+   </select>
 	
 	
 	

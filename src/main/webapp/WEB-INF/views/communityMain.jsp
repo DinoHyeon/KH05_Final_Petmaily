@@ -20,7 +20,7 @@
 	left: 0.52%;
 	top: 12.4%;
 	width: 14.7%;
-	height: 150%;
+	height: 100%;
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
 }
@@ -30,7 +30,7 @@
 	left: 15.52%;
 	top: 12.5%;
 	width: 82.95%;
-	height: 150%;
+	height: 90%;
 	background: white;
 }
 
@@ -47,7 +47,8 @@
 
 #conDiv h1 {
 	position: absolute;
-	left: 40%;
+	top:-10%;
+	left: 30%;
 	margin: 50px 0px 25px 0px;
 	text-align: center;
 	color: #28977B;
@@ -57,7 +58,7 @@
 /* 셀렉트박스 테이블 */
 #selectTable {
 	top: 12%;
-	left: 18%;
+	left: 0%;
 	height: 50px;
 	position: absolute;
 	float: left;
@@ -98,7 +99,7 @@
 #listTable {
 	position: absolute;
 	top: 18%;
-	left: 10%;
+	left: 1%;
 	width: 80%;
 	margin: 20px 5px 200px 5px;
 	border-collapse: collapse;
@@ -132,13 +133,13 @@
 
 #paging {
 	position: absolute;
-	top: 63%;
-	left: 39%;
+	top: 89%;
+	left: 34%;
 }
 
 #write {
 	position: absolute;
-	top: 63%;
+	top: 89%;
 	left: 70%;
 }
 
@@ -183,9 +184,10 @@
 			<tbody id="cList">
 			</tbody>
 		</table>
+		<div id="paging"></div>
 		<input type="button" id="write" value="글 작성"
 			onclick="location.href='./communityForm'" />
-		<div id="paging"></div>
+		
 	</div>
 	</div>
 </body>
