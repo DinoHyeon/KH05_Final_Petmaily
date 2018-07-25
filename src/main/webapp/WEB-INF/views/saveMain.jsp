@@ -61,8 +61,8 @@
 }
 /* 검색버튼 */
 .save #searchBtn {
-   top: 280px;
-   left: 62%;
+   top: 36%;
+   left: 71%;
    width: 80px;
    height: 36px;
    position: absolute;

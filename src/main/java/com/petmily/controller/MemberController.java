@@ -28,9 +28,10 @@ public class MemberController {
 
 	/* 회원가입 */
 	@RequestMapping(value = "/joinPage")
-	public String joinPage(Model model) {
-		logger.info("회원가입");
-		return "joinPage";
+	public String joinPage(Model model,HttpSession session) {
+	   logger.info("회원가입");
+	   session.removeAttribute("emailConfirmNum");
+	   return "joinPage";
 	}
 
 	/* 로그인 페이지 이동 */

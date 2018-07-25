@@ -35,7 +35,8 @@
 }
 /* 타이틀 */
 #conDiv h1 {
-	left: 43%;
+	top:-5%;
+	left: 28%;
 	margin: 50px 0px 25px 0px;
 	text-align: center;
 	color: #28977B;
@@ -46,8 +47,8 @@
 /* 글 작성 테이블 */
 #writeTable {
 	position: absolute;
-	top: 12%;
-	left: 10%;
+	top: 10%;
+	left: -5%;
 	width: 1000px;
 	margin: 0px 5px 5px 5px;
 	border-collapse: collapse;
@@ -101,8 +102,8 @@
 /* 업로드 테이블 */
 #uploadTable {
 	position: absolute;
-	top: 60%;
-	left: 10%;
+	top: 61%;
+	left: -5%;
 	border: 1px solid gray;
 	width: 1000px;
 	height: 150px;
@@ -161,10 +162,9 @@
 		<form id="communityWrite" action="communityWrite" method="post">
 			<table id="writeTable">
 				<tr>
-					<th class="thCls">작성자-나중에수정</th>
-					<td><input id="board_writer" type="text" name="board_writer"
-						readOnly value="작성자test" /></td>
-					<%-- <td><input id="board_writer" type="text" name="board_writer" readOnly value="${sessionScope.loginId}"/></td> --%>
+					<th class="thCls">작성자</th>
+					<td><input id="board_writer" type="text" name="board_writer" readOnly value="${sessionScope.loginId}"/></td>
+					
 				</tr>
 				<tr>
 					<th class="thCls">제 목</th>
@@ -198,6 +198,7 @@
 			</table>
 
 		</form>
+	</div>
 	</div>
 </body>
 <script>

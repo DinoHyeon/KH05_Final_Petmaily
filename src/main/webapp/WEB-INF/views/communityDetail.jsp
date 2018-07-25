@@ -27,8 +27,8 @@
 
 #conDiv {
 	position: absolute;
-	left: 15.52%;
-	top: 12.5%;
+	left: 0%;
+	top: 0%;
 	width: 82.95%;
 	height: 150%;
 	background: white;
@@ -144,7 +144,7 @@
 					용</th>
 			</tr>
 			<tr>
-				<td colspan=4 style="text-align: left; border: 1px solid gray;">
+				<td colspan=4 style="text-align: left; border: 1px solid gray; height:450px;">
 					${cDetail.board_content}</td>
 			</tr>
 			<tr>
@@ -156,13 +156,15 @@
 					id="listBtn" value="글 목록" onclick="location.href='./communityMain'" />
 				</td>
 			</tr>
-			<tr>
-				<td><jsp:include page="reply.jsp"/></td>
+			<tbody>
+				<tr>
+			<td>	<jsp:include page="reply.jsp"/>
+			</td>
 			</tr>
+			</tbody>
 		</table>
 	</div>
 	</div>
-	
 </body>
 <script>
 
@@ -199,14 +201,14 @@
 	};
 
 	//로그인 아이디 체크 -> 버튼 활성화/비활성화
-	/* 		var loginId = "${sessionScope.loginId}";
+	 var loginId = "${sessionScope.loginId}";
 	 console.log("커뮤니티 상세보기 - 로그인아이디", loginId);
 	 if (loginId == "${cDetail.board_writer}") {
 	 console.log("글작성자 확인, 수정+삭제버튼 활성화");
 	 } else {
 	 $("#updateBtn").hide();
 	 $("#delBtn").hide();
-	 } */
+	 } 
 	//삭제 요청
 	function communityDel() {
 		var cDel = confirm("커뮤니티 게시글을 삭제하시겠습니까?");

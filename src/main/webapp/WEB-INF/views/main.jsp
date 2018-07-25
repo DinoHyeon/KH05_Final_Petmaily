@@ -211,7 +211,6 @@
 	//오늘 날짜 구하기
 	function fn_getToday(){
 	    var date = new Date();
-	    console.log("풀2",date);
 	    var year = date.getFullYear(); //년도
 	    var month = date.getMonth()+1; //월
 	    var day = date.getDate(); //일
@@ -221,7 +220,6 @@
 	    	month = "0" + month;
 	    }
 	    today = String(year)+month+day; // 오늘 날짜 (20180101)
-	    console.log("today:",today);
 	    
 	    //15일전 계산
 	    var agoDay = new Date(date-(3600000*24*15));
@@ -235,7 +233,6 @@
 	    	amonth = "0" + amonth;
 	    }
 	    oDay = String(year)+amonth+aday; // 15일전 날짜 (20180101)
-	    console.log("oldDay:",oDay);
 	}
 	function prevDate(){
 		if(cntDate==1){
@@ -244,7 +241,6 @@
 			cntDate--;
 			fn_cntDate();
 		}
-		console.log("cntDate",cntDate);
 	}
 	function nextDate(){
 		if(cntDate==3){
@@ -253,7 +249,6 @@
 			cntDate++;
 			fn_cntDate();
 		}
-		console.log("cntDate",cntDate);
 	}
 	//분기 날짜 설정
 	function fn_cntDate(){
@@ -343,18 +338,12 @@
 				"endde" : today
 				},
 			success : function(data) {
-				var nDie = data.nDie;
-				var ret = data.ret
-				var adpt = data.adpt;
-				var bDie = data.bDie;
-				var give = data.give;
-				var netu = data.netu;
-				console.log(nDie);//종료(자연사)
-				console.log(ret);//종료(반환)
-				console.log(adpt);//종료(입양)
-				console.log(bDie);//종료(안락사)
-				console.log(give);//종료(기증)
-				console.log(netu);//종료(방사)
+				var nDie = data.nDie;//종료(자연사)
+				var ret = data.ret;//종료(반환)
+				var adpt = data.adpt;//종료(입양)
+				var bDie = data.bDie;//종료(안락사)
+				var give = data.give;//종료(기증)
+				var netu = data.netu;//종료(방사)
 				var content="";
 				
 				$('#mask, #loadingImg').hide();
@@ -415,13 +404,11 @@
 				"endde" : oDay
 				},
 			success : function(data) {
-				console.log("fn_getList",data);
 				pageCnt = data.pageCnt;
  				for(var i=0; i<data.list.length; i++){
  					content+="<a href='./noticeDetail?idx="+data.list[i].noticeNo+"'>";
 					content+="<img class='listImg' src='"+data.list[i].fileName+"'></a>";
 				} 
-				console.log(content);
 				$("#listSpan").html(content);
 			},
 			error : function(e) {

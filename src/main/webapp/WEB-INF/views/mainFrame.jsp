@@ -168,17 +168,16 @@
       //로그인 아이디 세션체크
       var loginId = "${sessionScope.loginId}";
       if(loginId!=""){
-    	  
     	  console.log("세션체크",loginId);
          $("#login").attr("src","resources/mypage.jpg");
          $("#join").attr("src","resources/logout.jpg");
          $("#cngA1").attr("href", "./memberUpdatePwConfirmPage");
          $("#cngA2").attr("href", "./logoutPage")
-         //종현이랑 합친 후에 a href 수정하고 테스트해보기
+      }else{
+    	  console.log("로그인아이디 없음",loginId);
       }
       $("#lostProtect").click(function(){//실종/보호버튼 클릭시
          //클릭 항목 색 변경, 아래 부분 띄우기
-         console.log("lostProtect클릭");
          $("#lostProtect").attr("src","resources/lostProtect1.jpg");
          $("#adopt").attr("src","resources/adopt.jpg");
          $("#save").attr("src","resources/save.jpg");
@@ -190,7 +189,6 @@
       });
       $("#adopt").click(function(){//입양버튼 클릭시
          //클릭 항목 색 변경, 아래 부분 띄우기
-         console.log("adopt클릭");
          $("#lostProtect").attr("src","resources/lostProtect.jpg");
          $("#adopt").attr("src","resources/adopt1.jpg");
          $("#save").attr("src","resources/save.jpg");
@@ -202,7 +200,6 @@
       });
       $("#save").click(function(){//구조버튼 클릭시
          //클릭 항목 색 변경, 아래 부분 띄우기
-         console.log("save클릭");      
          $("#lostProtect").attr("src","resources/lostProtect.jpg");
          $("#adopt").attr("src","resources/adopt.jpg");
          $("#save").attr("src","resources/save1.jpg");
@@ -214,7 +211,6 @@
       });
       $("#quiz").click(function(){//퀴즈버튼 클릭시
          //클릭 항목 색 변경, 아래 부분 띄우기      
-         console.log("quiz클릭");
          $("#lostProtect").attr("src","resources/lostProtect.jpg");
          $("#adopt").attr("src","resources/adopt.jpg");
          $("#save").attr("src","resources/save.jpg");

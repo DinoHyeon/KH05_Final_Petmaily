@@ -1,32 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petmily.dao.diseaseDAO.DiseaseInter">
-	<!-- 질병 직접 검색 -->
-	<select id="diseaseSearchListPage" parameterType="hashMap" resultType="DiseaseDTO">
-		SELECT * FROM disease
-		<where>
-			<if test="inputSearch != null and animal == 'Dog' and selectSearch == 'symptom'">
-				(animal LIKE '%'||'개'||'%' AND condition LIKE '%'||#{inputSearch}||'%')
-			</if>
-			<if test="inputSearch != null and animal == 'Cat' and selectSearch == 'symptom'">
-				(animal LIKE '%'||'고양이'||'%' AND condition LIKE '%'||#{inputSearch}||'%')
-			</if>
-			<if test="inputSearch != null and animal == 'Dog' and selectSearch == 'disease'">
-				(animal LIKE '%'||'개'||'%' AND disease_name LIKE '%'||#{inputSearch}||'%')
-			</if>
-			<if test="inputSearch != null and animal == 'Cat' and selectSearch == 'disease'">
-				(animal LIKE '%'||'고양이'||'%' AND disease_name LIKE '%'||#{inputSearch}||'%')
-			</if>
-		</where>
-	</select>
-	
-	<!-- 질병 키워드 검색 -->
-	<select id="diseaseKeywordListPage" parameterType="hashMap" resultType="DiseaseDTO">
-		SELECT * FROM disease 
-		<where>
-			<foreach collection="list" item="keyword" separator="AND" open="(" close=")">
-				condition LIKE '%'||#{keyword}||'%' 
-			</foreach>
-		</where>
-	</select>
+   <!-- 질병 직접 검색(페이징) -->
+   <select id="diseaseSearchListPage" parameterType="hashMap" resultType="DiseaseDTO">
+      SELECT * FROM (SELECT num, disease_name, animal, define, condition, ROW_NUMBER() OVER (ORDER BY num DESC) AS rNum FROM disease 
+      <where>
+         <if test="inputSearch != null and animal == 'Dog' and selectSearch == 'symptom'">
+            (animal LIKE '%'||'개'||'%' AND condition LIKE '%'||#{inputSearch}||'%')
+         </if>
+         <if test="inputSearch != null and animal == 'Cat' and selectSearch == 'symptom'">
+            (animal LIKE '%'||'고양이'||'%' AND condition LIKE '%'||#{inputSearch}||'%')
+         </if>
+         <if test="inputSearch != null and animal == 'Dog' and selectSearch == 'disease'">
+            (animal LIKE '%'||'개'||'%' AND disease_name LIKE '%'||#{inputSearch}||'%')
+         </if>
+         <if test="inputSearch != null and animal == 'Cat' and selectSearch == 'disease'">
+            (animal LIKE '%'||'고양이'||'%' AND disease_name LIKE '%'||#{inputSearch}||'%')
+         </if>
+      </where>
+      <if test="start != null and end != null">
+        )  WHERE rNum BETWEEN #{start} AND #{end} ORDER BY num DESC
+      </if>
+   </select>
+   
+   <!-- 질병 직접 검색(전체) -->
+   <select id="diseaseAllSearchListPage" parameterType="hashMap" resultType="DiseaseDTO">
+      SELECT * FROM disease 
+      <where>
+         <if test="inputSearch != null and animal == 'Dog' and selectSearch == 'symptom'">
+            (animal LIKE '%'||'개'||'%' AND condition LIKE '%'||#{inputSearch}||'%')
+         </if>
+         <if test="inputSearch != null and animal == 'Cat' and selectSearch == 'symptom'">
+            (animal LIKE '%'||'고양이'||'%' AND condition LIKE '%'||#{inputSearch}||'%')
+         </if>
+         <if test="inputSearch != null and animal == 'Dog' and selectSearch == 'disease'">
+            (animal LIKE '%'||'개'||'%' AND disease_name LIKE '%'||#{inputSearch}||'%')
+         </if>
+         <if test="inputSearch != null and animal == 'Cat' and selectSearch == 'disease'">
+            (animal LIKE '%'||'고양이'||'%' AND disease_name LIKE '%'||#{inputSearch}||'%')
+         </if>
+      </where>
+   </select>
+   
+   <!-- 질병 키워드 검색 -->
+   <select id="diseaseAllKeywordListPage" parameterType="hashMap" resultType="DiseaseDTO">
+      SELECT * FROM disease 
+      <where>
+         <foreach collection="list" item="keyword" separator="and" open="(" close=")">
+            condition LIKE '%'||#{keyword}||'%' 
+         </foreach>
+      </where>
+   </select>
+   
+   <!-- 질병 키워드 검색 -->
+   <select id="diseaseKeywordListPage" parameterType="HashMap" resultType="DiseaseDTO">
+       SELECT * FROM (SELECT num, disease_name, animal, define, condition, ROW_NUMBER() OVER (ORDER BY num DESC) AS rNum FROM disease 
+      <where>
+         <foreach collection="val" item="keyword" separator="and" open="(" close=")">
+            condition LIKE '%'||#{keyword}||'%' 
+         </foreach>
+      </where>
+      <if test="start != null and end != null">
+         ) WHERE rNum BETWEEN #{start} AND #{end} ORDER BY num DESC
+      </if>
+   </select>
+   
 </mapper>

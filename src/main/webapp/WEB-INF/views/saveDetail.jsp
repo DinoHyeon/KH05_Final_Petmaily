@@ -206,6 +206,12 @@
 						<div id="content_div">${sDetail.board_content}</div>
 					</td>
 				</tr>
+				<tbody>
+				<tr>
+			<td>	<jsp:include page="reply.jsp"/>
+			</td>
+			</tr>
+			</tbody>
 			</table>
 			<table id="uploadTable">
 				<tr>
@@ -222,10 +228,15 @@
 						class="btn" onclick="location.href='./saveMain'" value="글 목록으로" />
 					</td>
 				</tr>
+				<tbody>
+				<tr>
+			<td>	<jsp:include page="reply.jsp"/>
+			</td>
+			</tr>
+			</tbody>
 			</table>
 			</div>
 			</div>
-			<jsp:include page="reply.jsp"/>
 </body>
 <script>
 	var menuName = {'구조후기':'saveMain', '모금':'fundMain'};

@@ -296,7 +296,7 @@ input[type='text'] {
                         <input id="pass" name="pass" type="password" placeholder="비밀번호"
                            style="height: 35px;" />
                      </c:if>
-                     <input type="button" class="btn" id="btn_missingWrite" value="등록">
+                     <input type="button" class="btn" id="btn_protectWrite" value="등록">
                      <input type="button" class="btn" id="back" value="취소">
                   </center>
                </td>
