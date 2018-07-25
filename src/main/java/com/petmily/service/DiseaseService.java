@@ -23,9 +23,11 @@ public class DiseaseService {
 
    private Logger logger = LoggerFactory.getLogger(this.getClass());
    
-   HashMap<String, String> inputInfo = new HashMap<String, String>();
+   HashMap<String, String> inputInfo = new HashMap<String, String>();//입력검색
+   List<String> keyList = null;//클릭한 키워드 값 넣음
+   HashMap<String, String> keyInfo = new HashMap<String, String>();//클릭검색
    
-   //질병 직접 검색 요청 서비스
+   //질병 직접 검색 요청 서비스1
    public ModelAndView diseaseSearchListPage(HashMap<String, String> params) {
       logger.info("질병 직접 검색 요청");
       inter = sqlSession.getMapper(DiseaseInter.class);
@@ -58,34 +60,93 @@ public class DiseaseService {
       mav.addObject("SearchList", SearchList);
       mav.addObject("range", range);
       mav.addObject("currPage", page);
+      mav.addObject("title", "search");
       mav.setViewName("diseaseListPage");      
       
       return mav;
    }
 
-   //질병 키워드 검색 요청 서비스
+   //질병 키워드 검색 요청 서비스1
    public ModelAndView diseaseKeywordListPage(List<String> values) {
-      logger.info("질병 키워드 검색 요청");
+	   logger.info("질병 키워드 검색 요청");
+	      inter = sqlSession.getMapper(DiseaseInter.class);
+	      keyInfo.clear();
+	      keyList = values;
+	      ArrayList<DiseaseDTO> allSearchList = inter.diseaseAllKeywordListPage(values);
+	      int listCnt = allSearchList.size();
+	      logger.info("검색된 크기 "+listCnt);
+	      int range = listCnt % 15 > 0 ? Math.round(listCnt / 15) + 1 : listCnt / 15;
+	      /*int page = Integer.parseInt(params.get("showNum"));       */
+	      int page =1;
+	      logger.info("검색페이지값 "+page);
+	      if (page > range) { 
+	         page = range; 
+	      }
+	      int end = 15 * page;
+	      int start = end - 15 + 1;
+	      HashMap<String, Object> paging = new HashMap<>();
+	      paging.put("val",values);
+	      paging.put("start", start);
+	      paging.put("end",end);
+	      //keyInfo.put("start", String.valueOf(start));
+	      //keyInfo.put("end", String.valueOf(end));
+	      ArrayList<DiseaseDTO> SearchList = inter.diseaseKeywordListPage(paging);
+
+	      ModelAndView mav = new ModelAndView();
+	      //mav.addObject("params", params);
+	      mav.addObject("SearchList", SearchList);
+	      mav.addObject("range", range);
+	      mav.addObject("currPage", page);
+	      mav.addObject("title", "key");
+	      mav.setViewName("diseaseListPage");      
+	      
+	      return mav;
+	      
+	      
       
-      inter = sqlSession.getMapper(DiseaseInter.class);      
-      
-      for(int i=0; i<values.size(); i++) {
-         logger.info(values.get(i));
-      }
-      
-      ArrayList<DiseaseDTO> SearchList = inter.diseaseKeywordListPage(values);
-      
-      ModelAndView mav = new ModelAndView();
-      mav.addObject("SearchList", SearchList);
-      mav.setViewName("diseaseListPage");   
-      
-      return mav;
    }
    
    
-   //질병 직접 검색 요청 서비스
+   //질병 키워드 검색 요청 서비스2
+   public HashMap<String, Object> diseaseKeywordListPage2(int num) {
+	   logger.info("질병 키워드 검색 요청2");
+	      inter = sqlSession.getMapper(DiseaseInter.class);
+	      ArrayList<DiseaseDTO> allSearchList = inter.diseaseAllKeywordListPage(keyList);
+	      int listCnt = allSearchList.size();
+	      logger.info("검색된 크기 "+listCnt);
+	      int range = listCnt % 15 > 0 ? Math.round(listCnt / 15) + 1 : listCnt / 15;
+	      //int page =1;
+	      logger.info("검색페이지값 "+num);
+	      if (num > range) { 
+	    	  num = range; 
+	      }
+	      int end = 15 * num;
+	      int start = end - 15 + 1;
+	      HashMap<String, Object> paging = new HashMap<>();
+	      paging.put("val",keyList);
+	      paging.put("start", start);
+	      paging.put("end",end);
+	      //keyInfo.put("start", String.valueOf(start));
+	      //keyInfo.put("end", String.valueOf(end));
+	      ArrayList<DiseaseDTO> SearchList = inter.diseaseKeywordListPage(paging);
+	      //sList.put("range", range);
+	      //sList.put("currPage", page); 
+	      HashMap<String, Object> sList = new HashMap<String, Object>();   
+	      sList.put("SearchList",SearchList);
+	      sList.put("range", range);
+	      sList.put("currPage", num); 
+	      sList.put("title", "search");     
+	      
+	      return sList;
+	      
+	      
+      
+   }
+   
+   
+   //질병 직접 검색 요청 서비스2
       public HashMap<String, Object> diseaseSearchListPage2(int num) {
-         logger.info("질병 직접 검색 요청");
+         logger.info("질병 직접 검색 요청2");
          inter = sqlSession.getMapper(DiseaseInter.class);
          
          ArrayList<DiseaseDTO> allSearchList = inter.diseaseAllSearchListPage(inputInfo);
@@ -105,6 +166,7 @@ public class DiseaseService {
          sList.put("SearchList",SearchList);
          sList.put("range", range);
          sList.put("currPage", num); 
+         sList.put("title", "search");
 
          return sList;
       }

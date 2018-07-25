@@ -68,14 +68,6 @@
             border-bottom:none;
          }
          
-         
-         
-         
-         
-         
-         
-         
-         
            #list h1{
             cursor:pointer;
          } 
@@ -109,6 +101,8 @@
          </div>
    </body>
    <script>
+   var title="${title}";
+   console.log("title",title);
    
    $(document).on('click', '#list h1', function() {   
       console.log("클릭");
@@ -119,9 +113,6 @@
        }
    });
          
-
-         
-         
       var showPageNum = 1;
       var page=1;
       $(document).ready(function() {
@@ -130,14 +121,20 @@
                currPage : ${currPage},
                maxPage : ${range},
                clickAction : function(e){
-                  diseaseList(e.currentTarget.innerHTML);
+            	   if(title=="key"){
+            		   console.log(e.currentTarget.innerHTML);
+            		   keyList(e.currentTarget.innerHTML);
+            	   }else if(title=="search"){
+            		   diseaseList(e.currentTarget.innerHTML);
+            	   }
+                  
               }
            });  
            
       });
       
       
-      function diseaseList(page) {
+      function diseaseList(page) {//수동 입력 검색일 경우
          
          $.ajax({
             type : "get",
@@ -154,6 +151,23 @@
             }
          });
       }
+      
+      function keyList(page) {//버튼 클릭 검색일 경우
+          $.ajax({
+             type : "get",
+             url : "./diseaseKeywordListPage2",
+             data : {
+                "showNum" : page
+             },
+             success : function(data) {
+                listPrint(data);
+
+             },
+             error : function(e) {
+                console.log(e);
+             }
+          });
+       }
       
       function listPrint(data) {
          
@@ -181,12 +195,18 @@
                maxPage : data.range,
                clickAction : function(e){
                   if(e.currentTarget.innerHTML=="Next"){
-                     console.log("에러!!");
-                     diseaseList(data.currPage+1);
+	              	   if(title=="key"){
+	            		   keyList(data.currPage+1);
+	            	   }else if(title=="search"){
+	            		   diseaseList(data.currPage+1);
+	            	   }
                   }else{
-                     diseaseList(e.currentTarget.innerHTML);      
+	              	   if(title=="key"){
+	              		 	keyList(e.currentTarget.innerHTML);
+	            	   }else if(title=="search"){
+	            		   diseaseList(e.currentTarget.innerHTML);
+	            	   }
                   }
-                      
                }
            });
       }

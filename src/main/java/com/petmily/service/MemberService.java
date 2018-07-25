@@ -49,7 +49,7 @@ public class MemberService {
          loginChkResult = inter.loginConfirmPage(id);
       } 
       
-      session.setAttribute("loginId", id); 
+      session.setAttribute("loginId", id);
       session.setAttribute("state", loginChkResult.getMember_state());
 
       String page = "main"; //이 부분은 수정이 필요한 테스트 코드
@@ -337,7 +337,7 @@ public class MemberService {
    
    //회원정보 자동 삭제
    int min = 0;
-   @Scheduled(fixedRate=5000)//5초 마다 loop 실행
+   @Scheduled(fixedRate=5000)
    public void loop() {
       logger.info("탈퇴확인중...");
       inter = sqlSession.getMapper(MemberInter.class);

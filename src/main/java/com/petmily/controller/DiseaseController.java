@@ -28,24 +28,31 @@ public class DiseaseController {
       return "diseaseMainPage";
    }
    
-   //질병 직접 검색
+   //질병 직접 검색1
    @RequestMapping(value="diseaseSearchListPage")
    public ModelAndView diseaseSearchListPage(@RequestParam HashMap<String, String> params) {
-      logger.info("질병 직접 검색");
+      logger.info("질병 직접 검색1");
       return service.diseaseSearchListPage(params);
    }
    
    //질병 직접 검색2
    @RequestMapping(value="diseaseSearchListPage2")
    public @ResponseBody HashMap<String, Object> diseaseSearchListPage2(@RequestParam ("showNum") int num) {
-      logger.info("질병 직접 검색");
+      logger.info("질병 직접 검색2");
       return service.diseaseSearchListPage2(num);
    }
    
-   //질병 키워드 검색
+   //질병 키워드 검색1
    @RequestMapping(value="diseaseKeywordListPage")
    public ModelAndView diseaseKeywordListPage(@RequestParam(value="arrKey", required=true) List<String> values) {
-      logger.info("질병 키워드 검색");
+      logger.info("질병 키워드 검색1");
       return service.diseaseKeywordListPage(values);
+   }
+   
+   //질병 키워드 검색2
+   @RequestMapping(value="diseaseKeywordListPage2")
+   public @ResponseBody HashMap<String, Object> diseaseKeywordListPage2(@RequestParam ("showNum") int num) {
+      logger.info("질병 키워드 검색2");
+      return service.diseaseKeywordListPage2(num);
    }
 }
