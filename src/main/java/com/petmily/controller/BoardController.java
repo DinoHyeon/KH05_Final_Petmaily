@@ -367,7 +367,7 @@ public class BoardController {
 
 	// 소현: 파일 유무확인
 	@RequestMapping(value = "checkphoto")
-	public @ResponseBody boolean checkphoto() {
+	public @ResponseBody int checkphoto() {
 		logger.info("파일 유무 확인 요청");
 
 		return fund.checkphoto();

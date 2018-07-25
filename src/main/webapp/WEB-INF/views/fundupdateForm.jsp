@@ -216,7 +216,7 @@
 	});
 
 	function home() {
-		location.href = "./";
+		location.href = "./fundMain";
 	}
 </script>
 </html>

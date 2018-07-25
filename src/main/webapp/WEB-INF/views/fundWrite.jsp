@@ -315,7 +315,7 @@ input[type='text'] {
 <script>
 var msg = "${msg}";
 var menuName = {'구조후기':'saveMain', '모금':'fundMain'};
-
+var photoChk=false;
 $(document).ready(function() {
 	var content = "";
 	for(var key in menuName){
@@ -333,6 +333,7 @@ $(document).ready(function() {
 	
 	$("#sideMenu").empty();
 	$("#sideMenu").append(content);
+	
 });
 
 function pageMove(e) {
@@ -458,26 +459,9 @@ $("#back").click(function() {
    });
       
 
-   function checkphoto() {
-      var photoChk;
-      $.ajax({
-         url:"./checkphoto",
-         type:"get",
-         async: false,
-         success:function(data){
-            photoChk = data;
-         },
-         error:function(e){
-            console.log(e);
-         }
-      });
-      
-      return photoChk;
-      
-   }
-   
+  
    function checkonephoto() {
-      var photoChk;
+     var photoChk;
       $.ajax({
          "url":"./checkonephoto",
          "type":"get",
