@@ -21,8 +21,8 @@ table, tr, td {
 .list {
 	position: absolute;
 	width: 100%;
-	top: 10%;
-	left: 3%;
+	top: 12%;
+	left: 6%;
 }
 
 #write {
@@ -66,7 +66,7 @@ table, tr, td {
 #paging {
 	position: absolute;
 	top: 96%;
-	left: 40%;
+	left: 43%;
 }
 
 #bIdx {
@@ -232,7 +232,7 @@ function listPrint(data){
 		content += "<td id='bTitle' style='background:#A5DE9F; color:white'><a href='protectDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
 		content += "</tr>";
 		content += "<tr>";
-		content += "<td colspan='2'><img width='390' height='400' src='./resources/upload/"+item.photo_newName+"'/></td>";
+		content += "<td colspan='2'><img width='290' height='300' src='./resources/upload/"+item.photo_newName+"'/></td>";
 		content += "</tr>";
 		content += "</table>";
 	})

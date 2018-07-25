@@ -20,7 +20,7 @@
 
 #title h5 {
 	top: 16%;
-	left: 49%;
+	left: 57.3%;
 	margin: 10px 0px 40px 0px;
 	text-align: right;
 	color: black;
@@ -80,7 +80,7 @@
 
 /* 글 작성 테이블 */
 #contentFrame #writeTable {
-	top: 27%;
+	top: 30%;
 	left: 13%;
 	width: 1000px;
 	margin: 0px 5px 5px 5px;
@@ -123,8 +123,8 @@
 }
 
 #btnTable {
-	left: 51%;
-    top: 76%;
+	left: 62%;
+    top: 92%;
 	position: absolute;
 	margin: auto auto 50px auto;
 }
@@ -266,7 +266,7 @@ input[type='text'] {
 
 				<tr>
 					<th style="width: 100px">제목</th>
-					<td><input type="text" name="board_title" /></td>
+					<td><input type="text" name="board_title" id="bTitle"/></td>
 				</tr>
 				<tr>
 					<th colspan="2" style="width: 1000px">내 용</th>
@@ -294,7 +294,7 @@ input[type='text'] {
 						<center>
 							<input type="button" class="btn" id="fileUpBtn"
 								onclick="fileUp()" value="첨부" />
-							<c:if test="${empty loginId}">
+							<c:if test="${empty sessionScope.login}">
 								<input id="pass" name="pass" type="password" placeholder="비밀번호"
 									style="height: 35px;" />
 							</c:if>
@@ -308,6 +308,8 @@ input[type='text'] {
 	</div>
 </body>
 <script>
+	
+
 	var menuName = {
 		'실종' : 'missingList',
 		'보호' : 'protectList'
@@ -453,13 +455,13 @@ input[type='text'] {
 			$("#bTitle").focus();
 			alert("제목을 입력해 주세요.");
 		} else if (!mcheckphoto()) {
-			alert("파일을 등록해주세요.");
-		} else if ($("#pass").val() == "") {
-			$("#pass").focus();
-			alert("비밀번호를 입력해 주세요.");
+			alert("파일을 1개이상 등록해주세요.");
 		} else if (!$("input:radio[name='main']").is(":checked")) {
 			$("input:radio[name='main']").focus();
 			alert("대표이미지를 선택해 주세요.");
+		} else if ($("#pass").val() == "") {
+			$("#pass").focus();
+			alert("비밀번호를 입력해 주세요.");
 		} else {
 			$("#editable input[type='button']").remove();//삭제 버튼 제거
 			$("#editable input[type='checkbox']").remove();//체크박스 버튼 제거
