@@ -187,25 +187,23 @@
       });
       
       $(function() {
-         $("#pwSearchEmailSend").click(function() {
-            var email = $("#pwEmailSearch").val();
-
-            $.ajax({
-               async : true,
-               type : 'POST',
-               data : email,
-               url : "pwSearchEmailSendPage",
-               dataType : "json",
-               contentType : "application/json; charset=UTF-8",
-               success : function(data) {
-                  alert(data.msg);
-               },
-               error : function(error) {
-                  alert("다시 작성해주세요.");
-               }
-            });
-         });
-      });
+          $("#pwSearchEmailSend").click(function() {
+             var email = $("#pwEmailSearch").val();
+             var id = $("#idSearch").val();
+             $.ajax({
+                async : true,
+                type : 'get',
+                data : {"email":email, "id": id},
+                url : "pwSearchEmailSendPage",
+                success : function(data) {
+                   alert(data.msg);
+                },
+                error : function(error) {
+                   alert("다시 작성해주세요.");
+                }
+             });
+          });
+       });
       
       var pwSearchChk = 0;
       $(function() {
@@ -259,14 +257,8 @@
       var changeMsg = "${changeMsg}";
       
       if(msg=="fail"){
-         var searchFail = document.getElementById("searchFail");
-         
-         searchFail.style.display = "block";
-         
-         var aaa = document.getElementById("aaa");
-         
-         aaa.style.display = "none";
-      }
+          alert("잘못 입력하셨습니다. 확인해주세요") ;
+        }
       
       if(changeMsg=="success"){
          alert("변경을 완료했습니다.");

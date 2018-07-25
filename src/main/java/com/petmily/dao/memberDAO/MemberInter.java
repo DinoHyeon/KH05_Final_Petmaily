@@ -32,6 +32,8 @@ public interface MemberInter {
    ArrayList<String> deleteConfirm(String state);//회원 탈퇴 확인
 
    void deleteFinish(String state);
+   
+   String ChkPwEmail(String id, String email);
 
 	
 	//////////////////////////////////////////////////소현//////////////////////////////////////////////////
@@ -41,4 +43,6 @@ public interface MemberInter {
 	ArrayList<MemberDTO> getmemberList(HashMap<String, String> params);
 
 	int getchangeState(String idx);
+
+	
 }

@@ -50,7 +50,9 @@ public class MemberService {
       } 
       
       session.setAttribute("loginId", id);
-      session.setAttribute("state", loginChkResult.getMember_state());
+      if(loginChkResult != null) {
+          session.setAttribute("state", loginChkResult.getMember_state());
+       }
 
       String page = "main"; //이 부분은 수정이 필요한 테스트 코드
       String msg = "success"; 
@@ -99,7 +101,7 @@ public class MemberService {
       dto.setMember_pw(hash);
       dto.setMember_email(map.get("emailName")+"@"+map.get("emailAddr"));
       dto.setMember_phone(map.get("phone"));
-      dto.setMember_addr(map.get("address"));
+      dto.setMember_addr(map.get("address")+" "+map.get("addressDetail"));
       
       int success =  0;
       success = inter.joinConfirmPage(dto);

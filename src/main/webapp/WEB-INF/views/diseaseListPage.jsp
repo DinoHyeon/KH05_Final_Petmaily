@@ -6,9 +6,15 @@
       <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
       <title>질병리스트</title>
       <style>
-         h3{
-            padding: 20px 600px 5px 740px;
-         }
+      #sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 100%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+}
       
          .table_style li{ 
             list-style:none;
@@ -19,7 +25,11 @@
          }
       
          .table_style { 
-            width:2000px; position:relative; padding-top:10px;
+         
+			position:absolute;
+			left:12%;
+            width:80%;
+             padding-top:10px;
          }
          
          #paging { 
@@ -71,12 +81,32 @@
            #list h1{
             cursor:pointer;
          } 
+         			#contentFrame {
+   position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 95%;
+   background: white;
+   text-align:center;
+}
+		#contentFrame h2{
+		color:#28977B;
+		}
+		#paging{
+		position:absolute;
+		top:100%;
+		left:10%;
+		}
       </style>      
    </head>
    <body>
        <jsp:include page="mainFrame.jsp" />
-      <h3>질병 리스트</h3>
-      <hr>
+       <div id="sideFrame"></div>
+		<jsp:include page="sideMenu.jsp" />
+		 <div id="contentFrame">
+      <h2>질병 리스트</h2>
+      <hr/>
       
       <form id="diseaseList" action="">
          <div class="table_style">
@@ -99,9 +129,40 @@
       </form> 
          <div id="paging">
          </div>
+         </div>
    </body>
    <script>
-   var title="${title}";
+   
+   var menuName = {'보호소센터 찾기':'searchShelter', '퀴즈':'quizSetting', '질병':'diseaseMain', '커뮤니티':'communityMain'};
+
+	var keyArr = [];
+	var i;
+	
+	$(document).ready(function() {
+		var content = "";
+		for(var key in menuName){
+			console.log(key);
+			content += "<div class='menuName'";
+			content += "style='"
+			if(key=='질병'){
+				content += "background:#28977B;color:white;font-weight: 600;";
+			}
+			content += "cursor: pointer'";
+			content += "onclick='pageMove(this)' id="+menuName[key]+">";
+			content += key;
+			content += "</div>";
+		};	
+		
+		$("#sideMenu").empty();
+		$("#sideMenu").append(content);
+	});
+	
+	function pageMove(e) {
+		console.log($(e).attr("id"));
+		location.href="./"+$(e).attr("id");
+	};
+   
+   var title="${title}";//어떤 검색을 통해 넘어왔는가
    console.log("title",title);
    
    $(document).on('click', '#list h1', function() {   

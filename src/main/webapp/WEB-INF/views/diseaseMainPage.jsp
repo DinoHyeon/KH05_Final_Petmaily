@@ -39,15 +39,16 @@
 			
 			#keywordSearch{
 				position: absolute;
-    width: 145px;
-    height: 55px;
-    top: 105%;
-    left: 44%;
-    background-color: #28977B;
-    border-color: #28977B;
-    border-style: solid;
-    font-weight: 900;
-    color: white;
+			    width: 145px;
+			    height: 55px;
+			    top: 105%;
+			    left: 44%;
+			    background-color: #28977B;
+			    border-color: #28977B;
+			    border-style: solid;
+			    font-weight: 900;
+			    color: white;
+			    cursor:pointer;
 			}
 			#contentFrame {
    position: absolute;
