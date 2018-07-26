@@ -147,6 +147,10 @@
 	text-decoration: none;
 	color: black;
 }
+
+#conDiv input[type='button']{
+border-radius: 5px;
+}
 </style>
 </head>
 <body>

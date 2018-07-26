@@ -146,9 +146,9 @@
 	color: white;
 	cursor: pointer;
 }
-/* 			#cancel{
-				left:80%;
-			} */
+#conDiv input[type='button']{
+border-radius: 5px;
+}
 </style>
 </head>
 <body>

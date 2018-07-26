@@ -13,11 +13,13 @@
 .del{
 	float: left;
 	padding: 5px;
+	cursor: pointer;
 }
 
 .modi{
 	float: left;
 	padding: 5px;
+	cursor: pointer;
 }
 
 .content{
