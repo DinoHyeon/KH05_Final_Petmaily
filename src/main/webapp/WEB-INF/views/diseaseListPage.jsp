@@ -95,7 +95,7 @@
 		}
 		#paging{
 		position:absolute;
-		top:100%;
+		top:110%;
 		left:10%;
 		}
       </style>      

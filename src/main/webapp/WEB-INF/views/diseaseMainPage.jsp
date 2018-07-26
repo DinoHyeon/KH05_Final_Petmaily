@@ -123,6 +123,7 @@
     border-style: solid;
     font-weight: 900;
     color: white;
+    cursor:pointer;
 }
 		</style>
 	</head>
