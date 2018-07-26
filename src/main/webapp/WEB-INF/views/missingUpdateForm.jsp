@@ -383,12 +383,14 @@ var mainPhoto;
 		//키를 이용해 값을 하나씩 뽑아내기
 		var content = "";
 		Object.keys(fileMap).forEach(function(item) {
+			content += "<div id='attachArea'>"
 			content += "<img width='15px' src='resources/upload/"+item+"'/>";
 			if(mainPhoto==item){
 				content += "<input type='radio' name='main' value='"+item+"' checked>";
 			}else{
 				content += "<input type='radio' name='main' value='"+item+"'>";
 			}
+			content += "</div>"
 			
 		});
 		$("#attach").append(content);
@@ -468,8 +470,10 @@ var mainPhoto;
 
 	//사진 삭제 - ajax
 	function mDel(elem) {
+		console.log(elem)
 		var fileName = elem.id.split("/")[2];
-		$.ajax({
+		console.log(fileName);
+ 		$.ajax({
 			url : "./mFileDel",
 			type : "get",
 			data : {
@@ -478,10 +482,8 @@ var mainPhoto;
 			success : function(data) {
 				console.log(data);
 				if (data.success == 1) {
-					
-					$(elem).prev().remove();//content 파일 삭제
-					$(elem).remove();//버튼 삭제
-					document.getElementById(fileName).remove(); //해당파일 삭제
+					$(elem).closest("div").remove();
+					document.getElementById(fileName).remove();
 				}
 			},
 			error : function(e) {
