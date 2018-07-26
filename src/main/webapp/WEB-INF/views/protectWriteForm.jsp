@@ -257,9 +257,8 @@ input[type='text'] {
          <table id="writeTable">
             <tr>
                <th style="width: 100px">작성자</th>
-               <c:set var="loginId" value="${sessionScope.login}" />
                <td><input id="board_writer" type="text" name="board_writer"
-                  readOnly value="${sessionScope.login}" /></td>
+                  readOnly value="${loginId}" /></td>
             </tr>
 
             <tr>
@@ -281,7 +280,7 @@ input[type='text'] {
             </tr>
             <tr>
                <td colspan="3" style="height: 150px; border: 1px solid lightgray;">
-                  <div id="attach"></div>
+                  <div id="attach"><h4>이미지 파일만 등록해 주세요.</h4></div>
                </td>
             </tr>
 
@@ -292,7 +291,7 @@ input[type='text'] {
                   <center>
                      <input type="button" class="btn" id="fileUpBtn"
                         onclick="fileUp()" value="첨부" />
-                     <c:if test="${empty sessionScope.login}">
+                     <c:if test="loginId == null">
                         <input id="pass" name="pass" type="password" placeholder="비밀번호"
                            style="height: 35px;" />
                      </c:if>

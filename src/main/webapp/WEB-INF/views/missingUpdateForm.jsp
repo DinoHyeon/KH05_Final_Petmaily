@@ -29,8 +29,8 @@ td {
 
 #fileUpBtn {
 	position: absolute;
-	top: 55.6%;
-	left: 82%;
+	top : 1.3%;
+	left: 93.5%;
 }
 
 #attach img {
@@ -73,10 +73,6 @@ td {
 
 #d_reg {
 	text-align: center;
-}
-
-input[type="text"] {
-	width: 100%;
 }
 
 #conDiv {
@@ -125,7 +121,7 @@ input[type="text"] {
 }
 
 #detailTable input[type='text'] {
-	width: 100%;
+	width: 96%;
 	height: 30px;
 }
 
@@ -164,7 +160,7 @@ input[type="text"] {
 /* 업로드 테이블 */
 #uploadTable {
 	position: absolute;
-	top: 65%;
+	top: 73%;
 	left: 11%;
 	border: 1px solid gray;
 	width: 1000px;
@@ -178,7 +174,6 @@ input[type="text"] {
 	font-weight: 600;
 	font-family: "나눔고딕 보통";
 	border: 1px solid gray;
-	text-align: center;
 }
 
 #uploadTable input[type='button'] {
@@ -196,7 +191,7 @@ input[type="text"] {
 }
 
 #detailTable select {
-	width: 150px; /* 원하는 너비설정 */
+	width: 290px; /* 원하는 너비설정 */
 	padding: .8em .5em; /* 여백으로 높이 설정 */
 	font-family: inherit; /* 폰트 상속 */
 	background: url(resources/arrowIcon.jpg) no-repeat 95% 50%;

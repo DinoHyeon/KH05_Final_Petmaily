@@ -53,7 +53,7 @@
 #favorite {
 	position: absolute;
 	top: 43.5%;
-	left: 66.5%;
+	left: 71.7%;
 }
 
 #sideFrame {
@@ -192,9 +192,9 @@
 			<tr>
 			<tr class="littleTr">
 				<th style="width: 10%">동물종</th>
-				<td id="d_animal">[ ${missingDetail.animal_idx} ]</td>
+				<td id="d_animal">${missingDetail.animal_idx}</td>
 				<th style="width: 10%">품종</th>
-				<td id="d_animal">[ ${missingDetail.animal_type} ]</td>
+				<td id="d_animal">${missingDetail.animal_type}</td>
 
 			</tr>
 			<tr>
@@ -346,9 +346,9 @@
 			$( "#missingNonmemberChk" ).dialog( "open" );
 		}else{
 			console.log(request);
-			if(request="modi"){
+			if(request=="modi"){
 				missingUpdate();
-			}if(request="del"){
+			}if(request=="del"){
 				missingDelete();
 			}
 		}

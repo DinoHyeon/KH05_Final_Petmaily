@@ -68,7 +68,7 @@
 }
 
 #detailTable input[type='text'] {
-	width: 100%;
+	width: 96%;
 	height: 30px;
 }
 
@@ -107,7 +107,7 @@
 /* 업로드 테이블 */
 #uploadTable {
 	position: absolute;
-	top: 65%;
+	top: 73%;
 	left: 11%;
 	border: 1px solid gray;
 	width: 1000px;
@@ -121,7 +121,6 @@
 	font-weight: 600;
 	font-family: "나눔고딕 보통";
 	border: 1px solid gray;
-	text-align: center;
 }
 
 #uploadTable input[type='button'] {
@@ -137,7 +136,9 @@
 }
 
 #fileUpBtn {
-	margin-left: 300px;
+	position: absolute;
+	top : 1.3%;
+	left: 93.5%;
 }
 
 #attach img {
@@ -146,7 +147,7 @@
 }
 
 #detailTable select {
-	width: 150px; /* 원하는 너비설정 */
+	width: 290px; /* 원하는 너비설정 */
 	padding: .8em .5em; /* 여백으로 높이 설정 */
 	font-family: inherit; /* 폰트 상속 */
 	background: url(resources/arrowIcon.jpg) no-repeat 95% 50%;
@@ -156,7 +157,6 @@
 	-webkit-appearance: none; /* 네이티브 외형 감추기 */
 	-moz-appearance: none;
 	appearance: none;
-	left: 30%;
 }
 </style>
 </head>
@@ -198,7 +198,7 @@
 					<th style="width: 100px">동물 종</th>
 
 					<td class="littleTd" style="width: 500px">
-						<!-- 품종 --> 품종 : <select id="animalType" name="animalType">
+						 <select id="animalType" name="animalType">
 					</select>
 					</td>
 				</tr>

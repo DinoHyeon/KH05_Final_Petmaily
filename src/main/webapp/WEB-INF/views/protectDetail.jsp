@@ -119,7 +119,7 @@
 #favorite {
 	position: absolute;
 	top: 43.5%;
-	left: 66.5%;
+	left: 71.7%;
 }
 
 .heart-blast {
@@ -219,6 +219,7 @@
 	var menuName = {'실종':'missingList', '보호':'protectList'};
 
 	$(document).ready(function() {
+		
 		var content = "";
 		for(var key in menuName){
 			console.log(key);
@@ -318,9 +319,10 @@
 			$( "#protectNonmemberChk" ).dialog( "open" );
 		}else{
 			console.log(request);
-			if(request="modi"){
+			if(request=="modi"){
 				protectUpdate();
-			}if(request="del"){
+				console.log(request);
+			}if(request=="del"){
 				protectDelete();
 			}
 		}
