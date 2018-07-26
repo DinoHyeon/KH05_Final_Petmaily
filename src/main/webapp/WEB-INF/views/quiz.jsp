@@ -349,6 +349,12 @@ fieldset legend {
 			$("#askResult").html(askResult);
 			$("#content").html(quiz.quiz_content);
 		}
+		
+		if($("#reqNum").html()==$("#solveNum").html()){
+			console.log("마지막문제");
+			$("#nextQuizBtn").val("퀴즈결과");
+			$("#nextQuizBtn").button("refresh");
+		}
 	}
 	
 	//정답 클릭

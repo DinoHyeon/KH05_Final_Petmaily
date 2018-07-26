@@ -24,7 +24,7 @@ input[type='text'] {
 
 #title h5 {
    top: 16%;
-   left: 46%;
+   left: 54.5%;
    margin: 10px 0px 40px 0px;
    text-align: right;
    color: black;
@@ -84,7 +84,7 @@ input[type='text'] {
 
 /* 글 작성 테이블 */
 #contentFrame #writeTable {
-   top: 27%;
+   top: 30%;
    left: 13%;
    width: 1000px;
    margin: 0px 5px 5px 5px;
@@ -127,8 +127,8 @@ input[type='text'] {
 }
 
 #btnTable {
-   left: 51%;
-   top: 76%;
+   left: 62%;
+   top: 92%;
    position: absolute;
    margin: auto auto 50px auto;
 }
@@ -257,14 +257,13 @@ input[type='text'] {
          <table id="writeTable">
             <tr>
                <th style="width: 100px">작성자</th>
-               <c:set var="loginId" value="${sessionScope.login}" />
                <td><input id="board_writer" type="text" name="board_writer"
-                  readOnly value="${sessionScope.login}" /></td>
+                  readOnly value="${loginId}" /></td>
             </tr>
 
             <tr>
                <th style="width: 100px">제목</th>
-               <td><input type="text" name="board_title" /></td>
+               <td><input type="text" name="board_title" id="bTitle"/></td>
             </tr>
             <tr>
                <th colspan="2" style="width: 1000px">내 용</th>
@@ -281,7 +280,7 @@ input[type='text'] {
             </tr>
             <tr>
                <td colspan="3" style="height: 150px; border: 1px solid lightgray;">
-                  <div id="attach"></div>
+                  <div id="attach"><h4>이미지 파일만 등록해 주세요.</h4></div>
                </td>
             </tr>
 
@@ -292,7 +291,7 @@ input[type='text'] {
                   <center>
                      <input type="button" class="btn" id="fileUpBtn"
                         onclick="fileUp()" value="첨부" />
-                     <c:if test="${empty loginId}">
+                     <c:if test="loginId == null">
                         <input id="pass" name="pass" type="password" placeholder="비밀번호"
                            style="height: 35px;" />
                      </c:if>
@@ -306,10 +305,6 @@ input[type='text'] {
    </div>
 </body>
 <script>
-
-function test() {
-   console.log("안녕");
-}
    var menuName = {
       '실종' : 'missingList',
       '보호' : 'protectList'
@@ -453,14 +448,14 @@ function test() {
          $("#bTitle").focus();
          alert("제목을 입력해 주세요.");
       } else if (!pcheckphoto()) {
-         alert("파일을 등록해주세요.");
-      } else if ($("#pass").val() == "") {
-         $("#pass").focus();
-         alert("비밀번호를 입력해 주세요.");
+         alert("파일을 1개이상 등록해주세요.");
       } else if (!$("input:radio[name='main']").is(":checked")) {
          $("input:radio[name='main']").focus();
          alert("대표이미지를 선택해 주세요.");
-      } else {
+      } else if ($("#pass").val() == "") {
+          $("#pass").focus();
+          alert("비밀번호를 입력해 주세요.");
+      }else {
          $("#editable input[type='button']").remove();//삭제 버튼 제거
          $("#editable input[type='checkbox']").remove();//체크박스 버튼 제거
          $("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기

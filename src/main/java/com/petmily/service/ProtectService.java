@@ -153,13 +153,14 @@ public class ProtectService {
 		dto.setBoard_content(map.get("board_content"));
 		dto.setMainPhoto(map.get("main"));
 
-		if (session.getAttribute("loginId") == null) {
+		if (session.getAttribute("loginId")==null) {
 			// 작성자에 비회원 + 아이피 주소 값
 			dto.setBoard_writer("비회원 " + ipAddr);
 			// view에서 입력 받은 비밀번호 암호화 처리 후 필드에 값 입력
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			dto.setProtect_pw(encoder.encode(map.get("pass")));
-		} else {
+		}
+		if (session.getAttribute("loginId")!=null) {
 			// 작성자는 로그인 session값
 			dto.setBoard_writer((String) session.getAttribute("loginId"));
 			// 회원인 경우 따로 입력한 pw값이 없기 때문에 '회원'데이터를 입력한다.

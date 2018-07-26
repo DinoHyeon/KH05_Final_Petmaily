@@ -169,7 +169,7 @@
       var loginId = "${sessionScope.loginId}";
       var loginState = "${sessionScope.state}"
       if(loginId!=""){
-    	  console.log("세션체크",loginId);
+    	  console.log("로그인한 ID값 : ",loginId);
          $("#login").attr("src","resources/mypage.jpg");
          $("#join").attr("src","resources/logout.jpg");
 		//관리자 / 유저에 따라 마이페이지 눌렀을때 가는 페이지 다르게 해주기        

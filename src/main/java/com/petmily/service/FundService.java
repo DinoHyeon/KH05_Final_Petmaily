@@ -107,10 +107,6 @@ public class FundService {
 
 		params.put("start", String.valueOf(start));
 		params.put("end", String.valueOf(end));
-		/*
-		 * params.put("sido", (String) params.get("sido")); params.put("sigundo",
-		 * (String) params.get("sigundo"));
-		 */
 
 		fundList.put("list", inter.getfundList(params));
 		// 생성 페이지의 수
@@ -266,9 +262,6 @@ public class FundService {
 	public boolean checkonephoto() {
 	
 		boolean photo = false;// 사진이 3개 이하면 false 반환
-		logger.info("사진 체크 파일 이름33333:{}", newFileName);
-	
-		
 
 		if (i >= 3 && j >= 1) {
 			photo = true;
@@ -277,7 +270,6 @@ public class FundService {
 		logger.info("포토:{}", photo);
 
 		return photo;
-
 	}
 
 	public ModelAndView upload(MultipartFile file, String root) {
