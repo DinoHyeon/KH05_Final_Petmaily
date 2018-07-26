@@ -26,8 +26,8 @@ table, tr {
 th{
    border: 1px solid gray;
 background-color: #217D65;
-	color:white;
-	   padding: 0.6% 1.5%;
+   color:white;
+      padding: 0.6% 1.5%;
    margin: 17% 1% 10.5% 44%;
 
 }
@@ -83,7 +83,7 @@ background-color: #217D65;
 #agree{
    position: absolute;
    right: 26%;
-   top: -20%;
+   top: -16%;
    width: 59.95%;
    height: 6%;
    background: white;
@@ -112,18 +112,18 @@ background-color: #217D65;
 }
 
 #sideFrame {
-	position: absolute;
-	left: 0.52%;
-	top: 12.4%;
-	width: 14.7%;
-	height: 150%;
-	border-right: 1px solid gray;
-	border-left: 1px solid gray;
+   position: absolute;
+   left: 0.52%;
+   top: 12.4%;
+   width: 14.7%;
+   height: 150%;
+   border-right: 1px solid gray;
+   border-left: 1px solid gray;
 }
 input[value='보내기']{
    position: absolute;
    top: 87%;
-   left: 42%;	
+   left: 42%;   
 }
 
 #text{
@@ -138,19 +138,34 @@ position: absolute;
    width: 15%;
 
 }
-	#agreeTable a:link{
-			text-decoration: none;
-			color: black;
-			
-		}
+   #agreeTable a:link{
+         text-decoration: none;
+         color: black;
+         
+      }
+      
+#title1 h1 {
+   top: 0%;
+   left: 38%;
+   margin: 50px 0px 25px 0px;
+   text-align: center;
+   color: #A9CB73;
+   font-weight: 700;
+   font-size: 40;
+   position: absolute;
+}      
 </style>
 </head>
 <body>
    <jsp:include page="mainFrame.jsp" />
-   	<div id="sideFrame"></div>
+      <div id="sideFrame"></div>
    <jsp:include page="sideMenu.jsp" />
    <div id="contentFrame">
-	<table id="agree">
+      <div id=title1>
+      <h1>모금글 관리</h1>
+            
+   </div>
+   <table id="agree">
       <thead>
          <tr>
             <th style=width:10%>글번호</th>
@@ -180,30 +195,30 @@ position: absolute;
 <script>
    var showPageNum = 1
    var menuName = {
-			'회원관리' : 'memberlist',
-			'모금글관리' : 'agreeAdmin',
-			'퀴즈등록' : 'quizMain'
-		};
+         '회원관리' : 'memberlist',
+         '모금글관리' : 'agreeAdmin',
+         '퀴즈등록' : 'quizMain'
+      };
    $(document).ready(function() {
-	   var content = "";
-		for ( var key in menuName) {
-			console.log(key);
-			content += "<div class='menuName'";
-			content += "style='"
-			if (key == '모금글관리') {
-				content += "background:#28977B;color:white;font-weight: 600;";
-			}
-			content += "cursor: pointer'";
-			content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
-			content += key;
-			content += "</div>";
-		}
-		;
+      var content = "";
+      for ( var key in menuName) {
+         console.log(key);
+         content += "<div class='menuName'";
+         content += "style='"
+         if (key == '모금글관리') {
+            content += "background:#28977B;color:white;font-weight: 600;";
+         }
+         content += "cursor: pointer'";
+         content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
+         content += key;
+         content += "</div>";
+      }
+      ;
 
-		$("#sideMenu").empty();
-		$("#sideMenu").append(content);
-	   
-	   
+      $("#sideMenu").empty();
+      $("#sideMenu").append(content);
+      
+      
       $("input[type=button]").button();
       
       agreelistCall(showPageNum);
@@ -218,9 +233,9 @@ position: absolute;
    });
 
    function pageMove(e) {
-		console.log($(e).attr("id"));
-		location.href = "./" + $(e).attr("id");
-	};
+      console.log($(e).attr("id"));
+      location.href = "./" + $(e).attr("id");
+   };
    function agreelistCall(page) {
       $.ajax({
          type : "get",

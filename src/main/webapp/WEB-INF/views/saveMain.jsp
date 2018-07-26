@@ -11,7 +11,7 @@
 <style>
 /* 타이틀 */
 #title h1 {
-   top: 16%;
+   top: 1%;
    left: 45%;
    margin: 50px 0px 25px 0px;
    text-align: center;
@@ -22,8 +22,8 @@
 }
 
 #title h5 {
-   top: 43%;
-   left: 70%;
+   top: 15%;
+   left: 74%;
    margin: 10px 0px 40px 0px;
    text-align: right;
    color: black;
@@ -34,8 +34,8 @@
 
 /* 셀렉트박스 테이블 */
 .save  #selectTable {
-   top: 36%;
-   left: 30%;
+   top: 10%;
+   left: 26%;
    height: 50px;
    margine: 10px 40px 10px 40px;
    position: absolute;
@@ -61,8 +61,8 @@
 }
 /* 검색버튼 */
 .save #searchBtn {
-   top: 36%;
-   left: 71%;
+   top: 10.3%;
+   left: 66%;
    width: 80px;
    height: 36px;
    position: absolute;
@@ -81,10 +81,11 @@
    width: 350px;
    margin: auto 20px auto 20px;
 }
+
 /* 글 목록 */
 .save #listTable {
-   top: 45%;
-   left: 20%;
+   top: 16%;
+   left: 11.3%;
    width: 1000px;
    margin: 20px 5px 200px 5px;
    border-collapse: collapse;
