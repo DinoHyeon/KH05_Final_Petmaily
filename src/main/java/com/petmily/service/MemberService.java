@@ -361,11 +361,11 @@ public class MemberService {
        calendar.add(Calendar.DAY_OF_MONTH, 7);   
        nDay = calendar.get(Calendar.DAY_OF_MONTH);
        
-       String date1 = nYear+"-0"+nMonth+"-"+nDay;
+      //String date1 = nYear+"-0"+nMonth+"-"+nDay;
        
       String state = "leave";
       
-      ArrayList<String> deleteConfirm = inter.deleteConfirm(state);
+      //ArrayList<String> deleteConfirm = inter.deleteConfirm(state);
       
       if(min < 12) {
          min++;

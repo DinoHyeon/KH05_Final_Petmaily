@@ -21,7 +21,7 @@
 	left: 0.52%;
 	top: 12.4%;
 	width: 14.7%;
-	height: 150%;
+	height: 185%;
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
 }
@@ -147,8 +147,8 @@ textarea {
 /* 페이징 */
 #paging{
 	position: absolute;
-	top : 169%;
-	left : 47%;
+	top : 187%;
+	left : 52%;
 }
 
 /* selectBox(검색) */
@@ -181,7 +181,6 @@ border-right: 1px solid gray;
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
    <jsp:include page="sideMenu.jsp" />
-   <div id="contentFrame">
 	
 	<div id="contentFrame">
 			<div id=title1>
