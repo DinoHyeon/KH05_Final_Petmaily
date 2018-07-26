@@ -42,6 +42,7 @@ public class FundService {
 
 	int i = 0;
 	int j = 0;
+	
 
 	// 소현: getmyList(마이리스트 페이징 처리 list 호출)
 	public HashMap<String, Object> getmyList(HashMap<String, String> params, HttpSession session) {
@@ -89,6 +90,8 @@ public class FundService {
 
 	// 소현: 모금게시판 페이징 처리 list 호출
 	public HashMap<String, Object> getfundList(HashMap<String, String> params) {
+		i=0;
+		j=0;
 		inter = sqlSession.getMapper(BoardInter.class);
 		int allCnt = inter.fundlistallCount(params);
 		int pageCnt = allCnt % 15 > 0 ? Math.round(allCnt / 15) + 1 : allCnt / 15;
@@ -241,19 +244,10 @@ public class FundService {
 		return map;
 	}
 
-	public boolean checkphoto() {
-		boolean photo = false;// 사진이 없으면 false 반환
-		System.out.println("파일: " + fileList.size());
-		if (fileList.size() > 0) {// 저장할 파일이 있을 경우
-			photo = true;
-		}
-
-		return photo;
-	}
-
-	public boolean checkonephoto() {
-		boolean photo = false;// 사진이 3개 이하면 false 반환
-		logger.info("사진 체크 파일 이름33333:{}", newFileName);
+	public int checkphoto() {
+		
+		int photo = 0;// 사진이 없으면 false 반환
+		
 		filen = newFileName.split("~")[0];
 		logger.info(" 사진 체크파일 이름:{}", filen);
 		// if(quizAnswer.equals(answer)) {
@@ -266,11 +260,19 @@ public class FundService {
 			j++;// 1
 			logger.info("j222:{}", j);
 		}
+		return photo;
+	}
 
-		if (i > 3 || j > 1) {
+	public boolean checkonephoto() {
+	
+		boolean photo = false;// 사진이 3개 이하면 false 반환
+		logger.info("사진 체크 파일 이름33333:{}", newFileName);
+	
+		
+
+		if (i >= 3 && j >= 1) {
 			photo = true;
-			logger.info("i3433는?:{}", i);
-			logger.info("j3433는?:{}", j);
+		
 		}
 		logger.info("포토:{}", photo);
 
@@ -303,7 +305,7 @@ public class FundService {
 		String msg = "성공";
 		// String filen = newFileName.split("~")[0];
 
-		checkonephoto();
+		checkphoto();
 
 		logger.info("파일 이름1111:{}", newFileName);
 
@@ -350,7 +352,7 @@ public class FundService {
 		newFileName = fname + slash + System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf("."));
 		String msg = "성공";
 		logger.info("영수증 파일 이름1111:{}", newFileName);
-		checkonephoto();
+		checkphoto();
 
 		// 4. 파일 추출
 		try {
@@ -373,9 +375,11 @@ public class FundService {
 	public ModelAndView funddetail(String idx) {
 		ModelAndView mav = new ModelAndView();
 		inter = sqlSession.getMapper(BoardInter.class);
+		inter.uphit(Integer.parseInt(idx)); // 조회수
+
 		// 상세보기 정보
 		mav.addObject("dto", inter.funddetail(idx));
-		inter.uphit(idx); // 조회수
+		
 
 		// 파일 정보(다운로드 리스트)
 		ArrayList<BoardDTO> files = inter.fundfileList(idx);

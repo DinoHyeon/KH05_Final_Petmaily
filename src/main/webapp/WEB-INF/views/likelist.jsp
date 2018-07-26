@@ -80,8 +80,8 @@ left:-28%;
 }
 #paging{
 position: absolute;
-   left: 52.52%;
-   top: 93.4%;
+   left: 36.52%;
+   top: 147.4%;
    width: 15%;
 }
 </style>
@@ -173,7 +173,13 @@ function likelistPrint(data) {
 		content += "<tr>"; 
 		content += "<td>" + item.favorite_idx + "</td>";
 		content += "<td>" + item.board_type + "</td>";
-		content += "<td><a href='funddetail?idx="+item.board_idx+"&call=detail' style='color: blue'>"+ item.board_title +"</a></td>";
+        if(item.board_type=='보호'){
+		content += "<td><a href='protectDetail?board_idx="+item.board_idx+"&call=detail' style='color: black'>"+ item.board_title +"</a></td>";
+	      }
+        if(item.board_type=='실종'){
+    		content += "<td><a href='missingDetail?board_idx="+item.board_idx+"&call=detail' style='color: black'>"+ item.board_title +"</a></td>";
+    		
+            }
 		content += "<td>" + item.board_writer + "</td>";
 		content += "<td><div class='heart' id="+ item.favorite_idx +"></div></td>";
      	content += "</tr>"; 

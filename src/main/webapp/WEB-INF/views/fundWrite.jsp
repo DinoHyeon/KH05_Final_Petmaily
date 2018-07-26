@@ -198,6 +198,10 @@ input[type='text'] {
 	padding: 1%;
 }
 
+#attachani {
+	float: left;
+
+}
 
 </style>
 </head>
@@ -315,7 +319,7 @@ input[type='text'] {
 <script>
 var msg = "${msg}";
 var menuName = {'구조후기':'saveMain', '모금':'fundMain'};
-
+var photoChk=false;
 $(document).ready(function() {
 	var content = "";
 	for(var key in menuName){
@@ -333,6 +337,7 @@ $(document).ready(function() {
 	
 	$("#sideMenu").empty();
 	$("#sideMenu").append(content);
+	
 });
 
 function pageMove(e) {
@@ -446,37 +451,21 @@ $("#back").click(function() {
          $("#editable input[type='checkbox']").remove();//체크박스 버튼 제거
          $("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
          $("#location").val($("#sido option:selected").html());
-          $("#sendForm").submit();
+         $("#sendForm").submit();
       }else{
          alert("※동물사진 3개이상, 영수증 사진 1개 이상 등록해주세요※");
       }  
  
-      
+  
+
    
       
    });
       
 
-   function checkphoto() {
-      var photoChk;
-      $.ajax({
-         url:"./checkphoto",
-         type:"get",
-         async: false,
-         success:function(data){
-            photoChk = data;
-         },
-         error:function(e){
-            console.log(e);
-         }
-      });
-      
-      return photoChk;
-      
-   }
-   
+  
    function checkonephoto() {
-      var photoChk;
+     var photoChk;
       $.ajax({
          "url":"./checkonephoto",
          "type":"get",

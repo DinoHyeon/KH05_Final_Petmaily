@@ -11,6 +11,7 @@
 		<config>src/main/resources/config/dataSource.xml</config>
 		<config>src/main/resources/config/transaction.xml</config>
 		<config>src/main/resources/config/interceptor.xml</config>
+		<config>src/main/resources/config/schedule.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
