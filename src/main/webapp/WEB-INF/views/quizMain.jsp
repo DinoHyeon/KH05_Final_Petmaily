@@ -330,6 +330,10 @@ border-right: 1px solid gray;
 						$("#aniamlList").val("동물");
 						$("#category").val("카테고리");
 						$("#quizAsk").val("");
+						
+						$( "#category" ).selectmenu( "refresh" );
+						$( "#aniamlList" ).selectmenu( "refresh" );
+						
 						$("#registQuizContent").val("");
 						$("input[name='answer']:checked").closest("label").attr("class","ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label");
 						$("input[name='answer']:checked").removeAttr('checked');
