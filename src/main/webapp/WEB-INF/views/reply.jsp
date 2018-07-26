@@ -44,13 +44,13 @@
 	top: 115%;
 }
 
-th{
+.replyArea th{
 	border-top : 1px solid black;
 	border-bottom: 1px solid black;
 	background-color: #D2E5A8;
 }
 
-td{
+.replyArea td{
 	border-bottom: 1px solid black;
 }
 

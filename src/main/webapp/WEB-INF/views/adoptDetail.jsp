@@ -9,6 +9,25 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <title>입양 후기 상세보기 페이지</title>
 <style>
+#contentFrame {
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 150%;
+	background: white;
+}
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+}
+
 /* 타이틀 */
 #title h1 {
 	top: 16%;
@@ -144,52 +163,91 @@
 }
 
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 150%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 150%;
+	background: white;
 }
 
-#sideFrame{
-    position: absolute;
-    left: 0.52%;
-    top: 12.4%;
-    width: 14.7%;
-    height: 150%;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
+
+#replyTable {
+	width: 1000px;
+	top: 70%;
+	left: 7.1%;
+	position: absolute;
+}
+
+#replyTable input[type='text'] {
+	width: 100%;
+	height: 30px;
+}
+	
+#replyTable th {
+	background-color: #28977B;
+	color: white;
+	font-weight: 600;
+}	
+
+#replyTable td{
+	padding: 5px 10px 5px 10px;
+}
+
+#contentFrame input[type='button'] {
+	top: 90%;
+	height: 40px;
+	width: 107px;
+	background-color: #28977B;
+	border-color: #28977B;
+	border-style: solid;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+}
+
+#registArea{
+	text-align:center;
+}
+
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
-<jsp:include page="sideMenu.jsp" />
-<div id="contentFrame">
-	<div class="adopt">
-	
-		<div id=title>
-			<h1>입양 후기 글 보기</h1>
-			<h5>회원님들이 작성한 입양 후기 입니다</h5>
-		</div>
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
+		<div class="adopt">
 
-		<table id="selectTable">
-			<tr>
-				<th colspan=2 style="width: 1000px">분류</th>
-			</tr>
-			<tr>
-				<td class=tap>동물 / 품종</td>
-				<td style="font-weight: 300">${boardAdoptDetail.animal_idx} /
-					${boardAdoptDetail.animal_type}</td>
-			</tr>
+			<div id=title>
+				<h1>입양 후기 글 보기</h1>
+				<h5>회원님들이 작성한 입양 후기 입니다</h5>
+			</div>
 
-			<tr>
-				<td class=tap>지역</td>
-				<td style="font-weight: 300">${boardAdoptDetail.adopt_loc1}
-					${boardAdoptDetail.adopt_loc2}</td>
-			</tr>
+			<table id="selectTable">
+				<tr>
+					<th colspan=2 style="width: 1000px">분류</th>
+				</tr>
+				<tr>
+					<td class=tap>동물 / 품종</td>
+					<td style="font-weight: 300">${boardAdoptDetail.animal_idx}/
+						${boardAdoptDetail.animal_type}</td>
+				</tr>
+
+				<tr>
+					<td class=tap>지역</td>
+					<td style="font-weight: 300">${boardAdoptDetail.adopt_loc1}
+						${boardAdoptDetail.adopt_loc2}</td>
+				</tr>
 			</table>
 			<table id="writeTable">
 				<input type="hidden" id="board_idx" value="${aDetail.board_idx}" />
@@ -230,14 +288,18 @@
 					</td>
 				</tr>
 				<tbody>
-				<tr>
-			<td>	<jsp:include page="reply.jsp"/>
-			</td>
-			</tr>
-			</tbody>
+
+				</tbody>
 			</table>
-			</div>
-			</div>
+		</div>
+
+		<table id="replyTable">
+			<tr>
+				<td><jsp:include page="reply.jsp" /></td>
+			</tr>
+		</table>
+
+	</div>
 </body>
 <script>
 	
