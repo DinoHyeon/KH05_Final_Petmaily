@@ -333,7 +333,7 @@
 	<select id="fundlistallCount" resultType="Integer"
 		parameterType="hashMap">
 		SELECT COUNT(*) FROM board b, board_fund f
-		where b.board_idx = f.board_idx
+		where b.board_idx = f.board_idx and f.fund_state='승인'
 		
 			<if test="!sido.equals('선택') and sido!=null">
 				AND fund_area LIKE '%'||#{sido}||'%'
@@ -361,7 +361,7 @@
 		b.board_hit, f.fund_area,
 		ROW_NUMBER() OVER(ORDER BY f.board_idx DESC) AS rnum
 		FROM board b, board_fund f
-		where b.board_idx = f.board_idx
+		where b.board_idx = f.board_idx and f.fund_state='승인'
 		<if test="!sido.equals('선택') and sido!=null">
 			AND fund_area LIKE '%'||#{sido}||'%'
 		</if>
@@ -498,6 +498,7 @@
 
 	<update id="uphit">
 		UPDATE board SET board_hit=board_hit+1 WHERE board_idx=#{param1}
+	
 	</update>
 	
 	

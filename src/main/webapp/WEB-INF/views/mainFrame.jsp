@@ -168,7 +168,7 @@
       //로그인 아이디 세션체크
       var loginId = "${sessionScope.loginId}";
       if(loginId!=""){
-    	  console.log("세션체크",loginId);
+    	  console.log("로그인한 ID값 : ",loginId);
          $("#login").attr("src","resources/mypage.jpg");
          $("#join").attr("src","resources/logout.jpg");
          $("#cngA1").attr("href", "./memberUpdatePwConfirmPage");

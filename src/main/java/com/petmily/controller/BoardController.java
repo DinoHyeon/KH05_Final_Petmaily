@@ -299,7 +299,6 @@ public class BoardController {
 	public @ResponseBody HashMap<String, Object> getmyList(@RequestParam HashMap<String, String> params,
 			HttpSession session) {
 		logger.info("마이 모금 리스트 호출");
-		System.out.println("로긘아뒤 :" + session.getAttribute("loginId"));
 		return fund.getmyList(params, session);
 	}
 
@@ -367,7 +366,7 @@ public class BoardController {
 
 	// 소현: 파일 유무확인
 	@RequestMapping(value = "checkphoto")
-	public @ResponseBody boolean checkphoto() {
+	public @ResponseBody int checkphoto() {
 		logger.info("파일 유무 확인 요청");
 
 		return fund.checkphoto();

@@ -154,11 +154,12 @@ public class MissingService {
 		dto.setBoard_content(map.get("board_content"));
 		dto.setMainPhoto(map.get("main"));
 
-		if (session.getAttribute("loginId") == null) { // loginId에 값이 없으면
+		if (session.getAttribute("loginId")==null) { // loginId에 값이 없으면
 			dto.setBoard_writer("비회원 " + ipAddr); // 작성자 : 비회원+ip주소
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); // 암호화
 			dto.setMissing_pw(encoder.encode(map.get("pass")));
-		} else {
+		} 
+		if (session.getAttribute("loginId")!=null){
 			dto.setBoard_writer((String) session.getAttribute("loginId"));
 			dto.setMissing_pw("회원");
 

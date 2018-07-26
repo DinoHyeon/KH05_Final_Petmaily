@@ -57,7 +57,7 @@ td{
 #paging{
 	position: absolute;
 	top :103%;
-	left: 50%;
+	left: 43%;
 }
 
 </style>
@@ -72,7 +72,7 @@ td{
 </div>
 
 <div id="registArea">
-	<input type="text" id="replyContent" placeholder="내용">
+	<input type="text" id="replyContent" placeholder="댓글을 입력해 주세요.">
 	<c:set var="loginId" value="${sessionScope.loginId}"/>
     	<c:if test="${empty loginId}">
 			비밀번호 <input type="password" id="noneMemberPass">

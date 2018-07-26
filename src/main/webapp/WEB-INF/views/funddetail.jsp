@@ -6,18 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-table {
-		border: 1px solid black;
+#conDiv table, th, td {
+	border: 1px solid gray;
 	border-collapse: collapse;
-	position: absolute;
-	width: 70%;
-	top: 10%;
-	left: 10%;
+	padding: 6px 15px;
+	text-align: center;
 }
-td {
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding: 20px;
+
+#conDiv td {
+	text-align: center;
 }
 
 #buttonarea {
@@ -144,7 +141,7 @@ td {
 	<div id="sideFrame"></div>
 	<jsp:include page="sideMenu.jsp" />
 	<div id="conDiv">
-		<h1>${dto.board_title}</h1>
+		<h1>모금 게시판</h1>
 		<input type="hidden" id="board_idx" value="${dto.board_idx}" />
 		<table id="detailTable" style="border: 1px solid gray">
 			<tr class="littleTr">
