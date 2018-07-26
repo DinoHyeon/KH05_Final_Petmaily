@@ -137,7 +137,7 @@
 
 #fileUpBtn {
 	position: absolute;
-	top : 1.3%;
+	top: 1.3%;
 	left: 93.5%;
 }
 
@@ -197,10 +197,9 @@
 					</select></td>
 					<th style="width: 100px">동물 종</th>
 
-					<td class="littleTd" style="width: 500px">
-						 <select id="animalType" name="animalType">
-					</select>
-					</td>
+					<td class="littleTd" style="width: 500px"><select
+						id="animalType" name="animalType">
+					</select></td>
 				</tr>
 				<tr>
 					<th style="width: 100px">위치</th>
@@ -332,18 +331,16 @@
 		//object 에서 키추출 -> 키에 따른 값을 추출
 		//키를 이용해 값을 하나씩 뽑아내기
 		var content = "";
-		Object
-				.keys(fileMap)
-				.forEach(
-						function(item) {
-							content += "<img width='15px' src='resources/upload/"+item+"'/>";
-							if (mainPhoto == item) {
-								content += "<input type='radio' name='main' value='"+item+"' checked>";
-							} else {
-								content += "<input type='radio' name='main' value='"+item+"'>";
-							}
-
-						});
+		Object.keys(fileMap).forEach(function(item) {
+			content += "<div id='attachArea'>"
+			content += "<img width='15px' src='resources/upload/"+item+"'/>";
+			if (mainPhoto == item) {
+				content += "<input type='radio' name='main' value='"+item+"' checked>";
+			} else {
+				content += "<input type='radio' name='main' value='"+item+"'>";
+			}
+			content += "</div>"
+		});
 		$("#attach").append(content);
 
 	} else {
@@ -432,10 +429,8 @@
 			success : function(data) {
 				console.log(data);
 				if (data.success == 1) {
-
-					$(elem).prev().remove();//content 파일 삭제
-					$(elem).remove();//버튼 삭제
-					document.getElementById(fileName).remove(); //해당파일 삭제
+					$(elem).closest("div").remove();
+					document.getElementById(fileName).remove();
 				}
 			},
 			error : function(e) {
