@@ -33,8 +33,7 @@
 }
 /* 타이틀 */
 #title h1 {
-	top: 16%;
-	left: 45%;
+	left: 42%;
 	margin: 50px 0px 25px 0px;
 	text-align: center;
 	color: #28977B;
@@ -44,8 +43,8 @@
 }
 
 #title h5 {
-	top: 42%;
-	left: 22%;
+	top: 17%;
+	left: 50%;
 	margin: 10px 0px 40px 0px;
 	text-align: right;
 	color: black;
@@ -56,8 +55,8 @@
 
 /* 셀렉트박스 테이블 */
 .adopt  #selectTable {
-	top: 42.5%;
-	left: 21%;
+	top: 11.5%;
+	left: 9%;
 	padding: 1px 1px 1px 1px;
 	margin: 25px auto auto  auto;
 	position: absolute;
@@ -105,8 +104,8 @@
 
 /* 글 작성 테이블 */
 .adopt #writeTable {
-	top: 56%;
-	left: 21%;
+	top: 21%;
+    left: 8.7%;
 	width: 1000px;
 	margin: 0px 5px 5px 5px;
 	border-collapse: collapse;
@@ -118,6 +117,7 @@
 	width: 100%;
 	height: 30px;
 }
+
 
 #writeTable textarea {
 	width: 100%;
@@ -148,8 +148,8 @@
 }
 /* 업로드 테이블 */
 .adopt #uploadTable {
-	top: 750px;
-	left: 21%;
+	top: 50%;
+	left: 8.8%;
 	border: 1px solid lightgray;
 	width: 1000px;
 	height: 150px;
@@ -160,8 +160,8 @@
 }
 
 #btnTable{
-			left:70%;
-			top:950px;
+			left:71%;
+			top:70%;
 			position: absolute;
 		}
 		.btn {

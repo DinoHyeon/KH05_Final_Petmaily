@@ -29,8 +29,7 @@
 }
 /* 타이틀 */
 #title h1 {
-	top: 16%;
-	left: 45%;
+	left: 40%;
 	margin: 50px 0px 25px 0px;
 	text-align: center;
 	color: #28977B;
@@ -40,7 +39,7 @@
 }
 
 #title h5 {
-	top: 41%;
+	top: 9%;
 	left: 69%;
 	margin: 10px 0px 40px 0px;
 	text-align: right;
@@ -52,8 +51,8 @@
 
 /* 동물 종류, 품종, 지역 테이블 */
 .adopt  #selectTable {
-	top: 48%;
-	left: 21%;
+	top: 9%;
+	left: 7%;
 	padding: 2px 2px 2px 4px;
 	margin: 30px auto auto auto;
 	position: absolute;
@@ -84,8 +83,8 @@
 
 /* 글 작성 테이블 */
 .adopt #writeTable {
-	top: 62%;
-	left: 21%;
+	top: 19%;
+	left: 7%;
 	width: 1000px;
 	margin: 0px 5px 5px 5px;
 	border-collapse: collapse;
@@ -132,8 +131,8 @@
 
 /* 업로드 테이블 */
 .adopt #uploadTable {
-	top: 96%;
-	left: 21%;
+	top: 42%;
+	left: 7.2%;
 	border: 1px solid lightgray;
 	width: 1000px;
 	height: 100px;
@@ -144,10 +143,18 @@
 }
 
 #btnTable {
-	left: 63%;
-	top: 940px;
+	left: 60%;
+	top: 61%;
 	position: absolute;
 }
+
+#replyTable {
+	width: 1000px;
+	top: 70%;
+	left : 7.1%;
+	position: absolute;
+}
+
 
 .btn {
 	top: 90%;
@@ -160,6 +167,7 @@
 	color: white;
 	cursor: pointer;
 }
+
 </style>
 </head>
 <body>
@@ -206,12 +214,12 @@
 						<div id="content_div">${sDetail.board_content}</div>
 					</td>
 				</tr>
-				<tbody>
+				<%-- <tbody>
 				<tr>
 			<td>	<jsp:include page="reply.jsp"/>
 			</td>
 			</tr>
-			</tbody>
+			</tbody> --%>
 			</table>
 			<table id="uploadTable">
 				<tr>
@@ -233,8 +241,13 @@
 			<td>	<jsp:include page="reply.jsp"/>
 			</td>
 			</tr>
-			</tbody>
+				</tbody>
 			</table>
+<!-- 			<table id="replyTable">
+				<tbody>
+				
+			</tbody>
+			</table> -->
 			</div>
 			</div>
 </body>
