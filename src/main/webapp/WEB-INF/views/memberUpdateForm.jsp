@@ -251,7 +251,7 @@
 		$(function() {
 		    $("#pwChk").click(function() { 
 				if($("#joinPw").val() == $("#joinPwChk").val()){
-					alert("비밀번호을 확인했습니다.");
+					alert("비밀번호를 확인했습니다.");
 					$('#joinPw').prop('readonly', true);
 					$('#joinPwChk').prop('readonly', true);
 					pwChk = 1;
