@@ -39,7 +39,14 @@
    background-color: gray; /* 크롬, 모질라 등, 기타 브라우저 */
    position: absolute;
    left: 10%;
+}
+
+#hr1{
    top: 33%;
+}
+
+#hr2{
+   top: 110%;
 }
 
 #joinTable {
@@ -87,7 +94,6 @@
    display: none;
 }
 /* 버튼 스타일 */
-
 .btn {
    position: relative;
    height: 45px;
@@ -97,8 +103,14 @@
    text-align: center;
    margin: auto 10px auto 10px;
    padding: 5px 0 5px 0;
-   border: 2.5px solid white;
+  
+   border-top:1.5px solid #28977B;
+   border-right:1.5px solid #217D65;
+   border-bottom:1.5px solid #217D65;
+   border-left:1.5px solid #28977B; 
    background-color: #28977B;
+
+   border-radius: 5px; 
    color: white;
    cursor: pointer;
 }
@@ -122,7 +134,7 @@
          <h1 style="font-size: 50">회원 가입</h1>
          <h5>회원 정보를 등록합니다</h5>
       </div>
-      <hr>
+      <hr id="hr1"/>
 
       <form id="joinConfirm" action="joinConfirmPage" method="post">
          <table id="joinTable">
@@ -185,12 +197,21 @@
                   style="width: 80pt; height: 35pt;" value="주소 찾기"> <span
                   class="inp" id="guide" style="color: #999"></span></td>
             </tr>
-            <tr>
+            <hr id="hr2"/>
+             <tr>
                <td colspan="2"><input type="button" class="btn"
                   onclick="joinChk()" id="joinBtn" value="가입하기"
-                  style="left: 84%; margin: 60px auto auto auto;" /> <input
+                  style="left: 71.5%; margin: 60px auto auto auto;" /> <input
                   type="button" class="btn" onclick="location.href='./' " value="취소"
-                  style="left: 57%; margin: 60px auto auto auto;" /></td>
+                  style=
+                  "left: 44.5%; 
+                  margin: 60px auto auto auto;  
+                  color:#28977B;
+                  border-top:1.5px solid #28977B;
+              border-right:1.5px solid #217D65;
+               border-bottom:1.5px solid #217D65;
+               border-left:1.5px solid #28977B; 
+               background-color: white;" /></td>
             </tr>
          </table>
       </form>

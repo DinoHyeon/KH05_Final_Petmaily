@@ -59,11 +59,20 @@ td{
 	top :103%;
 	left: 43%;
 }
+#start h3{
+	position:absolute;
+	left:27%;
+	color:darkgreen;
+}	
 
 </style>
 </head>
 <body>
-<div>
+<div id="start">
+
+
+
+<h3>------------------------- 댓  글 ------------------------</h3><br/><br/>
 <div id="noneMemberPassChk" title="비회원 댓글 삭제">
 	<div>
 		<h1>비밀번호를 입력해주세요.</h1>

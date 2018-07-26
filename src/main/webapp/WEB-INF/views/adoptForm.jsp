@@ -248,7 +248,6 @@ position: absolute;
 					</select> <input id="selsido" name="selsido" type="hidden" /></td>
 				</tr>
 			</table>
-
 			<table id="writeTable">
 				<tr>
 					<th style="width: 100px">작성자</th>
@@ -292,6 +291,7 @@ position: absolute;
 				</tr>
 			</table>
 		</form>
+
 	</div>
 </body>
 <script>
