@@ -371,10 +371,11 @@ input[type='text'] {
             console.log(data);
             var content = "";
             data.forEach(function(item) {
-               content += "<option value="+item.animalType+">";
-               content += item.animalType;
-               content += "</option>";
-            })
+				var selAni = item.animalType.replace(/ /gi, "");
+				content += "<option value="+selAni+">";
+				content += item.animalType;
+				content += "</option>";
+			})
             $("#animalType").empty();
             $("#animalType").append(content);
          },

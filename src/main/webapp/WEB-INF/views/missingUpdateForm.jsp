@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>실종 게시글 수정</title>
 <style>
-table {
+/* table {
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 5px 10px;
@@ -25,7 +25,7 @@ td {
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 15px;
-}
+} */
 
 #fileUpBtn {
 	position: absolute;
@@ -253,9 +253,10 @@ td {
 					</select></td>
 				</tr>
 				<tr>
-					<th style="width: 100px">실종 위치</th>
-					<td colspan="5" class="littleTd"><select id="sido"
-						onchange="getSigungu()">
+					<th style="width: 100px">위치</th>
+
+					<td colspan="5" class="littleTd" style="width: 500px"><select
+						id="sido" onchange="getSigungu()">
 							<option value="">선택</option>
 							<option value="6110000">서울특별시</option>
 							<option value="6260000">부산광역시</option>
@@ -271,13 +272,13 @@ td {
 							<option value="6440000">충청남도</option>
 							<option value="6450000">전라북도</option>
 							<option value="6460000">전라남도</option>
-
 							<option value="6470000">경상북도</option>
 							<option value="6480000">경상남도</option>
 							<option value="6500000">제주특별자치도</option>
-					</select> </select> <select id="sigundo" name="sigundo">
+					</select> <select id="sigundo" name="sigundo">
 							<input type="hidden" id="location" name="sido">
 					</select></td>
+
 
 				</tr>
 				<tr>
@@ -316,13 +317,21 @@ td {
 	</div>
 </body>
 <script>
-	var fullLoc = "${missingDetail.missing_loc}"; //지역 값 전체 받아오기
-	var locArr = fullLoc.split(' '); //locArr[0] :시    locArr[1] : 구
-	var mainPhoto;
-	var menuName = {'실종':'missingList', '보호':'protectList'};
+var fullLoc = "${missingDetail.missing_loc}"; //지역 값 전체 받아오기
+var locArr = fullLoc.split(' '); //locArr[0] :시    locArr[1] : 구
+var menuName = {
+	'실종' : 'missingList',
+	'보호' : 'protectList'
+};
+var mainPhoto;
 
 	//수정페이지 접근시 내가 선택했던 selectBox 값 불러오기
 	$(document).ready(function() {
+		selectBoxChk($("#sido"), locArr[0]);
+		getSigungu();//option 있는상태에서 내가 비교할 값 찾기
+		selectBoxChk($("#animal"), "${missingDetail.animal_idx}");
+		getAnimalType();
+		
 		var content = "";
 		for(var key in menuName){
 			console.log(key);
@@ -340,11 +349,7 @@ td {
 		$("#sideMenu").empty();
 		$("#sideMenu").append(content);
 
-
-		selectBoxChk($("#sido"),locArr[0]);
-		getSigungu();//option 있는상태에서 내가 비교할 값 찾기
-		selectBoxChk($("#animal"), "${missingDetail.animal_idx}");
-		getAnimalType();
+		
 	});
 	
 	function pageMove(e) {
@@ -395,7 +400,8 @@ td {
 	//지역
 	function getSigungu() {
 		console.log();
-		$.ajax({
+		$
+				.ajax({
 					"url" : "./getSigungu",
 					"type" : "get",
 					"data" : {
@@ -436,10 +442,11 @@ td {
 						var content = "";
 						data
 								.forEach(function(item) {
-									if (item.animalType == "${missingDetail.animal_type}") {
-										content += "<option value="+item.animalType+" selected>";
+									var selAni = item.animalType.replace(/ /gi, "");
+									if (selAni == "${missingDetail.animal_type}") {
+										content += "<option value="+selAni+" selected>";
 									} else {
-										content += "<option value="+item.animalType+">";
+										content += "<option value="+selAni+">";
 									}
 									content += item.animalType;
 									content += "</option>";

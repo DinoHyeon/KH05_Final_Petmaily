@@ -243,13 +243,14 @@ input[type='text'] {
 				<tr>
 					<td class="tap">동물</td>
 					<td>
-						<!-- 동물종 --> <select id="animal" onchange="getAnimalType()">
+						<select id="animal" onchange="getAnimalType()">
 							<option value="">선택</option>
 							<option value="417000">개</option>
 							<option value="422400">고양이</option>
 							<option value="429900">기타</option>
 							<input type="hidden" id="selectAnimal" name="animal">
-					</select> <!-- 품종 --> <select id="animalType" name="animalType">
+					</select> 
+					<select id="animalType" name="animalType">
 							<option value="">선택</option>
 					</select>
 					</td>
@@ -293,7 +294,7 @@ input[type='text'] {
 						<center>
 							<input type="button" class="btn" id="fileUpBtn"
 								onclick="fileUp()" value="첨부" />
-							<c:if test="loginId == null">
+							<c:if test="${empty loginId}">
 								<input id="pass" name="pass" type="password" placeholder="비밀번호"
 									style="height: 35px;" />
 							</c:if>
@@ -307,8 +308,6 @@ input[type='text'] {
 	</div>
 </body>
 <script>
-	
-
 	var menuName = {
 		'실종' : 'missingList',
 		'보호' : 'protectList'
@@ -376,7 +375,8 @@ input[type='text'] {
 				console.log(data);
 				var content = "";
 				data.forEach(function(item) {
-					content += "<option value="+item.animalType+">";
+					var selAni = item.animalType.replace(/ /gi, "");
+					content += "<option value="+selAni+">";
 					content += item.animalType;
 					content += "</option>";
 				})
@@ -384,7 +384,7 @@ input[type='text'] {
 				$("#animalType").append(content);
 			},
 			"error" : function(x, o, e) {
-				alert(x.status + ":" + o + ":" + e);
+				alert(x.status + ":" + o + ":" + e);q
 			}
 		});
 	}
@@ -466,7 +466,7 @@ input[type='text'] {
 			$("#editable input[type='checkbox']").remove();//체크박스 버튼 제거
 			$("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
 			$("#location").val($("#sido option:selected").html());
-			$("#selectAnimal").val($("#animal option:selected").html());
+			$("#selectAnimal").val($("#animal option:selected").html().replace(" ", ""));
 			$("#missingSend").submit();
 		}
 	});

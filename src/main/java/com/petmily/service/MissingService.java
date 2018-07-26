@@ -116,7 +116,6 @@ public class MissingService {
 		if (session.getAttribute("loginId") == null) {
 			id = "비회원";
 		} else {
-			/* session.setAttribute("login", session.getAttribute("loginId")); */
 			id = (String) session.getAttribute("loginId");
 		}
 
@@ -150,6 +149,11 @@ public class MissingService {
 		dto.setMissing_loc(map.get("sido") + " " + map.get("sigundo"));
 		dto.setAnimal_idx(map.get("animal")); // 동물종
 		dto.setAnimal_type(map.get("animalType"));
+		
+		logger.info("내가선택한 동물 종 : "+map.get("animalType"));
+		
+		
+		
 		dto.setBoard_title(map.get("board_title"));
 		dto.setBoard_content(map.get("board_content"));
 		dto.setMainPhoto(map.get("main"));

@@ -396,10 +396,11 @@
 						var content = "";
 						data
 								.forEach(function(item) {
-									if (item.animalType == "${protectDetail.animal_type}") {
-										content += "<option value="+item.animalType+" selected>";
+									var selAni = item.animalType.replace(/ /gi, "");
+									if (selAni == "${missingDetail.animal_type}") {
+										content += "<option value="+selAni+" selected>";
 									} else {
-										content += "<option value="+item.animalType+">";
+										content += "<option value="+selAni+">";
 									}
 									content += item.animalType;
 									content += "</option>";
