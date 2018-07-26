@@ -294,6 +294,7 @@ input[type='text'] {
 						<center>
 							<input type="button" class="btn" id="fileUpBtn"
 								onclick="fileUp()" value="첨부" />
+							<c:set var="loginId" value="${sessionScope.loginId}"/>			
 							<c:if test="${empty loginId}">
 								<input id="pass" name="pass" type="password" placeholder="비밀번호"
 									style="height: 35px;" />
