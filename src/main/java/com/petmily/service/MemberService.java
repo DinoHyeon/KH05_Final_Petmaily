@@ -48,23 +48,29 @@ public class MemberService {
       if(success == true) {
          loginChkResult = inter.loginConfirmPage(id);
       } 
-      
-      session.setAttribute("loginId", id);
-      if(loginChkResult != null) {
-          session.setAttribute("state", loginChkResult.getMember_state());
-       }
-
-      String page = "main"; //이 부분은 수정이 필요한 테스트 코드
+      String stateChk = "";//상태체크변수
+      String page = "main"; 
       String msg = "success"; 
       String loginId = null;
       
-      if(loginChkResult == null) {
+      if(loginChkResult != null) {//로그인 정보 있을 경우
+    	  stateChk = loginChkResult.getMember_state();//상태 체크
+    	  System.out.println("뽀테스트상태"+stateChk);
+    	  if(stateChk.equals("불량회원")){//추방 사용자일 경우
+         	  System.out.println("보네-추방회원");
+         	  page="loginPage";
+         	  msg = "out";
+           }else {//추방아닌 사용자일경우
+    	  session.setAttribute("loginId", id);
+          session.setAttribute("state", stateChk);
+          loginId = (String)session.getAttribute("loginId"); 
+          System.out.println("보네-로그인됨");
+           }
+      }else if(loginChkResult == null) {//로그인 정보 안맞을 경우
+    	  System.out.println("보네-로그인정보안맞음");
          page = "loginPage";
          msg = "fail";
-      } else {
-         loginId = (String)session.getAttribute("loginId"); 
-      }
-      
+       }
       ModelAndView mav = new ModelAndView();
       mav.addObject("loginId", loginId);
       mav.addObject("msg", msg); 
@@ -338,7 +344,7 @@ public class MemberService {
    }
    
    //회원정보 자동 삭제
-   /*int min = 0;
+   int min = 0;
    @Scheduled(fixedRate=5000)
    public void loop() {
       logger.info("탈퇴확인중...");
@@ -369,15 +375,15 @@ public class MemberService {
       if(min == 12) {
          inter.deleteFinish(state);
       }
-      
-      for(int i=0; i<deleteConfirm.size(); i++) {
+      //만약 주석 풀면 7일로 설정됨(지금은 시연을 위해 짧게 기간 잡음)
+/*      for(int i=0; i<deleteConfirm.size(); i++) {
          String[] resultDate = deleteConfirm.get(i).split(" ");
          
           if(date1.compareTo(resultDate[0]) == 0){
              logger.info("7일이 경과하면 삭제처리");
           }
-      }
-   }*/
+      }*/
+   }
 
 	/////////////////////////////////////////////////////////// 소현//////////////////////////////////////////////////////////
 

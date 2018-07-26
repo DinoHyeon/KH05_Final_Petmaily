@@ -6,7 +6,7 @@
 	<!-- 로그인 체크 -->
 	<select id="loginConfirmPage" resultType="MemberDTO">
 		SELECT member_id, member_state FROM member WHERE member_id=#{param1
-		} AND (member_state='member' OR member_state='administer')
+		} AND (member_state='member' OR member_state='admin' OR member_state='불량회원')
 	</select>
 	
 	<!-- 회원가입 요청 -->

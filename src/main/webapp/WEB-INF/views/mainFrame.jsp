@@ -167,11 +167,17 @@
    <script>
       //로그인 아이디 세션체크
       var loginId = "${sessionScope.loginId}";
+      var loginState = "${sessionScope.state}"
       if(loginId!=""){
     	  console.log("세션체크",loginId);
          $("#login").attr("src","resources/mypage.jpg");
          $("#join").attr("src","resources/logout.jpg");
-         $("#cngA1").attr("href", "./memberUpdatePwConfirmPage");
+		//관리자 / 유저에 따라 마이페이지 눌렀을때 가는 페이지 다르게 해주기        
+		if(loginState=="member"){//유저
+			$("#cngA1").attr("href", "./memberUpdatePwConfirmPage");
+		}else if(loginState=="admin"){//관리자
+			$("#cngA1").attr("href", "./memberlist");
+		}
          $("#cngA2").attr("href", "./logoutPage")
       }else{
     	  console.log("로그인아이디 없음",loginId);
