@@ -55,7 +55,7 @@ td{
 #paging{
 	position: absolute;
 	top :103%;
-	left: 50%;
+	left: 43%;
 }
 
 </style>
@@ -95,8 +95,8 @@ td{
 </div>
 </body>
 <script>
-var replyIdx='${reply}';
-console.log("replyIdx",replyIdx);
+//댓글,,
+var replyIdx;
 var request;
 var reShowPageNum = 1;
 
@@ -117,11 +117,14 @@ $(document).ready(function() {
 });
 
 function replyListCall(page) {
+	console.log("page: "+page);
+	console.log("idx: "+"${reply}");
+	
 	$.ajax({
 		type : "get",
 		url : "./replyListCall",
 		data : {
-			"idx": replyIdx,
+			"idx": "${reply}",
 			"reShowPageNum":page
 		},
 		success : function(data) {
@@ -229,7 +232,7 @@ function registAjax() {
 		type : "get",
 		url : "./replyRegist",
 		data : {
-			"idx": replyIdx,
+			"idx": "${reply}",
 			"content":$("#replyContent").val(),
 			"pass":$("#noneMemberPass").val()
 		},
@@ -299,7 +302,7 @@ function replyModiForm(data) {
 	$(".content[id="+data+"]").attr("readOnly",false);
 	$(".content[id="+data+"]").attr("disabled",false);
 	$(".modi[id="+data+"]").html(" 취소 ");
-	$(".modi[id="+data+"]").attr("onclick","replyListCall()");
+	$(".modi[id="+data+"]").attr("onclick","replyListCall("+reShowPageNum+")");
 	$(".del[id="+data+"]").html(" 저장 ");
 	$(".del[id="+data+"]").attr("onclick","replyModi("+data+")");
 	$("td[class='btn']").not($("td[id="+data+"]")).css("display","none");

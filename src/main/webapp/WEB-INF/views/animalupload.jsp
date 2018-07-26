@@ -33,7 +33,7 @@
 	        content +="<img id='"+imgId+"' width='250' src='${path}'/>";
 	        elem.innerHTML += content+"<br/>";
 	        content ="";//content 초기화
-	        content +="<div='attachArea'><img width='250' src='${path}'/>";
+	        content +="<div id='attachArea'><img width='250' src='${path}'/>";
 	        content +="<input id='${path}' type='button' value='삭제' onclick='del(this)'><input type='radio' name='main' value='"+imgId+"'></div>";
 	    
 	        elem2.innerHTML += content;

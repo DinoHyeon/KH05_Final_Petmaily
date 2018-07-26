@@ -43,6 +43,8 @@ public class ReplyService {
 	public HashMap<String, Object> replyListCall(HashMap<String, String> params) {
 		inter = sqlSession.getMapper(ReplyInter.class);
 
+		logger.info(params.get("idx"));
+		
 		int allCnt = inter.getAllCnt(Integer.parseInt(params.get("idx")));
 		int pageCnt = allCnt % 15 > 0 ? Math.round(allCnt / 15) + 1 : allCnt / 15;
 		HashMap<String, Object> replyList = new HashMap<String, Object>();
