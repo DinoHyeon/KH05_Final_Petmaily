@@ -26,77 +26,77 @@
 	border-left: 1px solid gray;
 }
 
-#title{
-    position: absolute;
-    font-size: 28px;
-    font-weight: 600;
-    top: 2.5%;
-    left: 44.5%;
-}
-
-#searchTable{
+#title {
 	position: absolute;
-    width: 78%;
-    height: 15%;
-    top: 8.5%;
-    left: 11%;
-    border: 1px solid black;
-    border-collapse: collapse;
+	font-size: 28px;
+	font-weight: 600;
+	top: 2.5%;
+	left: 44.5%;
 }
 
-table,td,tr{
+#searchTable {
+	position: absolute;
+	width: 78%;
+	height: 15%;
+	top: 8.5%;
+	left: 11%;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+table, td, tr {
 	border: 1px solid black;
 	border-collapse: collapse;
 	text-align: center;
 }
 
-#searchTable th{
+#searchTable th {
 	width: 10%;
 	background-color: #02886F;
 	color: white;
 }
 
-#date{
+#date {
 	font-weight: 450;
 }
 
-.overflow{
+.overflow {
 	height: 150px;
 }
 
-#clearBtn{
+#clearBtn {
 	position: absolute;
-    left: 55%;
-    top: 25%;
-    width: 20% !important;
-    height: 3% !important;
-    font-weight: 600 !important;
+	left: 55%;
+	top: 25%;
+	width: 20% !important;
+	height: 3% !important;
+	font-weight: 600 !important;
 }
 
-#searchBtn{
+#searchBtn {
 	position: absolute;
-    left: 28%;
-    top: 25%;
-    width: 20% !important;
-    height: 3% !important;
-    font-weight: 600 !important;
+	left: 28%;
+	top: 25%;
+	width: 20% !important;
+	height: 3% !important;
+	font-weight: 600 !important;
 }
 
-#list{
-    position: absolute;
-    left: 4.9%;
-    top: 30%;
-    width: 90%;
-    height: 60%;
+#list {
+	position: absolute;
+	left: 4.9%;
+	top: 30%;
+	width: 90%;
+	height: 60%;
 }
 
-#paging{
+#paging {
 	position: absolute;
 	left: 37%;
 	top: 94.5%;
 }
 
-.animalTable{
+.animalTable {
 	float: left;
 	width: 23%;
 	height: 50%;
@@ -104,10 +104,10 @@ table,td,tr{
 	font-size: 12px;
 }
 
-.animalTable th{
-	 width: 50;
-	 height: 26;
-	 background-color: #02886F;
+.animalTable th {
+	width: 50;
+	height: 26;
+	background-color: #02886F;
 }
 
 .animalImg:hover {
@@ -124,19 +124,17 @@ table,td,tr{
 		<table id="searchTable">
 			<tr>
 				<th>날짜</th>
-				<td colspan="5" id="date">
-					<select id="start_year"><option value="">선택</option></select>년
-					<select id="start_month"><option value="" selected="selected">선택</option></select>월
-					<select id="start_day"><option value='' selected="selected">선택</option></select>일 ~ 
-					<select id="end_year"><option value="" >선택</option></select>년
-					<select id="end_month"><option value="" selected="selected">선택</option></select>월
-					<select id="end_day"><option value='' selected="selected">선택</option></select>일
-				</td>
+				<td colspan="5" id="date"><select id="start_year"><option
+							value="">선택</option></select>년 <select id="start_month"><option
+							value="" selected="selected">선택</option></select>월 <select id="start_day"><option
+							value='' selected="selected">선택</option></select>일 ~ <select id="end_year"><option
+							value="">선택</option></select>년 <select id="end_month"><option
+							value="" selected="selected">선택</option></select>월 <select id="end_day"><option
+							value='' selected="selected">선택</option></select>일</td>
 			</tr>
 			<tr>
 				<th>시/도</th>
-				<td>
-					<select id="sido">
+				<td><select id="sido">
 						<option value="">선택</option>
 						<option value="6110000">서울특별시</option>
 						<option value="6260000">부산광역시</option>
@@ -155,54 +153,42 @@ table,td,tr{
 						<option value="6470000">경상북도</option>
 						<option value="6480000">경상남도</option>
 						<option value="6500000">제주특별자치도</option>
-					</select>
-				</td>
+				</select></td>
 				<th>시/구/군</th>
-				<td>
-					<select id="sigundo">
+				<td><select id="sigundo">
 						<option value="">선택</option>
-					</select>
-				</td>
+				</select></td>
 				<th>보호센터</th>
-				<td>
-					<select id="shelter">
+				<td><select id="shelter">
 						<option value="">선택</option>
-					</select>
-				</td>
+				</select></td>
 			</tr>
 			<tr>
 				<th>축종</th>
-				<td colspan="3">
-					<select id="animal">
+				<td colspan="3"><select id="animal">
 						<option value="">선택</option>
 						<option value="417000">개</option>
 						<option value="422400">고양이</option>
 						<option value="429900">기타</option>
-					</select>
-					<select id="animalType">
+				</select> <select id="animalType">
 						<option value="">선택</option>
-					</select>					
-				</td>
+				</select></td>
 				<th>상태</th>
-				<td>
-					<select id="statement">
+				<td><select id="statement">
 						<option value="">전체</option>
 						<option value="notice">공고중</option>
 						<option value="protect">보호중</option>
-					</select>
-				</td>
+				</select></td>
 			</tr>
 		</table>
-		
+
 		<button id="clearBtn">초기화</button>
 		<button id="searchBtn">검색</button>
 
-		<div id="list">
-			
-		</div>
+		<div id="list"></div>
 		<div id="paging"></div>
 	</div>
-	
+
 </body>
 <script>
 var showPageNum = 1;

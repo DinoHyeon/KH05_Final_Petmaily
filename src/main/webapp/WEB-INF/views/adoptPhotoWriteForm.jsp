@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-		<title>입양후기 사진 업로더</title>
-	</head>
-	<body>
-		<form id="adoptPhotoWrite" action="./adoptPhotoWrite" method="post" enctype="multipart/form-data">
-			<input type="file" name="file" onchange="adoptPhotoWrite(this)"/>
-		</form>
-	</body>
-	<script>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<title>입양후기 사진 업로더</title>
+</head>
+<body>
+	<form id="adoptPhotoWrite" action="./adoptPhotoWrite" method="post"
+		enctype="multipart/form-data">
+		<input type="file" name="file" onchange="adoptPhotoWrite(this)" />
+	</form>
+</body>
+<script>
 		function adoptPhotoWrite(photoEvt){
 			var thumbext = photoEvt.value; //파일을 추가한 input 박스의 값
 

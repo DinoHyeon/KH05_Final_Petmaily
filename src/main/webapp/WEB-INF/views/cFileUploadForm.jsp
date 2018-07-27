@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="icon" href="resources/icon.jpg"/>
-		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<title>커뮤니티 파일 업로드</title>		
-		<style></style>
-	</head>
-	<body>
-		<form id="cFileUpload" action="cFileUpload" method="post" enctype="multipart/form-data">
-			<input type="file" name="file" onchange="cFileUpload(this)"/>
-		</form>
-	</body>
-	<script>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="icon" href="resources/icon.jpg" />
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<title>커뮤니티 파일 업로드</title>
+<style></style>
+</head>
+<body>
+	<form id="cFileUpload" action="cFileUpload" method="post"
+		enctype="multipart/form-data">
+		<input type="file" name="file" onchange="cFileUpload(this)" />
+	</form>
+</body>
+<script>
 		function cFileUpload(photoEvt) {
 			var thumbext = photoEvt.value; //파일을 추가한 input 박스의 값
 			thumbext = thumbext.slice(thumbext.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로

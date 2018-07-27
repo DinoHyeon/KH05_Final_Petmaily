@@ -11,12 +11,12 @@
 <title>퀴즈 수정 페이지</title>
 <style>
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 95%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 95%;
+	background: white;
 }
 
 #sideFrame {
@@ -103,8 +103,8 @@
 <body>
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
-   <jsp:include page="sideMenu.jsp" />
-   <div id="contentFrame">
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
 		<div id="quiz">
 			<div id=title>
 				<h1>퀴즈 수정</h1>
@@ -113,14 +113,15 @@
 			<table>
 				<form id="update" action="quizUpdate">
 					<tr>
-						<th style="width:15%">동물</th>
-						<td style="width:35%"><select id="aniamlList" name="aniamlList">
+						<th style="width: 15%">동물</th>
+						<td style="width: 35%"><select id="aniamlList"
+							name="aniamlList">
 								<option value="강아지">강아지</option>
 								<option value="고양이">고양이</option>
 								<option value="기타">기타</option>
 						</select></td>
-						<th style="width:15%">주제</th>
-						<td style="width:35%"><select id="category" name="category">
+						<th style="width: 15%">주제</th>
+						<td style="width: 35%"><select id="category" name="category">
 								<option value="건강">건강</option>
 								<option value="음식">음식</option>
 								<option value="습성">습성</option>

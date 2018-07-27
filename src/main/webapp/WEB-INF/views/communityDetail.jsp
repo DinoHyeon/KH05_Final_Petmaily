@@ -7,12 +7,12 @@
 <title>커뮤니티 글 상세보기</title>
 <style>
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 95%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 95%;
+	background: white;
 }
 
 #sideFrame {
@@ -115,62 +115,62 @@
 	color: white;
 	cursor: pointer;
 }
-#conDiv input[type='button']{
-border-radius: 5px;
+
+#conDiv input[type='button'] {
+	border-radius: 5px;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
-		<div id="sideFrame"></div>
-   <jsp:include page="sideMenu.jsp" />
-   <div id="contentFrame">
-	<!-- 내용시작 -->
-	<div id="conDiv">
-		<h1>커뮤니티 상세 페이지</h1>
-		<input type="hidden" id="board_idx" value="${cDetail.board_idx}" />
-		<table id="detailTable" style="border: 1px solid gray">
-			<tr class="littleTr">
-				<th style="width: 100px">작성자</th>
-				<td class="littleTd" style="width: 500px">${cDetail.board_writer}</td>
-				<th style="width: 100px">작성일</th>
-				<td>${cDetail.board_regDate}</td>
-			</tr>
-			<tr class="littleTr">
-				<th style="width: 100px">제 목</th>
-				<td class="littleTd" style="width: 500px">${cDetail.board_title}</td>
-				<th style="width: 100px">조회수</th>
-				<td>${cDetail.board_hit}</td>
-			</tr>
-			<tr>
-				<th colspan=4 style="width: 1000px; border: 1px solid gray;">내
-					용</th>
-			</tr>
-			<tr>
-				<td colspan=4 style="text-align: left; border: 1px solid gray; height:450px;">
-					${cDetail.board_content}</td>
-			</tr>
-			<tr>
-				<td colspan=4 style="text-align: right"><input type="button"
-					id="upBtn"
-					onclick="location.href='./communityUpdateForm?board_idx=${cDetail.board_idx}'"
-					value="수정" /> <input type="button" id="delBtn"
-					onclick="communityDel()" value="삭제" /> <input type="button"
-					id="listBtn" value="글 목록" onclick="location.href='./communityMain'" />
-				</td>
-			</tr>
-			<tbody>
+	<div id="sideFrame"></div>
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
+		<!-- 내용시작 -->
+		<div id="conDiv">
+			<h1>커뮤니티 상세 페이지</h1>
+			<input type="hidden" id="board_idx" value="${cDetail.board_idx}" />
+			<table id="detailTable" style="border: 1px solid gray">
+				<tr class="littleTr">
+					<th style="width: 100px">작성자</th>
+					<td class="littleTd" style="width: 500px">${cDetail.board_writer}</td>
+					<th style="width: 100px">작성일</th>
+					<td>${cDetail.board_regDate}</td>
+				</tr>
+				<tr class="littleTr">
+					<th style="width: 100px">제 목</th>
+					<td class="littleTd" style="width: 500px">${cDetail.board_title}</td>
+					<th style="width: 100px">조회수</th>
+					<td>${cDetail.board_hit}</td>
+				</tr>
 				<tr>
-			<td>	<jsp:include page="reply.jsp"/>
-			</td>
-			</tr>
-			</tbody>
-		</table>
-	</div>
+					<th colspan=4 style="width: 1000px; border: 1px solid gray;">내
+						용</th>
+				</tr>
+				<tr>
+					<td colspan=4
+						style="text-align: left; border: 1px solid gray; height: 450px;">
+						${cDetail.board_content}</td>
+				</tr>
+				<tr>
+					<td colspan=4 style="text-align: right"><input type="button"
+						id="upBtn"
+						onclick="location.href='./communityUpdateForm?board_idx=${cDetail.board_idx}'"
+						value="수정" /> <input type="button" id="delBtn"
+						onclick="communityDel()" value="삭제" /> <input type="button"
+						id="listBtn" value="글 목록"
+						onclick="location.href='./communityMain'" /></td>
+				</tr>
+				<tbody>
+					<tr>
+						<td><jsp:include page="reply.jsp" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </body>
 <script>
-
 	var menuName = {
 		'보호소센터 찾기' : 'searchShelter',
 		'퀴즈' : 'quizSetting',
@@ -204,14 +204,14 @@ border-radius: 5px;
 	};
 
 	//로그인 아이디 체크 -> 버튼 활성화/비활성화
-	 var loginId = "${sessionScope.loginId}";
-	 console.log("커뮤니티 상세보기 - 로그인아이디", loginId);
-	 if (loginId == "${cDetail.board_writer}") {
-	 console.log("글작성자 확인, 수정+삭제버튼 활성화");
-	 } else {
-	 $("#updateBtn").hide();
-	 $("#delBtn").hide();
-	 } 
+	var loginId = "${sessionScope.loginId}";
+	console.log("커뮤니티 상세보기 - 로그인아이디", loginId);
+	if (loginId == "${cDetail.board_writer}") {
+		console.log("글작성자 확인, 수정+삭제버튼 활성화");
+	} else {
+		$("#updateBtn").hide();
+		$("#delBtn").hide();
+	}
 	//삭제 요청
 	function communityDel() {
 		var cDel = confirm("커뮤니티 게시글을 삭제하시겠습니까?");

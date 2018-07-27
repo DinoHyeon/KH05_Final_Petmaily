@@ -24,96 +24,97 @@ import com.petmily.dao.memberDAO.MemberInter;
 @Controller
 public class MailController {
 
-   @Autowired
-   private JavaMailSender mailSender;
+	@Autowired
+	private JavaMailSender mailSender;
 
-   MemberInter inter;
+	MemberInter inter;
 
-   @Autowired
-   SqlSession sqlSession;
+	@Autowired
+	SqlSession sqlSession;
 
-   private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-   /* 회원가입 인증 메일 발송 */
-   @RequestMapping(value = "/joinEmailSendPage")
-   @ResponseBody
-   public Map<Object, Object> mailSending(@RequestBody String email, HttpSession session) {
-      logger.info("회원가입 인증 메일 발송");
+	/* 회원가입 인증 메일 발송 */
+	@RequestMapping(value = "/joinEmailSendPage")
+	@ResponseBody
+	public Map<Object, Object> mailSending(@RequestBody String email, HttpSession session) {
+		logger.info("회원가입 인증 메일 발송");
 
-      int confirmNum = new Random().nextInt(100000) + 10000;
+		int confirmNum = new Random().nextInt(100000) + 10000;
 
-      String ranResult = Integer.toString(confirmNum);
+		String ranResult = Integer.toString(confirmNum);
 
-      session.setAttribute("emailConfirmNum", ranResult);
+		session.setAttribute("emailConfirmNum", ranResult);
 
-      String msg = null;
+		String msg = null;
 
-      try {
-         MimeMessage message = mailSender.createMimeMessage();
-         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-         messageHelper.setFrom("doecc336@gmail.com");
-         messageHelper.setTo(email);
-         messageHelper.setSubject("petMily 회원가입 인증번호 발송");
-         messageHelper.setText("인증번호: " + ranResult);
+			messageHelper.setFrom("doecc336@gmail.com");
+			messageHelper.setTo(email);
+			messageHelper.setSubject("petMily 회원가입 인증번호 발송");
+			messageHelper.setText("인증번호: " + ranResult);
 
-         mailSender.send(message);
+			mailSender.send(message);
 
-         msg = "인증번호를 발송했습니다.";
-      } catch (Exception e) {
-         System.out.println(e);
-         msg = "인증번호 발송에 실패했습니다.";
-      }
+			msg = "인증번호를 발송했습니다.";
+		} catch (Exception e) {
+			System.out.println(e);
+			msg = "인증번호 발송에 실패했습니다.";
+		}
 
-      Map<Object, Object> map = new HashMap<Object, Object>();
-      map.put("msg", msg);
-      return map;
-   }
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("msg", msg);
+		return map;
+	}
 
-   /* 비밀번호 찾기 인증 메일 발송 */
-   @RequestMapping(value = "/pwSearchEmailSendPage")
-   
-   public @ResponseBody Map<Object, Object> pwSearchEmailSendPage(@RequestParam HashMap<String, String> params, HttpSession session) {
-      
-      String email = params.get("email");
-      String id = params.get("id");
-      
-      logger.info("비밀번호 인증 메일 발송");
+	/* 비밀번호 찾기 인증 메일 발송 */
+	@RequestMapping(value = "/pwSearchEmailSendPage")
 
-      inter = sqlSession.getMapper(MemberInter.class);
+	public @ResponseBody Map<Object, Object> pwSearchEmailSendPage(@RequestParam HashMap<String, String> params,
+			HttpSession session) {
 
-      String result = inter.ChkPwEmail(id, email);
+		String email = params.get("email");
+		String id = params.get("id");
 
-      int pwSearchNum = new Random().nextInt(100000) + 10000;
+		logger.info("비밀번호 인증 메일 발송");
 
-      String pwSearchResult = Integer.toString(pwSearchNum);
+		inter = sqlSession.getMapper(MemberInter.class);
 
-      session.setAttribute("pwSearchConfirmNum", pwSearchResult);
+		String result = inter.ChkPwEmail(id, email);
 
-      String msg = "존재하지 않는 아이디 입니다.";
+		int pwSearchNum = new Random().nextInt(100000) + 10000;
 
-      if (result != null) {
-         try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+		String pwSearchResult = Integer.toString(pwSearchNum);
 
-            messageHelper.setFrom("doecc336@gmail.com");
-            messageHelper.setTo(email);
-            messageHelper.setSubject("petMily 비밀번호 찾기 인증번호 발송");
-            messageHelper.setText("인증번호: " + pwSearchNum);
+		session.setAttribute("pwSearchConfirmNum", pwSearchResult);
 
-            mailSender.send(message);
+		String msg = "존재하지 않는 아이디 입니다.";
 
-            msg = "인증번호를 발송했습니다.";
-         } catch (Exception e) {
-            System.out.println(e);
+		if (result != null) {
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-            msg = "인증번호 발송에 실패했습니다.";
-         }
-      }
+				messageHelper.setFrom("doecc336@gmail.com");
+				messageHelper.setTo(email);
+				messageHelper.setSubject("petMily 비밀번호 찾기 인증번호 발송");
+				messageHelper.setText("인증번호: " + pwSearchNum);
 
-      Map<Object, Object> map = new HashMap<Object, Object>();
-      map.put("msg", msg);
-      return map;
-   }
+				mailSender.send(message);
+
+				msg = "인증번호를 발송했습니다.";
+			} catch (Exception e) {
+				System.out.println(e);
+
+				msg = "인증번호 발송에 실패했습니다.";
+			}
+		}
+
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("msg", msg);
+		return map;
+	}
 }

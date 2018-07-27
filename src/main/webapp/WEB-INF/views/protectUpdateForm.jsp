@@ -296,7 +296,8 @@
 			content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
 			content += key;
 			content += "</div>";
-		};
+		}
+		;
 
 		$("#sideMenu").empty();
 		$("#sideMenu").append(content);
@@ -331,16 +332,19 @@
 		//object 에서 키추출 -> 키에 따른 값을 추출
 		//키를 이용해 값을 하나씩 뽑아내기
 		var content = "";
-		Object.keys(fileMap).forEach(function(item) {
-			content += "<div id='attachArea'>"
-			content += "<img width='15px' src='resources/upload/"+item+"'/>";
-			if (mainPhoto == item) {
-				content += "<input type='radio' name='main' value='"+item+"' checked>";
-			} else {
-				content += "<input type='radio' name='main' value='"+item+"'>";
-			}
-			content += "</div>"
-		});
+		Object
+				.keys(fileMap)
+				.forEach(
+						function(item) {
+							content += "<div id='attachArea'>"
+							content += "<img width='15px' src='resources/upload/"+item+"'/>";
+							if (mainPhoto == item) {
+								content += "<input type='radio' name='main' value='"+item+"' checked>";
+							} else {
+								content += "<input type='radio' name='main' value='"+item+"'>";
+							}
+							content += "</div>"
+						});
 		$("#attach").append(content);
 
 	} else {
@@ -381,34 +385,32 @@
 
 	//동물종&품종 값 가져오기
 	function getAnimalType() {
-		$
-				.ajax({
-					"url" : "./getAnimalType",
-					"type" : "get",
-					"data" : {
-						"animalCode" : $("#animal option:selected").val()
-					},
-					"success" : function(data) {
-						console.log(data);
-						var content = "";
-						data
-								.forEach(function(item) {
-									var selAni = item.animalType.replace(/ /gi, "");
-									if (selAni == "${missingDetail.animal_type}") {
-										content += "<option value="+selAni+" selected>";
-									} else {
-										content += "<option value="+selAni+">";
-									}
-									content += item.animalType;
-									content += "</option>";
-								})
-						$("#animalType").empty();
-						$("#animalType").append(content);
-					},
-					"error" : function(x, o, e) {
-						alert(x.status + ":" + o + ":" + e);
+		$.ajax({
+			"url" : "./getAnimalType",
+			"type" : "get",
+			"data" : {
+				"animalCode" : $("#animal option:selected").val()
+			},
+			"success" : function(data) {
+				console.log(data);
+				var content = "";
+				data.forEach(function(item) {
+					var selAni = item.animalType.replace(/ /gi, "");
+					if (selAni == "${missingDetail.animal_type}") {
+						content += "<option value="+selAni+" selected>";
+					} else {
+						content += "<option value="+selAni+">";
 					}
-				});
+					content += item.animalType;
+					content += "</option>";
+				})
+				$("#animalType").empty();
+				$("#animalType").append(content);
+			},
+			"error" : function(x, o, e) {
+				alert(x.status + ":" + o + ":" + e);
+			}
+		});
 	}
 
 	//파일 업로드 창
@@ -489,11 +491,7 @@
 							alert("대표이미지를 선택해 주세요.");
 						} else {
 							$("#editable input[type='button']").remove();//삭제 버튼 제거
-							$("input[name='mainPhoto']")
-									.val(
-											$(
-													"input:radio[name='main']:checked")
-													.val());
+							$("input[name='mainPhoto']").val($("input:radio[name='main']:checked").val());
 							$("#attach input[type='radio']").remove();//체크박스 버튼 제거
 							$("#contentForm").val($("#editable").html());//div 내용을 hidden 에 담기
 							$("#location").val(

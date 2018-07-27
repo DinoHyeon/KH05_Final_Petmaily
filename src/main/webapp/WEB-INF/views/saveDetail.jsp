@@ -10,22 +10,22 @@
 <title>구조 후기 상세보기 페이지</title>
 <style>
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 150%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 150%;
+	background: white;
 }
 
-#sideFrame{
-    position: absolute;
-    left: 0.52%;
-    top: 12.4%;
-    width: 14.7%;
-    height: 150%;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 /* 타이틀 */
 #title h1 {
@@ -151,10 +151,9 @@
 #replyTable {
 	width: 1000px;
 	top: 70%;
-	left : 7.1%;
+	left: 7.1%;
 	position: absolute;
 }
-
 
 .btn {
 	top: 90%;
@@ -167,30 +166,29 @@
 	color: white;
 	cursor: pointer;
 }
-
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
-<jsp:include page="sideMenu.jsp" />
-<div id="contentFrame">
-	<div class="adopt">
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
+		<div class="adopt">
 
-		<div id=title>
-			<h1>구조 후기 글 보기</h1>
-			<h5>회원님들이 작성한 구조 후기 입니다</h5>
-		</div>
+			<div id=title>
+				<h1>구조 후기 글 보기</h1>
+				<h5>회원님들이 작성한 구조 후기 입니다</h5>
+			</div>
 
-		<table id="selectTable">
-			<tr>
-				<th colspan=2 style="width: 1000px">분류</th>
-			</tr>
-			<tr>
-				<td class=tap>지역</td>
-				<td style="font-weight: 300">${boardSaveDetail.save_loc1}
-					${boardSaveDetail.save_loc2}</td>
-			</tr>
+			<table id="selectTable">
+				<tr>
+					<th colspan=2 style="width: 1000px">분류</th>
+				</tr>
+				<tr>
+					<td class=tap>지역</td>
+					<td style="font-weight: 300">${boardSaveDetail.save_loc1}
+						${boardSaveDetail.save_loc2}</td>
+				</tr>
 			</table>
 			<table id="writeTable">
 				<input type="hidden" id="board_idx" value="${sDetail.board_idx}" />
@@ -237,19 +235,18 @@
 					</td>
 				</tr>
 				<tbody>
-				<tr>
-			<td>	<jsp:include page="reply.jsp"/>
-			</td>
-			</tr>
+					<tr>
+						<td><jsp:include page="reply.jsp" /></td>
+					</tr>
 				</tbody>
 			</table>
-<!-- 			<table id="replyTable">
+			<!-- 			<table id="replyTable">
 				<tbody>
 				
 			</tbody>
 			</table> -->
-			</div>
-			</div>
+		</div>
+	</div>
 </body>
 <script>
 	var menuName = {'구조후기':'saveMain', '모금':'fundMain'};

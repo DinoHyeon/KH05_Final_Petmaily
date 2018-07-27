@@ -235,54 +235,56 @@
 					</tr>
 				</tbody>
 			</table>
-			<jsp:include page="reply.jsp"/>
+			<jsp:include page="reply.jsp" />
 		</div>
 	</div>
 </body>
 <script>
-	
-var menuName = {'유기동물공고':'animalNotice', '입양후기':'adoptMain'};
+	var menuName = {
+		'유기동물공고' : 'animalNotice',
+		'입양후기' : 'adoptMain'
+	};
 	var oriName = '${aDetailPhoto}';
 	var del = $("#board_idx").val();
-	
+
 	$(document).ready(function() {
 		var content = "";
-		for(var key in menuName){
+		for ( var key in menuName) {
 			console.log(key);
 			content += "<div class='menuName'";
 			content += "style='"
-			if(key=='입양후기'){
+			if (key == '입양후기') {
 				content += "background:#28977B;color:white;font-weight: 600;";
 			}
 			content += "cursor: pointer'";
-			content += "onclick='pageMove(this)' id="+menuName[key]+">";
+			content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
 			content += key;
 			content += "</div>";
-		};	
-		
+		}
+		;
+
 		$("#sideMenu").empty();
 		$("#sideMenu").append(content);
-		});
-	
+	});
+
 	function pageMove(e) {
 		console.log($(e).attr("id"));
-		location.href="./"+$(e).attr("id");
+		location.href = "./" + $(e).attr("id");
 	};
-	
+
 	//파일명에 넣을 수 없는 \기호를 사용
-	var newStr = oriName.replace( /a\a/gi, "<br/>");
+	var newStr = oriName.replace(/a\a/gi, "<br/>");
 	$("#photoTd").html(newStr);
 
 	function adoptDel() {
 		var aDel = confirm("입양후기 게시글을 삭제하시겠습니까?");
-		   if (aDel) {
-			      alert("삭제 되었습니다.");
-			      location.href='./adoptDelete?board_idx=${aDetail.board_idx}';
-			      
-			   }
-			   else {
-			      alert("삭제가 취소되었습니다.");
-			   }
+		if (aDel) {
+			alert("삭제 되었습니다.");
+			location.href = './adoptDelete?board_idx=${aDetail.board_idx}';
+
+		} else {
+			alert("삭제가 취소되었습니다.");
+		}
 	}
-	</script>
+</script>
 </html>

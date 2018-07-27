@@ -15,35 +15,35 @@
 <style>
 /* 타이틀 */
 #title h1 {
-    top: -2%;
-    left: 45%;
-    margin: 50px 0px 25px 0px;
-    text-align: center;
-    color: #28977B;
-    font-weight: 700;
-    font-size: 30;
-    position: absolute;
+	top: -2%;
+	left: 45%;
+	margin: 50px 0px 25px 0px;
+	text-align: center;
+	color: #28977B;
+	font-weight: 700;
+	font-size: 30;
+	position: absolute;
 }
 
 #title h5 {
-    top: 22%;
-    left: 53%;
-    margin: 10px 0px 40px 0px;
-    text-align: right;
-    color: black;
-    font-weight: 700;
-    font-size: 10;
-    position: absolute;
+	top: 22%;
+	left: 53%;
+	margin: 10px 0px 40px 0px;
+	text-align: right;
+	color: black;
+	font-weight: 700;
+	font-size: 10;
+	position: absolute;
 }
 
 /* 셀렉트박스 테이블 */
 .adopt  #selectTable {
 	top: 11.5%;
-    left: 11%;
-    padding: 1px 1px 1px 1px;
-    margin: 25px auto auto auto;
-    position: absolute;
-    float: left;
+	left: 11%;
+	padding: 1px 1px 1px 1px;
+	margin: 25px auto auto auto;
+	position: absolute;
+	float: left;
 }
 
 .tap {
@@ -87,13 +87,13 @@
 
 /* 글 작성 테이블 */
 .adopt #writeTable {
-    top: 31%;
-    left: 10.6%;
-    width: 1000px;
-    margin: 0px 5px 5px 5px;
-    border-collapse: collapse;
-    padding: 5px 10px;
-    position: absolute;
+	top: 31%;
+	left: 10.6%;
+	width: 1000px;
+	margin: 0px 5px 5px 5px;
+	border-collapse: collapse;
+	padding: 5px 10px;
+	position: absolute;
 }
 
 #writeTable input[type='text'] {
@@ -130,21 +130,21 @@
 }
 /* 업로드 테이블 */
 .adopt #uploadTable {
-    top: 75%;
-    left: 10.6%;
-    border: 1px solid lightgray;
-    width: 1000px;
-    height: 150px;
-    margin: 50px 5px 100px 5px;
-    border-collapse: collapse;
-    padding: 5px 10px;
-    position: absolute;
+	top: 75%;
+	left: 10.6%;
+	border: 1px solid lightgray;
+	width: 1000px;
+	height: 150px;
+	margin: 50px 5px 100px 5px;
+	border-collapse: collapse;
+	padding: 5px 10px;
+	position: absolute;
 }
 
 #btnTable {
-    left: 72%;
-    top: 105%;
-    position: absolute;
+	left: 72%;
+	top: 105%;
+	position: absolute;
 }
 
 .btn {
@@ -174,24 +174,23 @@
 }
 
 #sideFrame {
-position: absolute;
-    left: 0.52%;
-    top: 12.4%;
-    width: 14.7%;
-    height: 116%;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 116%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 
 .adopt {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 95%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 95%;
+	background: white;
 }
-
 </style>
 <body>
 	<jsp:include page="mainFrame.jsp" />

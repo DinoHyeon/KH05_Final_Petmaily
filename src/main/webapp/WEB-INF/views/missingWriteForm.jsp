@@ -124,7 +124,7 @@
 
 #btnTable {
 	left: 62%;
-    top: 92%;
+	top: 92%;
 	position: absolute;
 	margin: auto auto 50px auto;
 }
@@ -242,18 +242,15 @@ input[type='text'] {
 				</tr>
 				<tr>
 					<td class="tap">동물</td>
-					<td>
-						<select id="animal" onchange="getAnimalType()">
+					<td><select id="animal" onchange="getAnimalType()">
 							<option value="">선택</option>
 							<option value="417000">개</option>
 							<option value="422400">고양이</option>
 							<option value="429900">기타</option>
 							<input type="hidden" id="selectAnimal" name="animal">
-					</select> 
-					<select id="animalType" name="animalType">
+					</select> <select id="animalType" name="animalType">
 							<option value="">선택</option>
-					</select>
-					</td>
+					</select></td>
 				</tr>
 			</table>
 
@@ -266,7 +263,7 @@ input[type='text'] {
 
 				<tr>
 					<th style="width: 100px">제목</th>
-					<td><input type="text" name="board_title" id="bTitle"/></td>
+					<td><input type="text" name="board_title" id="bTitle" /></td>
 				</tr>
 				<tr>
 					<th colspan="2" style="width: 1000px">내 용</th>
@@ -283,7 +280,9 @@ input[type='text'] {
 				</tr>
 				<tr>
 					<td colspan="3" style="height: 150px; border: 1px solid lightgray;">
-						<div id="attach"><h4>이미지 파일만 등록해 주세요.</h4></div>
+						<div id="attach">
+							<h4>이미지 파일만 등록해 주세요.</h4>
+						</div>
 					</td>
 				</tr>
 
@@ -294,7 +293,7 @@ input[type='text'] {
 						<center>
 							<input type="button" class="btn" id="fileUpBtn"
 								onclick="fileUp()" value="첨부" />
-							<c:set var="loginId" value="${sessionScope.loginId}"/>			
+							<c:set var="loginId" value="${sessionScope.loginId}" />
 							<c:if test="${empty loginId}">
 								<input id="pass" name="pass" type="password" placeholder="비밀번호"
 									style="height: 35px;" />

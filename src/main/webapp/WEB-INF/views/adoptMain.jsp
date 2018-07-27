@@ -37,7 +37,7 @@
 
 /* 셀렉트박스 테이블 */
 .adopt  #selectTable {
-	top:  16.7%;
+	top: 16.7%;
 	left: 25%;
 	height: 50px;
 	margine: 10px 40px 10px 40px;
@@ -170,7 +170,7 @@
 	left: 15.52%;
 	top: 12.5%;
 	width: 82.95%;
-    height: 107%;
+	height: 107%;
 	background: white;
 }
 
@@ -179,7 +179,7 @@
 	left: 0.52%;
 	top: 12.4%;
 	width: 14.7%;
-    height: 107%;
+	height: 107%;
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
 }
@@ -347,17 +347,6 @@
 		var start = 1;
 		var end = 5;
 		var content = "";
-		
-		
-/* 		//이전
-		if(currPage >5){			
-			//end = currPage + 4; <- 이경우 페이지 변화 시 마다 페이징이 이동
-			//우리가 원하는 것은 5단위로 움직일때 새로운 페이징 생성
-			end = Math.ceil(currPage/5)*5;//6,11,16 씩 대입 해 보자
-			start = end - 4;
-			content += " <a href='#' onclick='listCall("+(start-1)+")'>"
-			+"이전</a> | ";
-		} */
 				
 		for(var i=start; i<=end;i++){			
 			if(i <=range){//i는 절대 생성 가능 페이지보다 크면 안된다.

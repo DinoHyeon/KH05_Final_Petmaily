@@ -110,7 +110,6 @@ public class CommunityService {
 		} finally {
 			map.put("success", success);
 		}
-		// fileList.clear(); 문제되는지 다시 확인
 		return map;
 	}
 

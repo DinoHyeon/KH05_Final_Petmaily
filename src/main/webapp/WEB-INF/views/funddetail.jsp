@@ -32,14 +32,14 @@
 	background: white;
 }
 
-#sideFrame{
-    position: absolute;
-    left: 0.52%;
-    top: 12.4%;
-    width: 14.7%;
-    height: 280%;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 280%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 
 #conDiv {
@@ -85,7 +85,7 @@
 
 #detailTable input[type='text'] {
 	width: 87%;
-    height: 30px;
+	height: 30px;
 }
 
 #detailTable textarea {
@@ -133,7 +133,6 @@
 	color: white;
 	cursor: pointer;
 }
-
 </style>
 </head>
 <body>
@@ -157,11 +156,11 @@
 				<td>${dto.board_hit}</td>
 			</tr>
 			<tr class="littleTr">
-            <th style="width: 100px">지역</th>
-            <td class="littleTd" style="width: 500px">${dto.fund_area}</td>
-            <th style="width: 100px">병원 정보</th>
-            <td class="littleTd" style="width: 500px">${dto.fund_centerName}</td>
-            </tr>
+				<th style="width: 100px">지역</th>
+				<td class="littleTd" style="width: 500px">${dto.fund_area}</td>
+				<th style="width: 100px">병원 정보</th>
+				<td class="littleTd" style="width: 500px">${dto.fund_centerName}</td>
+			</tr>
 			<tr>
 				<th colspan=4 style="width: 1000px; border: 1px solid gray;">내
 					용</th>
@@ -178,17 +177,11 @@
 			</tr>
 			<tbody>
 				<tr>
-					<td><jsp:include page="reply.jsp"/></td>
+					<td><jsp:include page="reply.jsp" /></td>
 				</tr>
 			</tbody>
-			
-
-
-
 		</table>
 	</div>
-	
-
 
 </body>
 <script>
@@ -207,7 +200,6 @@
 	 $("#fdel").hide();
 	 } 
 	
-
 	$(document).ready(function() {
 		var content = "";
 		for ( var key in menuName) {

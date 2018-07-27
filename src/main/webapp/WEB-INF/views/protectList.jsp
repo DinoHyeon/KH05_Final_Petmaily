@@ -77,46 +77,44 @@ table, tr, td {
 #bTitle {
 	text-align: center;
 }
-#protectbtn{
-position:relative;
-left:42%;
-top:30%;
 
-
-
+#protectbtn {
+	position: relative;
+	left: 42%;
+	top: 30%;
 }
-#searchArea input[type='text']{
-	position:absolute;
-	width:40%;
-	top:14%;
-	left:89%;
-	height:80%;
-}	
-		
 
-#contentFrame input[type='button']{
-	width:80px;
+#searchArea input[type='text'] {
+	position: absolute;
+	width: 40%;
+	top: 14%;
+	left: 89%;
+	height: 80%;
+}
+
+#contentFrame input[type='button'] {
+	width: 80px;
 	height: 40px;
 	background-color: #28977B;
-	border-color:#28977B;
-	border-style:solid;
+	border-color: #28977B;
+	border-style: solid;
 	font-weight: 600;
 	color: white;
 	cursor: pointer;
+}
 
-}					
-
-
-#searchArea select { 
-	width: 150px; /* 원하는 너비설정 */ 
-	padding: .8em .5em; /* 여백으로 높이 설정 */ 
-	font-family: inherit; /* 폰트 상속 */ 
-	background: url(resources/arrowIcon.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
-	border: 1px solid #999; border-radius: 0px; /* iOS 둥근모서리 제거 */ 
-	-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
-	-moz-appearance: none; 
-	appearance: none; 
-	left:30%;
+#searchArea select {
+	width: 150px; /* 원하는 너비설정 */
+	padding: .8em .5em; /* 여백으로 높이 설정 */
+	font-family: inherit; /* 폰트 상속 */
+	background: url(resources/arrowIcon.jpg) no-repeat 95% 50%;
+	/* 네이티브 화살표 대체 */
+	border: 1px solid #999;
+	border-radius: 0px; /* iOS 둥근모서리 제거 */
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+	left: 30%;
 }
 </style>
 </head>
@@ -126,7 +124,7 @@ top:30%;
 	<jsp:include page="sideMenu.jsp" />
 	<div id="contentFrame">
 		<h2 id="aaa">보호 게시판</h2>
-		
+
 		<!-- 지역 -->
 		<div id="searchArea">
 			<select id="sido" onchange="getSigungu()">
@@ -162,7 +160,8 @@ top:30%;
 			<!-- 품종 -->
 			<select id="animalType" name="animalType">
 			</select> <input type="text" id="keyWord" placeholder="검색어를 입력해주세요." /> <input
-				type="button" onclick="listCall(showPageNum)" value="검색" id="protectbtn"/>
+				type="button" onclick="listCall(showPageNum)" value="검색"
+				id="protectbtn" />
 		</div>
 
 		<div class="list"></div>
@@ -171,136 +170,146 @@ top:30%;
 	</div>
 </body>
 <script>
-var showPageNum=1;//현재 내가 보는 페이지
-var menuName = {'실종':'missingList', '보호':'protectList'};
+	var showPageNum = 1;//현재 내가 보는 페이지
+	var menuName = {
+		'실종' : 'missingList',
+		'보호' : 'protectList'
+	};
 
-$(document).ready(function() {
-	var content = "";
-	for(var key in menuName){
-		console.log(key);
-		content += "<div class='menuName'";
-		content += "style='"
-		if(key=='보호'){
-			content += "background:#28977B;color:white;font-weight: 600;";
+	$(document).ready(function() {
+		var content = "";
+		for ( var key in menuName) {
+			console.log(key);
+			content += "<div class='menuName'";
+			content += "style='"
+			if (key == '보호') {
+				content += "background:#28977B;color:white;font-weight: 600;";
+			}
+			content += "cursor: pointer'";
+			content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
+			content += key;
+			content += "</div>";
 		}
-		content += "cursor: pointer'";
-		content += "onclick='pageMove(this)' id="+menuName[key]+">";
-		content += key;
-		content += "</div>";
-	};	
-	
-	$("#sideMenu").empty();
-	$("#sideMenu").append(content);
-	listCall(showPageNum);
-});
+		;
 
-function pageMove(e) {
-	console.log($(e).attr("id"));
-	location.href="./"+$(e).attr("id");
-};
-
-function listCall(page){ //page -> showPageNum
-	$.ajax({
-		type : "get",
-		url : "./getProtectList",
-		data : {
-			"sido" : $("#sido option:selected").html(),
-			"sigundo" : $("#sigundo").val(),
-			"animal" : $("#animal option:selected").html(),
-			"animalType" :$("#animalType").val(),
-			"keyWord" : $("#keyWord").val(),
-			"showPageNum" : page
-		},
-		success : function(data) {
-			listPrint(data);
-			console.log(data);
-		},
-		error : function(e) {
-			console.log(e);
-		}
+		$("#sideMenu").empty();
+		$("#sideMenu").append(content);
+		listCall(showPageNum);
 	});
-}
 
+	function pageMove(e) {
+		console.log($(e).attr("id"));
+		location.href = "./" + $(e).attr("id");
+	};
 
+	function listCall(page) { //page -> showPageNum
+		$.ajax({
+			type : "get",
+			url : "./getProtectList",
+			data : {
+				"sido" : $("#sido option:selected").html(),
+				"sigundo" : $("#sigundo").val(),
+				"animal" : $("#animal option:selected").html(),
+				"animalType" : $("#animalType").val(),
+				"keyWord" : $("#keyWord").val(),
+				"showPageNum" : page
+			},
+			success : function(data) {
+				listPrint(data);
+				console.log(data);
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+	}
 
-function listPrint(data){
-	var content = "";
-	data.list.forEach(function(item){
-		content += "<table>";
-		content += "<tr>";
-		content += "<td id='bIdx' style='background:#28977B; color:white'>"+item.board_idx+"</td>";
-		content += "<td id='bTitle' style='background:#A5DE9F; color:white'><a href='protectDetail?board_idx="+item.board_idx+"'>"+item.board_title+"</a></td>";
-		content += "</tr>";
-		content += "<tr>";
-		content += "<td colspan='2'><img width='290' height='300' src='./resources/upload/"+item.photo_newName+"'/></td>";
-		content += "</tr>";
-		content += "</table>";
-	})
-	$(".list").empty();
-	$(".list").append(content);
-	
-	$("#paging").zer0boxPaging({
-        viewRange : 5,
-        currPage : data.currPage,
-        maxPage : data.range,
-        clickAction : function(e){
-        	listCall($(this).attr('page'));
-        }
-    });
-}
+	function listPrint(data) {
+		var content = "";
+		data.list
+				.forEach(function(item) {
+					content += "<table>";
+					content += "<tr>";
+					content += "<td id='bIdx' style='background:#28977B; color:white'>"
+							+ item.board_idx + "</td>";
+					content += "<td id='bTitle' style='background:#A5DE9F; color:white'><a href='protectDetail?board_idx="
+							+ item.board_idx
+							+ "'>"
+							+ item.board_title
+							+ "</a></td>";
+					content += "</tr>";
+					content += "<tr>";
+					content += "<td colspan='2'><img width='290' height='300' src='./resources/upload/"+item.photo_newName+"'/></td>";
+					content += "</tr>";
+					content += "</table>";
+				})
+		$(".list").empty();
+		$(".list").append(content);
 
+		$("#paging").zer0boxPaging({
+			viewRange : 5,
+			currPage : data.currPage,
+			maxPage : data.range,
+			clickAction : function(e) {
+				listCall($(this).attr('page'));
+			}
+		});
+	}
 
+	//지역
+	function getSigungu() {
+		console.log();
+		$.ajax({
+			"url" : "./getSigungu",
+			"type" : "get",
+			"data" : {
+				"sidoCode" : $("#sido").val()
+			},
+			"success" : function(data) {
+				console.log(data);
+				var content = "";
+				data.forEach(function(item) {
+					content += "<option value="+item.sigundoName+">";
+					content += item.sigundoName;
+					content += "</option>";
+				})
+				$("#sigundo").empty();
+				$("#sigundo").append(content);
+			},
+			"error" : function(x, o, e) {
+				alert(x.status + ":" + o + ":" + e);
+			}
+		});
+	}
 
-//지역
-function getSigungu() {
-	console.log();
-	$.ajax({
-		"url" : "./getSigungu",
-		"type" : "get",
-		"data" : {"sidoCode" : $("#sido").val()},
-		"success" : function(data) {
-			console.log(data);
-			var content = "";
-			data.forEach(function(item) {
-				content += "<option value="+item.sigundoName+">";
-				content += item.sigundoName;
-				content += "</option>";
-			})
-			$("#sigundo").empty();
-			$("#sigundo").append(content);
-		},
-		"error" : function(x, o, e) {
-			alert(x.status + ":" + o + ":" + e);
-		}
-	});
-}
-
-//동물종&품종 값 가져오기
-function getAnimalType() {
-	$.ajax({
-		"url" : "./getAnimalType",
-		"type" : "get",
-		"data" : {"animalCode" : $("#animal").val()},
-		"success" : function(data) {
-			console.log(data);
-			var content = "";
-			data.forEach(function(item) {
-				content += "<option value="+item.animalType+">";
-				content += item.animalType;
-				content += "</option>";
-			})
-			$("#animalType").empty();
-			$("#animalType").append(content);
-		},
-		"error" : function(x, o, e) {
-			alert(x.status + ":" + o + ":" + e);
-		}
-	});
-}
+	//동물종&품종 값 가져오기
+	function getAnimalType() {
+		$.ajax({
+			"url" : "./getAnimalType",
+			"type" : "get",
+			"data" : {
+				"animalCode" : $("#animal").val()
+			},
+			"success" : function(data) {
+				console.log(data);
+				var content = "";
+				data.forEach(function(item) {
+					content += "<option value="+item.animalType+">";
+					content += item.animalType;
+					content += "</option>";
+				})
+				$("#animalType").empty();
+				$("#animalType").append(content);
+			},
+			"error" : function(x, o, e) {
+				alert(x.status + ":" + o + ":" + e);
+			}
+		});
+	}
 
 	//보호 게시글 작성
-	function protectWrite(){
-		location.href="./protectWriteForm";
+	function protectWrite() {
+		location.href = "./protectWriteForm";
 	}
 </script>
 </html>

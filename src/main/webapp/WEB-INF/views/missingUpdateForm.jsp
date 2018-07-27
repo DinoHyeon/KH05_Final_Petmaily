@@ -7,29 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>실종 게시글 수정</title>
 <style>
-/* table {
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding: 5px 10px;
-	margin: auto;
-	width: 70%;
-	top: 10%;
-	left: 10%;
-}
-
-th {
-	width: 70px;
-}
-
-td {
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding: 15px;
-} */
-
 #fileUpBtn {
 	position: absolute;
-	top : 1.3%;
+	top: 1.3%;
 	left: 93.5%;
 }
 
