@@ -48,10 +48,6 @@ public class SaveService {
 		sList.put("range", range); // 생성 페이지 수
 		sList.put("currPage", page); // 현재 페이지
 
-		/*
-		 * String aSearchKey = map.get("cSearchKey"); //검색 키워드 String aSearchVal =
-		 * map.get("cSearchVal"); //검색 값
-		 */
 		return sList;
 	}
 
@@ -74,7 +70,6 @@ public class SaveService {
 		boardDTO.setSave_loc2(params.get("save_loc2"));
 		logger.info("boardDTO.getSave_loc2()" + boardDTO.getSave_loc2());
 		inter = sqlSession.getMapper(BoardInter.class);
-		// inter.adoptWrite(boardDTO);
 		if (inter.saveWrite(boardDTO) == 1) {
 			// 성공하면 fileList 내용을 DB에 적용
 

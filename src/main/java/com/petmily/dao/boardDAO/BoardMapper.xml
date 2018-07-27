@@ -345,9 +345,6 @@
 			<if test="keyWord!='' and keyWord!=null">
 				AND board_title LIKE '%'||#{keyWord}||'%'
 			</if>
-		
-
-
 	</select>
 
 
@@ -374,8 +371,6 @@
 		</if>
 		)
 		WHERE rnum BETWEEN #{start} AND #{end}
-
-
 	</select>
 
 	<!-- 소현 : 글등록 -->
@@ -448,7 +443,6 @@
 		from board b, board_fund f
 		where b.board_idx=f.board_idx and f.fund_state='승인대기'
 		)WHERE rnum BETWEEN #{start} AND #{end}
-
 	</select>
 
 	<!--소현: 관리자페이지 승인대기 리스트에서 승인대기-> 승인 -->
@@ -498,7 +492,6 @@
 
 	<update id="uphit">
 		UPDATE board SET board_hit=board_hit+1 WHERE board_idx=#{param1}
-	
 	</update>
 	
 	
@@ -568,16 +561,7 @@
 		FROM board WHERE board_idx = #{param1}
 	</select>
 	
-	<!-- 보네 - (커뮤니티) 상세보기 -->
-	<!-- ora11버전부터만 사용가능 - listagg -->
-	<!-- oriFileName 다시 가져오려면 주석해제 -->
-<!-- 	<select id="cDetailPhoto" parameterType="Integer"	resultType="String">
-		SELECT LISTAGG(photo_oriname, 'a\a') WITHIN GROUP (ORDER BY photo_oriname) AS photo_oriname FROM photo
-		<where>
-			board_idx=#{param1}
-		</where>
-	</select> -->
-	
+
 	<!-- 보네 - (커뮤니티) 글 삭제 -->
 	<!-- CASCADE 조건에 따라 추가로 사진, 댓글 삭제할지 여부 결정 - 우선은 글 삭제 -->
 	<delete id="communityDelete" parameterType="Integer">
@@ -601,8 +585,7 @@
 	
 	<!-- ///////////////////////////////////////////////////용진////////////////////////////////////////////////// -->
 	
-	
-	
+
 	<!-- 구조후기 -->
 	<!-- 구조후기 글 리스트 -->
 	<!-- (구조후기 ) 리스트, 검색, 페이징 -->
@@ -672,7 +655,7 @@
 		WHERE board_idx=#{param1}
 	</select>
 	<!-- 구조후기 내부 사진 상세보기 -->
-	<!-- ora11버전부터만 사용가능 - listagg -->
+	ora11버전부터만 사용가능 - listagg
 	<select id="sDetailPhoto" parameterType="Integer"
 		resultType="String">
 		SELECT LISTAGG(photo_oriname, 'a\a') WITHIN GROUP (ORDER BY

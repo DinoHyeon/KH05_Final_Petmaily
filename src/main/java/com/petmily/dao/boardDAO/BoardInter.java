@@ -179,8 +179,9 @@ public interface BoardInter {
 	int savePhotoDelete(String fileName); // 구조후기 사진 파일 삭제
 
 	String saveDelFileName(String fileName); // 삭제 파일명 존재 확인
-	/* 구조후기 */
 
+
+	
 	/* 입양후기 */
 	ArrayList<BoardDTO> adoptList(HashMap<String, String> map); // 입양후기 글 리스트
 
@@ -209,7 +210,6 @@ public interface BoardInter {
 	int adoptPhotoDelete(String fileName); // 입양후기 사진 파일 삭제
 
 	String adoptDelFileName(String fileName); // 삭제 파일명 존재 확인
-	/* 입양후기 */
 
 	
 }

@@ -7,12 +7,12 @@
 <title>커뮤니티 글 작성</title>
 <style>
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 95%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 95%;
+	background: white;
 }
 
 #sideFrame {
@@ -35,7 +35,7 @@
 }
 /* 타이틀 */
 #conDiv h1 {
-	top:-5%;
+	top: -5%;
 	left: 28%;
 	margin: 50px 0px 25px 0px;
 	text-align: center;
@@ -146,59 +146,62 @@
 	color: white;
 	cursor: pointer;
 }
-#conDiv input[type='button']{
-border-radius: 5px;
+
+#conDiv input[type='button'] {
+	border-radius: 5px;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
-		<div id="sideFrame"></div>
-   <jsp:include page="sideMenu.jsp" />
-   <div id="contentFrame">
-	<!-- 내용시작 -->
-	<div id="conDiv">
-		<h1>커뮤니티 글 작성</h1>
-		<form id="communityWrite" action="communityWrite" method="post">
-			<table id="writeTable">
-				<tr>
-					<th class="thCls">작성자</th>
-					<td><input id="board_writer" type="text" name="board_writer" readOnly value="${sessionScope.loginId}"/></td>
-					
-				</tr>
-				<tr>
-					<th class="thCls">제 목</th>
-					<td><input id="board_title" type="text" name="board_title"
-						onkeyup="chkword(this, 70)" /></td>
-				</tr>
-				<tr>
-					<th class="thCls">내 용</th>
-					<td><input type="hidden" id="contentForm" name="board_content" />
-						<div id="content_div" contenteditable="true" onkeyup="div_chk()"></div>
-					</td>
-				</tr>
-			</table>
-			<table id="uploadTable">
-				<tr>
-					<td>사 진 첨 부 <input type="button" onclick="cFileUp()"
-						value="첨부" /></td>
-				</tr>
-				<tr>
-					<td colspan="3" style="height: 120px; border: 1px solid gray;">
-						<div id="photo_div"></div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3" style="text-align: right; border: 1px solid white;">
-						<input type="button" id="btn_communityWrite" value="등록" /> <input
-						id="cancel" type="button"
-						onclick="location.href='./communityMain'" value="취소" />
-					</td>
-				</tr>
-			</table>
+	<div id="sideFrame"></div>
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
+		<!-- 내용시작 -->
+		<div id="conDiv">
+			<h1>커뮤니티 글 작성</h1>
+			<form id="communityWrite" action="communityWrite" method="post">
+				<table id="writeTable">
+					<tr>
+						<th class="thCls">작성자</th>
+						<td><input id="board_writer" type="text" name="board_writer"
+							readOnly value="${sessionScope.loginId}" /></td>
 
-		</form>
-	</div>
+					</tr>
+					<tr>
+						<th class="thCls">제 목</th>
+						<td><input id="board_title" type="text" name="board_title"
+							onkeyup="chkword(this, 70)" /></td>
+					</tr>
+					<tr>
+						<th class="thCls">내 용</th>
+						<td><input type="hidden" id="contentForm"
+							name="board_content" />
+							<div id="content_div" contenteditable="true" onkeyup="div_chk()"></div>
+						</td>
+					</tr>
+				</table>
+				<table id="uploadTable">
+					<tr>
+						<td>사 진 첨 부 <input type="button" onclick="cFileUp()"
+							value="첨부" /></td>
+					</tr>
+					<tr>
+						<td colspan="3" style="height: 120px; border: 1px solid gray;">
+							<div id="photo_div"></div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3"
+							style="text-align: right; border: 1px solid white;"><input
+							type="button" id="btn_communityWrite" value="등록" /> <input
+							id="cancel" type="button"
+							onclick="location.href='./communityMain'" value="취소" /></td>
+					</tr>
+				</table>
+
+			</form>
+		</div>
 	</div>
 </body>
 <script>

@@ -152,8 +152,6 @@ public class MissingService {
 		
 		logger.info("내가선택한 동물 종 : "+map.get("animalType"));
 		
-		
-		
 		dto.setBoard_title(map.get("board_title"));
 		dto.setBoard_content(map.get("board_content"));
 		dto.setMainPhoto(map.get("main"));
@@ -166,7 +164,6 @@ public class MissingService {
 		if (session.getAttribute("loginId")!=null){
 			dto.setBoard_writer((String) session.getAttribute("loginId"));
 			dto.setMissing_pw("회원");
-
 		}
 
 		// DB에 글 등록
@@ -205,7 +202,6 @@ public class MissingService {
 		ArrayList<BoardDTO> files = inter.fileList(board_idx);
 		for (BoardDTO dto : files) {
 			fileList.put(dto.getPhoto_newName(), dto.getPhoto_oriName());
-
 		}
 
 		mav.addObject("files", files);

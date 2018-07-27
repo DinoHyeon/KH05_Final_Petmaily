@@ -39,7 +39,6 @@ public class DiseaseService {
       logger.info("검색된 크기 "+listCnt);
       int range = listCnt % 15 > 0 ? Math.round(listCnt / 15) + 1 : listCnt / 15;
       HashMap<String, Object> sList = new HashMap<String, Object>();
-      /*int page = Integer.parseInt(params.get("showNum"));       */
       int page =1;
       logger.info("검색페이지값 "+page);
       if (page > range) { 
@@ -50,13 +49,10 @@ public class DiseaseService {
       params.put("start", String.valueOf(start));
       params.put("end", String.valueOf(end));
       ArrayList<DiseaseDTO> SearchList = inter.diseaseSearchListPage(params);
-      //sList.put("range", range);
-      //sList.put("currPage", page); 
 
       logger.info("하이"+range);
       
       ModelAndView mav = new ModelAndView();
-      //mav.addObject("params", params);
       mav.addObject("SearchList", SearchList);
       mav.addObject("range", range);
       mav.addObject("currPage", page);
@@ -76,7 +72,6 @@ public class DiseaseService {
 	      int listCnt = allSearchList.size();
 	      logger.info("검색된 크기 "+listCnt);
 	      int range = listCnt % 15 > 0 ? Math.round(listCnt / 15) + 1 : listCnt / 15;
-	      /*int page = Integer.parseInt(params.get("showNum"));       */
 	      int page =1;
 	      logger.info("검색페이지값 "+page);
 	      if (page > range) { 
@@ -88,12 +83,9 @@ public class DiseaseService {
 	      paging.put("val",values);
 	      paging.put("start", start);
 	      paging.put("end",end);
-	      //keyInfo.put("start", String.valueOf(start));
-	      //keyInfo.put("end", String.valueOf(end));
 	      ArrayList<DiseaseDTO> SearchList = inter.diseaseKeywordListPage(paging);
 
 	      ModelAndView mav = new ModelAndView();
-	      //mav.addObject("params", params);
 	      mav.addObject("SearchList", SearchList);
 	      mav.addObject("range", range);
 	      mav.addObject("currPage", page);
@@ -101,9 +93,6 @@ public class DiseaseService {
 	      mav.setViewName("diseaseListPage");      
 	      
 	      return mav;
-	      
-	      
-      
    }
    
    
@@ -115,7 +104,6 @@ public class DiseaseService {
 	      int listCnt = allSearchList.size();
 	      logger.info("검색된 크기 "+listCnt);
 	      int range = listCnt % 15 > 0 ? Math.round(listCnt / 15) + 1 : listCnt / 15;
-	      //int page =1;
 	      logger.info("검색페이지값 "+num);
 	      if (num > range) { 
 	    	  num = range; 
@@ -126,11 +114,7 @@ public class DiseaseService {
 	      paging.put("val",keyList);
 	      paging.put("start", start);
 	      paging.put("end",end);
-	      //keyInfo.put("start", String.valueOf(start));
-	      //keyInfo.put("end", String.valueOf(end));
 	      ArrayList<DiseaseDTO> SearchList = inter.diseaseKeywordListPage(paging);
-	      //sList.put("range", range);
-	      //sList.put("currPage", page); 
 	      HashMap<String, Object> sList = new HashMap<String, Object>();   
 	      sList.put("SearchList",SearchList);
 	      sList.put("range", range);
@@ -138,9 +122,7 @@ public class DiseaseService {
 	      sList.put("title", "search");     
 	      
 	      return sList;
-	      
-	      
-      
+    
    }
    
    

@@ -8,12 +8,12 @@
 <style>
 /* 전체(배경) */
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 95%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 95%;
+	background: white;
 }
 
 #sideFrame {
@@ -37,6 +37,7 @@
 	font-size: 40;
 	position: absolute;
 }
+
 #title1 h5 {
 	top: 22%;
 	left: 64%;
@@ -59,6 +60,7 @@
 	font-size: 40;
 	position: absolute;
 }
+
 #title2 h5 {
 	top: 102%;
 	left: 74%;
@@ -71,51 +73,50 @@
 }
 
 /* selectBox(동물종/카테고리) */
-#registSelectBox{
+#registSelectBox {
 	position: absolute;
-	top : 31.5%;
-	left : 20%;
+	top: 31.5%;
+	left: 20%;
 }
 
-
 /* 정답 div */
-#registAnswerRadio{
+#registAnswerRadio {
 	position: absolute;
-	top : 81%;
-	left : 20%;
+	top: 81%;
+	left: 20%;
 }
 
 /* 테이블 상단 */
-#quizListTable{
-	border-top : 1px solid black;
+#quizListTable {
+	border-top: 1px solid black;
 	border-bottom: 1px solid black;
-	margin-top : 20px;
-	width : 100%;
+	margin-top: 20px;
+	width: 100%;
 	padding-top: 3px;
 	background-color: #A9CB73;
 }
 
-#quizListTable td{
+#quizListTable td {
 	text-align: center;
-	width : 5.4%;
+	width: 5.4%;
 }
 
 textarea {
 	resize: none;
 }
 
-#noLisd{
-	width : 14%;
+#noLisd {
+	width: 14%;
 }
 
 /* 문제작성 */
 #quizAsk {
 	width: 65%;
-	height : 6%;
+	height: 6%;
 	border: 1px solid black;
 	position: absolute;
-	top : 37%;
-	left : 20%;
+	top: 37%;
+	left: 20%;
 }
 
 /* 문제해설 */
@@ -124,77 +125,86 @@ textarea {
 	height: 26%;
 	border: 1px solid black;
 	position: absolute;
-	top : 44%;
-	left : 20%;
+	top: 44%;
+	left: 20%;
 }
 
 /* 버튼(문제등록) */
-#registBtn{
+#registBtn {
 	position: absolute;
-	top : 74%;
-	left : 48%;
+	top: 74%;
+	left: 48%;
 }
 
-#qqq{
-	margin-left : 15px;
+#qqq {
+	margin-left: 15px;
 }
 
 /* 리스트 */
-#quizList{
+#quizList {
 	position: absolute;
-	top : 110%;
+	top: 110%;
 }
 /* 페이징 */
-#paging{
+#paging {
 	position: absolute;
-	top : 187%;
-	left : 52%;
+	top: 187%;
+	left: 52%;
 }
 
 /* selectBox(검색) */
-#quizListDiv{
+#quizListDiv {
 	position: absolute;
-	top : 108%;
-	left : 17%;
+	top: 108%;
+	left: 17%;
 	width: 73%;
 }
 
-button{
+button {
 	width: 10%;
-	
-}
-td{
-	border-bottom: 1px solid black;
-	padding : 1% 0;
-}
-.ui-widget{
-    font-size: 16px !important;
 }
 
-#a{
+td {
+	border-bottom: 1px solid black;
+	padding: 1% 0;
+}
+
+.ui-widget {
+	font-size: 16px !important;
+}
+
+#a {
 	margin-top: 55%;
 }
-border-right: 1px solid gray;
+border-right
+:
+ 
+1
+px
+ 
+solid
+ 
+gray
+;
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
-   <jsp:include page="sideMenu.jsp" />
-	
+	<jsp:include page="sideMenu.jsp" />
+
 	<div id="contentFrame">
-			<div id=title1>
-				<h1>퀴즈 등록</h1>
-				<h5>임의의 동물과 주제로 퀴즈를 등록합니다</h5>
-			</div>
+		<div id=title1>
+			<h1>퀴즈 등록</h1>
+			<h5>임의의 동물과 주제로 퀴즈를 등록합니다</h5>
+		</div>
 		<div id="registSelectBox">
 			<select id="aniamlList">
 				<option value="동물">동물 선택</option>
 				<option value="강아지">강아지</option>
 				<option value="고양이">고양이</option>
 				<option value="기타">기타</option>
-			</select>
-			<select id="category">
+			</select> <select id="category">
 				<option value="카테고리">카테고리 선택</option>
 				<option value="건강">건강</option>
 				<option value="음식">음식</option>
@@ -205,16 +215,14 @@ border-right: 1px solid gray;
 		</div>
 		<textarea id="quizAsk" rows="" cols="" placeholder="퀴즈 제목 작성"></textarea>
 		<div id="registAnswerRadio">
-			<label>
-				O<input type="radio" name="answer" value="O">
-			</label>
-			<label>
-				X<input type="radio" name="answer" value="X">
+			<label> O<input type="radio" name="answer" value="O">
+			</label> <label> X<input type="radio" name="answer" value="X">
 			</label>
 		</div>
-		<textarea id="registQuizContent" rows="" cols="" placeholder="퀴즈 해설 작성"></textarea>
+		<textarea id="registQuizContent" rows="" cols=""
+			placeholder="퀴즈 해설 작성"></textarea>
 		<div id="registBtn">
-		<input type="button" onclick="registQuiz()" value="문제 등록">
+			<input type="button" onclick="registQuiz()" value="문제 등록">
 		</div>
 		<hr id="a">
 		<div id=title2>
@@ -227,17 +235,15 @@ border-right: 1px solid gray;
 				<option value="강아지">강아지</option>
 				<option value="고양이">고양이</option>
 				<option value="기타">기타</option>
-			</select> 
-			<select id="searchCategory">
+			</select> <select id="searchCategory">
 				<option value="전체">전체</option>
 				<option value="건강">건강</option>
 				<option value="음식">음식</option>
 				<option value="습성">습성</option>
 				<option value="생활">생활</option>
 				<option value="기타">기타</option>
-			</select> 
-			문제 : <input id="searchWord" type="text">
-			<input type="button" onclick="quizListCall(showPageNum)" value="검색" >
+			</select> 문제 : <input id="searchWord" type="text"> <input
+				type="button" onclick="quizListCall(showPageNum)" value="검색">
 			<table id="quizListTable">
 				<thead>
 					<tr>
@@ -248,13 +254,13 @@ border-right: 1px solid gray;
 						<th>정답</th>
 					</tr>
 				</thead>
-				
+
 				<tbody id="quizList">
 				</tbody>
 			</table>
 		</div>
-		</div>
-		<div id="paging"></div>
+	</div>
+	<div id="paging"></div>
 	</div>
 </body>
 <script>

@@ -174,87 +174,83 @@
 }
 
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 150%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 150%;
+	background: white;
 }
 
-#sideFrame{
-    position: absolute;
-    left: 0.52%;
-    top: 12.4%;
-    width: 14.7%;
-    height: 150%;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 </style>
 <body>
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
-<jsp:include page="sideMenu.jsp" />
-<div id="contentFrame">
-	<div class="adopt">
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
+		<div class="adopt">
 
-		<div id=title>
-			<h1>입양 후기 수정</h1>
-			<h5>자신이 작성한 입양 후기를 수정합니다</h5>
-		</div>
-		<form id="adoptUpdate" action="adoptUpdate" name="adoptUpdate"
-			method="post">
-			<input type="hidden" name="board_idx"
-				value="${aUpdateForm.board_idx}" />
-			<table id="selectTable">
-				<tr>
-					<th colspan=2 style="width: 1000px">필수 선택 항목</th>
-				</tr>
-				<tr>
-				<td class=tap>동물</td>
-				<td><select id="animal" onchange="getAnimalType()" name="animal_idx">
-						<option selected >동물 선택 (필수)</option>
-						<option value="417000" >개</option>
-						<option value="422400">고양이</option>
-						<option value="429900">기타</option>
-				</select> <select id="animalType" name="animal_type">
-						<option selected>품종 선택</option>
-						<option></option>
-				</select>
-				<input id="selanimal" name="selanimal" type="hidden"/>
-				</td>
-			</tr>
+			<div id=title>
+				<h1>입양 후기 수정</h1>
+				<h5>자신이 작성한 입양 후기를 수정합니다</h5>
+			</div>
+			<form id="adoptUpdate" action="adoptUpdate" name="adoptUpdate"
+				method="post">
+				<input type="hidden" name="board_idx"
+					value="${aUpdateForm.board_idx}" />
+				<table id="selectTable">
+					<tr>
+						<th colspan=2 style="width: 1000px">필수 선택 항목</th>
+					</tr>
+					<tr>
+						<td class=tap>동물</td>
+						<td><select id="animal" onchange="getAnimalType()"
+							name="animal_idx">
+								<option selected>동물 선택 (필수)</option>
+								<option value="417000">개</option>
+								<option value="422400">고양이</option>
+								<option value="429900">기타</option>
+						</select> <select id="animalType" name="animal_type">
+								<option selected>품종 선택</option>
+								<option></option>
+						</select> <input id="selanimal" name="selanimal" type="hidden" /></td>
+					</tr>
 
-			<tr>
-				<td class=tap>지역</td>
-				<td>
-					<select id="sido" onchange="getSigungu()"  name="adopt_loc1">
-							<option selected>시/도 선택 (필수)</option>
-							<option value="6110000">서울특별시</option>
-							<option value="6260000">부산광역시</option>
-							<option value="6270000">대구광역시</option>
-							<option value="6280000">인천광역시</option>
-							<option value="6290000">광주광역시</option>
-							<option value="6300000">대전광역시</option>
-							<option value="6310000">울산광역시</option>
-							<option value="6410000">경기도</option>
-							<option value="6420000">강원도</option>
-							<option value="6430000">충청북도</option>
-							<option value="6440000">충청남도</option>
-							<option value="6450000">전라북도</option>
-							<option value="6460000">전라남도</option>
-							<option value="6470000">경상북도</option>
-							<option value="6480000">경상남도</option>
-							<option value="6500000">제주특별자치도</option>
-					</select>
-					 <select id="sigundo" name="adopt_loc2">
-					 	<option selected>시/군/도 선택</option>
-					</select>
-					<input id="selsido" name="selsido" type="hidden"/>
-				</td>
-			</tr>
-		</table>
+					<tr>
+						<td class=tap>지역</td>
+						<td><select id="sido" onchange="getSigungu()"
+							name="adopt_loc1">
+								<option selected>시/도 선택 (필수)</option>
+								<option value="6110000">서울특별시</option>
+								<option value="6260000">부산광역시</option>
+								<option value="6270000">대구광역시</option>
+								<option value="6280000">인천광역시</option>
+								<option value="6290000">광주광역시</option>
+								<option value="6300000">대전광역시</option>
+								<option value="6310000">울산광역시</option>
+								<option value="6410000">경기도</option>
+								<option value="6420000">강원도</option>
+								<option value="6430000">충청북도</option>
+								<option value="6440000">충청남도</option>
+								<option value="6450000">전라북도</option>
+								<option value="6460000">전라남도</option>
+								<option value="6470000">경상북도</option>
+								<option value="6480000">경상남도</option>
+								<option value="6500000">제주특별자치도</option>
+						</select> <select id="sigundo" name="adopt_loc2">
+								<option selected>시/군/도 선택</option>
+						</select> <input id="selsido" name="selsido" type="hidden" /></td>
+					</tr>
+				</table>
 
 				<table id="writeTable">
 					<tr>
@@ -273,11 +269,9 @@
 					<tr>
 						<td colspan=2>
 							<!-- 단점이... 값을 넘길 수 없다는것!! 그래서 hidden 만든다 --> <input
-							type="hidden" id="contentForm" name="board_content" />
-							<!-- div에서 내용 받아 볼 수 있게 하려고 설정 -->
+							type="hidden" id="contentForm" name="board_content" /> <!-- div에서 내용 받아 볼 수 있게 하려고 설정 -->
 							<div id="content_div" contenteditable="true" onkeyup="div_chk()">
-								${aUpdateForm.board_content} 
-							</div>
+								${aUpdateForm.board_content}</div>
 						</td>
 					</tr>
 				</table>
@@ -296,15 +290,14 @@
 				</table>
 				<table id="btnTable">
 					<tr>
-						<td>
-						<input class="btn" type="button" value="수정"  id="btn_adoptUpdate"  /> 
-						<input class="btn" type="button"  value="취소" onclick="location.href='./adoptMain'"  />
-						</td>
+						<td><input class="btn" type="button" value="수정"
+							id="btn_adoptUpdate" /> <input class="btn" type="button"
+							value="취소" onclick="location.href='./adoptMain'" /></td>
 					</tr>
 				</table>
-				</form>
-				</div>
-				</div>
+			</form>
+		</div>
+	</div>
 </body>
 <script>
 var menuName = {'유기동물공고':'animalNotice', '입양후기':'adoptMain'};

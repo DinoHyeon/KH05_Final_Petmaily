@@ -105,7 +105,6 @@ table, th, td {
 	color: white;
 }
 
-
 /* 셀렉트박스 테이블 */
 #selectTable {
 	top: 8%;
@@ -228,10 +227,7 @@ table, th, td {
 						<th style="width: 150px">작성자</th>
 						<th style="width: 400px">지역</th>
 						<th style="width: 150px">작성일</th>
-
 						<th style="width: 150px">조회수</th>
-
-
 					</tr>
 				</thead>
 				<tbody id="fundTable">
@@ -244,22 +240,22 @@ table, th, td {
 	</div>
 </body>
 <script>
+	var obj = {};
+	obj.type = "get";
+	obj.dataType = "json";
+	obj.error = function(e) {
+		console.log(e)
+	};
+	var showPageNum = 1
+	var menuName = {
+		'구조후기' : 'saveMain',
+		'모금' : 'fundMain'
+	};
 
-var obj = {};		
-obj.type="get";
-obj.dataType="json";
-obj.error=function(e){console.log(e)};
-var showPageNum = 1
-var menuName = {'구조후기':'saveMain', '모금':'fundMain'};
+	$(document).ready(function() {
 
-$(document).ready(function() {
-	/* 
-	if('${sessionScope.loginId}'==""){
-		alert("로그인이 필요한 서비스입니다.");
-		location.href="loginPage";} */
-		//else{
 		fundlistCall(showPageNum);
-	//}
+
 		var content = "";
 		for ( var key in menuName) {
 			console.log(key);
@@ -277,101 +273,90 @@ $(document).ready(function() {
 
 		$("#sideMenu").empty();
 		$("#sideMenu").append(content);
-});
-
-function pageMove(e) {
-	console.log($(e).attr("id"));
-	location.href="./"+$(e).attr("id");
-};
-
-function getSigungu() {
-	console.log();
-	$.ajax({
-		"url" : "./getSigungu",
-		"type" : "get",
-		"data" : {"sidoCode" : $("#sido").val()},
-		"success" : function(data) {
-			console.log(data);
-			var content = "";
-			data.forEach(function(item) {
-				content += "<option value="+item.sigundoName+">";
-				content += item.sigundoName;
-				content += "</option>";
-			})
-			$("#sigundo").empty();
-			$("#sigundo").append(content);
-		},
-		"error" : function(x, o, e) {
-			alert(x.status + ":" + o + ":" + e);
-		}
 	});
-}
 
+	function pageMove(e) {
+		console.log($(e).attr("id"));
+		location.href = "./" + $(e).attr("id");
+	};
 
-function fundlistCall(page){
-	$.ajax({
-		type : "get",
-		url : "./getfundList",
-		data : {
-			"sido" : $("#sido option:selected").html(),
-			"sigundo" : $("#sigundo").val(),
-			"keyWord" : $("#keyWord").val(),
-			"showPageNum" : page
-		},
-		success : function(data) {
-			fundlistPrint(data);
-		/* 	showPageNum=data.currPage;  //보여지는 페이지 = 현재 페이지 (data.currPage) */
+	function getSigungu() {
+		console.log();
+		$.ajax({
+			"url" : "./getSigungu",
+			"type" : "get",
+			"data" : {
+				"sidoCode" : $("#sido").val()
+			},
+			"success" : function(data) {
+				console.log(data);
+				var content = "";
+				data.forEach(function(item) {
+					content += "<option value="+item.sigundoName+">";
+					content += item.sigundoName;
+					content += "</option>";
+				})
+				$("#sigundo").empty();
+				$("#sigundo").append(content);
+			},
+			"error" : function(x, o, e) {
+				alert(x.status + ":" + o + ":" + e);
+			}
+		});
+	}
 
-		},
-		error : function(e) {
-			console.log(e);
-		}
-	});
-}
+	function fundlistCall(page) {
+		$.ajax({
+			type : "get",
+			url : "./getfundList",
+			data : {
+				"sido" : $("#sido option:selected").html(),
+				"sigundo" : $("#sigundo").val(),
+				"keyWord" : $("#keyWord").val(),
+				"showPageNum" : page
+			},
+			success : function(data) {
+				fundlistPrint(data);
+				/* 	showPageNum=data.currPage;  //보여지는 페이지 = 현재 페이지 (data.currPage) */
 
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+	}
 
+	function fundlistPrint(data) {
 
-function fundlistPrint(data) {
-	
-	var content = "";
-		data.list.forEach(function(item,idx) {
-			content += "<tr>"; 
+		var content = "";
+		data.list.forEach(function(item, idx) {
+			content += "<tr>";
 			content += "<td>" + item.board_idx + "</td>";
-		 content += "<td><a href='funddetail?idx="+item.board_idx+"&call=detail'>"+ item.board_title +"</a></td>";
-		content += "<td>" + item.board_writer+ "</td>";
-		content += "<td>" + item.fund_area +"</td>";
-		var date = new Date(item.board_regDate);			
-		content +="<td>"+date.toLocaleDateString("ko-KR")+"</td>"
-	
-
-		content += "<td>" + item.board_hit +"</td>";
-		
-       			content += "</tr>"; 
+			content += "<td><a href='funddetail?idx=" + item.board_idx
+					+ "&call=detail'>" + item.board_title + "</a></td>";
+			content += "<td>" + item.board_writer + "</td>";
+			content += "<td>" + item.fund_area + "</td>";
+			var date = new Date(item.board_regDate);
+			content += "<td>" + date.toLocaleDateString("ko-KR") + "</td>"
+			content += "<td>" + item.board_hit + "</td>";
+			content += "</tr>";
 		})
 		$("#fundTable").empty();
-		$("#fundTable").append(content); 
-		
+		$("#fundTable").append(content);
+
 		$("#paging").zer0boxPaging({
-            viewRange : 5,
-            currPage : data.currPage,
-            maxPage : data.range,
-            clickAction : function(e){
-            	 fundlistCall($(this).attr('page'));
-            }
-        });
-	}		
+			viewRange : 5,
+			currPage : data.currPage,
+			maxPage : data.range,
+			clickAction : function(e) {
+				fundlistCall($(this).attr('page'));
+			}
+		});
+	}
 
-
-
-
-function ajaxCall(param){
-	console.log(param);
-	$.ajax(param);
-}
-
-
-
-
+	function ajaxCall(param) {
+		console.log(param);
+		$.ajax(param);
+	}
 </script>
-
 </html>

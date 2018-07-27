@@ -26,72 +26,72 @@
 	border-left: 1px solid gray;
 }
 
-#noticeNo{
+#noticeNo {
 	text-align: center;
-    position: absolute;
-    width: 80%;
-    height: 45%;
-    top: 3%;
-    left: 10%;
-    font-size: 20px;
-    font-weight: 600;
-    color: #02886F;
-}
-
-#imgDiv{
-    position: absolute;
-    left: 10%;
-    top: 8.8%;
-    border: 1px solid black;
-    text-align: center;
-    width: 80%;
-    height: 45%;
-}
-
-#img{
-  display: inline-block;
-  vertical-align: middle;
-  max-height: 100%;
-  max-width: 100%;
-}
-
-#animal{
-    position: absolute;
-    left: 10%;
-    top: 54%;
-    text-align: center;
-    width: 80.2%;
-    height: 6%;
-}
-
-#noticeText{
 	position: absolute;
-    left: 10%;
-    top: 76%;
-    text-align: center;
-    width: 80.2%;
+	width: 80%;
+	height: 45%;
+	top: 3%;
+	left: 10%;
+	font-size: 20px;
+	font-weight: 600;
+	color: #02886F;
 }
 
-#animalShelter{
-    position: absolute;
-    left: 10%;
-    top: 80%;
-    text-align: center;
-    width: 80.2%;
-    height: 6%;
+#imgDiv {
+	position: absolute;
+	left: 10%;
+	top: 8.8%;
+	border: 1px solid black;
+	text-align: center;
+	width: 80%;
+	height: 45%;
 }
 
-table,td,tr{
+#img {
+	display: inline-block;
+	vertical-align: middle;
+	max-height: 100%;
+	max-width: 100%;
+}
+
+#animal {
+	position: absolute;
+	left: 10%;
+	top: 54%;
+	text-align: center;
+	width: 80.2%;
+	height: 6%;
+}
+
+#noticeText {
+	position: absolute;
+	left: 10%;
+	top: 76%;
+	text-align: center;
+	width: 80.2%;
+}
+
+#animalShelter {
+	position: absolute;
+	left: 10%;
+	top: 80%;
+	text-align: center;
+	width: 80.2%;
+	height: 6%;
+}
+
+table, td, tr {
 	border: 1px solid black;
 	border-collapse: collapse;
 }
 
-.ui-widget{
+.ui-widget {
 	font-size: 15px !important;
 	font-weight: 600 !important;
 }
 
-#listBtn{
+#listBtn {
 	position: absolute;
 	left: 84%;
 	top: 93%;
@@ -113,13 +113,15 @@ table,td,tr{
 				<td colspan="2"><span id="remainderDate"></span></td>
 			</tr>
 			<tr>
-				<td colspan="4">${dto.kindCd}/ <span id="gender"></span> / ${dto.colorCd} / ${dto.age} / ${dto.weight}</td>
+				<td colspan="4">${dto.kindCd}/<span id="gender"></span> /
+					${dto.colorCd} / ${dto.age} / ${dto.weight}
+				</td>
 			</tr>
 			<tr>
 				<th>공고번호</th>
 				<td>${dto.noticeNo}</td>
 				<th>공고기간</th>
-				<td>${dto.noticeSdt} ~ ${dto.noticeEdt}</td>
+				<td>${dto.noticeSdt}~ ${dto.noticeEdt}</td>
 			</tr>
 			<tr>
 				<th>발견 장소</th>
@@ -136,22 +138,22 @@ table,td,tr{
 				<th>보호센터</th>
 				<td colspan="2">${dto.careNm}</td>
 				<th>전화 번호</th>
-				<td colspan="2">${dto.careTel}</td>		
+				<td colspan="2">${dto.careTel}</td>
 			</tr>
 			<tr>
 				<th>보호센터 위치</th>
-				<td colspan="5">${dto.careAddr}</td>	
+				<td colspan="5">${dto.careAddr}</td>
 			</tr>
 			<tr>
-				<th>관할기관 </th>
+				<th>관할기관</th>
 				<td>${dto.orgNm}</td>
 				<th>담당자</th>
 				<td>${dto.chargeNm}</td>
 				<th>연락처</th>
-				<td>${dto.officetel}</td>			
+				<td>${dto.officetel}</td>
 			</tr>
 		</table>
-		
+
 		<div id="listBtn">
 			<button>리스트</button>
 		</div>

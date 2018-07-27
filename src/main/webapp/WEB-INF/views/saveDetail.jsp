@@ -141,8 +141,12 @@
 	position: absolute;
 }
 
+<<<<<<< HEAD
 
 #contentFrame input[type='button'] {
+=======
+.btn {
+>>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
 	top: 90%;
 	height: 40px;
 	width: 107px;
@@ -153,6 +157,7 @@
 	color: white;
 	cursor: pointer;
 }
+<<<<<<< HEAD
 
 #replyTable th{
 	background-color: #28977B;
@@ -168,6 +173,8 @@
 #registArea{
 	text-align:center;
 }
+=======
+>>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
 </style>
 </head>
 <body>
@@ -236,6 +243,7 @@
 						class="btn" onclick="location.href='./saveMain'" value="글 목록으로" />
 					</td>
 				</tr>
+<<<<<<< HEAD
 			</table>
 
 		</div>
@@ -247,6 +255,20 @@
 		</table>
 
 
+=======
+				<tbody>
+					<tr>
+						<td><jsp:include page="reply.jsp" /></td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- 			<table id="replyTable">
+				<tbody>
+				
+			</tbody>
+			</table> -->
+		</div>
+>>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
 	</div>
 </body>
 <script>

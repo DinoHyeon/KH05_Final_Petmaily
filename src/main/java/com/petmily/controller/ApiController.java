@@ -93,7 +93,6 @@ public class ApiController {
 					shelterList.add(dto);
 				}
 			} catch (IOException | ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -166,7 +165,6 @@ public class ApiController {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -235,7 +233,6 @@ public class ApiController {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
@@ -302,7 +299,6 @@ public class ApiController {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

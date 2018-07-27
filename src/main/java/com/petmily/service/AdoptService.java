@@ -69,8 +69,6 @@ public class AdoptService {
 		logger.info("boardDTO.getBoard_title()" + boardDTO.getBoard_title());
 		boardDTO.setBoard_content(params.get("board_content"));
 		logger.info("boardDTO.getBoard_content()" + boardDTO.getBoard_content());
-
-		////////////////////////////
 		boardDTO.setAnimal_idx(params.get("selanimal"));
 		logger.info("boardDTO.getAnimal_idx()" + boardDTO.getAnimal_idx());
 		boardDTO.setAnimal_type(params.get("animal_type"));
@@ -81,7 +79,6 @@ public class AdoptService {
 		logger.info("boardDTO.getAdopt_loc2()" + boardDTO.getAdopt_loc2());
 		logger.info("셀렉트문 확인 :" + boardDTO.getAnimal_idx() + "/" + boardDTO.getAdopt_loc1());
 		inter = sqlSession.getMapper(BoardInter.class);
-		// inter.adoptWrite(boardDTO);
 		if (inter.adoptWrite(boardDTO) == 1) {
 			// 성공하면 fileList 내용을 DB에 적용
 

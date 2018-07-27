@@ -21,12 +21,12 @@
 }
 
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 95%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 95%;
+	background: white;
 }
 
 #sideFrame {
@@ -173,17 +173,16 @@ fieldset legend {
 	font-size: 25px !important;
 }
 
-#quizEnding{
+#quizEnding {
 	display: none;
 }
-
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
-	 <div id="sideFrame"></div>
-   <jsp:include page="sideMenu.jsp" />
-   <div id="contentFrame">
+	<div id="sideFrame"></div>
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
 		<div id="dialog-confirm" title="퀴즈 시작 !">
 			<p>열심히 풀어주세요 !</p>
 		</div>
@@ -210,8 +209,7 @@ fieldset legend {
 		</div>
 
 		<div id="quizEnding" title="퀴즈 결과 발표">
-			정답 : <span id="rightNum"></span><br/>
-			오답 : <span id="wrongNum"></span>
+			정답 : <span id="rightNum"></span><br /> 오답 : <span id="wrongNum"></span>
 		</div>
 	</div>
 </body>

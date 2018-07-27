@@ -14,22 +14,22 @@
 </head>
 <style>
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 150%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 150%;
+	background: white;
 }
 
-#sideFrame{
-    position: absolute;
-    left: 0.52%;
-    top: 12.4%;
-    width: 14.7%;
-    height: 150%;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
 }
 /* 타이틀 */
 #title h1 {
@@ -58,7 +58,7 @@
 	top: 11.5%;
 	left: 9%;
 	padding: 1px 1px 1px 1px;
-	margin: 25px auto auto  auto;
+	margin: 25px auto auto auto;
 	position: absolute;
 	float: left;
 }
@@ -105,7 +105,7 @@
 /* 글 작성 테이블 */
 .adopt #writeTable {
 	top: 21%;
-    left: 8.7%;
+	left: 8.7%;
 	width: 1000px;
 	margin: 0px 5px 5px 5px;
 	border-collapse: collapse;
@@ -117,7 +117,6 @@
 	width: 100%;
 	height: 30px;
 }
-
 
 #writeTable textarea {
 	width: 100%;
@@ -159,89 +158,87 @@
 	position: absolute;
 }
 
-#btnTable{
-			left:71%;
-			top:70%;
-			position: absolute;
-		}
-		.btn {
-	     top:90%;
-		 height:40px;
-         width:107px;
-         background-color: #28977B;
-         border-color:#28977B;
-         border-style:solid;
-         font-weight: 600;
-         color: white;
-         cursor: pointer;
-		}
-		
-		#uploadBtn{
-		 left:88%;
-		 top:100px;
-		 height:40px;
-         width:107px;
-         background-color: #28977B;
-         border-color:#28977B;
-         border-style:solid;
-         font-weight: 600;
-         color: white;
-         cursor: pointer;
-         position: absolute;
-		}
+#btnTable {
+	left: 71%;
+	top: 70%;
+	position: absolute;
+}
+
+.btn {
+	top: 90%;
+	height: 40px;
+	width: 107px;
+	background-color: #28977B;
+	border-color: #28977B;
+	border-style: solid;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+}
+
+#uploadBtn {
+	left: 88%;
+	top: 100px;
+	height: 40px;
+	width: 107px;
+	background-color: #28977B;
+	border-color: #28977B;
+	border-style: solid;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+	position: absolute;
+}
 </style>
 <body>
 	<jsp:include page="mainFrame.jsp" />
 	<div id="sideFrame"></div>
-<jsp:include page="sideMenu.jsp" />
-<div id="contentFrame">
-	<div class="adopt">
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
+		<div class="adopt">
 
-		<div id=title>
-			<h1>구조 후기 등록</h1>
-			<h5>
-				구조 후기를 작성합니다 구조 지역을 선택해 주세요
-			</h5>
-		</div>
-<form id="saveWrite" action="saveWrite" name="saveWrite" method="post">
-		<table id="selectTable">
-			<tr>
-				<th colspan=2 style="width: 1000px">필수 선택 항목</th>
-			</tr>
-			<tr>
-				<td class=tap>지역</td>
-				<td>
-					<select id="sido" onchange="getSigungu()"  name="save_loc1">
-							<option selected>시/도 선택 (필수)</option>
-							<option value="6110000">서울특별시</option>
-							<option value="6260000">부산광역시</option>
-							<option value="6270000">대구광역시</option>
-							<option value="6280000">인천광역시</option>
-							<option value="6290000">광주광역시</option>
-							<option value="6300000">대전광역시</option>
-							<option value="6310000">울산광역시</option>
-							<option value="6410000">경기도</option>
-							<option value="6420000">강원도</option>
-							<option value="6430000">충청북도</option>
-							<option value="6440000">충청남도</option>
-							<option value="6450000">전라북도</option>
-							<option value="6460000">전라남도</option>
-							<option value="6470000">경상북도</option>
-							<option value="6480000">경상남도</option>
-							<option value="6500000">제주특별자치도</option>
-					</select>
-					 <select id="sigundo" name="save_loc2">
-					 	<option selected>시/군/도 선택</option>
-					</select>
-					<input id="selsido" name="selsido" type="hidden"/>
-				</td>
-			</tr>
-			</table>
+			<div id=title>
+				<h1>구조 후기 등록</h1>
+				<h5>구조 후기를 작성합니다 구조 지역을 선택해 주세요</h5>
+			</div>
+			<form id="saveWrite" action="saveWrite" name="saveWrite"
+				method="post">
+				<table id="selectTable">
+					<tr>
+						<th colspan=2 style="width: 1000px">필수 선택 항목</th>
+					</tr>
+					<tr>
+						<td class=tap>지역</td>
+						<td><select id="sido" onchange="getSigungu()"
+							name="save_loc1">
+								<option selected>시/도 선택 (필수)</option>
+								<option value="6110000">서울특별시</option>
+								<option value="6260000">부산광역시</option>
+								<option value="6270000">대구광역시</option>
+								<option value="6280000">인천광역시</option>
+								<option value="6290000">광주광역시</option>
+								<option value="6300000">대전광역시</option>
+								<option value="6310000">울산광역시</option>
+								<option value="6410000">경기도</option>
+								<option value="6420000">강원도</option>
+								<option value="6430000">충청북도</option>
+								<option value="6440000">충청남도</option>
+								<option value="6450000">전라북도</option>
+								<option value="6460000">전라남도</option>
+								<option value="6470000">경상북도</option>
+								<option value="6480000">경상남도</option>
+								<option value="6500000">제주특별자치도</option>
+						</select> <select id="sigundo" name="save_loc2">
+								<option selected>시/군/도 선택</option>
+						</select> <input id="selsido" name="selsido" type="hidden" /></td>
+					</tr>
+				</table>
 
 				<table id="writeTable">
 					<tr>
 						<th style="width: 100px">작성자</th>
-						<td><input id="board_writer" type="text" name="board_writer" readOnly value="${sessionScope.loginId}"/></td>
+						<td><input id="board_writer" type="text" name="board_writer"
+							readOnly value="${sessionScope.loginId}" /></td>
 					</tr>
 					<tr>
 						<th style="width: 100px">제 목</th>
@@ -253,19 +250,18 @@
 					</tr>
 					<tr>
 						<td colspan=2>
-							<!-- 단점이... 값을 넘길 수 없다는것!! 그래서 hidden 만든다 --> 
-							<input type="hidden" id="contentForm" name="board_content" /> 
-							<!-- div에서 내용 받아 볼 수 있게 하려고 설정 -->
+							<!-- 단점이... 값을 넘길 수 없다는것!! 그래서 hidden 만든다 --> <input
+							type="hidden" id="contentForm" name="board_content" /> <!-- div에서 내용 받아 볼 수 있게 하려고 설정 -->
 							<div id="content_div" contenteditable="true" onkeyup="div_chk()"></div>
 						</td>
 					</tr>
 				</table>
 				<table id="uploadTable">
 					<tr>
-						<td>  사진첨부</td>
+						<td>사진첨부</td>
 						<td></td>
-						<td><input type="button"  id="uploadBtn" onclick="savePhotoWrite()"
-							value="첨부" /></td>
+						<td><input type="button" id="uploadBtn"
+							onclick="savePhotoWrite()" value="첨부" /></td>
 					</tr>
 					<tr>
 						<td colspan="3">
@@ -275,14 +271,13 @@
 				</table>
 				<table id="btnTable">
 					<tr>
-						<td>
-							<input type="button"  class="btn" id="btn_saveWrite" value="등록" /> 
-							<input type="button" class="btn" onclick="location.href='./saveMain'" value="취소" />
-						</td>
+						<td><input type="button" class="btn" id="btn_saveWrite"
+							value="등록" /> <input type="button" class="btn"
+							onclick="location.href='./saveMain'" value="취소" /></td>
 					</tr>
 				</table>
-	</form>
-	</div>
+			</form>
+		</div>
 	</div>
 </body>
 <script>

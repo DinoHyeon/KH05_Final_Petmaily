@@ -28,10 +28,10 @@ public class MemberController {
 
 	/* 회원가입 */
 	@RequestMapping(value = "/joinPage")
-	public String joinPage(Model model,HttpSession session) {
-	   logger.info("회원가입");
-	   session.removeAttribute("emailConfirmNum");
-	   return "joinPage";
+	public String joinPage(Model model, HttpSession session) {
+		logger.info("회원가입");
+		session.removeAttribute("emailConfirmNum");
+		return "joinPage";
 	}
 
 	/* 로그인 페이지 이동 */
@@ -207,30 +207,27 @@ public class MemberController {
 
 		return service.changePwPage(id, hash, session);
 	}
-	
-	
-	//////////////////////////////////////소현///////////////////////////////////////////////
-	
-	
-	/*소현 : 관리자페이지 멤버추방*/
-	   @RequestMapping(value = "getmemberList")
-	   public @ResponseBody HashMap<String, Object> getmemberList(@RequestParam HashMap<String, String> params) {
-	      logger.info("멤버 리스트 호출");
-	      return service.getmemberList(params);
-	   }
-	   
-	   //소현 : 관리자 페이지 회원 추방(회원 상태 리스트)
-	   @RequestMapping(value="changeState")
-	   public @ResponseBody int changeState(@RequestParam ("idx") String idx) {
-	      logger.info("나의 모금 리스트 삭제 ");
-	      return service.changeState(idx);
-	   }
 
-	   
-	    //소현 : 관리자 페이지 회원 상태 리스트 페이지 접근
-	   @RequestMapping(value = "memberlist")
-	   public String memberlist () {
-	      logger.info("나의 회원 리스트 페이지 접근");
-	      return "memberlist";
-	   }
+	////////////////////////////////////// 소현///////////////////////////////////////////////
+
+	/* 소현 : 관리자페이지 멤버추방 */
+	@RequestMapping(value = "getmemberList")
+	public @ResponseBody HashMap<String, Object> getmemberList(@RequestParam HashMap<String, String> params) {
+		logger.info("멤버 리스트 호출");
+		return service.getmemberList(params);
+	}
+
+	// 소현 : 관리자 페이지 회원 추방(회원 상태 리스트)
+	@RequestMapping(value = "changeState")
+	public @ResponseBody int changeState(@RequestParam("idx") String idx) {
+		logger.info("나의 모금 리스트 삭제 ");
+		return service.changeState(idx);
+	}
+
+	// 소현 : 관리자 페이지 회원 상태 리스트 페이지 접근
+	@RequestMapping(value = "memberlist")
+	public String memberlist() {
+		logger.info("나의 회원 리스트 페이지 접근");
+		return "memberlist";
+	}
 }

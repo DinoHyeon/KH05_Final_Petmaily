@@ -8,12 +8,12 @@
 <title>커뮤니티 수정 페이지</title>
 <style>
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 95%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 95%;
+	background: white;
 }
 
 #sideFrame {
@@ -25,6 +25,7 @@
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
 }
+
 #conDiv {
 	position: absolute;
 	left: 0%;
@@ -138,81 +139,84 @@
 	color: white;
 	cursor: pointer;
 }
-#content_div img{
-	width:130px;
-	height:130px;
-}
-#photo_div img{
-	width:100px;
-	height:100px;
+
+#content_div img {
+	width: 130px;
+	height: 130px;
 }
 
-#conDiv input[type='button']{
-border-radius: 5px;
+#photo_div img {
+	width: 100px;
+	height: 100px;
+}
+
+#conDiv input[type='button'] {
+	border-radius: 5px;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
-		<div id="sideFrame"></div>
-   <jsp:include page="sideMenu.jsp" />
-   <div id="contentFrame">
-	<!-- 내용시작 -->
-	<form id="communityUpdate" action="communityUpdate" method="post">
-		<div id="conDiv">
-			<h1>커뮤니티 수정</h1>
-			<input type="hidden" name="board_idx"
-				value="${cUpdateForm.board_idx}" />
-			<table id="detailTable" style="border: 1px solid gray">
-				<tr class="littleTr">
-					<th style="width: 100px">작성자</th>
-					<td class="littleTd" style="width: 500px">${cUpdateForm.board_writer}</td>
-					<%-- <td><input id="board_writer" type="text" name="board_writer" readOnly value="${sessionScope.loginId}"/></td> --%>
-					<th style="width: 100px">작성일</th>
-					<td>${cUpdateForm.board_regDate}</td>
-				</tr>
-				<tr class="littleTr">
-					<th style="width: 100px">제 목</th>
-					<td class="littleTd" style="width: 500px"><input type="text"
-						name="board_title" value="${cUpdateForm.board_title}"
-						onkeyup="chkword(this, 70)" /></td>
-					<th style="width: 100px">조회수</th>
-					<td>${cUpdateForm.board_hit}</td>
-				</tr>
-				<tr>
-					<th colspan=4 style="width: 1000px; border: 1px solid gray;">내
-						용</th>
-				</tr>
-				<tr>
-					<td colspan=4 style="text-align: left; border: 1px solid gray;">
-						<input type="hidden" id="contentForm" name="board_content" />
-						<div id="content_div" contenteditable="true" onkeyup="div_chk()">
-							${cUpdateForm.board_content}</div>
-					</td>
-				</tr>
-				<tr>
-				</tr>
-			</table>
-			<table id="uploadTable">
-				<tr>
-					<td>사 진 첨 부 <input type="button" onclick="cFileUp()"
-						value="첨부" /></td>
-				</tr>
-				<tr>
-					<td colspan="3" style="height: 120px; border: 1px solid gray;">
-						<div id="photo_div"></div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3" style="text-align: right; border: 1px solid white;">
-						<input type="button" value="수정" onclick="communityUpdate()" />
-						<input type="button" value="취소"
-						onclick="location.href='./communityDetail?board_idx=${cUpdateForm.board_idx}'" />
-					</td>
-				</tr>
-			</table>
-		</div>
-	</form>
+	<div id="sideFrame"></div>
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
+		<!-- 내용시작 -->
+		<form id="communityUpdate" action="communityUpdate" method="post">
+			<div id="conDiv">
+				<h1>커뮤니티 수정</h1>
+				<input type="hidden" name="board_idx"
+					value="${cUpdateForm.board_idx}" />
+				<table id="detailTable" style="border: 1px solid gray">
+					<tr class="littleTr">
+						<th style="width: 100px">작성자</th>
+						<td class="littleTd" style="width: 500px">${cUpdateForm.board_writer}</td>
+						<%-- <td><input id="board_writer" type="text" name="board_writer" readOnly value="${sessionScope.loginId}"/></td> --%>
+						<th style="width: 100px">작성일</th>
+						<td>${cUpdateForm.board_regDate}</td>
+					</tr>
+					<tr class="littleTr">
+						<th style="width: 100px">제 목</th>
+						<td class="littleTd" style="width: 500px"><input type="text"
+							name="board_title" value="${cUpdateForm.board_title}"
+							onkeyup="chkword(this, 70)" /></td>
+						<th style="width: 100px">조회수</th>
+						<td>${cUpdateForm.board_hit}</td>
+					</tr>
+					<tr>
+						<th colspan=4 style="width: 1000px; border: 1px solid gray;">내
+							용</th>
+					</tr>
+					<tr>
+						<td colspan=4 style="text-align: left; border: 1px solid gray;">
+							<input type="hidden" id="contentForm" name="board_content" />
+							<div id="content_div" contenteditable="true" onkeyup="div_chk()">
+								${cUpdateForm.board_content}</div>
+						</td>
+					</tr>
+					<tr>
+					</tr>
+				</table>
+				<table id="uploadTable">
+					<tr>
+						<td>사 진 첨 부 <input type="button" onclick="cFileUp()"
+							value="첨부" /></td>
+					</tr>
+					<tr>
+						<td colspan="3" style="height: 120px; border: 1px solid gray;">
+							<div id="photo_div"></div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3"
+							style="text-align: right; border: 1px solid white;"><input
+							type="button" value="수정" onclick="communityUpdate()" /> <input
+							type="button" value="취소"
+							onclick="location.href='./communityDetail?board_idx=${cUpdateForm.board_idx}'" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</form>
 	</div>
 </body>
 <script>
@@ -343,8 +347,7 @@ border-radius: 5px;
 		var myWin = window.open("./cFileUploadForm", "파일 업로드",
 				"width=400, height=100");
 	}
-	
-	
+
 	//수정 요청
 	function communityUpdate() {
 		$("#contentForm").val($("#content_div").html());//div 내용을 hidden에 담기

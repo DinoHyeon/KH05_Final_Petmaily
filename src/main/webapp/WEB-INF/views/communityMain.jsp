@@ -7,12 +7,12 @@
 <title>커뮤니티 메인</title>
 <style>
 #contentFrame {
-   position: absolute;
-   left: 15.52%;
-   top: 12.5%;
-   width: 82.95%;
-   height: 95%;
-   background: white;
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 95%;
+	background: white;
 }
 
 #sideFrame {
@@ -47,7 +47,7 @@
 
 #conDiv h1 {
 	position: absolute;
-	top:-10%;
+	top: -10%;
 	left: 30%;
 	margin: 50px 0px 25px 0px;
 	text-align: center;
@@ -148,51 +148,51 @@
 	color: black;
 }
 
-#conDiv input[type='button']{
-border-radius: 5px;
+#conDiv input[type='button'] {
+	border-radius: 5px;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="mainFrame.jsp" />
-		<div id="sideFrame"></div>
-   <jsp:include page="sideMenu.jsp" />
-   <div id="contentFrame">
-	<!-- 내용시작 -->
-	<div id="conDiv">
-		<h1>커뮤니티 게시판</h1>
-		<table id="selectTable">
-			<tr>
-				<td><select id="cSearchKey" name="cSearchKey">
-						<option value="검색 키워드" selected>검색 키워드</option>
-						<option value="제목">제목</option>
-						<option value="작성자">작성자</option>
-						<option value="내용">내용</option>
-				</select></td>
-				<td id="valTd"><input type="text" id="cSearchVal"
-					name="cSearchVal" /></td>
-				<td><input type="button" id="searchBtn"
-					onclick="communityList(showPageNum)" value="검색" /></td>
-			</tr>
-		</table>
-		<table id="listTable">
-			<thead>
+	<div id="sideFrame"></div>
+	<jsp:include page="sideMenu.jsp" />
+	<div id="contentFrame">
+		<!-- 내용시작 -->
+		<div id="conDiv">
+			<h1>커뮤니티 게시판</h1>
+			<table id="selectTable">
 				<tr>
-					<th style="width: 150px">글번호</th>
-					<th style="width: 450px">제목</th>
-					<th style="width: 150px">작성자</th>
-					<th style="width: 150px">작성일</th>
-					<th style="width: 100px">조회수</th>
+					<td><select id="cSearchKey" name="cSearchKey">
+							<option value="검색 키워드" selected>검색 키워드</option>
+							<option value="제목">제목</option>
+							<option value="작성자">작성자</option>
+							<option value="내용">내용</option>
+					</select></td>
+					<td id="valTd"><input type="text" id="cSearchVal"
+						name="cSearchVal" /></td>
+					<td><input type="button" id="searchBtn"
+						onclick="communityList(showPageNum)" value="검색" /></td>
 				</tr>
-			</thead>
-			<tbody id="cList">
-			</tbody>
-		</table>
-		<div id="paging"></div>
-		<input type="button" id="write" value="글 작성"
-			onclick="location.href='./communityForm'" />
-		
-	</div>
+			</table>
+			<table id="listTable">
+				<thead>
+					<tr>
+						<th style="width: 150px">글번호</th>
+						<th style="width: 450px">제목</th>
+						<th style="width: 150px">작성자</th>
+						<th style="width: 150px">작성일</th>
+						<th style="width: 100px">조회수</th>
+					</tr>
+				</thead>
+				<tbody id="cList">
+				</tbody>
+			</table>
+			<div id="paging"></div>
+			<input type="button" id="write" value="글 작성"
+				onclick="location.href='./communityForm'" />
+
+		</div>
 	</div>
 </body>
 <script>
@@ -231,7 +231,7 @@ border-radius: 5px;
 		console.log($(e).attr("id"));
 		location.href = "./" + $(e).attr("id");
 	};
-	
+
 	//리스트 ajax
 	function communityList(page) {
 		$.ajax({

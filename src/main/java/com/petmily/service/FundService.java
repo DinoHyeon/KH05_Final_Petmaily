@@ -246,7 +246,6 @@ public class FundService {
 		
 		filen = newFileName.split("~")[0];
 		logger.info(" 사진 체크파일 이름:{}", filen);
-		// if(quizAnswer.equals(answer)) {
 		if (filen.equals("동물")) {// 저장할 파일이 있을 경우
 
 			i++;// 1
@@ -275,7 +274,6 @@ public class FundService {
 	public ModelAndView upload(MultipartFile file, String root) {
 		logger.info("파일업로드");
 		ModelAndView mav = new ModelAndView();
-		// String fullPath = "resources/fundupload/";
 		String fullPath = root + "resources/upload/";
 
 		System.out.println("ddd");
@@ -324,7 +322,6 @@ public class FundService {
 	public ModelAndView Photoupload(MultipartFile file, String root) {
 		logger.info("파일업로드");
 		ModelAndView mav = new ModelAndView();
-		// String fullPath = "resources/fundupload/";
 		String fullPath = root + "resources/upload/";
 		// 1. 폴더가 없을 경우 폴더 생성
 		File dir = new File(fullPath);
@@ -372,7 +369,6 @@ public class FundService {
 		// 상세보기 정보
 		mav.addObject("dto", inter.funddetail(idx));
 		
-
 		// 파일 정보(다운로드 리스트)
 		ArrayList<BoardDTO> files = inter.fundfileList(idx);
 		mav.addObject("files", files);
@@ -515,7 +511,7 @@ public class FundService {
 		int success = inter.delLikelist(idx);
 		return success;
 	}
-
+	
 	public ModelAndView funddelete(Model model) {
 		inter = sqlSession.getMapper(BoardInter.class);
 		Map<String, Object> map = model.asMap();

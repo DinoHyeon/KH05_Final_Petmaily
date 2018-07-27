@@ -15,7 +15,7 @@
 <style>
 /* 타이틀 */
 #title h1 {
-	top: 16%;
+	top: -2%;
 	left: 45%;
 	margin: 50px 0px 25px 0px;
 	text-align: center;
@@ -26,8 +26,8 @@
 }
 
 #title h5 {
-	top: 42%;
-	left: 22%;
+	top: 22%;
+	left: 53%;
 	margin: 10px 0px 40px 0px;
 	text-align: right;
 	color: black;
@@ -38,10 +38,10 @@
 
 /* 셀렉트박스 테이블 */
 .adopt  #selectTable {
-	top: 42.5%;
-	left: 21.5%;
+	top: 11.5%;
+	left: 11%;
 	padding: 1px 1px 1px 1px;
-	margin: 25px auto auto  auto;
+	margin: 25px auto auto auto;
 	position: absolute;
 	float: left;
 }
@@ -87,8 +87,8 @@
 
 /* 글 작성 테이블 */
 .adopt #writeTable {
-	top: 62%;
-	left: 21%;
+	top: 31%;
+	left: 10.6%;
 	width: 1000px;
 	margin: 0px 5px 5px 5px;
 	border-collapse: collapse;
@@ -130,8 +130,8 @@
 }
 /* 업로드 테이블 */
 .adopt #uploadTable {
-	top: 800px;
-	left: 21%;
+	top: 75%;
+	left: 10.6%;
 	border: 1px solid lightgray;
 	width: 1000px;
 	height: 150px;
@@ -141,73 +141,90 @@
 	position: absolute;
 }
 
+#btnTable {
+	left: 72%;
+	top: 105%;
+	position: absolute;
+}
 
+.btn {
+	top: 90%;
+	height: 40px;
+	width: 107px;
+	background-color: #28977B;
+	border-color: #28977B;
+	border-style: solid;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+}
 
-#btnTable{
-			left:70%;
-			top:1010px;
-			position: absolute;
-		}
-		.btn {
-	     top:90%;
-		 height:40px;
-         width:107px;
-         background-color: #28977B;
-         border-color:#28977B;
-         border-style:solid;
-         font-weight: 600;
-         color: white;
-         cursor: pointer;
-		}
-		
-		#uploadBtn{
-		 left:88%;
-		 top:100px;
-		 height:40px;
-         width:107px;
-         background-color: #28977B;
-         border-color:#28977B;
-         border-style:solid;
-         font-weight: 600;
-         color: white;
-         cursor: pointer;
-         position: absolute;
-		}
+#uploadBtn {
+	left: 88%;
+	top: 100px;
+	height: 40px;
+	width: 107px;
+	background-color: #28977B;
+	border-color: #28977B;
+	border-style: solid;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+	position: absolute;
+}
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 116%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+}
+
+.adopt {
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 95%;
+	background: white;
+}
 </style>
 <body>
 	<jsp:include page="mainFrame.jsp" />
+	<div id="sideFrame"></div>
+	<jsp:include page="sideMenu.jsp" />
 	<div class="adopt">
-
 		<div id=title>
 			<h1>입양 후기 등록</h1>
-			<h5>
-				입양 후기를 작성합니다, 동물의 종류와 품종, 입양 지역을 선택해 주세요
-			</h5>
+			<h5>입양 후기를 작성합니다, 동물의 종류와 품종, 입양 지역을 선택해 주세요</h5>
 		</div>
-<form id="adoptWrite" action="adoptWrite" name="adoptWrite" method="post">
-		<table id="selectTable">
-			<tr>
-				<th colspan=2 style="width: 1000px">필수 선택 항목</th>
-			</tr>
-			<tr>
-				<td class=tap>동물</td>
-				<td><select id="animal" onchange="getAnimalType()" name="animal_idx">
-						<option selected >동물 선택 (필수)</option>
-						<option value="417000" >개</option>
-						<option value="422400">고양이</option>
-						<option value="429900">기타</option>
-				</select> <select id="animalType" name="animal_type">
-						<option selected>품종 선택</option>
-						<option></option>
-				</select>
-				<input id="selanimal" name="selanimal" type="hidden"/>
-				</td>
-			</tr>
+		<form id="adoptWrite" action="adoptWrite" name="adoptWrite"
+			method="post">
+			<table id="selectTable">
+				<tr>
+					<th colspan=2 style="width: 1000px">필수 선택 항목</th>
+				</tr>
+				<tr>
+					<td class=tap>동물</td>
+					<td><select id="animal" onchange="getAnimalType()"
+						name="animal_idx">
+							<option selected>동물 선택 (필수)</option>
+							<option value="417000">개</option>
+							<option value="422400">고양이</option>
+							<option value="429900">기타</option>
+					</select> <select id="animalType" name="animal_type">
+							<option selected>품종 선택</option>
+							<option></option>
+					</select> <input id="selanimal" name="selanimal" type="hidden" /></td>
+				</tr>
 
-			<tr>
-				<td class=tap>지역</td>
-				<td>
-					<select id="sido" onchange="getSigungu()"  name="adopt_loc1">
+				<tr>
+					<td class=tap>지역</td>
+					<td><select id="sido" onchange="getSigungu()"
+						name="adopt_loc1">
 							<option selected>시/도 선택 (필수)</option>
 							<option value="6110000">서울특별시</option>
 							<option value="6260000">부산광역시</option>
@@ -225,79 +242,100 @@
 							<option value="6470000">경상북도</option>
 							<option value="6480000">경상남도</option>
 							<option value="6500000">제주특별자치도</option>
-					</select>
-					 <select id="sigundo" name="adopt_loc2">
-					 	<option selected>시/군/도 선택</option>
-					</select>
-					<input id="selsido" name="selsido" type="hidden"/>
-				</td>
-			</tr>
+					</select> <select id="sigundo" name="adopt_loc2">
+							<option selected>시/군/도 선택</option>
+					</select> <input id="selsido" name="selsido" type="hidden" /></td>
+				</tr>
 			</table>
+			<table id="writeTable">
+				<tr>
+					<th style="width: 100px">작성자</th>
+					<td><input id="board_writer" type="text" name="board_writer"
+						readOnly value="작성자test" /></td>
+				</tr>
+				<tr>
+					<th style="width: 100px">제 목</th>
+					<td><input id="board_title" type="text" name="board_title"
+						onkeyup="chkword(this, 200)" /></td>
+				</tr>
+				<tr>
+					<th colspan=2 style="width: 1000px">내 용</th>
+				</tr>
+				<tr>
+					<td colspan=2>
+						<!-- 단점이... 값을 넘길 수 없다는것!! 그래서 hidden 만든다 --> <input type="hidden"
+						id="contentForm" name="board_content" /> <!-- div에서 내용 받아 볼 수 있게 하려고 설정 -->
+						<div id="content_div" contenteditable="true" onkeyup="div_chk()"></div>
+					</td>
+				</tr>
+			</table>
+			<table id="uploadTable">
+				<tr>
+					<td>사진첨부</td>
+					<td></td>
+					<td><input type="button" id="uploadBtn"
+						onclick="adoptPhotoWrite()" value="첨부" /></td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<div id="photo_div" contenteditable="true"></div>
+					</td>
+				</tr>
+			</table>
+			<table id="btnTable">
+				<tr>
+					<td><input type="button" class="btn" id="btn_adoptWrite"
+						value="등록" /> <input type="button" class="btn"
+						onclick="location.href='./adoptMain'" value="취소" /></td>
+				</tr>
+			</table>
+		</form>
 
-				<table id="writeTable">
-					<tr>
-						<th style="width: 100px">작성자</th>
-						<td><input id="board_writer" type="text" name="board_writer" readOnly value="${sessionScope.loginId}"/></td>
-					</tr>
-					<tr>
-						<th style="width: 100px">제 목</th>
-						<td><input id="board_title" type="text" name="board_title"
-							onkeyup="chkword(this, 200)" /></td>
-					</tr>
-					<tr>
-						<th colspan=2 style="width: 1000px">내 용</th>
-					</tr>
-					<tr>
-						<td colspan=2>
-							<!-- 단점이... 값을 넘길 수 없다는것!! 그래서 hidden 만든다 --> 
-							<input type="hidden" id="contentForm" name="board_content" /> 
-							<!-- div에서 내용 받아 볼 수 있게 하려고 설정 -->
-							<div id="content_div" contenteditable="true" onkeyup="div_chk()"></div>
-						</td>
-					</tr>
-				</table>
-				<table id="uploadTable">
-					<tr>
-						<td>  사진첨부</td>
-						<td></td>
-						<td><input type="button"  id="uploadBtn" onclick="adoptPhotoWrite()"
-							value="첨부" /></td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<div id="photo_div" contenteditable="true"></div>
-						</td>
-					</tr>
-				</table>
-				<table id="btnTable">
-					<tr>
-						<td>
-							<input type="button"  class="btn" id="btn_adoptWrite" value="등록" /> 
-							<input type="button" class="btn" onclick="location.href='./adoptMain'" value="취소" />
-						</td>
-					</tr>
-				</table>
-	</form>
 	</div>
 </body>
 <script>
+	var menuName = {
+		'유기동물공고' : 'animalNotice',
+		'입양후기' : 'adoptMain'
+	};
 	$(document).ready(function() {
-	    
+		var content = "";
+		for ( var key in menuName) {
+			console.log(key);
+			content += "<div class='menuName'";
+			content += "style='"
+			if (key == '입양후기') {
+				content += "background:#28977B;color:white;font-weight: 600;";
+			}
+			content += "cursor: pointer'";
+			content += "onclick='pageMove(this)' id=" + menuName[key] + ">";
+			content += key;
+			content += "</div>";
+		}
+		;
+
+		$("#sideMenu").empty();
+		$("#sideMenu").append(content);
 	});
 
+	function pageMove(e) {
+		console.log($(e).attr("id"));
+		location.href = "./" + $(e).attr("id");
+	};
+
 	//내용 placeholder+글자수 제한을 위해!
-	function div_chk(){
+	function div_chk() {
 		var div_len = $("#content_div").html().length;
 		console.log("div_len", div_len);
-	    if (div_len > 1500) {
-		          alert("허용 가능한 글자수를 초과하셨습니다.");
-		          var new_len = $("#content_div").html().substr(0, 1500);
-		          console.log("new_len", new_len);
- 		          $("#content_div").text(new_len);
-		       }
+		if (div_len > 1500) {
+			alert("허용 가능한 글자수를 초과하셨습니다.");
+			var new_len = $("#content_div").html().substr(0, 1500);
+			console.log("new_len", new_len);
+			$("#content_div").text(new_len);
+		}
 	}
 	//등록 버튼 클릭시
-	
+
 	$("#btn_adoptWrite").click(function() {
 		$("#contentForm").val($("#content_div").html());//div 내용을 hidden에 담기
 		// 동물, 동물 값
@@ -306,8 +344,8 @@
 		// 시/도, 시/도 값
 		var sido = document.getElementById("sido");
 		var sidoText = sido.options[sido.selectedIndex].text;
-	
-	//null 들어가지 않도록 설정
+
+		//null 들어가지 않도록 설정
 		if (animalText == "동물 선택 (필수)") {
 			alert("동물을 선택해주세요!");
 		} else if (sidoText == "시/도 선택 (필수)") {
