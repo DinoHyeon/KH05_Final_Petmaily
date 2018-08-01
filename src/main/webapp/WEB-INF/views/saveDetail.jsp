@@ -237,7 +237,6 @@
                   class="btn" onclick="location.href='./saveMain'" value="글 목록으로" />
                </td>
             </tr>
-<<<<<<< HEAD
          </table>
 
       </div>
@@ -248,22 +247,7 @@
          </tr>
       </table>
 
-
-=======
-            <tbody>
-               <tr>
-                  <td><jsp:include page="reply.jsp" /></td>
-               </tr>
-            </tbody>
-         </table>
-         <!--          <table id="replyTable">
-            <tbody>
-            
-         </tbody>
-         </table> -->
       </div>
->>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
-   </div>
 </body>
 <script>
    var menuName = {'구조후기':'saveMain', '모금':'fundMain'};
