@@ -251,6 +251,9 @@
 	var request;
 	var favorite=0;
 	var menuName = {'실종':'missingList', '보호':'protectList'};
+	var delBtn = $("#del");
+	var modiBtn = $("#modi");
+
 	
 	$(document).ready(function() {
 		var content = "";
