@@ -69,15 +69,15 @@
 	width: 100px;
 }
 
-#selectTable th {
-	background-color: #28977B;
+#writeTable th {
 	height: 30px;
 	width: 1000px;
+	background-color: #28977B;
 	color: white;
 	font-weight: 600;
 }
 
-#selectTable td {
+#writeTable td {
 	padding: 5px 10px 5px 10px;
 }
 
@@ -92,7 +92,7 @@
 	position: absolute;
 }
 
-#writeTable input[type='text'] {
+#contentFrame input[type='text'] {
 	width: 100%;
 	height: 30px;
 }
@@ -103,21 +103,7 @@
 	margin: 0;
 }
 
-#writeTable td {
-	text-align: center;
-	border: 1px solid white;
-	border-collapse: collapse;
-	padding: 2px 2px;
-	margin: 0px;
-}
 
-#writeTable th {
-	border: 1px solid white;
-	border-collapse: collapse;
-	padding: 5px 10px;
-	background-color: #28977B;
-	color: white;
-}
 
 #content_div {
 	border: 1px solid lightgray;
@@ -155,7 +141,12 @@
 	position: absolute;
 }
 
+<<<<<<< HEAD
+
+#contentFrame input[type='button'] {
+=======
 .btn {
+>>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
 	top: 90%;
 	height: 40px;
 	width: 107px;
@@ -166,6 +157,24 @@
 	color: white;
 	cursor: pointer;
 }
+<<<<<<< HEAD
+
+#replyTable th{
+	background-color: #28977B;
+	color: white;
+	font-weight: 600;
+}
+
+#replyTable {
+
+	font-weight: 600;
+}
+
+#registArea{
+	text-align:center;
+}
+=======
+>>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
 </style>
 </head>
 <body>
@@ -234,6 +243,19 @@
 						class="btn" onclick="location.href='./saveMain'" value="글 목록으로" />
 					</td>
 				</tr>
+<<<<<<< HEAD
+			</table>
+
+		</div>
+
+		<table id="replyTable">
+			<tr>
+				<td><jsp:include page="reply.jsp" /></td>
+			</tr>
+		</table>
+
+
+=======
 				<tbody>
 					<tr>
 						<td><jsp:include page="reply.jsp" /></td>
@@ -246,6 +268,7 @@
 			</tbody>
 			</table> -->
 		</div>
+>>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
 	</div>
 </body>
 <script>

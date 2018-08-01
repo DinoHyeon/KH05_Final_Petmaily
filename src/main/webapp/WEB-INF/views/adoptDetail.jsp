@@ -9,6 +9,25 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <title>입양 후기 상세보기 페이지</title>
 <style>
+#contentFrame {
+	position: absolute;
+	left: 15.52%;
+	top: 12.5%;
+	width: 82.95%;
+	height: 150%;
+	background: white;
+}
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+}
+
 /* 타이틀 */
 #title h1 {
 	top: 16%;
@@ -150,6 +169,7 @@
 	width: 82.95%;
 	height: 150%;
 	background: white;
+<<<<<<< HEAD
 }
 
 #sideFrame {
@@ -161,6 +181,57 @@
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
 }
+
+#replyTable {
+	width: 1000px;
+	top: 70%;
+	left: 7.1%;
+	position: absolute;
+}
+
+#replyTable input[type='text'] {
+	width: 100%;
+	height: 30px;
+}
+	
+#replyTable th {
+	background-color: #28977B;
+	color: white;
+	font-weight: 600;
+}	
+
+#replyTable td{
+	padding: 5px 10px 5px 10px;
+}
+
+#contentFrame input[type='button'] {
+	top: 90%;
+	height: 40px;
+	width: 107px;
+	background-color: #28977B;
+	border-color: #28977B;
+	border-style: solid;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+}
+
+#registArea{
+	text-align:center;
+=======
+}
+
+#sideFrame {
+	position: absolute;
+	left: 0.52%;
+	top: 12.4%;
+	width: 14.7%;
+	height: 150%;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+>>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
+}
+
 </style>
 </head>
 <body>
@@ -230,6 +301,19 @@
 					</td>
 				</tr>
 				<tbody>
+<<<<<<< HEAD
+
+				</tbody>
+			</table>
+		</div>
+
+		<table id="replyTable">
+			<tr>
+				<td><jsp:include page="reply.jsp" /></td>
+			</tr>
+		</table>
+
+=======
 					<tr>
 						<td></td>
 					</tr>
@@ -237,6 +321,7 @@
 			</table>
 			<jsp:include page="reply.jsp" />
 		</div>
+>>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
 	</div>
 </body>
 <script>

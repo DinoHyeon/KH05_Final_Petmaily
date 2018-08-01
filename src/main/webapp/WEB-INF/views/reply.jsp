@@ -44,13 +44,22 @@
 	top: 115%;
 }
 
+<<<<<<< HEAD
+.replyArea th{
+	border-top : 1px solid black;
+=======
 th {
 	border-top: 1px solid black;
+>>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
 	border-bottom: 1px solid black;
 	background-color: #D2E5A8;
 }
 
+<<<<<<< HEAD
+.replyArea td{
+=======
 td {
+>>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
 	border-bottom: 1px solid black;
 }
 
