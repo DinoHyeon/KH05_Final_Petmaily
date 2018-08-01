@@ -30,8 +30,8 @@
 
 /* 타이틀 */
 #title h1 {
-   top: 16%;
-   left: 45%;
+   top: 2%;
+   left: 37%;
    margin: 50px 0px 25px 0px;
    text-align: center;
    color: #28977B;
@@ -41,8 +41,8 @@
 }
 
 #title h5 {
-   top: 41%;
-   left: 69%;
+   top: 15%;
+   left: 66%;
    margin: 10px 0px 40px 0px;
    text-align: right;
    color: black;
@@ -53,8 +53,8 @@
 
 /* 동물 종류, 품종, 지역 테이블 */
 .adopt  #selectTable {
-   top: 42.5%;
-   left: 21%;
+   top: 15.5%;
+   left: 7%;
    padding: 2px 2px 2px 4px;
    margin: 30px auto auto auto;
    position: absolute;
@@ -85,8 +85,8 @@
 
 /* 글 작성 테이블 */
 .adopt #writeTable {
-   top: 62%;
-   left: 21%;
+   top: 29%;
+   left: 7%;
    width: 1000px;
    margin: 0px 5px 5px 5px;
    border-collapse: collapse;
@@ -130,23 +130,9 @@
 .littleTd {
    text-align: left;
 }
-
-/* 업로드 테이블 */
-.adopt #uploadTable {
-   top: 96%;
-   left: 21%;
-   border: 1px solid lightgray;
-   width: 1000px;
-   height: 100px;
-   margin: 100px 5px 100px 5px;
-   border-collapse: collapse;
-   padding: 5px 10px;
-   position: absolute;
-}
-
 #btnTable {
-   left: 63%;
-   top: 940px;
+   left: 58%;
+   top: 60%;
    position: absolute;
 }
 
@@ -273,17 +259,11 @@
                </td>
             </tr>
          </table>
-         <table id="uploadTable">
-            <tr>
-               <td>첨부된 파일</td>
-               <td id="photoTd">${aDetailPhoto}</td>
-            </tr>
-         </table>
          <table id=btnTable>
             <tr>
-               <td><input type="button" class="btn"
+               <td><input type="button" id="upBtn" class="btn"
                   onclick="location.href='./adoptUpdateForm?board_idx=${aDetail.board_idx}'"
-                  value="수정" /> <input type="button" class="btn"
+                  value="수정" /> <input type="button" class="btn" id="delBtn"
                   onclick="adoptDel()" value="삭제" /> <input type="button"
                   class="btn" onclick="location.href='./adoptMain'" value="글 목록으로" />
                </td>
@@ -304,6 +284,16 @@
    </div>
 </body>
 <script>
+	//로그인 아이디 체크 -> 버튼 활성화/비활성화
+	var loginId = "${sessionScope.loginId}";
+	console.log("입양 상세보기 - 로그인아이디", loginId);
+	if (loginId == "${aDetail.board_writer}") {
+		console.log("글작성자 확인, 수정+삭제버튼 활성화");
+	} else {
+		$("#upBtn").hide();
+		$("#delBtn").hide();
+	}
+
    var menuName = {
       '유기동물공고' : 'animalNotice',
       '입양후기' : 'adoptMain'
