@@ -104,6 +104,10 @@
 	cursor: pointer;
 }
 
+#modi, #del{
+	display: none;
+}
+
 /* 글 테이블 */
 #detailTable {
 	top: 14%;
@@ -285,6 +289,16 @@
 			//아니라면 그냥 출력
 			$("#writer").html(writer);
 		}
+		
+		if(writer.indexOf("비회원")!=-1 && '${sessionScope.loginId}'==''){
+			delBtn.css("display","inline");
+			modiBtn.css("display","inline");
+		}else{
+			if(writer == '${sessionScope.loginId}'||'${sessionScope.state}'=='admin'){
+				delBtn.css("display","inline");
+				modiBtn.css("display","inline");
+			}
+		};
 		
 		$( "#missingNonmemberChk" ).dialog({
 			autoOpen: false,

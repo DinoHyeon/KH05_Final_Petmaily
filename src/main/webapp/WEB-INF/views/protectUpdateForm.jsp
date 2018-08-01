@@ -483,7 +483,7 @@
 						} else if ($("#sido option:selected").html() == "선택") {
 							$("#sido").focus();
 							alert("지역을 선택해 주세요.");
-						} else if (!mcheckphoto()) {
+						} else if (!pcheckphoto()) {
 							alert("파일을 등록해주세요.");
 						} else if (!$("input:radio[name='main']")
 								.is(":checked")) {

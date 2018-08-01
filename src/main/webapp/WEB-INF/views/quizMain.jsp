@@ -21,7 +21,7 @@
 	left: 0.52%;
 	top: 12.4%;
 	width: 14.7%;
-	height: 185%;
+	height: 250%;
 	border-right: 1px solid gray;
 	border-left: 1px solid gray;
 }
@@ -148,8 +148,8 @@ textarea {
 /* 페이징 */
 #paging {
 	position: absolute;
-	top: 187%;
-	left: 52%;
+	top: 245%;
+	left: 47%;
 }
 
 /* selectBox(검색) */
@@ -215,8 +215,8 @@ gray
 		</div>
 		<textarea id="quizAsk" rows="" cols="" placeholder="퀴즈 제목 작성"></textarea>
 		<div id="registAnswerRadio">
-			<label> O<input type="radio" name="answer" value="O">
-			</label> <label> X<input type="radio" name="answer" value="X">
+			<label> O<input id="O" type="radio" name="answer" value="O">
+			</label> <label> X<input id="X"  type="radio" name="answer" value="X">
 			</label>
 		</div>
 		<textarea id="registQuizContent" rows="" cols=""
@@ -259,8 +259,8 @@ gray
 				</tbody>
 			</table>
 		</div>
+		<div id="paging"></div>
 	</div>
-	<div id="paging"></div>
 	</div>
 </body>
 <script>
@@ -292,7 +292,7 @@ gray
 		$( "#category" ).selectmenu();
 		$( "#searchAniamlList" ).selectmenu();
 		$( "#searchCategory" ).selectmenu();
-		$('input[type="radio"]').checkboxradio({icon: false});
+		$("input[name='answer']").checkboxradio({icon: false});
 	    $( "input[type=submit], button, input[type=button]" ).button();
 		quizListCall(showPageNum);
 	});
@@ -340,8 +340,7 @@ gray
 						$( "#aniamlList" ).selectmenu( "refresh" );
 						
 						$("#registQuizContent").val("");
-						$("input[name='answer']:checked").closest("label").attr("class","ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label");
-						$("input[name='answer']:checked").removeAttr('checked');
+						$("input[name=answer]").prop("checked",false);	
 						$("input[name='answer']").checkboxradio( "refresh" );
 						quizListCall(showPageNum);
 					} else {

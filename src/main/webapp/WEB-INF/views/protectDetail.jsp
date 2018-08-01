@@ -116,6 +116,10 @@
 	cursor: pointer;
 }
 
+#modi, #del{
+	display: none;
+}
+
 #favorite {
 	position: absolute;
 	top: 43.5%;
@@ -190,11 +194,11 @@
 
 			</tr>
 			<tr>
-				<td colspan=4 style="text-align: right"><input type="button"
-					id="mlist" onclick="protectList()" value="리스트" /> <input
-					type="button" id="modi" onclick="protectNonmemberChk('modi')"
-					value="수정" /> <input type="button" id="del"
-					onclick="protectNonmemberChk('del')" value="삭제" /></td>
+				<td colspan=4 style="text-align: right">
+					<input type="button" id="mlist" onclick="protectList()" value="리스트" />
+					<input type="button" id="modi" onclick="protectNonmemberChk('modi')" value="수정" />
+					<input type="button" id="del" onclick="protectNonmemberChk('del')" value="삭제" />
+				</td>
 			</tr>
 			<tbody>
 				<tr>
@@ -217,6 +221,8 @@
 	var request;
 	var favorite=0;
 	var menuName = {'실종':'missingList', '보호':'protectList'};
+	var delBtn = $("#del");
+	var modiBtn = $("#modi");
 
 	$(document).ready(function() {
 		
@@ -255,6 +261,16 @@
 			//아니라면 그냥 출력
 			$("#writer").html(writer);
 		}
+		
+		if(writer.indexOf("비회원")!=-1 && '${sessionScope.loginId}'==''){
+			delBtn.css("display","inline");
+			modiBtn.css("display","inline");
+		}else{
+			if(writer == '${sessionScope.loginId}'||'${sessionScope.state}'=='admin'){
+				delBtn.css("display","inline");
+				modiBtn.css("display","inline");
+			}
+		};
 		
 		//dialog 플러그인 사용
 		$( "#protectNonmemberChk" ).dialog({
