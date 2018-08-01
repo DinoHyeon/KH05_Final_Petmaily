@@ -27,9 +27,11 @@
    border-right: 1px solid gray;
    border-left: 1px solid gray;
 }
+
 /* 타이틀 */
 #title h1 {
-   left: 40%;
+   top: 8%;
+   left: 37%;
    margin: 50px 0px 25px 0px;
    text-align: center;
    color: #28977B;
@@ -39,8 +41,8 @@
 }
 
 #title h5 {
-   top: 9%;
-   left: 69%;
+   top: 23%;
+   left: 66%;
    margin: 10px 0px 40px 0px;
    text-align: right;
    color: black;
@@ -51,7 +53,7 @@
 
 /* 동물 종류, 품종, 지역 테이블 */
 .adopt  #selectTable {
-   top: 9%;
+   top: 23.5%;
    left: 7%;
    padding: 2px 2px 2px 4px;
    margin: 30px auto auto auto;
@@ -69,21 +71,21 @@
    width: 100px;
 }
 
-#writeTable th {
+#selectTable th {
+   background-color: #28977B;
    height: 30px;
    width: 1000px;
-   background-color: #28977B;
    color: white;
    font-weight: 600;
 }
 
-#writeTable td {
+#selectTable td {
    padding: 5px 10px 5px 10px;
 }
 
 /* 글 작성 테이블 */
 .adopt #writeTable {
-   top: 19%;
+   top: 34%;
    left: 7%;
    width: 1000px;
    margin: 0px 5px 5px 5px;
@@ -92,7 +94,7 @@
    position: absolute;
 }
 
-#contentFrame input[type='text'] {
+#writeTable input[type='text'] {
    width: 100%;
    height: 30px;
 }
@@ -103,7 +105,21 @@
    margin: 0;
 }
 
+#writeTable td {
+   text-align: center;
+   border: 1px solid white;
+   border-collapse: collapse;
+   padding: 2px 2px;
+   margin: 0px;
+}
 
+#writeTable th {
+   border: 1px solid white;
+   border-collapse: collapse;
+   padding: 5px 10px;
+   background-color: #28977B;
+   color: white;
+}
 
 #content_div {
    border: 1px solid lightgray;
@@ -115,23 +131,41 @@
    text-align: left;
 }
 
-/* 업로드 테이블 */
-.adopt #uploadTable {
-   top: 42%;
-   left: 7.2%;
-   border: 1px solid lightgray;
-   width: 1000px;
-   height: 100px;
-   margin: 100px 5px 100px 5px;
-   border-collapse: collapse;
-   padding: 5px 10px;
+#btnTable {
+   left: 58%;
+   top: 65%;
    position: absolute;
 }
 
-#btnTable {
-   left: 60%;
-   top: 61%;
+.btn {
+   top: 90%;
+   height: 40px;
+   width: 107px;
+   background-color: #28977B;
+   border-color: #28977B;
+   border-style: solid;
+   font-weight: 600;
+   color: white;
+   cursor: pointer;
+}
+
+#contentFrame {
    position: absolute;
+   left: 15.52%;
+   top: 12.5%;
+   width: 82.95%;
+   height: 150%;
+   background: white;
+}
+
+#sideFrame {
+   position: absolute;
+   left: 0.52%;
+   top: 12.4%;
+   width: 14.7%;
+   height: 150%;
+   border-right: 1px solid gray;
+   border-left: 1px solid gray;
 }
 
 #replyTable {
@@ -141,6 +175,20 @@
    position: absolute;
 }
 
+#replyTable input[type='text'] {
+   width: 100%;
+   height: 30px;
+}
+   
+#replyTable th {
+   background-color: #28977B;
+   color: white;
+   font-weight: 600;
+}   
+
+#replyTable td{
+   padding: 5px 10px 5px 10px;
+}
 
 #contentFrame input[type='button'] {
    top: 90%;
@@ -154,19 +202,9 @@
    cursor: pointer;
 }
 
-#replyTable th{
-   background-color: #28977B;
-   color: white;
-   font-weight: 600;
-}
-
-#replyTable {
-
-   font-weight: 600;
-}
-
 #registArea{
    text-align:center;
+
 }
 
 </style>
@@ -222,12 +260,7 @@
          </tr>
          </tbody> --%>
          </table>
-         <table id="uploadTable">
-            <tr>
-               <td>첨부된 파일</td>
-               <td id="photoTd">${sDetailPhoto}</td>
-            </tr>
-         </table>
+
          <table id=btnTable>
             <tr>
                <td><input type="button" class="btn"
@@ -237,7 +270,6 @@
                   class="btn" onclick="location.href='./saveMain'" value="글 목록으로" />
                </td>
             </tr>
-<<<<<<< HEAD
          </table>
 
       </div>
@@ -248,22 +280,7 @@
          </tr>
       </table>
 
-
-=======
-            <tbody>
-               <tr>
-                  <td><jsp:include page="reply.jsp" /></td>
-               </tr>
-            </tbody>
-         </table>
-         <!--          <table id="replyTable">
-            <tbody>
-            
-         </tbody>
-         </table> -->
       </div>
->>>>>>> 88388ad3dfc8e8893a2f2ca03d5d1d2983f6e854
-   </div>
 </body>
 <script>
    var menuName = {'구조후기':'saveMain', '모금':'fundMain'};

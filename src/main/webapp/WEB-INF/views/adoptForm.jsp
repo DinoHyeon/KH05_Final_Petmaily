@@ -251,7 +251,7 @@
 				<tr>
 					<th style="width: 100px">작성자</th>
 					<td><input id="board_writer" type="text" name="board_writer"
-						readOnly value="작성자test" /></td>
+						readOnly value="${sessionScope.loginId}" /></td>
 				</tr>
 				<tr>
 					<th style="width: 100px">제 목</th>

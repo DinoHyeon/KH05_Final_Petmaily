@@ -209,7 +209,7 @@
 	if (loginId == "${cDetail.board_writer}") {
 		console.log("글작성자 확인, 수정+삭제버튼 활성화");
 	} else {
-		$("#updateBtn").hide();
+		$("#upBtn").hide();
 		$("#delBtn").hide();
 	}
 	//삭제 요청

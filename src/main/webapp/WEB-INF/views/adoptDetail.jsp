@@ -30,8 +30,8 @@
 
 /* 타이틀 */
 #title h1 {
-   top: 16%;
-   left: 45%;
+   top: 8%;
+   left: 37%;
    margin: 50px 0px 25px 0px;
    text-align: center;
    color: #28977B;
@@ -41,8 +41,8 @@
 }
 
 #title h5 {
-   top: 41%;
-   left: 69%;
+   top: 23%;
+   left: 66%;
    margin: 10px 0px 40px 0px;
    text-align: right;
    color: black;
@@ -53,8 +53,8 @@
 
 /* 동물 종류, 품종, 지역 테이블 */
 .adopt  #selectTable {
-   top: 42.5%;
-   left: 21%;
+   top: 23.5%;
+   left: 7%;
    padding: 2px 2px 2px 4px;
    margin: 30px auto auto auto;
    position: absolute;
@@ -85,8 +85,8 @@
 
 /* 글 작성 테이블 */
 .adopt #writeTable {
-   top: 62%;
-   left: 21%;
+   top: 37%;
+   left: 7%;
    width: 1000px;
    margin: 0px 5px 5px 5px;
    border-collapse: collapse;
@@ -131,22 +131,9 @@
    text-align: left;
 }
 
-/* 업로드 테이블 */
-.adopt #uploadTable {
-   top: 96%;
-   left: 21%;
-   border: 1px solid lightgray;
-   width: 1000px;
-   height: 100px;
-   margin: 100px 5px 100px 5px;
-   border-collapse: collapse;
-   padding: 5px 10px;
-   position: absolute;
-}
-
 #btnTable {
-   left: 63%;
-   top: 940px;
+   left: 58%;
+   top: 68%;
    position: absolute;
 }
 
@@ -271,12 +258,6 @@
                <td colspan=4 style="text-align: left">
                   <div id="content_div">${aDetail.board_content}</div>
                </td>
-            </tr>
-         </table>
-         <table id="uploadTable">
-            <tr>
-               <td>첨부된 파일</td>
-               <td id="photoTd">${aDetailPhoto}</td>
             </tr>
          </table>
          <table id=btnTable>

@@ -254,7 +254,9 @@
 	    var day = date.getDate(); //일
 	    if ((day+"").length < 2) {       // 일이 한자리 수인 경우 앞에 0을 붙여주기 위해
 	        day = "0" + day;
-	    }else if ((month+"").length < 2) {       // 월이 한자리 수인 경우 앞에 0을 붙여주기 위해
+	    }
+	    
+	    if ((month+"").length < 2) {       // 월이 한자리 수인 경우 앞에 0을 붙여주기 위해
 	    	month = "0" + month;
 	    }
 	    today = String(year)+month+day; // 오늘 날짜 (20180101)
