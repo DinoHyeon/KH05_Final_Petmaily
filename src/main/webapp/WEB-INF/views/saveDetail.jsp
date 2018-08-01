@@ -30,7 +30,7 @@
 
 /* 타이틀 */
 #title h1 {
-   top: 8%;
+   top: 2%;
    left: 37%;
    margin: 50px 0px 25px 0px;
    text-align: center;
@@ -41,7 +41,7 @@
 }
 
 #title h5 {
-   top: 23%;
+   top: 15%;
    left: 66%;
    margin: 10px 0px 40px 0px;
    text-align: right;
@@ -53,7 +53,7 @@
 
 /* 동물 종류, 품종, 지역 테이블 */
 .adopt  #selectTable {
-   top: 23.5%;
+   top: 15.5%;
    left: 7%;
    padding: 2px 2px 2px 4px;
    margin: 30px auto auto auto;
@@ -85,7 +85,7 @@
 
 /* 글 작성 테이블 */
 .adopt #writeTable {
-   top: 34%;
+   top: 29%;
    left: 7%;
    width: 1000px;
    margin: 0px 5px 5px 5px;
@@ -130,10 +130,9 @@
 .littleTd {
    text-align: left;
 }
-
 #btnTable {
    left: 58%;
-   top: 65%;
+   top: 60%;
    position: absolute;
 }
 
@@ -206,7 +205,6 @@
    text-align:center;
 
 }
-
 </style>
 </head>
 <body>
@@ -263,10 +261,10 @@
 
          <table id=btnTable>
             <tr>
-               <td><input type="button" class="btn"
+               <td><input type="button" class="btn" id="upBtn"
                   onclick="location.href='./saveUpdateForm?board_idx=${sDetail.board_idx}'"
                   value="수정" /> <input type="button" class="btn"
-                  onclick="saveDel()" value="삭제" /> <input type="button"
+                  onclick="saveDel()" value="삭제" id="delBtn"/> <input type="button"
                   class="btn" onclick="location.href='./saveMain'" value="글 목록으로" />
                </td>
             </tr>
@@ -283,6 +281,16 @@
       </div>
 </body>
 <script>
+
+
+	var loginId = "${sessionScope.loginId}";
+	console.log("구조 상세보기 - 로그인아이디", loginId);
+	if (loginId == "${sDetail.board_writer}") {
+		console.log("글작성자 확인, 수정+삭제버튼 활성화");
+	} else {
+		$("#upBtn").hide();
+		$("#delBtn").hide();
+	}
    var menuName = {'구조후기':'saveMain', '모금':'fundMain'};
    var oriName = '${sDetailPhoto}';
    var del = $("#board_idx").val();
