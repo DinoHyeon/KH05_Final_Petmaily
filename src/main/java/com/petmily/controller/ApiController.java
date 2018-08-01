@@ -35,15 +35,15 @@ public class ApiController {
 
 	//////////////////////// 보네 - 메인페이지에서 사용//////////////////////////
 
-	int mtotalCount = 1;// 분기별 유기동물 총 카운트
-	int prot = 1;// 보호중
+	int mtotalCount = 0;// 분기별 유기동물 총 카운트
+	int prot = 0;// 보호중
 	int nDie = 0;// 종료(자연사)
 	int ret = 0;// 종료(반환)
 	int adpt = 0;// 종료(입양)
 	int bDie = 0;// 종료(안락사)
 	int give = 0;// 종료(기증)
 	int netu = 0;// 종료(방사)
-	int fullCnt = 1;// 동물상태 카운트 - 전체수
+	int fullCnt = 0;// 동물상태 카운트 - 전체수
 	// ArrayList<NoticeDTO> mainList = new ArrayList<NoticeDTO>();//메인페이지 유기동물 리스트
 	HashMap<String, Integer> map = new HashMap<>();// 동물상태 담을 map
 
