@@ -60,7 +60,12 @@ public class FundService {
 		}
 		int end = 6 * page;
 		int start = end - 6 + 1;
-
+		
+		
+		logger.info("페이지 번호: "+page);
+		logger.info("시작: "+start);
+		logger.info("끝: "+end);
+		
 		params.put("start", String.valueOf(start));
 		params.put("end", String.valueOf(end));
 		myList.put("list", inter.getmyList(params));
@@ -420,6 +425,11 @@ public class FundService {
 
 		params.put("start", String.valueOf(start));
 		params.put("end", String.valueOf(end));
+		
+		logger.info("페이지 번호: "+page);
+		logger.info("시작: "+start);
+		logger.info("끝: "+end);
+		
 
 		agreeList.put("list", inter.getagreeList(params));
 		// 생성 페이지의 수

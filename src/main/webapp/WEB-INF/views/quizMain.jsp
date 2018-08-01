@@ -342,6 +342,7 @@ gray
 						$("#registQuizContent").val("");
 						$("input[name='answer']:checked").closest("label").attr("class","ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label");
 						$("input[name='answer']:checked").removeAttr('checked');
+						$("input[name='answer']").checkboxradio( "refresh" );
 						quizListCall(showPageNum);
 					} else {
 						alert("문제 등록에 실패했습니다");

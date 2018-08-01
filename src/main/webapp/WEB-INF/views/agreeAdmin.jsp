@@ -195,7 +195,7 @@ input[value='보내기'] {
 
 </body>
 <script>
-   var showPageNum = 1
+   var showPageNum = 1;
    var menuName = {
          '회원관리' : 'memberlist',
          '모금글관리' : 'agreeAdmin',
@@ -224,6 +224,7 @@ input[value='보내기'] {
       $("input[type=button]").button();
       
       agreelistCall(showPageNum);
+      
       $('#agreedialog').dialog({
          title : '　 승인 거부',
          autoOpen : false,
@@ -239,6 +240,7 @@ input[value='보내기'] {
       location.href = "./" + $(e).attr("id");
    };
    function agreelistCall(page) {
+	   console.log(page);
       $.ajax({
          type : "get",
          url : "./getagreeList",

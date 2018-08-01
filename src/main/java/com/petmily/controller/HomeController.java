@@ -15,7 +15,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		logger.info("Fetmily 실행");
-		return "jsp";
+		return "main";
 	}
 
 	@RequestMapping(value = "/mainFrame", method = RequestMethod.GET)

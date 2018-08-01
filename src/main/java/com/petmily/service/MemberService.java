@@ -61,7 +61,7 @@ public class MemberService {
 				page = "loginPage";
 				msg = "out";
 			} else {// 추방아닌 사용자일경우
-				session.setAttribute("loginId", id);
+				session.setAttribute("loginId", loginChkResult.getMember_id());
 				session.setAttribute("state", stateChk);
 				loginId = (String) session.getAttribute("loginId");
 				System.out.println("보네-로그인됨");
