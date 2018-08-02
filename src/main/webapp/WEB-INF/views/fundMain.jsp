@@ -31,6 +31,10 @@ table, th, td {
 	height: 2%;
 }
 
+#title{
+	text-overflow: ellipsis;
+}
+
 #paging {
 	position: absolute;
 	top: 55%;
@@ -332,7 +336,7 @@ table, th, td {
 		data.list.forEach(function(item, idx) {
 			content += "<tr>";
 			content += "<td>" + item.board_idx + "</td>";
-			content += "<td><a href='funddetail?idx=" + item.board_idx
+			content += "<td id='title'><a href='funddetail?idx=" + item.board_idx
 					+ "&call=detail'>" + item.board_title + "</a></td>";
 			content += "<td>" + item.board_writer + "</td>";
 			content += "<td>" + item.fund_area + "</td>";

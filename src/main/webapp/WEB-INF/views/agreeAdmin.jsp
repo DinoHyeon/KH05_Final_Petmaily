@@ -348,8 +348,8 @@ input[value='보내기'] {
 
                $('#agreedialog').dialog('close');
                agreelistCall(showPageNum);
-               alert("거절 사유 전송을 완료했습니다.!")
-
+               alert("거절 사유 전송을 완료했습니다.!");
+				$("#noreason").val("");
             } else {
                alert("불러오기 실패!")
             }

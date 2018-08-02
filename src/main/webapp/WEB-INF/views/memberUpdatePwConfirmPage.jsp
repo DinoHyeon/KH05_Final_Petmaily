@@ -9,8 +9,8 @@
 <style>
 #updateBtn {
    position: absolute;
-   top : 50.5%;
-   left : 53%;
+   top : 50.2%;
+   left : 58%;
 }
 
 #title h1 {
